@@ -21,13 +21,17 @@ class Interpreter extends Component {
     }
     repeated[this.props.storage + "-" + this.props.target] = current + 1
 
-    let response = await fetch("game/patch_lang_english/" + this.props.storage)
-    let file = await response.text()
-    if (!response.ok || file.startsWith("<!DOCTYPE html>")) {
-      response = await fetch("game/patch/" + this.props.storage) // data/scenario/
-      file = await response.text()
+    let response = await fetch("/static/game/patch_lang_english/" + this.props.storage)
+    if (!response.ok) {
+      response = await fetch("/static/game/patch/" + this.props.storage) // data/scenario/
+      if (!response.ok) {
+        const file = await response.text()
+        this.setState({displayText: "failed to load: " + file})
+        return
+      }
     }
-
+    const buffer = await response.arrayBuffer()
+    const file = new TextDecoder("utf-16le").decode(buffer)
     this.setState({displayText: file})
   }
 
@@ -36,13 +40,13 @@ class Interpreter extends Component {
     const stackFrame = {storage: this.props.storage, lines: lines, lineIndex: 0, returnFrame: this.props.returnFrame}
 
 
-    return <div>
+    return <>
       <div>--- start of {this.props.storage} {this.props.target} ---</div>
-      <Parse gameState={this.props.gameState || {macros: {}}}
+      <Parse gameState={this.props.gameState}
              storage={this.props.storage}
              target={this.props.target}
              stackFrame={stackFrame}/>
-    </div>
+    </>
   }
 }
 
