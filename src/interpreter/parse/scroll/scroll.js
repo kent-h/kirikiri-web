@@ -14,7 +14,7 @@ class ScrollDetect extends Component {
                    rootMargin="-50% 0px 100000% 0px"
                    skip={Math.abs(this.props.visible.currentID - this.props.id) > 2}
                    onChange={(inView, entry) => {
-                     this.props.visible.onChange(this.props.id, !inView)
+                     this.props.visible.onChange(this.props.id, "static/game/" + this.props.folder + this.props.image + ".png", !inView)
                      this.setState({visible: inView})
                    }}>
       <div style={{border: this.state.visible ? "1px solid white" : "1px solid green"}}>

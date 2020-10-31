@@ -4,6 +4,8 @@ import Anchor from "./anchor/anchor"
 import ScrollDetect from "./scroll/scroll"
 import Tag from "./tag/tag"
 
+const debug = false
+
 const Parse = (props) => {
   const tokens = []
   Tokenize(tokens, props)
@@ -13,20 +15,107 @@ const Parse = (props) => {
     toDisplay.push(<Fragment key={toDisplay.length + 1}>{Component}</Fragment>)
   }
 
+  let betweenText = []
+
   tokens.forEach(token => {
     switch (token.type) {
       case ";": // comment
         // console.log(token.text) // ignore comments in general
         break
       case "t": // text
-        append(<>{token.text}</>)
+        RenderChunk(betweenText, append)
+        betweenText = []
+        append(token.text)
         break
       case "*": // link
+        betweenText.push(token)
+        break
+      case "@": // full-line tag
+      case "[": // inline tag
+        betweenText.push(token)
+        break
+      case "EOF":
+        RenderChunk(betweenText, append)
+        betweenText = []
+        append(<div>--- end of {token.storage} ---</div>)
+        break
+      case "call": // jump or call statements require more page loading
+        RenderChunk(betweenText, append)
+        betweenText = []
+        append(<Interpreter gameState={token.gameState}
+                            storage={token.storage}
+                            target={token.target}
+                            returnFrame={token.returnFrame}/>)
+        break
+      default:
+        console.log("warning: unhandled token type: " + token.type, token)
+    }
+  })
+  return toDisplay
+}
+
+const RenderChunk = (tokens, append) => {
+  const section = {name: null}
+  let isDivider = false
+
+  tokens.forEach(token => {
+    switch (token.type) {
+      case ";": // comment
+        // console.log(token.text) // ignore comments in general
+        break
+      case "*": // link
+        section.name = token.link
+        isDivider = true
         append(<Anchor name={token.link}/>)
         break
       case "@": // full-line tag
       case "[": // inline tag
-        RenderCommand(token, append)
+        if (debug) {
+          append(<Tag command={token}/>)
+        }
+        switch (token.command.toLowerCase()) {
+          case "imageex":
+          case "image":
+            isDivider = true
+            append(<ScrollDetect image={token.args.storage}
+                                 id={uuid++}
+                                 folder="bgimage/"
+                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
+            break
+          case "ld":
+            isDivider = true
+            append(<ScrollDetect image={token.args.file}
+                                 id={uuid++}
+                                 folder="fgimage/"
+                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
+            break
+          case "fadein":
+            isDivider = true
+            append(<ScrollDetect image={token.args.file}
+                                 id={uuid++}
+                                 folder="bgimage/"
+                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
+            break
+          case "lr":
+          case "r":
+            append(<div/>)
+            break
+          case "macro":
+            // on creation of a macro, there's nothing to render unless debugging
+            if (debug) {
+              append(<div style={{color: "darkred", marginLeft: "2em", border: "1px solid green"}}>
+                {token.tokens.map(token => (<Tag command={token}/>))}
+              </div>)
+            }
+            break
+          case "return":
+            append(<div>--- returning from {token.from} (to {token.to}) ---</div>)
+            break
+          case "s":
+            append("--- page generation halted at [s] ---")
+            break
+          default:
+        }
         break
       case "EOF":
         append(<div>--- end of {token.storage} ---</div>)
@@ -41,50 +130,14 @@ const Parse = (props) => {
         console.log("warning: unhandled token type: " + token.type, token)
     }
   })
-  return toDisplay
+
+  if (isDivider) {
+    append(<><br/><br/></>)
+  }
 }
 
-const RenderCommand = (tag, append) => {
-  switch (tag.command.toLowerCase()) {
-    case "imageex":
-    case "image":
-      append(<ScrollDetect image={tag.args.storage}
-                           id={uuid++}
-                           folder="bgimage/"
-                           alt={tag.command + " " + Object.keys(tag.args).map(key => key === "*" ? " *" : " " + key + "=" + tag.args[key]).join("")}/>)
-      break
-    case "ld":
-      append(<ScrollDetect image={tag.args.file}
-                           id={uuid++}
-                           folder="fgimage/"
-                           alt={tag.command + " " + Object.keys(tag.args).map(key => key === "*" ? " *" : " " + key + "=" + tag.args[key]).join("")}/>)
-      break
-    case "fadein":
-      append(<ScrollDetect image={tag.args.file}
-                           id={uuid++}
-                           folder="bgimage/"
-                           alt={tag.command + " " + Object.keys(tag.args).map(key => key === "*" ? " *" : " " + key + "=" + tag.args[key]).join("")}/>)
-      break
-    case "macro":
-      // on creation of a macro, there's nothing to render unless debugging
-      // macros will be executed silently
-      append(<div style={{border: "1px solid green"}}>
-        <Tag command={tag}/>
-        <div style={{color: "darkred", marginLeft: "2em"}}>
-          {tag.tokens.map(token => (<Tag command={token}/>))}
-        </div>
-      </div>)
-      break
-    case "return":
-      append(<Tag command={tag}/>)
-      append(<div>--- returning from {tag.from} (to {tag.to}) ---</div>)
-      break
-    case "s":
-      append("--- page generation halted at [s] ---")
-      break
-    default:
-      append(<Tag command={tag}/>)
-  }
+const RenderCommand = (token, append) => {
+
 }
 
 const Tokenize = (tokens, props) => {
