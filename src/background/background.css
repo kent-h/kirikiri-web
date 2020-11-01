@@ -1,12 +1,14 @@
 
 .large-background-holder-left {
   position:         fixed;
-  top:              0;
+  top:              50%;
   left:             0;
   width:            133.333333333vh;
   max-width:        100%;
+  min-width:        calc(50vw - 66.666666667vh);
 
-  z-index:          -2;
+  z-index:          -3;
+  transform:        translateY(-50%);
 
   background-color: rgba(0, 0, 0, 0.5);
 
@@ -15,12 +17,14 @@
 
 .large-background-holder-right {
   position:         fixed;
-  top:              0;
+  top:              50%;
   right:            0;
   width:            133.333333333vh;
   max-width:        100%;
+  min-width:        calc(50vw - 66.666666667vh);
 
-  z-index:          -2;
+  z-index:          -3;
+  transform:        translateY(-50%);
 
   background-color: rgba(0, 0, 0, 0.5);
 
@@ -29,15 +33,16 @@
 
 .large-background-holder-bottom {
   position:         fixed;
-  top:              50%;
+  bottom:           0;
   left:             50%;
-  width:            133.333333333vh;
-  min-width:        100%;
+  width:            100%;
+  min-width:        calc(133.33333333vh - 100%);
+  max-width:        133vh;
 
-  z-index:          -3;
-  transform:        translate(-50%, -50%);
+  z-index:          -2;
+  transform:        translateX(-50%);
 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 1);
 
   overflow:         hidden;
 }
