@@ -1,13 +1,12 @@
 import React, {Component} from "react"
 import Parse from "./parse/parse"
-
-const repeated = {}
+import "./interpreter.css"
 
 class Interpreter extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {displayText: ""}
+    this.state = {displayText: "", macroText: ""}
   }
 
   componentDidMount() {
@@ -15,11 +14,17 @@ class Interpreter extends Component {
   }
 
   async load() {
-    let current = (repeated[this.props.storage + "-" + this.props.target] || 0)
-    if (current > 2) {
-      return
+    if (!this.props.gameState) {
+      let response = await fetch("/static/game/patch/マクロ.ks")
+      if (!response.ok) {
+        const file = await response.text()
+        this.setState({macroText: "failed to load: " + file})
+        return
+      }
+      const buffer = await response.arrayBuffer()
+      const file = new TextDecoder("utf-16le").decode(buffer)
+      this.setState({macroText: file})
     }
-    repeated[this.props.storage + "-" + this.props.target] = current + 1
 
     let response = await fetch("/static/game/patch_lang_english/" + this.props.storage)
     if (!response.ok) {
@@ -37,13 +42,18 @@ class Interpreter extends Component {
 
   render() {
     const lines = this.state.displayText.split("\r\n")
-    const stackFrame = {storage: this.props.storage, lines: lines, lineIndex: 0, returnFrame: this.props.returnFrame}
+    let stackFrame = {storage: this.props.storage, lines: lines, lineIndex: 0, returnFrame: this.props.returnFrame}
 
+    let gameState = this.props.gameState
+    if (!gameState) {
+      gameState = {macros: {}}
+      // call macro first, and "return" to the specified storage
+      stackFrame = {storage: "マクロ.ks", lines: this.state.macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame}
+    }
 
     return <>
       <div>--- start of {this.props.storage} {this.props.target} ---</div>
-      <Parse gameState={this.props.gameState}
-             storage={this.props.storage}
+      <Parse gameState={gameState}
              target={this.props.target}
              stackFrame={stackFrame}/>
     </>

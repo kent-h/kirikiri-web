@@ -12,18 +12,16 @@ class ScrollDetect extends Component {
   render() {
     return <InView as="div"
                    rootMargin="-50% 0px 100000% 0px"
+                   threshold={0.5}
                    skip={Math.abs(this.props.visible.currentID - this.props.id) > 2}
                    onChange={(inView, entry) => {
-                     this.props.visible.onChange(this.props.id, "static/game/" + this.props.folder + this.props.image + ".png", !inView)
+                     this.props.visible.onChange(this.props.id, "static/game/" + this.props.folder + this.props.image + ".png", !inView, this.props.layers)
                      this.setState({visible: inView})
                    }}>
-      <div style={{border: this.state.visible ? "1px solid white" : "1px solid green"}}>
-        {this.props.id} {this.props.alt}
-      </div>
-      {/*<img style={this.state.visible ? {border: "1px solid red", mixBlendMode: "lighten"} : {border: "1px solid green"}}*/}
-      {/*     src={"game/" + this.props.folder + this.props.image + ".png"}*/}
-      {/*     alt={this.props.alt}*/}
-      {/*     title={this.props.alt}/>*/}
+      <div style={{
+        height: "50vh",
+        border: this.state.visible ? "1px solid white" : "1px solid green",
+      }}/>
     </InView>
   }
 }

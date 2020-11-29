@@ -25,7 +25,7 @@ const Parse = (props) => {
       case "t": // text
         RenderChunk(betweenText, append)
         betweenText = []
-        append(token.text)
+        append(<span>{token.text}</span>)
         break
       case "*": // link
         betweenText.push(token)
@@ -55,8 +55,14 @@ const Parse = (props) => {
 }
 
 const RenderChunk = (tokens, append) => {
-  const section = {name: null}
   let isDivider = false
+  let backgroundFolder = null
+  let background = null
+
+  let time = 0
+  let layers = []
+  let transition = []
+  let animation = []
 
   tokens.forEach(token => {
     switch (token.type) {
@@ -64,8 +70,6 @@ const RenderChunk = (tokens, append) => {
         // console.log(token.text) // ignore comments in general
         break
       case "*": // link
-        section.name = token.link
-        isDivider = true
         append(<Anchor name={token.link}/>)
         break
       case "@": // full-line tag
@@ -76,29 +80,63 @@ const RenderChunk = (tokens, append) => {
         switch (token.command.toLowerCase()) {
           case "imageex":
           case "image":
+          case "image4demo":
             isDivider = true
-            append(<ScrollDetect image={token.args.storage}
-                                 id={uuid++}
-                                 folder="bgimage/"
-                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
-            break
-          case "ld":
-            isDivider = true
-            append(<ScrollDetect image={token.args.file}
-                                 id={uuid++}
-                                 folder="fgimage/"
-                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
+            layers[token.args.layer || 0] = {
+              image: token.args.storage,
+              folder: "bgimage/",
+              animation: [{
+                left: token.args.left || 0,
+                top: token.args.top || 0,
+              }],
+            }
+            background = token.args.storage
+            backgroundFolder = "bgimage/"
+            append(<Tag command={token} color="red"/>)
+            // append(<ScrollDetect image={token.args.storage}
+            //                      id={uuid++}
+            //                      folder="bgimage/"
+            //                      alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
             break
           case "fadein":
             isDivider = true
-            append(<ScrollDetect image={token.args.file}
-                                 id={uuid++}
-                                 folder="bgimage/"
-                                 alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
+            layers[token.args.layer || 0] = {
+              image: token.args.file,
+              folder: "bgimage/",
+              animation: [{
+                left: 0,
+                top: 0,
+              }],
+            }
+            transition[token.args.layer || 0] = {method: token.args.method, time: token.args.time}
+            background = token.args.file
+            backgroundFolder = "bgimage/"
+            append(<Tag command={token} color="red"/>)
+            // append(<ScrollDetect image={token.args.file}
+            //                      id={uuid++}
+            //                      folder="bgimage/"
+            //                      alt={token.command + " " + Object.keys(token.args).map(key => key === "*" ? " *" : " " + key + "=" + token.args[key]).join("")}/>)
             break
-          case "lr":
+          case "move":
+            const pathRegex = /\((\d+),(\d+),(\d+)\)/y // read as many as we have
+            let node
+            while ((node = pathRegex.exec(token.args.path)) !== null) {
+              if (layers[token.args.layer || 0]) {
+                layers[token.args.layer || 0].animation.push({
+                  time: time + token.args.time,
+                  left: parseInt(node[1], 10),
+                  top: parseInt(node[2], 10),
+                  opacity: parseInt(node[3], 10) / 255,
+                })
+              }
+            }
+            append(<Tag command={token} color="red"/>)
+            break
           case "r":
-            append(<div/>)
+            append(<div className="newline"/>)
+            break
+          case "cm":
+            append(<div style={{height: "3em"}}/>)
             break
           case "macro":
             // on creation of a macro, there's nothing to render unless debugging
@@ -132,16 +170,18 @@ const RenderChunk = (tokens, append) => {
   })
 
   if (isDivider) {
-    append(<><br/><br/></>)
+    // determine transition
+    // determine reverse transition
+    append(<ScrollDetect image={background}
+                         id={uuid++}
+                         folder={backgroundFolder}
+                         layers={layers}
+                         alt=""/>)
   }
 }
 
-const RenderCommand = (token, append) => {
-
-}
-
 const Tokenize = (tokens, props) => {
-  let gameState = props.gameState || {macros: {}}
+  let gameState = props.gameState
   let stackFrame = props.stackFrame
   let target = props.target
 
@@ -188,6 +228,8 @@ const Tokenize = (tokens, props) => {
 
 let uuid = 1
 
+const ignoreMacros = {cl_notrans: true}
+
 // InterpretCommand interprets the given command, and pauses execution of the
 const InterpretCommand = (tokens, gameState, tag, stackFrame) => {
   if (stackFrame.macroBuilder) { // if we're building a macro, just add commands to the macro
@@ -208,32 +250,36 @@ const InterpretCommand = (tokens, gameState, tag, stackFrame) => {
   }
 
   if (tag.command in gameState.macros) { // if a macro, run each command in the macro
-    const macro = gameState.macros[tag.command]
-    return macro.some(macroCommand => {
-      let cmd = macroCommand
-      if (macroCommand.type !== "t") {
-        const args = Object.assign({}, macroCommand.args)
-        // handle '*' argument
-        if (macroCommand.args["*"]) {
-          Object.assign(args, macroCommand.args)
-        } else {
+    if (!(tag.command in ignoreMacros)) {
+      tokens.push(tag)
+      const macro = gameState.macros[tag.command]
+      return macro.some(macroCommand => {
+        let cmd = macroCommand
+        if (macroCommand.type !== "t") {
+          const args = Object.assign({}, macroCommand.args)
           // handle '%value' arguments
           Object.keys(args).forEach(key => {
             const value = args[key]
-            if (value.startsWith("%")) {
+            if (typeof value === "string" && value.startsWith("%")) {
               args[key] = tag.args[value.substring(1)]
             }
           })
-        }
+          // handle '*' argument
+          if (macroCommand.args["*"]) {
+            delete args["*"]
+            Object.assign(args, tag.args)
+          }
 
-        cmd = {
-          type: macroCommand.type,
-          command: macroCommand.command,
-          args: args,
+          cmd = {
+            type: macroCommand.type,
+            command: macroCommand.command,
+            args: args,
+            depth: (tag.depth || 0) + 1,
+          }
         }
-      }
-      return InterpretCommand(tokens, gameState, cmd, stackFrame)
-    })
+        return InterpretCommand(tokens, gameState, cmd, stackFrame)
+      })
+    }
   }
 
   switch (tag.command.toLowerCase()) {
@@ -350,4 +396,4 @@ const ParseInlineTags = (tokens, gameState, line, stackFrame) => {
   return false
 }
 
-export default Parse
+export {Parse as default, Tokenize}

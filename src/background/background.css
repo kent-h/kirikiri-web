@@ -71,7 +71,26 @@
   overflow:      visible;
 }
 
-.background-image {
-  width: 100%;
+.background-image-holder {
+  position: absolute;
+  top:      0;
+  left:     0;
+  right:    0;
+  bottom:   0;
+  overflow: hidden;
 }
 
+.background-image {
+  position: absolute;
+  width:    100%;
+}
+
+.text {
+  width:       calc(100% - 2em);
+  max-width:   calc(133.33333333vh - 2em);
+  margin:      auto;
+
+  color:       white;
+
+  text-shadow: 1px 0 1px #000, -1px 0 1px #000, 0 1px 1px #000, 0 -1px 1px #000;
+}

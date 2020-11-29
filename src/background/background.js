@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import "./background.css"
+import ImageLayer from "./animation/image-layer"
 
 const {Provider, Consumer} = React.createContext(undefined)
 
@@ -12,9 +13,9 @@ class Background extends Component {
     this.state = {visible: {id: 0}}
   }
 
-  onChange(id, image, visible) {
+  onChange(id, image, visible, layers) {
     if (visible) {
-      this.visible[id] = {id, image}
+      this.visible[id] = {id, image, layers}
     } else {
       delete this.visible[id]
     }
@@ -49,11 +50,18 @@ class Background extends Component {
 
       <div className="background-holder">
         <div className="background-margin-hack">
-          {this.state.visible.id !== 0 &&
-          <img className="background-image" src={this.state.visible.image} alt=""/>}
+          <div className="background-image-holder">
+            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
+              const layer = this.state.visible.layers[layerID]
+              return <ImageLayer key={layerID} image={layer.image} folder={layer.folder} animation={layer.animation}/>
+            })}
+          </div>
         </div>
       </div>
-      {this.props.children}
+
+      <div className="text">
+        {this.props.children}
+      </div>
     </Provider>
   }
 }

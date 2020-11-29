@@ -1,0 +1,7 @@
+.newline {
+  height: 0;
+}
+
+.newline + .newline {
+  height: 1em;
+}
