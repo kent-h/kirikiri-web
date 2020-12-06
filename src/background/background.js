@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import "./background.css"
 import ImageLayer from "./animation/image-layer"
+import "./background.css"
 
 const {Provider, Consumer} = React.createContext(undefined)
 
@@ -23,6 +23,7 @@ class Background extends Component {
   }
 
   render() {
+    console.log(this.state.visible.layers)
     return <Provider value={{onChange: this.onChange, currentID: this.state.visible.id}}>
       <div style={{position: "fixed", backgroundColor: "darkred"}}>{this.state.visible.id}</div>
 
@@ -53,7 +54,10 @@ class Background extends Component {
           <div className="background-image-holder">
             {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
               const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID} image={layer.image} folder={layer.folder} animation={layer.animation}/>
+              return <ImageLayer key={layerID + " " + this.state.visible.id}
+                                 layer={layerID}
+                                 visibleID={this.state.visible.id}
+                                 animation={layer}/>
             })}
           </div>
         </div>

@@ -52,7 +52,6 @@ class Interpreter extends Component {
     }
 
     return <>
-      <div>--- start of {this.props.storage} {this.props.target} ---</div>
       <Parse gameState={gameState}
              target={this.props.target}
              stackFrame={stackFrame}/>

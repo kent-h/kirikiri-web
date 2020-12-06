@@ -20,6 +20,7 @@ class ScrollDetect extends Component {
                    }}>
       <div style={{
         height: "50vh",
+        maxHeight: "37.5vw",
         border: this.state.visible ? "1px solid white" : "1px solid green",
       }}/>
     </InView>
