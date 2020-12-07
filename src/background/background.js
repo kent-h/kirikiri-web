@@ -24,27 +24,49 @@ class Background extends Component {
 
   render() {
     console.log(this.state.visible.layers)
+
     return <Provider value={{onChange: this.onChange, currentID: this.state.visible.id}}>
       <div style={{position: "fixed", backgroundColor: "darkred"}}>{this.state.visible.id}</div>
 
-      <div className="large-background-holder-left">
-        <div className="background-margin-hack background-blur">
-          {this.state.visible.id !== 0 &&
-          <img className="background-image" src={this.state.visible.image} alt=""/>}
+      <div className="large-background-holder-left background-blur">
+        <div className="background-margin-hack">
+          <div className="background-image-holder">
+            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
+              const layer = this.state.visible.layers[layerID]
+              return <ImageLayer key={layerID + " " + this.state.visible.id}
+                                 layer={layerID}
+                                 visibleID={this.state.visible.id}
+                                 animation={layer}/>
+            })}
+          </div>
         </div>
       </div>
 
-      <div className="large-background-holder-right">
-        <div className="background-margin-hack background-blur">
-          {this.state.visible.id !== 0 &&
-          <img className="background-image" src={this.state.visible.image} alt=""/>}
+      <div className="large-background-holder-right background-blur">
+        <div className="background-margin-hack">
+          <div className="background-image-holder">
+            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
+              const layer = this.state.visible.layers[layerID]
+              return <ImageLayer key={layerID + " " + this.state.visible.id}
+                                 layer={layerID}
+                                 visibleID={this.state.visible.id}
+                                 animation={layer}/>
+            })}
+          </div>
         </div>
       </div>
 
-      <div className="large-background-holder-bottom">
-        <div className="background-margin-hack background-blur">
-          {this.state.visible.id !== 0 &&
-          <img className="background-image" src={this.state.visible.image} alt=""/>}
+      <div className="large-background-holder-bottom background-blur">
+        <div className="background-margin-hack">
+          <div className="background-image-holder">
+            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
+              const layer = this.state.visible.layers[layerID]
+              return <ImageLayer key={layerID + " " + this.state.visible.id}
+                                 layer={layerID}
+                                 visibleID={this.state.visible.id}
+                                 animation={layer}/>
+            })}
+          </div>
         </div>
       </div>
 

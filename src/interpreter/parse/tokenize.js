@@ -177,6 +177,10 @@ const ParseTag = (tag, startAt) => {
     if (arg[3]) {
       args["*"] = true
     } else {
+      if (arg[2].startsWith("\"")) {
+        // can do better un-escaping of quoted strings, this is just a hack for basic (") enclosed strings
+        arg[2] = arg[2].substring(1, arg[2].length - 1)
+      }
       args[arg[1]] = arg[2]
     }
     lastIndex = argsRegex.lastIndex

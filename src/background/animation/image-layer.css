@@ -1,3 +1,13 @@
+.background-layer-holder {
+  position: absolute;
+  width:    100%;
+  height:   100%;
+}
+
+.background-layer-holder[layer="0"] {
+  background-color: black;
+}
+
 .background-image-layer {
   position: absolute;
   width:    100%;
