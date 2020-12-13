@@ -8,14 +8,13 @@ class ImageLayer extends Component {
     this.sleep = this.sleep.bind(this)
 
     this.state = {keyframe: this.props.animation[0], last: null}
-    this.animate()
+    this.animate(true)
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.visibleID !== this.props.visibleID) {
       this.abort(false)
-      this.setState({keyframe: this.props.animation[0], last: null})
-      this.animate()
+      this.animate(false)
     }
   }
 
@@ -23,14 +22,50 @@ class ImageLayer extends Component {
     this.abort(false)
   }
 
-  sleep(ms) {
-    return Promise.race([this.abortable, new Promise(resolve => setTimeout(() => resolve(true), ms))])
+  sleep(abortPromise, ms) {
+    return Promise.race([abortPromise, new Promise(resolve => setTimeout(() => resolve(true), ms))])
   }
 
-  async animate() {
-    this.abortable = new Promise(resolve => {
+  async preload(abortPromise) {
+    const promises = []
+    //this.preloaded is not used, but must be held to avoid accidentally canceling the load operation
+    this.preloaded = this.props.animation.reduce((images, frame) => {
+      if (frame.contents.image) {
+        const name = frame.contents.folder + frame.contents.image
+        if (!images[name]) {
+          const img = new Image()
+          promises.push(new Promise(resolve => {
+            img.onload = () => resolve(true)
+            img.onerror = () => resolve(false)
+          }))
+          img.src = "static/game/" + name + ".png"
+          images[name] = img
+        }
+      }
+      return images
+    }, {})
+    if (promises.length === 0) {
+      return false
+    }
+    return await Promise.race([abortPromise, Promise.all(promises)])
+  }
+
+  async animate(componentIsNew) {
+    const abortPromise = new Promise(resolve => {
       this.abort = resolve
     })
+
+    if (!await this.preload(abortPromise)) {
+      return
+    }
+
+    if (!componentIsNew) {
+      this.setState({keyframe: this.props.animation[0], last: null})
+      // wait for the above setState to propagate & force a redraw before continuing
+      if (!await Promise.race([abortPromise, new Promise(resolve => window.requestAnimationFrame(() => resolve(true)))])) {
+        return
+      }
+    }
 
     let first = true
     let time = 0
@@ -42,7 +77,7 @@ class ImageLayer extends Component {
       } else {
         this.setState({keyframe: keyframe, last: this.state.keyframe})
       }
-      if (!await this.sleep(keyframe.duration < 30 ? 30 : keyframe.duration)) {
+      if (!await this.sleep(abortPromise, keyframe.duration < 30 ? 30 : keyframe.duration)) {
         break
       }
       time = keyframe.time
@@ -58,7 +93,7 @@ class ImageLayer extends Component {
            layer={this.props.layer}
            src={"static/game/" + keyframe.contents.folder + keyframe.contents.image + ".png"}
            style={{
-             transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
+             transition: keyframe.time !== 0 && ("all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear")),
              top: (keyframe.top / 6) + "%",
              left: (keyframe.left / 8) + "%",
              transform: (keyframe.transform || "") + " " + keyframe.contents.transform,
@@ -74,7 +109,7 @@ class ImageLayer extends Component {
              layer={this.props.layer}
              src={"static/game/" + last.contents.folder + last.contents.image + ".png"}
              style={{
-               transition: "all " + keyframe.duration + "ms ease-in", // keyframe transform will have the correct duration
+               transition: keyframe.time !== 0 && ("all " + keyframe.duration + "ms ease-in"), // keyframe transform will have the correct duration
                top: (last.top / 6) + "%",
                left: (last.left / 8) + "%",
                transform: (last.transform || "") + " " + last.contents.transform,

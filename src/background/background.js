@@ -33,7 +33,7 @@ class Background extends Component {
           <div className="background-image-holder">
             {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
               const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID + " " + this.state.visible.id}
+              return <ImageLayer key={layerID}
                                  layer={layerID}
                                  visibleID={this.state.visible.id}
                                  animation={layer}/>
@@ -47,7 +47,7 @@ class Background extends Component {
           <div className="background-image-holder">
             {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
               const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID + " " + this.state.visible.id}
+              return <ImageLayer key={layerID}
                                  layer={layerID}
                                  visibleID={this.state.visible.id}
                                  animation={layer}/>
@@ -61,7 +61,7 @@ class Background extends Component {
           <div className="background-image-holder">
             {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
               const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID + " " + this.state.visible.id}
+              return <ImageLayer key={layerID}
                                  layer={layerID}
                                  visibleID={this.state.visible.id}
                                  animation={layer}/>
@@ -76,7 +76,7 @@ class Background extends Component {
           <div className="background-image-holder">
             {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
               const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID + " " + this.state.visible.id}
+              return <ImageLayer key={layerID}
                                  layer={layerID}
                                  visibleID={this.state.visible.id}
                                  animation={layer}/>
