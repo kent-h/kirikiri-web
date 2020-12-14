@@ -100,12 +100,20 @@ const RenderChunk = (tokens, layerContents, append) => {
     pushFrame(layer, frame)
   }
 
-  const clearOtherLayers = layer => {
+  const clearOtherLayers = (layer, timeOffset) => {
     layer = layer === "base" ? 0 : (layer || 0)
+    timeOffset = timeOffset ? parseInt(timeOffset, 10) : 0
     // there must be a cleaner way to indicate that a layer has been removed
-    layers.forEach(animation => {
+    layers.forEach((animation, animLayer) => {
       if (animation !== layers[layer]) {
-        if (lastContents(layer).image) {
+        if (lastContents(animLayer).image) {
+          // duplicateLastFrame(animLayer, {
+          //   time: time,
+          // })
+          // duplicateLastFrame(animLayer, {
+          //   time: time,
+          //   opacity: 0,
+          // })
           animation.push({
             contents: {},
             time: time,
@@ -115,13 +123,13 @@ const RenderChunk = (tokens, layerContents, append) => {
     })
   }
 
-  const pushBasicFrame = (token, folder, image, timeOffset, fadeInsteadOfAnimate) => {
-    pushFrame(token.args.layer, {
+  const pushBasicFrame = (token, folder, image, layer, timeOffset, fadeInsteadOfAnimate) => {
+    pushFrame(layer, {
       time: time + (timeOffset ? parseInt(timeOffset, 10) : 0),
       contents: {
         image: image,
         folder: folder,
-        key: fadeInsteadOfAnimate === !lastContents(token.args.layer).key,
+        key: fadeInsteadOfAnimate === !lastContents(layer).key,
         transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
       },
       left: token.args.left ? parseInt(token.args.left, 10) : 0,
@@ -179,24 +187,15 @@ const RenderChunk = (tokens, layerContents, append) => {
             append(<Tag command={token} color="red"/>)
             break
           case "imageex":
+            pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer || 10, 0, true)
+            append(<Tag command={token} color="red"/>)
+            break
           case "image":
           case "image4demo":
             if (token.args.layer && token.args.layer.startsWith("&")) {
               break
             }
-            pushBasicFrame(token, "bgimage/", token.args.storage, 0, true)
-            // pushFrame(token.args.layer, {
-            //   time: time,
-            //   contents: {
-            //     image: token.args.storage,
-            //     folder: "bgimage/",
-            //     key: !lastContents(token.args.layer).key,
-            //     transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
-            //   },
-            //   left: token.args.left ? parseInt(token.args.left, 10) : 0,
-            //   top: token.args.top ? parseInt(token.args.top, 10) : 0,
-            //   opacity: (token.args.opacity ? parseInt(token.args.opacity, 10) : 0) / 255,
-            // })
+            pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
             append(<Tag command={token} color="red"/>)
             break
           case "fadein":
@@ -205,19 +204,8 @@ const RenderChunk = (tokens, layerContents, append) => {
               break
             }
             duplicateLastFrame(token.args.layer)
-            pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.time, true)
-            // pushFrame(token.args.layer, {
-            //   time: time + (token.args.time ? parseInt(token.args.time, 10) : 0),
-            //   contents: {
-            //     image: token.args.file || token.args.storage,
-            //     folder: "bgimage/",
-            //     key: !lastContents(token.args.layer).key,
-            //     transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
-            //   },
-            //   left: 0,
-            //   top: 0,
-            // })
-            clearOtherLayers(token.args.layer)
+            pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.layer, token.args.time, true)
+            clearOtherLayers(token.args.layer, token.args.time)
 
             time += (token.args.time ? parseInt(token.args.time, 10) : 0)
 
@@ -239,7 +227,7 @@ const RenderChunk = (tokens, layerContents, append) => {
             let moveTime = parseInt(token.args.time, 10)
             nodes.forEach((node, nodeID) => {
               duplicateLastFrame(token.args.layer, {
-                time: time + moveTime * (1 + nodeID) / nodes.length,
+                time: time + moveTime * (1 + nodeID),
                 left: parseInt(node[1], 10),
                 top: parseInt(node[2], 10),
                 opacity: parseInt(node[3], 10) / 255,
@@ -247,7 +235,7 @@ const RenderChunk = (tokens, layerContents, append) => {
               })
             })
 
-            moveTime += time
+            moveTime += time * nodes.length
             endTime = endTime > moveTime ? endTime : moveTime
             append(<Tag command={token} color="red"/>)
             break
