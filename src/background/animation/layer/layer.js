@@ -1,8 +1,8 @@
 import React, {Component} from "react"
-import "./image-layer.css"
+import "./layer.css"
 
 
-class ImageLayer extends Component {
+class Layer extends Component {
   constructor(props) {
     super(props)
     this.sleep = this.sleep.bind(this)
@@ -11,13 +11,13 @@ class ImageLayer extends Component {
   }
 
   componentDidMount() {
-    this.animate(true)
+    this.animate()
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.visibleID !== this.props.visibleID) {
       this.abort(false)
-      this.animate(false)
+      this.animate()
     }
   }
 
@@ -29,42 +29,9 @@ class ImageLayer extends Component {
     return Promise.race([abortPromise, new Promise(resolve => setTimeout(() => resolve(true), ms))])
   }
 
-  async preload(abortPromise) {
-    const promises = []
-    //this.preloaded is not used, but must be held to avoid accidentally canceling the load operation
-    this.preloaded = this.props.animation.reduce((images, frame) => {
-      if (frame.contents.image) {
-        const name = frame.contents.folder + frame.contents.image
-        if (!images[name]) {
-          const img = new Image()
-          promises.push(new Promise(resolve => {
-            img.onload = () => resolve(true)
-            img.onerror = () => resolve(false)
-          }))
-          img.src = "static/game/" + name + ".png"
-          images[name] = img
-        }
-      }
-      return images
-    }, {})
-    return await Promise.race([abortPromise, Promise.all(promises)])
-  }
-
-  async animate(componentIsNew) {
+  async animate() {
     const abortPromise = new Promise(resolve => {
       this.abort = resolve
-    })
-
-    if (!await this.preload(abortPromise)) {
-      return
-    }
-
-    // get resolution of each image
-    this.props.animation.forEach(frame => {
-      if (frame.contents.image) {
-        frame.contents.naturalWidth = this.preloaded[frame.contents.folder + frame.contents.image].naturalWidth / 8
-        console.log(frame.contents.image, frame.contents.naturalWidth)
-      }
     })
 
     this.props.animation[0].duration = 0
@@ -95,7 +62,7 @@ class ImageLayer extends Component {
     const keyframe = this.state.keyframe
     const last = this.state.last
     const ret = keyframe && keyframe.contents.image &&
-      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image}
+      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.visibleID}
            className="background-image-layer"
            layer={this.props.layer}
            src={"static/game/" + keyframe.contents.folder + keyframe.contents.image + ".png"}
@@ -112,7 +79,7 @@ class ImageLayer extends Component {
       return [ret]
     } else {
       return [ret,
-        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image}
+        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.visibleID}
              className="background-image-layer"
              layer={this.props.layer}
              src={"static/game/" + last.contents.folder + last.contents.image + ".png"}
@@ -130,4 +97,4 @@ class ImageLayer extends Component {
   }
 }
 
-export default ImageLayer
+export default Layer

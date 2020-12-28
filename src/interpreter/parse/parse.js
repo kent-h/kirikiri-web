@@ -15,7 +15,7 @@ const Parse = (props) => {
   }
 
   let betweenText = []
-  let layerContents = []
+  let prevLastFrame = []
 
   tokens.forEach(token => {
     switch (token.type) {
@@ -23,7 +23,7 @@ const Parse = (props) => {
         // console.log(token.text) // ignore comments in general
         break
       case "t": // text
-        layerContents = RenderChunk(betweenText, layerContents, append)
+        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
         betweenText = []
         append(<span>{token.text}</span>)
         break
@@ -33,7 +33,7 @@ const Parse = (props) => {
       case "@": // full-line tag
       case "[": // inline tag
         if (token.command.toLowerCase() === "align") {
-          layerContents = RenderChunk(betweenText, layerContents, append)
+          prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
           betweenText = []
           append(<div style={{textAlign: "center"}}>{token.args.text}</div>)
         } else {
@@ -41,12 +41,12 @@ const Parse = (props) => {
         }
         break
       case "EOF":
-        layerContents = RenderChunk(betweenText, layerContents, append)
+        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
         betweenText = []
         // append(<div>--- end of {token.storage} ---</div>)
         break
       case "call": // jump or call statements require more page loading
-        layerContents = RenderChunk(betweenText, layerContents, append)
+        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
         betweenText = []
         append(<Interpreter gameState={token.gameState}
                             storage={token.storage}
@@ -63,17 +63,13 @@ const Parse = (props) => {
 const debug = false
 let uuid = 1
 
-const RenderChunk = (tokens, layerContents, append) => {
+const RenderChunk = (tokens, prevLastFrame, append) => {
   let isDivider = false
-  let backgroundFolder = null
-  let background = null
 
   let time = 0
   let endTime = 0
 
-  let layers = layerContents
-  let transition = []
-  let animation = []
+  let layers = prevLastFrame
 
   const lastFrame = (layer) => {
     layer = layer === "base" ? 0 : (layer || 0)
@@ -152,6 +148,7 @@ const RenderChunk = (tokens, layerContents, append) => {
           append(<Tag command={token}/>)
         }
         switch (token.command.toLowerCase()) {
+          case "dash":
           case "dashcombo": // these use opacity values where 0 is fully visible
           case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,
             if (token.args.layer && token.args.layer.startsWith("&")) {
@@ -285,22 +282,20 @@ const RenderChunk = (tokens, layerContents, append) => {
   })
 
   // save final frame for next animation block to use
-  layerContents = []
+  prevLastFrame = []
   layers.forEach((animation, layer) => {
-    layerContents[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
+    prevLastFrame[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
   })
 
 
   if (isDivider) {
     // determine transition
     // determine reverse transition
-    append(<ScrollDetect image={background}
-                         id={uuid++}
-                         folder={backgroundFolder}
-                         layers={layers}
+    append(<ScrollDetect id={uuid++}
+                         animation={layers}
                          alt=""/>)
   }
-  return layerContents
+  return prevLastFrame
 }
 
 export default Parse

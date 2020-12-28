@@ -15,7 +15,7 @@ class ScrollDetect extends Component {
                    threshold={0.5}
                    skip={Math.abs(this.props.visible.currentID - this.props.id) > 2}
                    onChange={(inView, entry) => {
-                     this.props.visible.onChange(this.props.id, "static/game/" + this.props.folder + this.props.image + ".png", !inView, this.props.layers)
+                     this.props.visible.onChange(this.props.id, !inView, this.props.animation)
                      this.setState({visible: inView})
                    }}>
       <div style={{

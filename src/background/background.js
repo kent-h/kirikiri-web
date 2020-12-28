@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import ImageLayer from "./animation/image-layer"
+import Animation from "./animation/animation"
 import "./background.css"
 
 const {Provider, Consumer} = React.createContext(undefined)
@@ -13,9 +13,9 @@ class Background extends Component {
     this.state = {visible: {id: 0}}
   }
 
-  onChange(id, image, visible, layers) {
+  onChange(id, visible, layers) {
     if (visible) {
-      this.visible[id] = {id, image, layers}
+      this.visible[id] = {id, layers}
     } else {
       delete this.visible[id]
     }
@@ -29,60 +29,19 @@ class Background extends Component {
       <div style={{position: "fixed", backgroundColor: "darkred"}}>{this.state.visible.id}</div>
 
       <div className="large-background-holder-left background-blur">
-        <div className="background-margin-hack">
-          <div className="background-image-holder">
-            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
-              const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID}
-                                 layer={layerID}
-                                 visibleID={this.state.visible.id}
-                                 animation={layer}/>
-            })}
-          </div>
-        </div>
+        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
       </div>
 
       <div className="large-background-holder-right background-blur">
-        <div className="background-margin-hack">
-          <div className="background-image-holder">
-            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
-              const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID}
-                                 layer={layerID}
-                                 visibleID={this.state.visible.id}
-                                 animation={layer}/>
-            })}
-          </div>
-        </div>
+        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
       </div>
 
       <div className="large-background-holder-bottom background-blur">
-        <div className="background-margin-hack">
-          <div className="background-image-holder">
-            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
-              const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID}
-                                 layer={layerID}
-                                 visibleID={this.state.visible.id}
-                                 animation={layer}/>
-            })}
-          </div>
-        </div>
+        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
       </div>
 
-
       <div className="background-holder">
-        <div className="background-margin-hack">
-          <div className="background-image-holder">
-            {this.state.visible.id !== 0 && Object.keys(this.state.visible.layers).map(layerID => {
-              const layer = this.state.visible.layers[layerID]
-              return <ImageLayer key={layerID}
-                                 layer={layerID}
-                                 visibleID={this.state.visible.id}
-                                 animation={layer}/>
-            })}
-          </div>
-        </div>
+        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
       </div>
 
       <div className="text">
