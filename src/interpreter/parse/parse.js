@@ -15,7 +15,7 @@ const Parse = (props) => {
   }
 
   let betweenText = []
-  let prevLastFrame = []
+  let renderState = undefined
 
   tokens.forEach(token => {
     switch (token.type) {
@@ -23,7 +23,7 @@ const Parse = (props) => {
         // console.log(token.text) // ignore comments in general
         break
       case "t": // text
-        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
+        renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
         append(<span>{token.text}</span>)
         break
@@ -33,7 +33,7 @@ const Parse = (props) => {
       case "@": // full-line tag
       case "[": // inline tag
         if (token.command.toLowerCase() === "align") {
-          prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
+          renderState = RenderChunk(betweenText, renderState, append)
           betweenText = []
           append(<div style={{textAlign: "center"}}>{token.args.text}</div>)
         } else {
@@ -41,12 +41,12 @@ const Parse = (props) => {
         }
         break
       case "EOF":
-        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
+        renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
         // append(<div>--- end of {token.storage} ---</div>)
         break
       case "call": // jump or call statements require more page loading
-        prevLastFrame = RenderChunk(betweenText, prevLastFrame, append)
+        renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
         append(<Interpreter gameState={token.gameState}
                             storage={token.storage}
@@ -63,13 +63,15 @@ const Parse = (props) => {
 const debug = false
 let uuid = 1
 
-const RenderChunk = (tokens, prevLastFrame, append) => {
+const RenderChunk = (tokens, prevState, append) => {
+  prevState = prevState === undefined ? {bgm: undefined, animationFrame: []} : prevState
+
   let isDivider = false
 
   let time = 0
   let endTime = 0
 
-  let layers = prevLastFrame
+  let layers = prevState.animationFrame
 
   const lastFrame = (layer) => {
     layer = layer === "base" ? 0 : (layer || 0)
@@ -134,6 +136,28 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
     })
   }
 
+  let bgmTimeline = [{time: 0, bgm: prevState.bgm}]
+  const pushBgm = (bgm, fadeTime) => {
+    isDivider = true
+    const lastBgm = bgmTimeline[bgmTimeline.length - 1]
+    if (lastBgm.time !== time) { // if time has advanced, create a new frame
+      bgmTimeline.push({time: time, bgm: bgm, fadeTime: fadeTime})
+    } else { // else change info of last frame
+      lastBgm.bgm = bgm
+      lastBgm.fadeTime = fadeTime
+    }
+  }
+
+  let seTimeline = []
+  const pushSound = (sound) => {
+    isDivider = true
+    if (seTimeline.length === 0 || seTimeline[seTimeline.length - 1].time !== time) {
+      seTimeline.push({time: time, sounds: {}})
+    }
+    seTimeline[seTimeline.length - 1].sounds[sound] = true
+  }
+
+
   tokens.forEach(token => {
     switch (token.type) {
       case ";": // comment
@@ -144,10 +168,21 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
         break
       case "@": // full-line tag
       case "[": // inline tag
-        if (debug) {
-          append(<Tag command={token}/>)
-        }
+        let specialTag = "red"
         switch (token.command.toLowerCase()) {
+          case "playbgm":
+          case "fadeinbgm":
+            pushBgm(token.args.storage, token.args.time || 0)
+            break
+          case "stopbgm":
+          case "fadeoutbgm":
+            pushBgm(undefined, token.args.time || 0)
+            break
+          case "fadeinse":
+          case "playse":
+            // TODO: handle looping
+            pushSound(token.args.storage)
+            break
           case "dash":
           case "dashcombo": // these use opacity values where 0 is fully visible
           case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,
@@ -180,12 +215,9 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
             duplicateLastFrame(token.args.layer, {
               transform: fOrigT + " scale(" + (token.args.mag ? token.args.mag : 2) + ") " + rOrigT,
             })
-
-            append(<Tag command={token} color="red"/>)
             break
           case "imageex":
             pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer || 10, 0, true)
-            append(<Tag command={token} color="red"/>)
             break
           case "image":
           case "image4demo":
@@ -193,7 +225,6 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
               break
             }
             pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
-            append(<Tag command={token} color="red"/>)
             break
           case "fadein":
           case "bg":
@@ -205,8 +236,6 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
             clearOtherLayers(token.args.layer, token.args.time)
 
             time += (token.args.time ? parseInt(token.args.time, 10) : 0)
-
-            append(<Tag command={token} color="red"/>)
             break
           case "move":
             if (token.args.layer && token.args.layer.startsWith("&")) {
@@ -234,23 +263,23 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
 
             moveTime += time * nodes.length
             endTime = endTime > moveTime ? endTime : moveTime
-            append(<Tag command={token} color="red"/>)
             break
           case "wm":
             time = time > endTime ? time : endTime
-            append(<Tag command={token} color="red"/>)
             break
           case "wait":
             time += parseInt(token.args.time, 10) || 0
-            append(<Tag command={token} color="red"/>)
             break
           case "r":
+            specialTag = "yellow"
             append(<div className="newline"/>)
             break
           case "cm":
+            specialTag = "yellow"
             append(<div style={{height: "3em"}}/>)
             break
           case "macro":
+            specialTag = false
             // on creation of a macro, there's nothing to render unless debugging
             if (debug) {
               append(<div style={{color: "darkred", marginLeft: "2em", border: "1px solid green"}}>
@@ -259,12 +288,18 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
             }
             break
           case "return":
+            specialTag = false
             // append(<div>--- returning from {token.from} (to {token.to}) ---</div>)
             break
           case "s":
+            specialTag = false
             append("--- page generation halted at [s] ---")
             break
           default:
+            specialTag = false
+        }
+        if (debug || specialTag) {
+          append(<Tag command={token} color={specialTag}/>)
         }
         break
       case "EOF":
@@ -281,21 +316,22 @@ const RenderChunk = (tokens, prevLastFrame, append) => {
     }
   })
 
-  // save final frame for next animation block to use
-  prevLastFrame = []
-  layers.forEach((animation, layer) => {
-    prevLastFrame[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
-  })
-
-
   if (isDivider) {
     // determine transition
     // determine reverse transition
     append(<ScrollDetect id={uuid++}
                          animation={layers}
-                         alt=""/>)
+                         bgmTimeline={bgmTimeline}
+                         seTimeline={seTimeline}/>)
   }
-  return prevLastFrame
+
+  // save final frame for next animation block to use
+  let lastFrames = []
+  layers.forEach((animation, layer) => {
+    lastFrames[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
+  })
+
+  return {animationFrame: lastFrames, bgm: bgmTimeline[bgmTimeline.length - 1].bgm}
 }
 
 export default Parse

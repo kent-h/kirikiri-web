@@ -13,9 +13,9 @@ class Background extends Component {
     this.state = {visible: {id: 0}}
   }
 
-  onChange(id, visible, layers) {
+  onChange(id, visible, animation, bgmTimeline, seTimeline) {
     if (visible) {
-      this.visible[id] = {id, layers}
+      this.visible[id] = {id, animation, bgmTimeline, seTimeline}
     } else {
       delete this.visible[id]
     }
@@ -23,26 +23,15 @@ class Background extends Component {
   }
 
   render() {
-    console.log(this.state.visible.layers)
+    console.log(this.state.visible.animation, this.state.visible.bgmTimeline, this.state.visible.seTimeline)
 
     return <Provider value={{onChange: this.onChange, currentID: this.state.visible.id}}>
       <div style={{position: "fixed", backgroundColor: "darkred"}}>{this.state.visible.id}</div>
 
-      <div className="large-background-holder-left background-blur">
-        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
-      </div>
-
-      <div className="large-background-holder-right background-blur">
-        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
-      </div>
-
-      <div className="large-background-holder-bottom background-blur">
-        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
-      </div>
-
-      <div className="background-holder">
-        <Animation animationID={this.state.visible.id} animation={this.state.visible.layers}/>
-      </div>
+      <Animation animationID={this.state.visible.id}
+                 animation={this.state.visible.animation}
+                 bgmTimeline={this.state.visible.bgmTimeline}
+                 seTimeline={this.state.visible.seTimeline}/>
 
       <div className="text">
         {this.props.children}

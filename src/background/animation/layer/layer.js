@@ -15,7 +15,7 @@ class Layer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.visibleID !== this.props.visibleID) {
+    if (prevProps.animationID !== this.props.animationID) {
       this.abort(false)
       this.animate()
     }
@@ -62,7 +62,7 @@ class Layer extends Component {
     const keyframe = this.state.keyframe
     const last = this.state.last
     const ret = keyframe && keyframe.contents.image &&
-      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.visibleID}
+      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.animationID}
            className="background-image-layer"
            layer={this.props.layer}
            src={"static/game/" + keyframe.contents.folder + keyframe.contents.image + ".png"}
@@ -79,7 +79,7 @@ class Layer extends Component {
       return [ret]
     } else {
       return [ret,
-        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.visibleID}
+        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.animationID}
              className="background-image-layer"
              layer={this.props.layer}
              src={"static/game/" + last.contents.folder + last.contents.image + ".png"}
