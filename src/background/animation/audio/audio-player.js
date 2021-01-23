@@ -6,14 +6,14 @@ class AudioPlayer extends Component {
     super(props)
     this.sleep = this.sleep.bind(this)
 
-    this.state = {playingSe: []}
+    this.state = {playingSe: [], fadeIn: 0, fadeOut: 0}
   }
 
   componentDidMount() {
     const abortPromise = new Promise(resolve => {
       this.abort = resolve
     })
-    this.runBgmTimeline(abortPromise)
+    this.runBGMTimeline(abortPromise)
     this.runSeTimeline(abortPromise)
   }
 
@@ -23,7 +23,7 @@ class AudioPlayer extends Component {
       const abortPromise = new Promise(resolve => {
         this.abort = resolve
       })
-      this.runBgmTimeline(abortPromise)
+      this.runBGMTimeline(abortPromise)
       this.runSeTimeline(abortPromise)
     }
   }
@@ -36,7 +36,12 @@ class AudioPlayer extends Component {
     return Promise.race([abortPromise, new Promise(resolve => setTimeout(() => resolve(true), ms))])
   }
 
-  async runBgmTimeline(abortPromise) {
+  async runBGMTimeline(abortPromise) {
+    if (this.props.bgmTimeline.length === 0) {
+      this.setState(state => ({playingBgm: undefined, lastPlayingBgm: state.playingBgm}))
+      this.fadeBGM(abortPromise, 500) // 0.5s fade time if none is defined
+    }
+
     let time = 0
     for (const keyframeID in this.props.bgmTimeline) {
       const keyframe = this.props.bgmTimeline[keyframeID]
@@ -44,9 +49,29 @@ class AudioPlayer extends Component {
       if (!await this.sleep(abortPromise, duration)) {
         break
       }
-      this.setState(state => ({playingBgm: keyframe, lastPlayingBgm: state.playingBgm}))
+      this.setState(state => ((!state.playingBgm || state.playingBgm.bgm !== keyframe.bgm) ? {
+        playingBgm: keyframe,
+        lastPlayingBgm: state.playingBgm,
+      } : {}))
+      this.fadeBGM(abortPromise, keyframe.fadeTime)
       time = keyframe.time
     }
+  }
+
+  async fadeBGM(abortPromise, fadeTime) {
+    if (fadeTime === 0) {
+      this.setState({fadeIn: 1, fadeOut: 0})
+      return
+    }
+
+    for (let i = 0; i <= fadeTime; i += 10) {
+      this.setState({fadeIn: i / fadeTime, fadeOut: 1 - i / fadeTime})
+      // turn volume down every 1/100th of a second
+      if (!await this.sleep(abortPromise, 10)) {
+        break
+      }
+    }
+    this.setState({lastPlayingBgm: undefined})
   }
 
   async runSeTimeline(abortPromise) {
@@ -75,20 +100,26 @@ class AudioPlayer extends Component {
   }
 
   render() {
+    const bgmVersion = "vita" // vita | ps2 | classic
+
+    const bgmPlayer = (bgm, fade) => (
+      <ReactAudioPlayer autoPlay key={bgm}
+                        volume={0.5 * fade} preload="auto"
+                        src={"/static/bgm/" + bgmVersion + "/" + bgm + ".ogg"}/>
+    )
+
     return <>
-      {[this.state.playingBgm && this.state.playingBgm.bgm &&
-      <ReactAudioPlayer autoPlay key={this.state.playingBgm.bgm}
-                        volume={0.5} preload="auto"
-                        src={"/static/game/bgm/" + this.state.playingBgm.bgm + ".ogg"}/>,
-        this.state.lastPlayingBgm && this.state.lastPlayingBgm.bgm && this.state.lastPlayingBgm.bgm !== this.state.playingBgm.bgm &&
-        <ReactAudioPlayer autoPlay key={this.state.lastPlayingBgm.bgm}
-                          volume={0.5} preload="auto"
-                          src={"/static/game/bgm/" + this.state.lastPlayingBgm.bgm + ".ogg"}/>]}
+      {[
+        this.state.playingBgm && this.state.playingBgm.bgm &&
+        bgmPlayer(this.state.playingBgm.bgm, this.state.fadeIn),
+        this.state.lastPlayingBgm && this.state.lastPlayingBgm.bgm && (!this.state.playingBgm || this.state.lastPlayingBgm.bgm !== this.state.playingBgm.bgm) &&
+        bgmPlayer(this.state.lastPlayingBgm.bgm, this.state.fadeOut),
+      ]}
 
       {this.state.playingSe.map((sound, index) => (
         <ReactAudioPlayer autoPlay key={this.props.animationID + "" + index}
                           volume={0.4} preload="auto"
-                          src={"/static/game/sound/" + sound + ".wav"}/>
+                          src={"/static/" + sound + ".ogg"}/>
       ))}
     </>
   }

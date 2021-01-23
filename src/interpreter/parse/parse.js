@@ -139,6 +139,7 @@ const RenderChunk = (tokens, prevState, append) => {
   let bgmTimeline = [{time: 0, bgm: prevState.bgm}]
   const pushBgm = (bgm, fadeTime) => {
     isDivider = true
+    fadeTime = parseInt(fadeTime || 0, 10)
     const lastBgm = bgmTimeline[bgmTimeline.length - 1]
     if (lastBgm.time !== time) { // if time has advanced, create a new frame
       bgmTimeline.push({time: time, bgm: bgm, fadeTime: fadeTime})
@@ -170,19 +171,25 @@ const RenderChunk = (tokens, prevState, append) => {
       case "[": // inline tag
         let specialTag = "red"
         switch (token.command.toLowerCase()) {
+          case "say":
+            pushSound("voice/" + token.args.storage)
+            break
           case "playbgm":
           case "fadeinbgm":
-            pushBgm(token.args.storage, token.args.time || 0)
+            pushBgm(token.args.storage, token.args.time)
             break
           case "stopbgm":
           case "fadeoutbgm":
-            pushBgm(undefined, token.args.time || 0)
+            pushBgm(undefined, token.args.time)
             break
           case "fadeinse":
           case "playse":
             // TODO: handle looping
-            pushSound(token.args.storage)
+            pushSound("sound/" + token.args.storage)
             break
+          case "stopse":
+          case "fadeoutse":
+            break // TODO: cancel looped sound effects
           case "dash":
           case "dashcombo": // these use opacity values where 0 is fully visible
           case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,

@@ -65,7 +65,7 @@ class Layer extends Component {
       <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.animationID}
            className="background-image-layer"
            layer={this.props.layer}
-           src={"static/game/" + keyframe.contents.folder + keyframe.contents.image + ".png"}
+           src={"/static/images/" + keyframe.contents.image + ".webp"}
            style={{
              transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
              top: (keyframe.top / 6) + "%",
@@ -82,7 +82,7 @@ class Layer extends Component {
         <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.animationID}
              className="background-image-layer"
              layer={this.props.layer}
-             src={"static/game/" + last.contents.folder + last.contents.image + ".png"}
+             src={"/static/images/" + last.contents.image + ".webp"}
              style={{
                // keyframe transform will have the correct duration
                transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
