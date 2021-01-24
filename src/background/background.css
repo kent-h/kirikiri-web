@@ -86,12 +86,18 @@
   width:    100%;
 }
 
+.text-area {
+  width:     calc(100%);
+  max-width: calc(133.33333333vh);
+  margin:    auto;
+}
+
 .text {
-  width:       calc(100% - 2em);
-  max-width:   calc(133.33333333vh - 2em);
-  margin:      auto;
+  margin:      0 10%;
 
   color:       white;
+  font-size:   large;
+  line-height: 1.4;
 
-  text-shadow: 1px 0 1px #000, -1px 0 1px #000, 0 1px 1px #000, 0 -1px 1px #000;
+  text-shadow: 0 0 0.125em #343837, 0 0 0.125em #343837, 0 0 0.25em #000, 0 0 0.25em #000, 0 0 0.5em #000, 0 0 0.5em #000, 0 0 1em #000, 0 0 1em #000;
 }

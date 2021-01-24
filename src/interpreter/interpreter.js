@@ -1,12 +1,15 @@
 import React, {Component} from "react"
-import Parse from "./parse/parse"
 import "./interpreter.css"
+import Render from "./parse/render"
+import Tokenize from "./parse/tokenize"
 
 class Interpreter extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {displayText: "", macroText: ""}
+    this.preRender = this.preRender.bind(this)
+
+    this.state = {display: []}
   }
 
   componentDidMount() {
@@ -14,48 +17,49 @@ class Interpreter extends Component {
   }
 
   async load() {
+    let macroFile
     if (!this.props.gameState) {
-      let response = await fetch("/static/game/patch/マクロ.ks")
+      const response = await fetch("/static/scripts/マクロ.ks")
+      macroFile = await response.text()
       if (!response.ok) {
-        const file = await response.text()
-        this.setState({macroText: "failed to load: " + file})
+        this.setState({macroText: "failed to load: " + macroFile})
         return
       }
-      const buffer = await response.arrayBuffer()
-      const file = new TextDecoder("utf-16le").decode(buffer)
-      this.setState({macroText: file})
+      this.setState({macroText: macroFile})
     }
 
-    let response = await fetch("/static/game/patch_lang_english/" + this.props.storage)
+    let response = await fetch("/static/scripts/eng/" + this.props.storage)
+    let file = await response.text()
     if (!response.ok) {
-      response = await fetch("/static/game/patch/" + this.props.storage) // data/scenario/
+      let response = await fetch("/static/scripts/" + this.props.storage)
+      file = await response.text()
       if (!response.ok) {
-        const file = await response.text()
         this.setState({displayText: "failed to load: " + file})
         return
       }
     }
-    const buffer = await response.arrayBuffer()
-    const file = new TextDecoder("utf-16le").decode(buffer)
-    this.setState({displayText: file})
+
+    this.preRender(file, macroFile)
   }
 
-  render() {
-    const lines = this.state.displayText.split("\r\n")
+  preRender(displayText, macroText) {
+    const lines = displayText.split("\r\n")
     let stackFrame = {storage: this.props.storage, lines: lines, lineIndex: 0, returnFrame: this.props.returnFrame}
 
     let gameState = this.props.gameState
     if (!gameState) {
       gameState = {macros: {}}
       // call macro first, and "return" to the specified storage
-      stackFrame = {storage: "マクロ.ks", lines: this.state.macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame}
+      stackFrame = {storage: "マクロ.ks", lines: macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame}
     }
 
-    return <>
-      <Parse gameState={gameState}
-             target={this.props.target}
-             stackFrame={stackFrame}/>
-    </>
+    let tokens = []
+    Tokenize(tokens, gameState, stackFrame, this.props.target)
+    this.setState({display: Render(tokens)})
+  }
+
+  render() {
+    return this.state.display
   }
 }
 

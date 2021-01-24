@@ -3,12 +3,8 @@ import Interpreter from "../interpreter"
 import Anchor from "./anchor/anchor"
 import ScrollDetect from "./scroll/scroll"
 import Tag from "./tag/tag"
-import Tokenize from "./tokenize"
 
-const Parse = (props) => {
-  const tokens = []
-  Tokenize(tokens, props.gameState, props.stackFrame, props.target)
-
+const Render = (tokens) => {
   const toDisplay = []
   const append = (Component) => {
     toDisplay.push(<Fragment key={toDisplay.length + 1}>{Component}</Fragment>)
@@ -25,7 +21,7 @@ const Parse = (props) => {
       case "t": // text
         renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
-        append(<span>{token.text}</span>)
+        append(<span>{token.text} </span>)// the extra space here is intentional
         break
       case "*": // link
         betweenText.push(token)
@@ -61,6 +57,8 @@ const Parse = (props) => {
 }
 
 const debug = false
+const verbose = false
+
 let uuid = 1
 
 const RenderChunk = (tokens, prevState, append) => {
@@ -277,18 +275,47 @@ const RenderChunk = (tokens, prevState, append) => {
           case "wait":
             time += parseInt(token.args.time, 10) || 0
             break
+          default:
+            specialTag = false
+        }
+        if (debug && (specialTag || verbose)) {
+          append(<Tag command={token} color={specialTag}/>)
+        }
+        break
+      default:
+        console.log("warning: unhandled token type: " + token.type, token)
+    }
+  })
+
+
+  tokens.forEach(token => {
+    switch (token.type) {
+      case ";": // comment
+        // console.log(token.text) // ignore comments in general
+        break
+      case "*": // link
+        append(<Anchor name={token.link}/>)
+        break
+      case "@": // full-line tag
+      case "[": // inline tag
+        let specialTag = "red"
+        switch (token.command.toLowerCase()) {
           case "r":
             specialTag = "yellow"
-            append(<div className="newline"/>)
+            if (!isDivider) {
+              append(<div className="newline"/>)
+            }
             break
           case "cm":
             specialTag = "yellow"
-            append(<div style={{height: "3em"}}/>)
+            if (!isDivider) {
+              append(<div className="spacer-cm"/>)
+            }
             break
           case "macro":
             specialTag = false
             // on creation of a macro, there's nothing to render unless debugging
-            if (debug) {
+            if (verbose) {
               append(<div style={{color: "darkred", marginLeft: "2em", border: "1px solid green"}}>
                 {token.tokens.map(token => (<Tag command={token}/>))}
               </div>)
@@ -305,18 +332,9 @@ const RenderChunk = (tokens, prevState, append) => {
           default:
             specialTag = false
         }
-        if (debug || specialTag) {
+        if (debug && (specialTag || verbose)) {
           append(<Tag command={token} color={specialTag}/>)
         }
-        break
-      case "EOF":
-        append(<div>--- end of {token.storage} ---</div>)
-        break
-      case "call": // jump or call statements require more page loading
-        append(<Interpreter gameState={token.gameState}
-                            storage={token.storage}
-                            target={token.target}
-                            returnFrame={token.returnFrame}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)
@@ -341,4 +359,4 @@ const RenderChunk = (tokens, prevState, append) => {
   return {animationFrame: lastFrames, bgm: bgmTimeline[bgmTimeline.length - 1].bgm}
 }
 
-export default Parse
+export default Render

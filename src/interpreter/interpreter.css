@@ -5,3 +5,7 @@
 .newline + .newline {
   height: 1em;
 }
+
+.spacer-cm {
+  height: 3em;
+}

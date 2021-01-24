@@ -104,7 +104,7 @@ class AudioPlayer extends Component {
 
     const bgmPlayer = (bgm, fade) => (
       <ReactAudioPlayer autoPlay key={bgm}
-                        volume={0.5 * fade} preload="auto"
+                        volume={0.25 * 0.5 * fade} preload="auto"
                         src={"/static/bgm/" + bgmVersion + "/" + bgm + ".ogg"}/>
     )
 
@@ -118,7 +118,7 @@ class AudioPlayer extends Component {
 
       {this.state.playingSe.map((sound, index) => (
         <ReactAudioPlayer autoPlay key={this.props.animationID + "" + index}
-                          volume={0.4} preload="auto"
+                          volume={0.25 * 0.4} preload="auto"
                           src={"/static/" + sound + ".ogg"}/>
       ))}
     </>

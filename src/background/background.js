@@ -14,12 +14,18 @@ class Background extends Component {
   }
 
   onChange(id, visible, animation, bgmTimeline, seTimeline) {
+    if (!!this.visible[id] === visible) {
+      return // exit early if there is no change
+    }
+
     if (visible) {
       this.visible[id] = {id, animation, bgmTimeline, seTimeline}
     } else {
       delete this.visible[id]
     }
-    this.setState(() => ({visible: Object.keys(this.visible).reduce((a, b) => (a.id > this.visible[b].id ? a : this.visible[b]), {id: 0})}))
+    // try to only run setState once
+    clearTimeout(this.time)
+    this.time = setTimeout(() => this.setState(() => ({visible: Object.keys(this.visible).reduce((a, b) => (a.id > this.visible[b].id ? a : this.visible[b]), {id: 0})})), 1)
   }
 
   render() {
@@ -33,8 +39,10 @@ class Background extends Component {
                  bgmTimeline={this.state.visible.bgmTimeline}
                  seTimeline={this.state.visible.seTimeline}/>
 
-      <div className="text">
-        {this.props.children}
+      <div className="text-area">
+        <div className="text">
+          {this.props.children}
+        </div>
       </div>
     </Provider>
   }
