@@ -19,7 +19,7 @@ class Interpreter extends Component {
   async load() {
     let macroFile
     if (!this.props.gameState) {
-      const response = await fetch("/static/scripts/マクロ.ks")
+      const response = await fetch("/static/scripts/マクロ.ks.gz")
       macroFile = await response.text()
       if (!response.ok) {
         this.setState({macroText: "failed to load: " + macroFile})
@@ -28,10 +28,10 @@ class Interpreter extends Component {
       this.setState({macroText: macroFile})
     }
 
-    let response = await fetch("/static/scripts/eng/" + this.props.storage)
+    let response = await fetch("/static/scripts/eng/" + this.props.storage + ".gz")
     let file = await response.text()
     if (!response.ok) {
-      let response = await fetch("/static/scripts/" + this.props.storage)
+      let response = await fetch("/static/scripts/" + this.props.storage + ".gz")
       file = await response.text()
       if (!response.ok) {
         this.setState({displayText: "failed to load: " + file})

@@ -123,7 +123,7 @@ const RenderChunk = (tokens, prevState, append) => {
     pushFrame(layer, {
       time: time + (timeOffset ? parseInt(timeOffset, 10) : 0),
       contents: {
-        image: image,
+        image: image && image.toLowerCase(),
         folder: folder,
         key: fadeInsteadOfAnimate === !lastContents(layer).key,
         transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
@@ -204,7 +204,7 @@ const RenderChunk = (tokens, prevState, append) => {
             pushFrame(token.args.layer, {
               time: time,
               contents: {
-                image: token.args.storage,
+                image: token.args.storage && token.args.storage.toLowerCase(),
                 folder: "bgimage/",
                 key: !lastContents(token.args.layer).key,
                 transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
