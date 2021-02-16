@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {withScroll} from "../scroll/watcher"
 import AudioPlayer from "./audio/audio-player"
 import Layer from "./layer/layer"
 
@@ -15,7 +16,7 @@ class Animation extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.animationID !== this.props.animationID) {
+    if (prevProps.animation.id !== this.props.animation.id) {
       this.abort(false)
       this.prepareAnimation()
     }
@@ -24,8 +25,8 @@ class Animation extends Component {
   async preload(abortPromise) {
     const promises = []
     // neededImg *must* be held to avoid accidentally canceling the load operation
-    let neededImg = Object.keys(this.props.animation || []).reduce((images, layerID) => (
-      this.props.animation[layerID].reduce((images, frame) => {
+    let neededImg = Object.keys(this.props.animation.timeline || []).reduce((images, layerID) => (
+      this.props.animation.timeline[layerID].reduce((images, frame) => {
         if (frame.contents.image) {
           const name = frame.contents.image
           if (!images[name]) {
@@ -56,7 +57,7 @@ class Animation extends Component {
 
     // wait for music to load
     // neededBgm *must* be held to avoid accidentally canceling the load operation
-    let neededBgm = (this.props.bgmTimeline || []).reduce((sounds, keyframe) => {
+    let neededBgm = (this.props.animation.bgmTimeline || []).reduce((sounds, keyframe) => {
       if (keyframe.bgm && !sounds[keyframe.bgm]) {
         sounds[keyframe.bgm] = loadSound("/static/bgm/" + bgmVersion + "/" + keyframe.bgm + ".ogg")
       }
@@ -65,7 +66,7 @@ class Animation extends Component {
 
     // wait for sound effects to load
     // neededSe *must* be held to avoid accidentally canceling the load operation
-    let neededSe = (this.props.seTimeline || []).reduce((sounds, keyframe) => (
+    let neededSe = (this.props.animation.seTimeline || []).reduce((sounds, keyframe) => (
       Object.keys(keyframe.sounds).reduce((sounds, sound) => {
         if (!sounds[sound]) {
           sounds[sound] = loadSound("/static/" + sound + ".ogg")
@@ -93,8 +94,8 @@ class Animation extends Component {
       neededSe = undefined
     } else {
       // save resolution of each image
-      Object.keys(this.props.animation || []).forEach(layerID => {
-        const layer = this.props.animation[layerID]
+      Object.keys(this.props.animation.timeline || []).forEach(layerID => {
+        const layer = this.props.animation.timeline[layerID]
         layer.forEach(frame => {
           if (frame.contents.image) {
             frame.contents.naturalWidth = neededImg[frame.contents.image].naturalWidth / 8
@@ -114,12 +115,11 @@ class Animation extends Component {
       return
     }
 
-
     this.setState({
-      animationID: this.props.animationID,
-      animation: this.props.animation,
-      bgmTimeline: this.props.bgmTimeline,
-      seTimeline: this.props.seTimeline,
+      animationID: this.props.animation.id,
+      animation: this.props.animation.timeline,
+      bgmTimeline: this.props.animation.bgmTimeline,
+      seTimeline: this.props.animation.seTimeline,
     })
   }
 
@@ -148,5 +148,7 @@ class Animation extends Component {
     </>
   }
 }
+
+Animation = withScroll(Animation)
 
 export default Animation

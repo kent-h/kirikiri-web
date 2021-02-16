@@ -1,0 +1,43 @@
+.menu-background {
+  position:         fixed;
+  top:              0;
+  bottom:           0;
+  left:             0;
+  right:            0;
+  background-color: black;
+
+  opacity:          0.4;
+  transition:       opacity linear 0.2s, transform ease-out 0.2s;
+}
+
+.menu-background[invisible] {
+  opacity:        0;
+  transition:     opacity linear 0.2s, transform ease-in 0.2s;
+
+  pointer-events: none;
+}
+
+
+.menu {
+  position:            fixed;
+  top:                 10%;
+  bottom:              10%;
+  left:                10%;
+  right:               10%;
+  background-color:    #333;
+  box-shadow:          0 0 1em 0.25em white;
+  animation:           fadein 2s ease-out 1 none;
+  animation-fill-mode: none;
+
+  opacity:             1;
+  transform:           translateY(0);
+  transition:          opacity linear 0.2s, transform ease-out 0.2s;
+}
+
+.menu[invisible] {
+  opacity:        0;
+  transform:      translateY(-25%);
+  transition:     opacity linear 0.2s, transform ease-in 0.2s;
+
+  pointer-events: none;
+}

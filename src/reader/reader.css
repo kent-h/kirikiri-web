@@ -86,6 +86,24 @@
   width:    100%;
 }
 
+/* can we have a fade-out affect with the text, so that it scrolls offscreen before reaching the very top of the page? */
+/*.window {*/
+/*  position:         absolute;*/
+/*  top:              0;*/
+/*  height:           100vh;*/
+/*  width:            100vw;*/
+
+/*  background-color: red;*/
+
+/*  mask:             url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAIAAADdv/LVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAGdYAABnWARjRyu0AAAASSURBVBhXYwCB////M/z//x8AF/QF+xwHbbUAAAAASUVORK5CYII=');*/
+/*  mask-mode:        luminance;*/
+/*  mask-repeat:      no-repeat;*/
+/*  !*mask-size:        cover;*!*/
+/*  mask-position:    center;*/
+/*  overflow:         auto;*/
+/*  mask-size:        100% 100%;*/
+/*}*/
+
 .text-area {
   width:     calc(100%);
   max-width: calc(133.33333333vh);
@@ -93,11 +111,41 @@
 }
 
 .text {
-  margin:      0 10%;
+  margin:      0 12%;
 
   color:       white;
-  font-size:   large;
+  font-size:   1em;
   line-height: 1.4;
 
   text-shadow: 0 0 0.125em #343837, 0 0 0.125em #343837, 0 0 0.25em #000, 0 0 0.25em #000, 0 0 0.5em #000, 0 0 0.5em #000, 0 0 1em #000, 0 0 1em #000;
 }
+
+@media only screen and (min-width: 800px) and (min-height: 600px)  {
+  .text {
+    font-size: 1.1em;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (min-height: 750px) {
+  .text {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (min-height: 900px)  {
+  .text {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (min-height: 1050px)  {
+  .text {
+    font-size: 1.4em;
+  }
+}
+
+/*@media only screen and (min-width: 1600px)  {*/
+/*  .text {*/
+/*    font-size: larger;*/
+/*  }*/
+/*}*/

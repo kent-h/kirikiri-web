@@ -1,12 +1,12 @@
-import React, {Component} from "react"
+import {Component} from "react"
 import "./interpreter.css"
+import {LocateScript} from "./parse/lookup/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
 
 class Interpreter extends Component {
   constructor(props) {
     super(props)
-
     this.preRender = this.preRender.bind(this)
 
     this.state = {display: []}
@@ -17,26 +17,23 @@ class Interpreter extends Component {
   }
 
   async load() {
+    const scriptFetchPromise = fetch(LocateScript(this.props.storage))
+
     let macroFile
     if (!this.props.gameState) {
       const response = await fetch("/static/scripts/マクロ.ks.gz")
       macroFile = await response.text()
       if (!response.ok) {
-        this.setState({macroText: "failed to load: " + macroFile})
+        this.setState({display: "failed to load: " + macroFile})
         return
       }
-      this.setState({macroText: macroFile})
     }
 
-    let response = await fetch("/static/scripts/eng/" + this.props.storage + ".gz")
-    let file = await response.text()
+    const response = await scriptFetchPromise
+    const file = await response.text()
     if (!response.ok) {
-      let response = await fetch("/static/scripts/" + this.props.storage + ".gz")
-      file = await response.text()
-      if (!response.ok) {
-        this.setState({displayText: "failed to load: " + file})
-        return
-      }
+      this.setState({display: "failed to load: " + file})
+      return
     }
 
     this.preRender(file, macroFile)

@@ -1,7 +1,7 @@
 import React, {Fragment} from "react"
 import Interpreter from "../interpreter"
 import Anchor from "./anchor/anchor"
-import ScrollDetect from "./scroll/scroll"
+import ScrollDetect from "../../reader/scroll/detect"
 import Tag from "./tag/tag"
 
 const Render = (tokens) => {
@@ -21,7 +21,7 @@ const Render = (tokens) => {
       case "t": // text
         renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
-        append(<span>{token.text} </span>)// the extra space here is intentional
+        append(<span>{token.text}</span>)
         break
       case "*": // link
         betweenText.push(token)
@@ -345,7 +345,7 @@ const RenderChunk = (tokens, prevState, append) => {
     // determine transition
     // determine reverse transition
     append(<ScrollDetect id={uuid++}
-                         animation={layers}
+                         timeline={layers}
                          bgmTimeline={bgmTimeline}
                          seTimeline={seTimeline}/>)
   }
