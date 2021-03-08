@@ -40,19 +40,28 @@ class Interpreter extends Component {
   }
 
   preRender(displayText, macroText) {
-    const lines = displayText.split("\r\n")
-    let stackFrame = {storage: this.props.storage, lines: lines, lineIndex: 0, returnFrame: this.props.returnFrame}
+    const stackFrame = (this.props.gameState && this.props.gameState.stackFrame) || {}
+    stackFrame.storage = this.props.storage
+    stackFrame.lines = displayText.split("\r\n")
+    stackFrame.lineIndex = 0
 
     let gameState = this.props.gameState
+
+    if (gameState) {
+      gameState.stackFrame = stackFrame
+    }
+
     if (!gameState) {
-      gameState = {macros: {}}
       // call macro first, and "return" to the specified storage
-      stackFrame = {storage: "マクロ.ks", lines: macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame}
+      gameState = {
+        macros: {},
+        stackFrame: {storage: "マクロ.ks", lines: macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame},
+      }
     }
 
     let tokens = []
-    Tokenize(tokens, gameState, stackFrame, this.props.target)
-    this.setState({display: Render(tokens)})
+    Tokenize(tokens, gameState, this.props.target)
+    this.setState({display: Render(tokens, this.props.renderState)})
   }
 
   render() {

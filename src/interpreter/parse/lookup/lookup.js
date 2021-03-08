@@ -6,6 +6,7 @@ const sharedScriptsMap = SharedScripts.reduce((map, item) => {
 }, {})
 
 export const LocateScript = (name) => {
+  name = name.toLowerCase()
   if (sharedScriptsMap[name.split(".", 1)]) {
     return "/static/scripts/" + name + ".gz"
   }

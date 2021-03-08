@@ -1,4 +1,6 @@
-const Tokenize = (tokens, gameState, stackFrame, target) => {
+const Tokenize = (tokens, gameState, target) => {
+  const stackFrame = gameState.stackFrame
+
   if (target) {
     for (; stackFrame.lineIndex < stackFrame.lines.length; stackFrame.lineIndex++) {
       if (stackFrame.lines[stackFrame.lineIndex].startsWith(target)) {
@@ -21,14 +23,14 @@ const Tokenize = (tokens, gameState, stackFrame, target) => {
         case "@":
           // command
           const tag = ParseTag(line, 0)
-          if (InterpretCommand(tokens, gameState, tag, stackFrame)) {
+          if (InterpretCommand(tokens, gameState, tag)) {
             break loop
           }
           break
         default:
           // regular text
           if (line.length !== 0) {
-            if (ParseInlineTags(tokens, gameState, line, stackFrame)) {
+            if (ParseInlineTags(tokens, gameState, line)) {
               break loop
             }
           }
@@ -43,7 +45,9 @@ const Tokenize = (tokens, gameState, stackFrame, target) => {
 const ignoreMacros = {cl_notrans: true}
 
 // InterpretCommand interprets the given command, and pauses execution of the
-const InterpretCommand = (tokens, gameState, tag, stackFrame) => {
+const InterpretCommand = (tokens, gameState, tag) => {
+  const stackFrame = gameState.stackFrame
+
   if (stackFrame.macroBuilder) { // if we're building a macro, just add commands to the macro
     const macroBuilder = stackFrame.macroBuilder
     if (tag.command === "endmacro") {
@@ -100,6 +104,8 @@ const InterpretCommand = (tokens, gameState, tag, stackFrame) => {
 
       stackFrame.lineIndex++
 
+      // gameState.stackFrame.storage = tag.args.storage || stackFrame.storage
+      // gameState.stackFrame.target = tag.args.target
       tokens.push({
         type: "call",
         gameState,
@@ -112,19 +118,24 @@ const InterpretCommand = (tokens, gameState, tag, stackFrame) => {
 
       stackFrame.lineIndex++
 
+      gameState.stackFrame = {
+        returnFrame: gameState.stackFrame,
+        // storage: tag.args.storage || stackFrame.storage,
+        // target: tag.args.target,
+      }
       tokens.push({
         type: "call",
         gameState,
         storage: tag.args.storage || stackFrame.storage,
         target: tag.args.target,
-        returnFrame: stackFrame,
       })
       return true
     case "return":
       if (stackFrame.returnFrame) {
         tokens.push(Object.assign({from: stackFrame.storage, to: stackFrame.returnFrame.storage}, tag))
 
-        Tokenize(tokens, gameState, stackFrame.returnFrame)
+        gameState.stackFrame = stackFrame.returnFrame
+        Tokenize(tokens, gameState)
       }
       return true
     case "iscript":

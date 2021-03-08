@@ -1,17 +1,16 @@
 import React, {Fragment} from "react"
+import ScrollDetect from "../../reader/scroll/detect"
 import Interpreter from "../interpreter"
 import Anchor from "./anchor/anchor"
-import ScrollDetect from "../../reader/scroll/detect"
 import Tag from "./tag/tag"
 
-const Render = (tokens) => {
+const Render = (tokens, renderState) => {
   const toDisplay = []
   const append = (Component) => {
     toDisplay.push(<Fragment key={toDisplay.length + 1}>{Component}</Fragment>)
   }
 
   let betweenText = []
-  let renderState = undefined
 
   tokens.forEach(token => {
     switch (token.type) {
@@ -44,10 +43,10 @@ const Render = (tokens) => {
       case "call": // jump or call statements require more page loading
         renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
-        append(<Interpreter gameState={token.gameState}
+        append(<Interpreter renderState={renderState}
+                            gameState={token.gameState}
                             storage={token.storage}
-                            target={token.target}
-                            returnFrame={token.returnFrame}/>)
+                            target={token.target}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)
@@ -59,17 +58,17 @@ const Render = (tokens) => {
 const debug = false
 const verbose = false
 
-let uuid = 1
+const RenderChunk = (tokens, renderState, append) => {
+  renderState = renderState === undefined ? {bgm: undefined, animationFrame: [], sectionID: 1} : renderState
 
-const RenderChunk = (tokens, prevState, append) => {
-  prevState = prevState === undefined ? {bgm: undefined, animationFrame: []} : prevState
+  let sectionID = renderState.sectionID
 
   let isDivider = false
 
   let time = 0
   let endTime = 0
 
-  let layers = prevState.animationFrame
+  let layers = renderState.animationFrame
 
   const lastFrame = (layer) => {
     layer = layer === "base" ? 0 : (layer || 0)
@@ -134,7 +133,7 @@ const RenderChunk = (tokens, prevState, append) => {
     })
   }
 
-  let bgmTimeline = [{time: 0, bgm: prevState.bgm}]
+  let bgmTimeline = [{time: 0, bgm: renderState.bgm}]
   const pushBgm = (bgm, fadeTime) => {
     isDivider = true
     fadeTime = parseInt(fadeTime || 0, 10)
@@ -344,7 +343,7 @@ const RenderChunk = (tokens, prevState, append) => {
   if (isDivider) {
     // determine transition
     // determine reverse transition
-    append(<ScrollDetect id={uuid++}
+    append(<ScrollDetect id={sectionID++}
                          timeline={layers}
                          bgmTimeline={bgmTimeline}
                          seTimeline={seTimeline}/>)
@@ -356,7 +355,11 @@ const RenderChunk = (tokens, prevState, append) => {
     lastFrames[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
   })
 
-  return {animationFrame: lastFrames, bgm: bgmTimeline[bgmTimeline.length - 1].bgm}
+  return {
+    animationFrame: lastFrames,
+    bgm: bgmTimeline[bgmTimeline.length - 1].bgm,
+    sectionID: sectionID,
+  }
 }
 
 export default Render
