@@ -1,190 +1,87 @@
+import InterpretCommand from "./interpreter"
+
+// this regex is called repeatedly (using the stickY flag), to extract the next token
+// only one of these fragments will actually match, based primarily on the first character
+// each fragment matches a different token type
+// ;               comment            ^;(.*)$
+// *               anchor/save point  ^\*(.+)$
+// @               full-line tag      ^@(\S+)(.*)$
+// [               inline tag         \[([^\s\]]+)([^\]\r\n]*)\]
+// other non-empty text               (?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^@;*\[\r\n ])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)
+// whitespace      ignored            (\s+)
+// eslint-disable-next-line
+const topLevelRegex = /^;(.*)$|^\*(.+)$|^@(\S+)(.*)$|\[([^\s\]]+)([^\]\r\n]*)\]|(?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^@;*\[\r\n ])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)|(\s+)/my
+
 const Tokenize = (tokens, gameState, target) => {
   const stackFrame = gameState.stackFrame
 
   if (target) {
-    for (; stackFrame.lineIndex < stackFrame.lines.length; stackFrame.lineIndex++) {
-      if (stackFrame.lines[stackFrame.lineIndex].startsWith(target)) {
-        break
-      }
-    }
+    const targetRegex = new RegExp("^\\*" + target, "m")
+    const match = targetRegex.exec(stackFrame.file)
+    stackFrame.fileIndex = match !== null ? match.index : stackFrame.file.length
   }
 
+  topLevelRegex.lastIndex = stackFrame.fileIndex
+
+  let match
   loop:
-    for (; stackFrame.lineIndex < stackFrame.lines.length; stackFrame.lineIndex++) {
-      let line = stackFrame.lines[stackFrame.lineIndex].trim()
-      switch (line.charAt(0)) {
-        case ";":
-          tokens.push({type: ";", text: line})
-          break
-        case "*":
-          // link
-          tokens.push({type: "*", id: line})
-          break
-        case "@":
-          // command
-          const tag = ParseTag(line, 0)
-          if (InterpretCommand(tokens, gameState, tag)) {
-            break loop
-          }
-          break
-        default:
-          // regular text
-          if (line.length !== 0) {
-            if (ParseInlineTags(tokens, gameState, line)) {
+    while ((match = topLevelRegex.exec(stackFrame.file))) {
+      stackFrame.fileIndex = topLevelRegex.lastIndex
+
+      const [text, comment, link, lineTag, lineTagArgs, inlineTag, inlineTagArgs, whitespace] = match
+      const type = text[0]
+
+      if (!whitespace) {
+        // console.log(text[0], comment || link || lineTag || inlineTag || text)
+
+        switch (type) {
+          case ";":
+            // comment
+            tokens.push({type: ";", text: comment})
+            break
+          case "*":
+            // link
+            tokens.push({type: "*", id: link})
+            break
+          case "@":
+          case "[":
+            // tag
+            const tag = {
+              type: type,
+              command: lineTag || inlineTag,
+              args: ParseTag(text[0], lineTagArgs || inlineTagArgs),
+            }
+            if (InterpretCommand(tokens, gameState, tag)) {
               break loop
             }
-          }
-      }
-    }
-
-  if (stackFrame.lineIndex >= stackFrame.lines.length) {
-    tokens.push({type: "EOF", storage: stackFrame.storage})
-  }
-}
-
-const ignoreMacros = {cl_notrans: true}
-
-// InterpretCommand interprets the given command, and pauses execution of the
-const InterpretCommand = (tokens, gameState, tag) => {
-  const stackFrame = gameState.stackFrame
-
-  if (stackFrame.macroBuilder) { // if we're building a macro, just add commands to the macro
-    const macroBuilder = stackFrame.macroBuilder
-    if (tag.command === "endmacro") {
-      tokens.push({type: "@", command: "macro", args: {name: macroBuilder.name}, tokens: macroBuilder.macro}) // for debug only, macros should be ignored in general
-      gameState.macros[macroBuilder.name] = macroBuilder.macro
-      stackFrame.macroBuilder = false
-    } else {
-      macroBuilder.macro.push(tag)
-    }
-    return false
-  }
-
-  if (tag.type === "t") {
-    tokens.push(tag)
-    return false
-  }
-
-  if (tag.command in gameState.macros) { // if a macro, run each command in the macro
-    if (!(tag.command in ignoreMacros)) {
-      tokens.push(tag)
-      const macro = gameState.macros[tag.command]
-      return macro.some(macroCommand => {
-        let cmd = macroCommand
-        if (macroCommand.type !== "t") {
-          const args = Object.assign({}, macroCommand.args)
-          // handle '%value' arguments
-          Object.keys(args).forEach(key => {
-            const value = args[key]
-            if (typeof value === "string" && value.startsWith("%")) {
-              args[key] = tag.args[value.substring(1)]
+            break
+          default:
+            // regular text
+            if (InterpretCommand(tokens, gameState, {type: "t", text: text})) {
+              break loop
             }
-          })
-          // handle '*' argument
-          if (macroCommand.args["*"]) {
-            delete args["*"]
-            Object.assign(args, tag.args)
-          }
-
-          cmd = {
-            type: macroCommand.type,
-            command: macroCommand.command,
-            args: args,
-            depth: (tag.depth || 0) + 1,
-          }
         }
-        return InterpretCommand(tokens, gameState, cmd, stackFrame)
-      })
+      }
+      topLevelRegex.lastIndex = stackFrame.fileIndex
+    }
+
+  if (!match) {
+    if (stackFrame.fileIndex >= stackFrame.file.length) {
+      tokens.push({type: "EOF", storage: stackFrame.storage})
+    } else {
+      throw new Error("failed to parse near position" + stackFrame.fileIndex)
     }
   }
-
-  switch (tag.command.toLowerCase()) {
-    case "jump":
-      tokens.push(tag)
-
-      stackFrame.lineIndex++
-
-      // gameState.stackFrame.storage = tag.args.storage || stackFrame.storage
-      // gameState.stackFrame.target = tag.args.target
-      tokens.push({
-        type: "call",
-        gameState,
-        storage: tag.args.storage || stackFrame.storage,
-        target: tag.args.target,
-      })
-      return true
-    case "call":
-      tokens.push(tag)
-
-      stackFrame.lineIndex++
-
-      gameState.stackFrame = {
-        returnFrame: gameState.stackFrame,
-        // storage: tag.args.storage || stackFrame.storage,
-        // target: tag.args.target,
-      }
-      tokens.push({
-        type: "call",
-        gameState,
-        storage: tag.args.storage || stackFrame.storage,
-        target: tag.args.target,
-      })
-      return true
-    case "return":
-      if (stackFrame.returnFrame) {
-        tokens.push(Object.assign({from: stackFrame.storage, to: stackFrame.returnFrame.storage}, tag))
-
-        gameState.stackFrame = stackFrame.returnFrame
-        Tokenize(tokens, gameState)
-      }
-      return true
-    case "iscript":
-      // skip lines until end of script
-      const script = []
-      for (stackFrame.lineIndex++; stackFrame.lineIndex < stackFrame.lines.length; stackFrame.lineIndex++) {
-        let line = stackFrame.lines[stackFrame.lineIndex]
-        if (line === "[endscript]" || line === "@endscript") {
-          break
-        } else {
-          script.push(line)
-        }
-      }
-      tokens.push(Object.assign({script}, tag))
-      break
-    case "macro":
-      // start building macro
-      stackFrame.macroBuilder = {name: tag.args.name, macro: []}
-      break
-    case "erasemacro":
-      tokens.push(tag)
-      delete gameState.macros[tag.args.name]
-      break
-    case "s":
-      tokens.push(tag)
-      return true
-    default:
-      tokens.push(tag)
-  }
-  return false
 }
 
-const ParseTag = (tag, startAt) => {
-  const tagRegex = /([@[])([^\s\]]+)/y
-  const argsRegex = /\s*(?:([^\s=]+)=((?:'[^']*'|"[^"]*"|[^\s'"\]])+)|(\*))/y
+const argsRegex = /\s*(?:([^\s=]+)=((?:'[^']*'|"[^"]*"|[^\s'"\]])+)|(\*))/y
 
-  tagRegex.lastIndex = startAt
-  let tagMatch = tagRegex.exec(tag)
-
-  if (!tagMatch) {
-    return {command: "unable to match: '" + tag + "'", args: {}, lastIndex: startAt}
-  }
-
-  let lastIndex = tagRegex.lastIndex
-  argsRegex.lastIndex = tagRegex.lastIndex
+const ParseTag = (type, argString) => {
+  argsRegex.lastIndex = 0
 
   let args = {}
   let arg
-  while ((arg = argsRegex.exec(tag)) !== null) {
+  while ((arg = argsRegex.exec(argString))) {
     if (arg[3]) {
       args["*"] = true
     } else {
@@ -194,33 +91,9 @@ const ParseTag = (tag, startAt) => {
       }
       args[arg[1]] = arg[2]
     }
-    lastIndex = argsRegex.lastIndex
   }
 
-  return {type: tagMatch[1], command: tagMatch[2], args: args, lastIndex: lastIndex}
-}
-
-const ParseInlineTags = (tokens, gameState, line, stackFrame) => {
-  const tagRegex = /([^[]*)(\[?)/y // read until there's a '[' character
-  let tag
-  while ((tag = tagRegex.exec(line)) !== null) {
-    if (tag[1].length !== 0) {
-      if (InterpretCommand(tokens, gameState, {type: "t", text: tag[1]}, stackFrame)) {
-        return true
-      }
-    }
-    if (tag[2]) { // if the last character was '['
-      let command = ParseTag(line, tagRegex.lastIndex - 1)
-      tagRegex.lastIndex = command.lastIndex + 1
-
-      if (InterpretCommand(tokens, gameState, command, stackFrame)) {
-        return true
-      }
-    } else {
-      break
-    }
-  }
-  return false
+  return args
 }
 
 export default Tokenize

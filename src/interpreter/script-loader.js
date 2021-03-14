@@ -1,10 +1,10 @@
 import {Component} from "react"
-import "./interpreter.css"
 import {LocateScript} from "./parse/lookup/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
+import "./script-loader.css"
 
-class Interpreter extends Component {
+class ScriptLoader extends Component {
   constructor(props) {
     super(props)
     this.preRender = this.preRender.bind(this)
@@ -39,11 +39,11 @@ class Interpreter extends Component {
     this.preRender(file, macroFile)
   }
 
-  preRender(displayText, macroText) {
+  preRender(file, macroFile) {
     const stackFrame = (this.props.gameState && this.props.gameState.stackFrame) || {}
     stackFrame.storage = this.props.storage
-    stackFrame.lines = displayText.split("\r\n")
-    stackFrame.lineIndex = 0
+    stackFrame.file = file
+    stackFrame.fileIndex = 0
 
     let gameState = this.props.gameState
 
@@ -55,7 +55,7 @@ class Interpreter extends Component {
       // call macro first, and "return" to the specified storage
       gameState = {
         macros: {},
-        stackFrame: {storage: "マクロ.ks", lines: macroText.split("\r\n"), lineIndex: 0, returnFrame: stackFrame},
+        stackFrame: {storage: "マクロ.ks", file: macroFile, fileIndex: 0, returnFrame: stackFrame},
       }
     }
 
@@ -69,4 +69,4 @@ class Interpreter extends Component {
   }
 }
 
-export default Interpreter
+export default ScriptLoader

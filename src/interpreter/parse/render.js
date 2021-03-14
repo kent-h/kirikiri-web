@@ -1,6 +1,6 @@
 import React, {Fragment} from "react"
 import ScrollDetect from "../../reader/scroll/detect"
-import Interpreter from "../interpreter"
+import ScriptLoader from "../script-loader"
 import Anchor from "./anchor/anchor"
 import Tag from "./tag/tag"
 
@@ -43,10 +43,10 @@ const Render = (tokens, renderState) => {
       case "call": // jump or call statements require more page loading
         renderState = RenderChunk(betweenText, renderState, append)
         betweenText = []
-        append(<Interpreter renderState={renderState}
-                            gameState={token.gameState}
-                            storage={token.storage}
-                            target={token.target}/>)
+        append(<ScriptLoader renderState={renderState}
+                             gameState={token.gameState}
+                             storage={token.storage}
+                             target={token.target}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)

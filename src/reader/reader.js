@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {withRouter} from "react-router"
-import Interpreter from "../interpreter/interpreter"
+import ScriptLoader from "../interpreter/script-loader"
 import {ScrollWatcher} from "./scroll/watcher"
 import Animation from "./animation/animation"
 import Menu from "./menu/menu"
@@ -31,7 +31,7 @@ class Reader extends Component {
 
         <div className="text-area">
           <div className="text">
-            <Interpreter storage={this.props.match.params.script + ".ks"}/>
+            <ScriptLoader storage={this.props.match.params.script + ".ks"}/>
             {/*// プロローグ1日目.ks プロローグ.ks first.ks*/}
           </div>
         </div>
