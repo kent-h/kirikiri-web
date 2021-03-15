@@ -2,9 +2,10 @@ import React, {Fragment} from "react"
 import ScrollDetect from "../../reader/scroll/detect"
 import ScriptLoader from "../script-loader"
 import Anchor from "./anchor/anchor"
-import Tag from "./tag/tag"
+import "./render.css"
+import {Tag, TagBlock, TagBlockInline} from "./tag/tag"
 
-const Render = (tokens, renderState) => {
+const Render = (tokens, renderState, debug) => {
   const toDisplay = []
   const append = (Component) => {
     toDisplay.push(<Fragment key={toDisplay.length + 1}>{Component}</Fragment>)
@@ -18,7 +19,7 @@ const Render = (tokens, renderState) => {
         // console.log(token.text) // ignore comments in general
         break
       case "t": // text
-        renderState = RenderChunk(betweenText, renderState, append)
+        renderState = RenderChunk(betweenText, renderState, append, debug)
         betweenText = []
         append(<span>{token.text}</span>)
         break
@@ -28,7 +29,7 @@ const Render = (tokens, renderState) => {
       case "@": // full-line tag
       case "[": // inline tag
         if (token.command.toLowerCase() === "align") {
-          renderState = RenderChunk(betweenText, renderState, append)
+          renderState = RenderChunk(betweenText, renderState, append, debug)
           betweenText = []
           append(<div style={{textAlign: "center"}}>{token.args.text}</div>)
         } else {
@@ -36,17 +37,19 @@ const Render = (tokens, renderState) => {
         }
         break
       case "EOF":
-        renderState = RenderChunk(betweenText, renderState, append)
+        renderState = RenderChunk(betweenText, renderState, append, debug)
         betweenText = []
         // append(<div>--- end of {token.storage} ---</div>)
         break
       case "call": // jump or call statements require more page loading
-        renderState = RenderChunk(betweenText, renderState, append)
+        renderState = RenderChunk(betweenText, renderState, append, debug)
         betweenText = []
-        append(<ScriptLoader renderState={renderState}
-                             gameState={token.gameState}
-                             storage={token.storage}
-                             target={token.target}/>)
+        toDisplay.push(
+          <ScriptLoader key={"s"}
+                        renderState={renderState}
+                        gameState={token.gameState}
+                        storage={token.storage}
+                        target={token.target}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)
@@ -55,11 +58,9 @@ const Render = (tokens, renderState) => {
   return toDisplay
 }
 
-const debug = false
-const verbose = false
-
-const RenderChunk = (tokens, renderState, append) => {
+const RenderChunk = (tokens, renderState, append, debug) => {
   renderState = renderState === undefined ? {bgm: undefined, animationFrame: [], sectionID: 1} : renderState
+  const verbose = debug === 2
 
   let sectionID = renderState.sectionID
 
@@ -155,199 +156,215 @@ const RenderChunk = (tokens, renderState, append) => {
     seTimeline[seTimeline.length - 1].sounds[sound] = true
   }
 
-
-  tokens.forEach(token => {
-    switch (token.type) {
-      case ";": // comment
-        // console.log(token.text) // ignore comments in general
-        break
-      case "*": // link
-        append(<Anchor name={token.link}/>)
-        break
-      case "@": // full-line tag
-      case "[": // inline tag
-        let specialTag = "red"
-        switch (token.command.toLowerCase()) {
-          case "say":
-            pushSound("voice/" + token.args.storage)
+  let specialTokens = {}
+  tokens.forEach((token, tokenIndex) => {
+    if (token.type === "@" || token.type === "[") {
+      let specialTag = "lightyellow"
+      switch (token.command.toLowerCase()) {
+        case "say":
+          pushSound("voice/" + token.args.storage)
+          break
+        case "playbgm":
+        case "fadeinbgm":
+          pushBgm(token.args.storage, token.args.time)
+          break
+        case "stopbgm":
+        case "fadeoutbgm":
+          pushBgm(undefined, token.args.time)
+          break
+        case "fadeinse":
+        case "playse":
+          // TODO: handle looping
+          pushSound("sound/" + token.args.storage)
+          break
+        case "stopse":
+        case "fadeoutse":
+          break // TODO: cancel looped sound effects
+        case "dash":
+        case "dashcombo": // these use opacity values where 0 is fully visible
+        case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,
+          if (token.args.layer && token.args.layer.startsWith("&")) {
             break
-          case "playbgm":
-          case "fadeinbgm":
-            pushBgm(token.args.storage, token.args.time)
+          }
+
+          let cx = token.args.cx === "c" ? "400" : token.args.cx || "0"
+          let cy = token.args.cy === "c" ? "300" : token.args.cy || "0"
+
+          let fOrigT = "translate(" + (cx ? parseInt(cx, 10) / 8 - 50 + "%" : "50%") + "," + (cy ? parseInt(cy, 10) / 6 - 50 + "%" : "50%") + ")"
+          let rOrigT = "translate(" + (cx ? -parseInt(cx, 10) / 8 + 50 + "%" : "50%") + "," + (cy ? -parseInt(cy, 10) / 6 + 50 + "%" : "50%") + ")"
+
+          pushFrame(token.args.layer, {
+            time: time,
+            contents: {
+              image: token.args.storage && token.args.storage.toLowerCase(),
+              folder: "bgimage/",
+              key: !lastContents(token.args.layer).key,
+              transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
+            },
+            transform: fOrigT + " scale(" + (token.args.imag ? token.args.imag : 1) + ") " + rOrigT,
+            acceleration: token.args.accel || 0,
+            left: 0,
+            top: 0,
+            opacity: 1, // (token.args.opacity ? (255 - parseInt(token.args.opacity, 10)) : 0) / 255,
+          })
+
+          time += parseInt(token.args.time, 10) || 0
+          duplicateLastFrame(token.args.layer, {
+            transform: fOrigT + " scale(" + (token.args.mag ? token.args.mag : 2) + ") " + rOrigT,
+          })
+          break
+        case "imageex":
+          pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer || 10, 0, true)
+          break
+        case "image":
+        case "image4demo":
+          if (token.args.layer && token.args.layer.startsWith("&")) {
             break
-          case "stopbgm":
-          case "fadeoutbgm":
-            pushBgm(undefined, token.args.time)
+          }
+          pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
+          break
+        case "fadein":
+        case "bg":
+          if (token.args.layer && token.args.layer.startsWith("&")) {
             break
-          case "fadeinse":
-          case "playse":
-            // TODO: handle looping
-            pushSound("sound/" + token.args.storage)
+          }
+          duplicateLastFrame(token.args.layer)
+          pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.layer, token.args.time, true)
+          clearOtherLayers(token.args.layer, token.args.time)
+
+          time += (token.args.time ? parseInt(token.args.time, 10) : 0)
+          break
+        case "move":
+          if (token.args.layer && token.args.layer.startsWith("&")) {
             break
-          case "stopse":
-          case "fadeoutse":
-            break // TODO: cancel looped sound effects
-          case "dash":
-          case "dashcombo": // these use opacity values where 0 is fully visible
-          case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,
-            if (token.args.layer && token.args.layer.startsWith("&")) {
-              break
-            }
+          }
+          duplicateLastFrame(token.args.layer)
 
-            let cx = token.args.cx === "c" ? "400" : token.args.cx || "0"
-            let cy = token.args.cy === "c" ? "300" : token.args.cy || "0"
+          let nodes = []
+          const pathRegex = /\((-?\d+),(-?\d+),(-?\d+)\)/y // read as many as we have
+          let node
+          while ((node = pathRegex.exec(token.args.path)) !== null) {
+            nodes.push(node)
+          }
 
-            let fOrigT = "translate(" + (cx ? parseInt(cx, 10) / 8 - 50 + "%" : "50%") + "," + (cy ? parseInt(cy, 10) / 6 - 50 + "%" : "50%") + ")"
-            let rOrigT = "translate(" + (cx ? -parseInt(cx, 10) / 8 + 50 + "%" : "50%") + "," + (cy ? -parseInt(cy, 10) / 6 + 50 + "%" : "50%") + ")"
-
-            pushFrame(token.args.layer, {
-              time: time,
-              contents: {
-                image: token.args.storage && token.args.storage.toLowerCase(),
-                folder: "bgimage/",
-                key: !lastContents(token.args.layer).key,
-                transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
-              },
-              transform: fOrigT + " scale(" + (token.args.imag ? token.args.imag : 1) + ") " + rOrigT,
-              acceleration: token.args.accel || 0,
-              left: 0,
-              top: 0,
-              opacity: 1, // (token.args.opacity ? (255 - parseInt(token.args.opacity, 10)) : 0) / 255,
-            })
-
-            time += parseInt(token.args.time, 10) || 0
+          let moveTime = parseInt(token.args.time, 10)
+          nodes.forEach((node, nodeID) => {
             duplicateLastFrame(token.args.layer, {
-              transform: fOrigT + " scale(" + (token.args.mag ? token.args.mag : 2) + ") " + rOrigT,
+              time: time + moveTime * (1 + nodeID),
+              left: parseInt(node[1], 10),
+              top: parseInt(node[2], 10),
+              opacity: parseInt(node[3], 10) / 255,
+              acceleration: token.args.accel || 0,
             })
-            break
-          case "imageex":
-            pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer || 10, 0, true)
-            break
-          case "image":
-          case "image4demo":
-            if (token.args.layer && token.args.layer.startsWith("&")) {
-              break
-            }
-            pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
-            break
-          case "fadein":
-          case "bg":
-            if (token.args.layer && token.args.layer.startsWith("&")) {
-              break
-            }
-            duplicateLastFrame(token.args.layer)
-            pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.layer, token.args.time, true)
-            clearOtherLayers(token.args.layer, token.args.time)
+          })
 
-            time += (token.args.time ? parseInt(token.args.time, 10) : 0)
-            break
-          case "move":
-            if (token.args.layer && token.args.layer.startsWith("&")) {
-              break
-            }
-            duplicateLastFrame(token.args.layer)
-
-            let nodes = []
-            const pathRegex = /\((-?\d+),(-?\d+),(-?\d+)\)/y // read as many as we have
-            let node
-            while ((node = pathRegex.exec(token.args.path)) !== null) {
-              nodes.push(node)
-            }
-
-            let moveTime = parseInt(token.args.time, 10)
-            nodes.forEach((node, nodeID) => {
-              duplicateLastFrame(token.args.layer, {
-                time: time + moveTime * (1 + nodeID),
-                left: parseInt(node[1], 10),
-                top: parseInt(node[2], 10),
-                opacity: parseInt(node[3], 10) / 255,
-                acceleration: token.args.accel || 0,
-              })
-            })
-
-            moveTime += time * nodes.length
-            endTime = endTime > moveTime ? endTime : moveTime
-            break
-          case "wm":
-            time = time > endTime ? time : endTime
-            break
-          case "wait":
-            time += parseInt(token.args.time, 10) || 0
-            break
-          default:
-            specialTag = false
-        }
-        if (debug && (specialTag || verbose)) {
-          append(<Tag command={token} color={specialTag}/>)
-        }
-        break
-      default:
-        console.log("warning: unhandled token type: " + token.type, token)
+          moveTime += time * nodes.length
+          endTime = endTime > moveTime ? endTime : moveTime
+          break
+        case "wm":
+          time = time > endTime ? time : endTime
+          break
+        case "wait":
+          time += parseInt(token.args.time, 10) || 0
+          break
+        default:
+          specialTag = false
+      }
+      if (debug && specialTag) {
+        specialTokens[tokenIndex] = specialTag
+      }
     }
   })
 
+  if (isDivider) {
+    append(<ScrollDetect key={"s" + sectionID}
+                         id={sectionID++}
+                         timeline={layers}
+                         bgmTimeline={bgmTimeline}
+                         seTimeline={seTimeline}/>)
+  }
 
-  tokens.forEach(token => {
+  let tags = []
+  let toRender = []
+  tokens.forEach((token, tokenIndex) => {
     switch (token.type) {
-      case ";": // comment
-        // console.log(token.text) // ignore comments in general
-        break
-      case "*": // link
-        append(<Anchor name={token.link}/>)
-        break
       case "@": // full-line tag
       case "[": // inline tag
-        let specialTag = "red"
+        let render
+        let specialTag = "pink"
         switch (token.command.toLowerCase()) {
           case "r":
-            specialTag = "yellow"
+            specialTag = false
             if (!isDivider) {
-              append(<div className="newline"/>)
+              specialTag = "salmon"
+              render = (<br/>)
             }
             break
           case "cm":
-            specialTag = "yellow"
+            specialTag = false
             if (!isDivider) {
-              append(<div className="spacer-cm"/>)
+              specialTag = "salmon"
+              render = (<div className="spacer-cm"/>)
             }
             break
           case "macro":
             specialTag = false
             // on creation of a macro, there's nothing to render unless debugging
             if (verbose) {
-              append(<div style={{color: "darkred", marginLeft: "2em", border: "1px solid green"}}>
-                {token.tokens.map(token => (<Tag command={token}/>))}
+              tags.push(<div style={{color: "darkred", marginLeft: "2em", border: "1px solid green"}}>
+                {token.tokens.map((token, index) => (<Tag key={index} command={token}/>))}
               </div>)
             }
             break
           case "return":
             specialTag = false
-            // append(<div>--- returning from {token.from} (to {token.to}) ---</div>)
+            // render = <div>--- returning from {token.from} (to {token.to}) ---</div>)
             break
           case "s":
             specialTag = false
-            append("--- page generation halted at [s] ---")
+            render = ("--- page generation halted at [s] ---")
             break
           default:
             specialTag = false
         }
-        if (debug && (specialTag || verbose)) {
-          append(<Tag command={token} color={specialTag}/>)
+        if (debug && (specialTag || specialTokens[tokenIndex] || verbose)) {
+          tags.push(<Tag command={token} color={specialTag || specialTokens[tokenIndex]}/>)
+          if (isDivider) {
+            if (render) {
+              toRender.push(render)
+            }
+          } else {
+            if (render) {
+              append(<TagBlockInline tags={tags}/>)
+              tags = []
+              append(render)
+            }
+          }
+        } else {
+          append(render)
         }
+        break
+      case ";": // comment
+        // console.log(token.text) // ignore comments in general
+        break
+      case "*": // link
+        append(<Anchor name={token.link}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)
     }
   })
 
-  if (isDivider) {
-    // determine transition
-    // determine reverse transition
-    append(<ScrollDetect id={sectionID++}
-                         timeline={layers}
-                         bgmTimeline={bgmTimeline}
-                         seTimeline={seTimeline}/>)
+
+  if (tags.length !== 0) {
+    if (isDivider) {
+      append(<TagBlock tags={tags}/>)
+    } else {
+      append(<TagBlockInline tags={tags}/>)
+    }
   }
+
+  toRender.forEach(append)
 
   // save final frame for next animation block to use
   let lastFrames = []

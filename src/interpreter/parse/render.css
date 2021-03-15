@@ -6,6 +6,10 @@
   height: 1em;
 }
 
+.newline + .tag-block-inline-pin + .newline{
+  height: 1em;
+}
+
 .spacer-cm {
   height: 3em;
 }

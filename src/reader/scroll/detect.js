@@ -23,19 +23,16 @@ class ScrollDetect extends Component {
       }
     }
 
-    return <InView rootMargin="10000000% 0px -100% 0px"
+    return <InView as="div"
+                   style={{height: this.props.id === 1 ? "33vh" : "67vh"}}
+                   children={undefined}
+                   rootMargin="10000000% 0px -100% 0px"
                    threshold={0}
                    skip={!makeActive}
                    onChange={(inView, entry) => {
                      this.props.scroll.onSectionChange(this.props.id, inView, this.props.timeline, this.props.bgmTimeline, this.props.seTimeline)
                      this.setState({visible: inView})
-                   }}>
-      <div style={{
-        height: this.props.id === 1 ? "33vh" : "67vh",
-        // maxHeight: "37.5vw",
-        // border: this.state.visible ? "1px solid green" : "1px solid red",
-      }}/>
-    </InView>
+                   }}/>
   }
 }
 

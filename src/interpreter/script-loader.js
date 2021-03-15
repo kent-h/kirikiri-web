@@ -1,8 +1,8 @@
 import {Component} from "react"
+import {withDebug} from "../reader/debug"
 import {LocateScript} from "./parse/lookup/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
-import "./script-loader.css"
 
 class ScriptLoader extends Component {
   constructor(props) {
@@ -59,9 +59,25 @@ class ScriptLoader extends Component {
       }
     }
 
+    let start = performance.now()
+
     let tokens = []
     Tokenize(tokens, gameState, this.props.target)
-    this.setState({display: Render(tokens, this.props.renderState)})
+    let tokenTime = performance.now()
+
+    const display = Render(tokens, this.props.renderState, this.props.debug)
+    let renderTime = performance.now()
+
+    console.log("tokenize: " + (tokenTime - start) + "ms  render: " + (renderTime - tokenTime) + "ms")
+    this.setState({tokens: tokens, display: display})
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.debug !== this.props.debug) {
+      if (this.state.tokens) {
+        this.setState({display: Render(this.state.tokens, this.props.renderState, this.props.debug)})
+      }
+    }
   }
 
   render() {
@@ -69,4 +85,5 @@ class ScriptLoader extends Component {
   }
 }
 
+ScriptLoader = withDebug(ScriptLoader)
 export default ScriptLoader

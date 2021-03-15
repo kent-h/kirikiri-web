@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {withScroll} from "../scroll/watcher"
+import "./animation.css"
 import AudioPlayer from "./audio/audio-player"
 import Layer from "./layer/layer"
 
