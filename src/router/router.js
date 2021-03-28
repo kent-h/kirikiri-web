@@ -14,7 +14,7 @@ const Index = (props) => (
         <br/>
         <Link to="プロローグ3日目">プロローグ3日目</Link>
       </Route>
-      <Route path="/:script">
+      <Route path={["/:script/:save", "/:script"]}>
         <Reader/>
       </Route>
     </Switch>

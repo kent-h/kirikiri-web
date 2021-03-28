@@ -1,7 +1,6 @@
 import React, {Fragment} from "react"
 import ScrollDetect from "../../reader/scroll/detect"
 import ScriptLoader from "../script-loader"
-import Anchor from "./anchor/anchor"
 import "./render.css"
 import {Tag, TagBlock, TagBlockInline} from "./tag/tag"
 
@@ -59,7 +58,10 @@ const Render = (tokens, renderState, debug) => {
 }
 
 const RenderChunk = (tokens, renderState, append, debug) => {
-  renderState = renderState === undefined ? {bgm: undefined, animationFrame: [], sectionID: 1} : renderState
+  renderState = renderState === undefined ? {
+    bgm: undefined, animationFrame: [], sectionID: 0, buildingSavePoints: [], savePoints: [],
+  } : renderState
+
   const verbose = debug === 2
 
   let sectionID = renderState.sectionID
@@ -70,6 +72,9 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   let endTime = 0
 
   let layers = renderState.animationFrame
+
+
+  let {buildingSavePoints, savePoints} = renderState
 
   const lastFrame = (layer) => {
     layer = layer === "base" ? 0 : (layer || 0)
@@ -277,8 +282,14 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   })
 
   if (isDivider) {
-    append(<ScrollDetect key={"s" + sectionID}
-                         id={sectionID++}
+    const isNewSavePoint = buildingSavePoints.length !== 0
+    savePoints = isNewSavePoint ? buildingSavePoints : savePoints
+    buildingSavePoints = []
+
+    append(<ScrollDetect key={"s" + ++sectionID}
+                         id={sectionID}
+                         savePoints={savePoints}
+                         isSavePointOwner={isNewSavePoint}
                          timeline={layers}
                          bgmTimeline={bgmTimeline}
                          seTimeline={seTimeline}/>)
@@ -287,11 +298,11 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   let tags = []
   let toRender = []
   tokens.forEach((token, tokenIndex) => {
+    let render
+    let specialTag = "pink"
     switch (token.type) {
       case "@": // full-line tag
       case "[": // inline tag
-        let render
-        let specialTag = "pink"
         switch (token.command.toLowerCase()) {
           case "r":
             specialTag = false
@@ -304,7 +315,7 @@ const RenderChunk = (tokens, renderState, append, debug) => {
             specialTag = false
             if (!isDivider) {
               specialTag = "salmon"
-              render = (<div className="spacer-cm"/>)
+              render = (<><br/><br/><br/></>)
             }
             break
           case "macro":
@@ -327,31 +338,35 @@ const RenderChunk = (tokens, renderState, append, debug) => {
           default:
             specialTag = false
         }
-        if (debug && (specialTag || specialTokens[tokenIndex] || verbose)) {
-          tags.push(<Tag command={token} color={specialTag || specialTokens[tokenIndex]}/>)
-          if (isDivider) {
-            if (render) {
-              toRender.push(render)
-            }
-          } else {
-            if (render) {
-              append(<TagBlockInline tags={tags}/>)
-              tags = []
-              append(render)
-            }
-          }
-        } else {
-          append(render)
-        }
         break
       case ";": // comment
+        specialTag = false
         // console.log(token.text) // ignore comments in general
         break
       case "*": // link
-        append(<Anchor name={token.link}/>)
+        if (sectionID > 1) {
+          buildingSavePoints.push(token.id.split("|")[0])
+        }
         break
       default:
+        specialTag = false
         console.log("warning: unhandled token type: " + token.type, token)
+    }
+    if (debug && (specialTag || specialTokens[tokenIndex] || verbose)) {
+      tags.push(<Tag command={token} color={specialTag || specialTokens[tokenIndex]}/>)
+      if (isDivider) {
+        if (render) {
+          toRender.push(render)
+        }
+      } else {
+        if (render) {
+          append(<TagBlockInline tags={tags}/>)
+          tags = []
+          append(render)
+        }
+      }
+    } else {
+      append(render)
     }
   })
 
@@ -376,6 +391,8 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     animationFrame: lastFrames,
     bgm: bgmTimeline[bgmTimeline.length - 1].bgm,
     sectionID: sectionID,
+    buildingSavePoints: buildingSavePoints,
+    savePoints: savePoints,
   }
 }
 

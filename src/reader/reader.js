@@ -12,7 +12,9 @@ class Reader extends Component {
     super(props)
     this.onKeyDown = this.onKeyDown.bind(this)
 
-    this.state = {showMenu: false, debugLevel: 0}
+    const cookie = /(?:^|;)debug=(\d)(?:;|$)/g.exec(document.cookie)
+    const debugLevel = cookie ? parseInt(cookie[1], 10) : 0
+    this.state = {showMenu: false, debugLevel: debugLevel}
   }
 
   componentDidMount() {
@@ -29,7 +31,11 @@ class Reader extends Component {
     if (e.keyCode === 27) { // escape
       this.setState({showMenu: !this.state.showMenu})
     } else if (e.keyCode === 192) { // tilda / back-tick
-      this.setState(prevState => ({debugLevel: (prevState.debugLevel + 1) % 3}))
+      this.setState(prevState => {
+        const debugLevel = (prevState.debugLevel + 1) % 3
+        document.cookie = "debug=" + debugLevel + ";SameSite=Strict"
+        return {debugLevel: debugLevel}
+      })
     }
   }
 

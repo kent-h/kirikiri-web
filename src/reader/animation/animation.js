@@ -25,6 +25,7 @@ class Animation extends Component {
 
   async preload(abortPromise) {
     const promises = []
+    // wait for images to load
     // neededImg *must* be held to avoid accidentally canceling the load operation
     let neededImg = Object.keys(this.props.animation.timeline || []).reduce((images, layerID) => (
       this.props.animation.timeline[layerID].reduce((images, frame) => {

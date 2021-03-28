@@ -5,8 +5,11 @@ import {withScrollDetect} from "./watcher"
 class ScrollDetect extends Component {
   constructor(props) {
     super(props)
+    this.ref = React.createRef()
+  }
 
-    this.state = {visible: false}
+  componentDidMount() {
+    this.props.scroll.addAnchor(this.props.id, this.ref, this.props.savePoints, this.props.isSavePointOwner)
   }
 
   render() {
@@ -24,14 +27,14 @@ class ScrollDetect extends Component {
     }
 
     return <InView as="div"
+                   ref={this.ref}
                    style={{height: this.props.id === 1 ? "33vh" : "67vh"}}
                    children={undefined}
                    rootMargin="10000000% 0px -100% 0px"
                    threshold={0}
                    skip={!makeActive}
                    onChange={(inView, entry) => {
-                     this.props.scroll.onSectionChange(this.props.id, inView, this.props.timeline, this.props.bgmTimeline, this.props.seTimeline)
-                     this.setState({visible: inView})
+                     this.props.scroll.onSectionChange(this.props.id, inView, this.props.timeline, this.props.bgmTimeline, this.props.seTimeline, this.props.savePoints)
                    }}/>
   }
 }
