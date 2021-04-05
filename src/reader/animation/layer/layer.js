@@ -68,7 +68,8 @@ class Layer extends Component {
            src={"/static/images/" + keyframe.contents.image + ".webp"}
            style={{
              transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
-             top: (keyframe.top / 6) + "%",
+             top: keyframe.top && (keyframe.top / 6) + "%",
+             bottom: keyframe.bottom && (keyframe.bottom / 6) + "%",
              left: (keyframe.left / 8) + "%",
              width: keyframe.contents.naturalWidth ? keyframe.contents.naturalWidth + "%" : "100%",
              transform: (keyframe.transform || "") + " " + keyframe.contents.transform,
@@ -86,7 +87,8 @@ class Layer extends Component {
              style={{
                // keyframe transform will have the correct duration
                transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
-               top: (last.top / 6) + "%",
+               top: last.top && (last.top / 6) + "%",
+               bottom: last.bottom && (last.bottom / 6) + "%",
                left: (last.left / 8) + "%",
                width: last.contents.naturalWidth ? last.contents.naturalWidth + "%" : "100%",
                transform: (last.transform || "") + " " + last.contents.transform,

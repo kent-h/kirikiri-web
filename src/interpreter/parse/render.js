@@ -125,16 +125,20 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   }
 
   const pushBasicFrame = (token, folder, image, layer, timeOffset, fadeInsteadOfAnimate) => {
+    const pos = token.args.pos
+    // these value can be defined in Config.tjs
+    const position = pos === "l" || pos === "left" ? 25 : (pos === "left_center" || pos === "leftcenter" || pos === "lc" ? 37.5 : (pos === "c" || pos === "center" ? 50 : (pos === "right_center" || pos === "rightcenter" || pos === "rc" ? 62.5 : (pos === "right" || pos === "r" ? 75 : 0))))
     pushFrame(layer, {
       time: time + (timeOffset ? parseInt(timeOffset, 10) : 0),
       contents: {
         image: image && image.toLowerCase(),
         folder: folder,
         key: fadeInsteadOfAnimate === !lastContents(layer).key,
-        transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : ""].join(" ") || undefined,
+        transform: [token.args.fliplr ? "scaleX(-1)" : "", token.args.flipud ? "scaleY(-1)" : "", pos ? "translateX(-50%)" : ""].join(" ") || undefined,
       },
-      left: token.args.left ? parseInt(token.args.left, 10) : 0,
-      top: token.args.top ? parseInt(token.args.top, 10) : 0,
+      left: token.args.left ? parseInt(token.args.left, 10) : (pos ? position * 8 : 0),
+      top: token.args.top ? parseInt(token.args.top, 10) : (pos ? undefined : 0),
+      bottom: pos ? 0 : undefined,
       opacity: (token.args.opacity ? parseInt(token.args.opacity, 10) : 255) / 255,
     })
   }
