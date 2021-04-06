@@ -17,7 +17,7 @@ class ScriptLoader extends Component {
   }
 
   async load() {
-    const scriptFetchPromise = fetch(LocateScript(this.props.storage))
+    const scriptFetchPromise = fetch(LocateScript(this.props.storage, this.props.lang))
 
     let macroFile
     if (!this.props.gameState) {

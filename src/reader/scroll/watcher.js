@@ -3,7 +3,8 @@ import {withRouter} from "react-router"
 import {withDebug} from "../debug"
 import "../reader.css"
 
-const {Provider, Consumer} = React.createContext({id: 0})
+const {Provider: AnimationProvider, Consumer: AnimationConsumer} = React.createContext({id: 0})
+const {Provider: ScrollProvider, Consumer: ScrollConsumer} = React.createContext({id: 0})
 
 class ScrollWatcher extends Component {
   lastScrollSection
@@ -17,13 +18,16 @@ class ScrollWatcher extends Component {
 
     this.savePointAtLoadTime = props.location.hash
     this.linkRefs = {}
+
+    this.lastJumpTime = new Date()
     // to avoid unnecessary re-rendering, we will recreate the value for the provider only when the scrolled section changes
-    this.includeCallbacks = { //
+    this.includeCallbacks = {
       onSectionChange: this.onSectionVisibilityChange,
       addAnchor: this.addAnchor,
     }
     this.visible = {}
-    this.state = {visible: Object.assign({id: 0}, this.includeCallbacks)}
+    const visible = Object.assign({id: 0}, this.includeCallbacks)
+    this.state = {visible: visible, nextVisible: visible}
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -43,13 +47,17 @@ class ScrollWatcher extends Component {
   }
 
   onKeyDown(e) {
+    e.preventDefault()
+    if (!this.props.isOnTop) {
+      return
+    }
+
     // forward: space w/o shift, enter w/o shift, down arrow, right arrow
     // backward: space w/ shift, enter w/ shift, up arrow, left arrow
     const moveDirection = (((e.keyCode === 32 || e.keyCode === 13) && !e.shiftKey) || e.keyCode === 40 || e.keyCode === 39) ? 1 :
       (((e.keyCode === 32 || e.keyCode === 13) && e.shiftKey) || e.keyCode === 38 || e.keyCode === 37) ? -1 : 0
 
     if (moveDirection !== 0) {
-      e.preventDefault()
       if (this.state.visible) {
         const movedRecently = this.lastScrollTime && new Date() - this.lastScrollTime < 500
         let moveToSection = moveDirection + (movedRecently ? this.lastScrollSection : this.state.visible.id)
@@ -115,35 +123,48 @@ class ScrollWatcher extends Component {
     }
     // try to only run setState once
     clearTimeout(this.time)
-    this.time = setTimeout(() => this.setState(() => ({
-      visible: Object.assign({}, this.includeCallbacks, Object.keys(this.visible).reduce((a, b) => (a.id > this.visible[b].id ? a : this.visible[b]), {id: 0})),
-    })), 1)
+    this.time = setTimeout(() => {
+      const visible = Object.assign({}, this.includeCallbacks, Object.keys(this.visible).reduce((a, b) => (a.id > this.visible[b].id ? a : this.visible[b]), {id: 0}))
+      // nextVisible is used to update scroll watchers (not all scroll watchers are enabled at once,
+      // so even if all scroll watchers have updated,
+      // there may be disabled scroll watchers which need to update before we perform the (expensive) asset load
+      this.setState({nextVisible: visible})
+
+      if (new Date() - this.lastJumpTime < 200) { // if we've jumped recently
+        this.time = setTimeout(() => this.setState({visible}), 200) // wait a moment to see if another jump happens
+      } else {
+        this.setState({visible})
+      }
+      this.lastJumpTime = new Date()
+    }, 1)
   }
 
   render() {
-    console.log(this.state.visible.timeline, this.state.visible.bgmTimeline, this.state.visible.seTimeline)
-    return <Provider value={this.state.visible}>
-      {this.props.debug !== 0 &&
-      <div style={{position: "fixed", backgroundColor: "darkred"}}>{this.state.visible.id}</div>}
+    return <ScrollProvider value={this.state.nextVisible}>
+      <AnimationProvider value={this.state.visible}>
+        {this.props.debug !== 0 && <div style={{position: "fixed", backgroundColor: "darkred"}}>
+          {this.state.visible.id}<br/>{this.state.nextVisible.id}
+        </div>}
 
-      {this.props.children}
-    </Provider>
+        {this.props.children}
+      </AnimationProvider>
+    </ScrollProvider>
   }
 }
 
 const withScrollDetect = Component => (
   props => (
-    <Consumer>
+    <ScrollConsumer>
       {value => <Component {...props} scroll={value}/>}
-    </Consumer>
+    </ScrollConsumer>
   )
 )
 
 const withScroll = Component => (
   props => (
-    <Consumer>
+    <AnimationConsumer>
       {value => <Component {...props} animation={value}/>}
-    </Consumer>
+    </AnimationConsumer>
   )
 )
 

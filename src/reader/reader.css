@@ -27,32 +27,35 @@
   margin:      0 12%;
 
   color:       white;
-  font-size:   1em;
   line-height: 1.4;
 
   text-shadow: 0 0 0.125em #343837, 0 0 0.125em #343837, 0 0 0.25em #000, 0 0 0.25em #000, 0 0 0.5em #000, 0 0 0.5em #000, 0 0 1em #000, 0 0 1em #000;
 }
 
+.resizable-text {
+  font-size:   1em;
+}
+
 @media only screen and (min-width: 800px) and (min-height: 600px) {
-  .text {
+  .resizable-text {
     font-size: 1.1em;
   }
 }
 
 @media only screen and (min-width: 1000px) and (min-height: 750px) {
-  .text {
+  .resizable-text {
     font-size: 1.2em;
   }
 }
 
 @media only screen and (min-width: 1200px) and (min-height: 900px) {
-  .text {
+  .resizable-text {
     font-size: 1.3em;
   }
 }
 
 @media only screen and (min-width: 1400px) and (min-height: 1050px) {
-  .text {
+  .resizable-text {
     font-size: 1.4em;
   }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import ReactAudioPlayer from "react-audio-player"
+import {withOptions} from "../../debug"
 
 class Audio extends Component {
   constructor(props) {
@@ -75,11 +76,15 @@ class Audio extends Component {
       "/static/" + this.props.sound
     )) + ".ogg"
 
+    let volume = this.props.bgm ? this.props.options.bgm :
+      (this.props.sound.startsWith("voice/") ? this.props.options.voice : this.props.options.sound)
+
     return <ReactAudioPlayer autoPlay
-                             volume={0.5 * this.state.fadeIn * this.state.fadeOut}
+                             volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
                              preload="auto"
                              src={src}/>
   }
 }
 
+Audio = withOptions(Audio)
 export default Audio

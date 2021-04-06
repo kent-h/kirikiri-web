@@ -135,22 +135,22 @@ class Animation extends Component {
             <div className="background-image-holder">
               {this.state.animationID !== 0 && Object.keys(this.state.animation).map(layerID => {
                 const layer = this.state.animation[layerID]
-                return <Layer key={layerID}
+                return <Layer key={this.props.freezeFrame + layerID}
                               layer={layerID}
                               animationID={this.state.animationID}
-                              animation={layer}/>
+                              animation={this.props.freezeFrame && layer.length !== 0 ? [layer[0]] : layer}/>
               })}
             </div>
           </div>
         </div>
       ))}
+      {!this.props.freezeFrame &&
       <AudioPlayer animationID={this.state.animationID}
                    bgmTimeline={this.state.bgmTimeline || []}
-                   seTimeline={this.state.seTimeline || []}/>
+                   seTimeline={this.state.seTimeline || []}/>}
     </>
   }
 }
 
 Animation = withScroll(Animation)
-
 export default Animation

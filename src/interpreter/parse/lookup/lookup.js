@@ -5,10 +5,10 @@ const sharedScriptsMap = SharedScripts.reduce((map, item) => {
   return map
 }, {})
 
-export const LocateScript = (name) => {
+export const LocateScript = (name, lang) => {
   name = name.toLowerCase()
   if (sharedScriptsMap[name.split(".", 1)]) {
     return "/static/scripts/" + name + ".gz"
   }
-  return "/static/scripts/eng/" + name + ".gz"
+  return "/static/scripts/" + lang + "/" + name + ".gz"
 }
