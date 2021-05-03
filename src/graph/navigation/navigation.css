@@ -1,0 +1,47 @@
+.graph-navigation {
+  position:       sticky;
+  top:            0;
+  height:         100vh;
+  overflow:       hidden;
+  margin-bottom:  -100vh;
+  pointer-events: none;
+  z-index:        3;
+}
+
+.graph-navigation-panel {
+  position:         absolute;
+  width:            10vw;
+  height:           100vh;
+  margin-bottom:    -100vh;
+  background-color: rgba(34, 34, 34, 0.5);
+  pointer-events:   auto;
+  transition:       opacity 0.5s ease-out;
+}
+
+.graph-navigation-panel[hide] {
+  opacity: 0;
+}
+
+.graph-navigation-panel[side=left] {
+  left: 0;
+}
+
+.graph-navigation-panel[side=right] {
+  right: 0;
+}
+
+.graph-navigation-arrow {
+  display:   block;
+  width:     8vw;
+  max-width: 7em;
+  margin:    50vh auto 0;
+  transform: translateY(-50%);
+  opacity:   0.3;
+}
+
+@media only screen and (min-device-width: 800px) {
+  .graph-navigation-panel:hover .graph-navigation-arrow {
+    opacity:    0.5;
+    transition: opacity 0s;
+  }
+}

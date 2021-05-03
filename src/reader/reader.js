@@ -96,7 +96,7 @@ class Reader extends Component {
     return <Provider value={this.state.debugLevel}>
       <OptsProvider value={this.state.options}>
         <ScrollWatcher key={this.state.options.lang} isOnTop={!this.state.showMenu}>
-          {<Animation freezeFrame={!this.state.closedMenu}/>}
+          <Animation freezeFrame={!this.state.closedMenu}/>
 
           <Menu visible={this.state.showMenu}
                 setSaveState={this.setSaveState}
@@ -110,7 +110,7 @@ class Reader extends Component {
 
           <div className="text-area">
             <div className="text resizable-text">
-              <ScriptLoader lang={this.state.options.lang} storage={this.props.match.params.script + ".ks"}/>
+              <ScriptLoader storage={this.props.match.params.script + ".ks"}/>
               {/*// プロローグ1日目.ks プロローグ.ks first.ks*/}
             </div>
           </div>

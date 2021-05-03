@@ -1,5 +1,5 @@
 import {Component} from "react"
-import {withDebug} from "../reader/debug"
+import {withDebug, withOptions} from "../reader/debug"
 import {LocateScript} from "./parse/lookup/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
@@ -17,7 +17,7 @@ class ScriptLoader extends Component {
   }
 
   async load() {
-    const scriptFetchPromise = fetch(LocateScript(this.props.storage, this.props.lang))
+    const scriptFetchPromise = fetch(LocateScript(this.props.storage, this.props.options.lang))
 
     let macroFile
     if (!this.props.gameState) {
@@ -85,5 +85,5 @@ class ScriptLoader extends Component {
   }
 }
 
-ScriptLoader = withDebug(ScriptLoader)
+ScriptLoader = withDebug(withOptions(ScriptLoader))
 export default ScriptLoader

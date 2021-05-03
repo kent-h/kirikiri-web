@@ -1,0 +1,91 @@
+.graph {
+  position:         relative;
+  background-color: #222222;
+  padding-bottom:   40vh;
+}
+
+.section-vertical {
+  display:        flex;
+  flex-direction: column;
+}
+
+.section-vertical > :not(.section-day-descriptor) {
+  margin: 0 auto;
+}
+
+.section-vertical > :not(.section-day-descriptor) ~ div {
+  margin-top: 1em;
+}
+
+.section-horizontal {
+  display:         flex;
+  flex-wrap:       nowrap;
+
+  justify-content: left;
+}
+
+.section-vertical > .section-horizontal:not(:first-child) {
+  margin-top: 0.5em;
+}
+
+.section-day {
+  max-width: calc(80vw - 1em);
+  padding:   0.5em;
+}
+
+.section-day > .section-horizontal {
+  margin: 0 -0.5em;
+}
+
+.section-day[route=プ] {
+  background-color: #222233;
+  box-shadow:       0 0 0.5em 0.25em #2222aa;
+}
+
+.section-day[route=セ] {
+  background-color: #333322;
+  box-shadow:       0 0 0.5em 0.25em #aaaa22;
+}
+
+.section-day[route=凛] {
+  background-color: #332222;
+  box-shadow:       0 0 0.5em 0.25em #aa0000;
+}
+
+.section-day[route=桜] {
+  background-color: #332233;
+  box-shadow:       0 0 0.5em 0.25em #aa00aa;
+}
+
+
+.graph > .section-vertical {
+  margin-bottom: 0.5em;
+}
+
+.graph > .section-horizontal {
+  justify-content: flex-start;
+
+  overflow:        hidden;
+  padding:         0.5em 0 0.5em 50%;
+}
+
+.graph > .section-horizontal > .section-vertical {
+  flex-shrink: 0;
+}
+
+.graph > .section-horizontal > .section-vertical:not(:first-child) {
+  margin-left: 1em;
+}
+
+.section-day.section-vertical {
+  align-self: flex-end;
+}
+
+.section-day .section-horizontal {
+  flex-wrap:       wrap;
+  justify-content: center;
+}
+
+.section-day-descriptor {
+
+}

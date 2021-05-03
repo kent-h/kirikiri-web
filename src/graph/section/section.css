@@ -1,0 +1,41 @@
+.graph-section {
+  overflow:   hidden;
+  box-shadow: 0 0 0.5em 0.125em #777777;
+  margin-top: 1em;
+}
+
+.graph-item {
+  display:          inline-block;
+  text-align:       center;
+  padding:          0.5em;
+  background-color: #333333;
+  border-left:      0.1875em solid #333333;
+  border-right:     0.1875em solid #333333;
+  border-top:       0.1875em solid #333333;
+  border-bottom:    0.1875em solid #333333;
+  box-shadow:       0 0 0.5em 0.125em #000000;
+  pointer-events:   auto;
+  cursor:           pointer;
+  z-index:          2;
+
+  margin-top:       0.5em;
+  margin-left:      0.5em;
+  margin-right:     0.5em;
+}
+
+.graph-item[hovered] {
+  border-left-color:   #aaaaaa;
+  border-right-color:  #aaaaaa;
+  border-top-color:    darkred;
+  border-bottom-color: darkred;
+}
+
+.graph-item[next] {
+  border-left-color:  #aaaaaa;
+  border-right-color: #aaaaaa;
+}
+
+.graph-item[prev] {
+  border-left-color:  #aaaaaa;
+  border-right-color: #aaaaaa;
+}
