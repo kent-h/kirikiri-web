@@ -1,5 +1,5 @@
 import {Component} from "react"
-import {withDebug, withOptions} from "../reader/debug"
+import {withOptions} from "../reader/debug"
 import {LocateScript} from "./parse/lookup/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
@@ -55,7 +55,7 @@ class ScriptLoader extends Component {
       // call macro first, and "return" to the specified storage
       gameState = {
         macros: {},
-        stackFrame: {storage: "マクロ.ks", file: macroFile, fileIndex: 0, returnFrame: stackFrame},
+        stackFrame: {storage: "マクロ", file: macroFile, fileIndex: 0, returnFrame: stackFrame},
       }
     }
 
@@ -65,7 +65,7 @@ class ScriptLoader extends Component {
     Tokenize(tokens, gameState, this.props.target)
     let tokenTime = performance.now()
 
-    const display = Render(tokens, this.props.renderState, this.props.debug)
+    const display = Render(tokens, this.props.renderState, this.props.options.debugLevel)
     let renderTime = performance.now()
 
     console.log("tokenize: " + (tokenTime - start) + "ms  render: " + (renderTime - tokenTime) + "ms")
@@ -73,9 +73,9 @@ class ScriptLoader extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.debug !== this.props.debug) {
+    if (prevProps.options.debugLevel !== this.props.options.debugLevel) {
       if (this.state.tokens) {
-        this.setState({display: Render(this.state.tokens, this.props.renderState, this.props.debug)})
+        this.setState({display: Render(this.state.tokens, this.props.renderState, this.props.options.debugLevel)})
       }
     }
   }
@@ -85,5 +85,5 @@ class ScriptLoader extends Component {
   }
 }
 
-ScriptLoader = withDebug(withOptions(ScriptLoader))
+ScriptLoader = withOptions(ScriptLoader)
 export default ScriptLoader

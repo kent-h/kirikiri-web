@@ -21,19 +21,19 @@ Object.keys(graph).forEach((fromID) => {
 class Arrows extends Component {
   constructor(props) {
     super(props)
-    this.onResize = this.onResize.bind(this)
+    this.mustUpdate = this.mustUpdate.bind(this)
     this.state = {mustUpdate: 0}
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.onResize)
+    window.addEventListener("resize", this.mustUpdate)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.onResize)
+    window.removeEventListener("resize", this.mustUpdate)
   }
 
-  onResize() {
+  mustUpdate() {
     this.setState({mustUpdate: this.state.mustUpdate + 1})
   }
 

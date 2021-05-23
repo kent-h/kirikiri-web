@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {withRouter} from "react-router"
-import {withDebug} from "../debug"
+import {withOptions} from "../debug"
 import "../reader.css"
 
 const {Provider: AnimationProvider, Consumer: AnimationConsumer} = React.createContext({id: 0})
@@ -142,7 +142,7 @@ class ScrollWatcher extends Component {
   render() {
     return <ScrollProvider value={this.state.nextVisible}>
       <AnimationProvider value={this.state.visible}>
-        {this.props.debug !== 0 && <div style={{position: "fixed", backgroundColor: "darkred"}}>
+        {this.props.options.debugLevel !== 0 && <div style={{position: "fixed", backgroundColor: "darkred"}}>
           {this.state.visible.id}<br/>{this.state.nextVisible.id}
         </div>}
 
@@ -168,5 +168,5 @@ const withScroll = Component => (
   )
 )
 
-ScrollWatcher = withDebug(withRouter(ScrollWatcher))
+ScrollWatcher = withOptions(withRouter(ScrollWatcher))
 export {ScrollWatcher, withScrollDetect, withScroll}

@@ -1,6 +1,7 @@
 .graph {
   position:         relative;
   background-color: #222222;
+  padding-top:      0.5em;
   padding-bottom:   40vh;
 }
 
@@ -87,5 +88,8 @@
 }
 
 .section-day-descriptor {
-
+  font-size:     larger;
+  margin-bottom: 0.5em;
+  margin-left:   0.25em;
+  color:         #aaaaaa;
 }

@@ -1,5 +1,6 @@
 import React, {Component, createRef} from "react"
 import {withRouter} from "react-router-dom"
+import {withOptions} from "../reader/debug"
 import Arrows from "./arrows/arrows"
 import "./graph.css"
 import Navigation from "./navigation/navigation"
@@ -18,10 +19,27 @@ const buildLookup = (sceneID, lookupGraph) => {
   }, {})
 }
 
+const sectionIDToDay = (id, lang) => {
+  const match = /^(.)(\d*)/.exec(id)
+  if (match) {
+    if (lang === "jp") {
+      return match[1] === "プ" ? "プロローグ" : match[2] + "日目"
+    }
+    return match[1] === "プ" ? "Prologue"
+      : match[2] + ({
+      "1": "st",
+      "2": "nd",
+      "3": "rd",
+    }[match[2]] || "th") + " Day"
+  }
+}
+
 class Graph extends Component {
   constructor(props) {
     super(props)
     this.onMouseOver = this.onMouseOver.bind(this)
+
+    props.options.setAutoplay()
 
     this.relativeRef = createRef()
     this.positions = Object.keys(graph).reduce((acc, key) => {
@@ -40,6 +58,12 @@ class Graph extends Component {
 
   componentDidMount() {
     this.setState({ready: true}) // this.positions will now contain the location of each element, need to update the graph
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.options.lang !== this.props.options.lang) {
+      this.setState({mustUpdate: this.state.mustUpdate + 1})
+    }
   }
 
   onMouseOver(sceneID) {
@@ -78,7 +102,8 @@ class Graph extends Component {
                       transition: elemIndex === 0 && refs && doneBefore ? "margin-left 0.5s ease" : "margin-left 0.1s ease",
                     }}>
 
-          {elem.section && <div className="section-day-descriptor">{elem.section}</div>}
+          {elem.section &&
+          <div className="section-day-descriptor">{sectionIDToDay(elem.section, this.props.options.lang)}</div>}
           {elem.section ?
             <Section key={elem.section}
                      section={elem}
@@ -126,5 +151,5 @@ class Graph extends Component {
   }
 }
 
-Graph = withRouter(Graph)
+Graph = withRouter(withOptions(Graph))
 export default Graph
