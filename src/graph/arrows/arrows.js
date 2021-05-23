@@ -11,7 +11,7 @@ Object.keys(graph).forEach((fromID) => {
   Object.keys(end).forEach(toSection => {
     const ids = end[toSection]
     ids.forEach(id => {
-      const toID = toSection + "-" + (("" + id).length < 2 ? "0" : "") + id
+      const toID = toSection + "-" + id
       linksBySection[toSection] = linksBySection[toSection] || []
       linksBySection[toSection].push({from: fromID, to: toID})
     })

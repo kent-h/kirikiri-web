@@ -13,7 +13,7 @@
   margin: 0 auto;
 }
 
-.section-vertical > :not(.section-day-descriptor) ~ div {
+.section-vertical > :not(.section-day-descriptor) ~ * {
   margin-top: 1em;
 }
 

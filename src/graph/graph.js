@@ -11,9 +11,8 @@ const empty = {}
 const buildLookup = (sceneID, lookupGraph) => {
   return Object.keys(lookupGraph[sceneID] || {}).reduce((acc, sceneKey) => {
     lookupGraph[sceneID][sceneKey].forEach(id => {
-      const idStr = "" + id
       acc[sceneKey] = acc[sceneKey] || {}
-      acc[sceneKey][sceneKey + "-" + (idStr.length < 2 ? "0" : "") + id] = true
+      acc[sceneKey][sceneKey + "-" + id] = true
     })
     return acc
   }, {})

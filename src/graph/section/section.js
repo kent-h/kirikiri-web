@@ -1,5 +1,6 @@
 import React, {Component} from "react"
-import {withRouter} from "react-router-dom"
+import {Link, withRouter} from "react-router-dom"
+import {scripts} from "../scene-index"
 import "./section.css"
 
 class Section extends Component {
@@ -9,16 +10,17 @@ class Section extends Component {
 
   render() {
     const addArray = (array, direction) => array.map((elem, elemIndex) => {
-      if (elem.link) {
-        return <div key={elemIndex}
-                    className="graph-item"
-                    ref={this.props.refs[elem.link]}
-                    hovered={this.props.hovered === elem.link ? "" : undefined}
-                    next={this.props.hoveredNext[elem.link] ? "" : undefined}
-                    prev={this.props.hoveredPrev[elem.link] ? "" : undefined}
-                    onMouseOver={() => this.props.onMouseOver(elem.link)}
-                    onMouseOut={this.props.onMouseOut}
-                    onClick={() => this.props.history.push("/" + elem.link)}>{elem.eng}</div>
+      if (elem.id) {
+        return <Link key={elemIndex}
+                     className="graph-item"
+                     to={"/" + (scripts[elem.id] || elem.id)}
+                     ref={this.props.refs[elem.id]}
+                     hovered={this.props.hovered === elem.id ? "" : undefined}
+                     next={this.props.hoveredNext[elem.id] ? "" : undefined}
+                     prev={this.props.hoveredPrev[elem.id] ? "" : undefined}
+                     onMouseOver={() => this.props.onMouseOver(elem.id)}
+                     onMouseOut={this.props.onMouseOut}>{elem.eng}
+        </Link>
       } else if (elem.v) {
         return <div className="section-vertical">
           {addArray(elem.v, "v")}

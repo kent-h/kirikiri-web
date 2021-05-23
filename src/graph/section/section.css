@@ -14,8 +14,8 @@
   border-top:       0.1875em solid #333333;
   border-bottom:    0.1875em solid #333333;
   box-shadow:       0 0 0.5em 0.125em #000000;
-  pointer-events:   auto;
-  cursor:           pointer;
+  text-decoration:  inherit;
+  color:            inherit;
   z-index:          2;
 
   margin-top:       0.5em;
