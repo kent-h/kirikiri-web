@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {Provider} from "../reader/debug"
 import Menu from "./menu/menu"
+import Tick from "./tick/tick"
 
 const getOptions = (s) => ({
   bgm: s.bgm / 100,
@@ -64,15 +65,15 @@ class Options extends Component {
         })
       }, 1)
     } else if (e.keyCode === 13) { // enter
-        setTimeout(() => {
-          this.setState({canAutoplay: true})
-          if (this.state.showMenu) {
-            this.setState({
-              showMenu: false,
-              options: getOptions(this.state),
-            })
-          }
-        }, 1)
+      setTimeout(() => {
+        this.setState({canAutoplay: true})
+        if (this.state.showMenu) {
+          this.setState({
+            showMenu: false,
+            options: getOptions(this.state),
+          })
+        }
+      }, 1)
     } else if (e.keyCode === 192) { // tilda / back-tick
       this.setState(prevState => {
         const debugLevel = (prevState.debugLevel + 1) % 3
@@ -105,6 +106,7 @@ class Options extends Component {
       showMenu: this.state.showMenu,
       canAutoplay: this.state.canAutoplay,
       setAutoplay: this.setAutoplay,
+      tick: <Tick onClick={() => this.setState({showMenu: true, canAutoplay: true})}/>,
     })}>
       {this.props.children}
 

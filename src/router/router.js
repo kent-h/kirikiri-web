@@ -1,10 +1,10 @@
 import React from "react"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import Home from "../graph/graph"
+import Home from "../home/home"
 import Options from "../options/options"
 import Reader from "../reader/reader"
 
-const Index = (props) => (
+const Index = (props) =>
   <Options>
     <Router>
       <Switch>
@@ -17,6 +17,5 @@ const Index = (props) => (
       </Switch>
     </Router>
   </Options>
-)
 
 export default Index

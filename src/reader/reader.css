@@ -66,7 +66,7 @@
 }
 
 .click-to-start {
-  display:          inline-block;
+  display:          block;
   position:         fixed;
   top:              0;
   left:             0;
@@ -92,24 +92,24 @@
 }
 
 .click-to-start > div > div {
-  margin-top: 1em;
-  font-size:  220%;
+  margin-bottom: 1em;
+  font-size:     220%;
 }
 
 .click-to-start > div:first-child {
-  display: none;
-}
-
-.click-to-start > div:last-child {
   display: block;
 }
 
-@media only screen and (min-width: 800px) and (min-height: 600px) {
+.click-to-start > div:last-child {
+  display: none;
+}
+
+@media (pointer: coarse) {
   .click-to-start > div:first-child {
-    display: block;
+    display: none;
   }
 
   .click-to-start > div:last-child {
-    display: none;
+    display: block;
   }
 }

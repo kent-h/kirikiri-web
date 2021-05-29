@@ -39,6 +39,12 @@
   opacity:   0.3;
 }
 
+.graph-navigation-arrow > path {
+  fill:         none;
+  stroke-width: 1;
+  stroke:       #fff;
+}
+
 @media only screen and (min-device-width: 800px) {
   .graph-navigation-panel:hover .graph-navigation-arrow {
     opacity:    0.5;

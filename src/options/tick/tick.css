@@ -1,0 +1,39 @@
+.tick {
+  position:       fixed;
+  top:            0;
+  width:          15vw;
+  max-width:      20vh;
+  z-index:        4;
+
+  pointer-events: auto;
+  opacity:        0.3;
+}
+
+@media (pointer: fine) {
+  .tick {
+    display: none;
+  }
+}
+
+.tick > path:first-child {
+  fill:            none;
+  stroke-width:    2;
+  stroke:          white;
+  /*stroke-opacity: 0.3;*/
+  stroke-linejoin: miter;
+}
+
+.tick > path:nth-child(2) {
+  fill: black;
+  /*fill-opacity: 1;*/
+}
+
+.tick > path:last-child {
+  fill:            none;
+  stroke-width:    2;
+  stroke:          black;
+  /*stroke-opacity:  0.3;*/
+  stroke-linejoin: miter;
+  stroke-linecap:  square;
+}
+

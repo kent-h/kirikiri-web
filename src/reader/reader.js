@@ -25,12 +25,13 @@ const pathToID = (params) => {
   return r + "-" + params.chapter
 }
 
-let Reader = (props) => (
+let Reader = (props) =>
   <ScrollWatcher key={props.options.lang}
                  isOnTop={!props.options.showMenu && props.options.canAutoplay}>
     <Animation freezeFrame={!props.options.canAutoplay}/>
 
     <div className="text-area" hide={!props.options.canAutoplay ? "" : undefined}>
+      {props.options.tick}
       <div className="text resizable-text">
         <ScriptLoader storage={props.match.params.script || scripts[pathToID(props.match.params)]}/>
       </div>
@@ -40,16 +41,15 @@ let Reader = (props) => (
          hide={props.options.canAutoplay ? "" : undefined}
          onClick={props.options.setAutoplay}>
       <div>
-        Press &lt;ESC&gt; to open settings
         <div>Click to start</div>
+        Press &lt;ESC&gt; to adjust settings
       </div>
       <div>
-        Press the tick to open settings
         <div>Tap to start</div>
+        Press tick to adjust settings
       </div>
     </div>
   </ScrollWatcher>
-)
 
 Reader = withOptions(withRouter(Reader))
 export default Reader

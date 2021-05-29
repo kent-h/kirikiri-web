@@ -5,7 +5,7 @@
   left:             0;
   right:            0;
   background-color: black;
-  z-index:          2;
+  z-index:          5;
 
   opacity:          0.4;
   transition:       opacity ease 0.2s;
@@ -31,7 +31,7 @@
 
   background-color: #333;
   box-shadow:       0 0 1em 0.25em #aaa;
-  z-index:          2;
+  z-index:          5;
 
   opacity:          1;
   transform:        translate(-50%, -50%) scale(1);
