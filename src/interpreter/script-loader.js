@@ -1,6 +1,6 @@
 import {Component} from "react"
 import {withOptions} from "../reader/debug"
-import {LocateScript} from "./parse/lookup/lookup"
+import {LocateScript} from "../resources/lookup"
 import Render from "./parse/render"
 import Tokenize from "./parse/tokenize"
 

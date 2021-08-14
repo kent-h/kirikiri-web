@@ -1,6 +1,6 @@
 import React from "react"
 import {withRouter} from "react-router"
-import {scripts} from "../graph/scene-index"
+import {scripts} from "../resources/generated/scene-index"
 import ScriptLoader from "../interpreter/script-loader"
 import Animation from "./animation/animation"
 import {withOptions} from "./debug"

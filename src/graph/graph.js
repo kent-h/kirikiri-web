@@ -4,7 +4,7 @@ import {withOptions} from "../reader/debug"
 import Arrows from "./arrows/arrows"
 import "./graph.css"
 import Navigation from "./navigation/navigation"
-import {graph, graphR, sections} from "./scene-index"
+import {graph, graphR, sections} from "../resources/generated/scene-index"
 import Section from "./section/section"
 
 const empty = {}

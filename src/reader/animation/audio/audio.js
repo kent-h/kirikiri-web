@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import ReactAudioPlayer from "react-audio-player"
+import {LocateBGM} from "../../../resources/lookup"
 import {withOptions} from "../../debug"
 
 class Audio extends Component {
@@ -70,11 +71,7 @@ class Audio extends Component {
   render() {
     const bgmVersion = "vita" // vita | ps2 | classic
 
-    const src = (this.props.bgm ? (
-      "/static/bgm/" + bgmVersion + "/" + this.props.bgm
-    ) : (
-      "/static/" + this.props.sound
-    )) + ".ogg"
+    const src = this.props.bgm ? LocateBGM(this.props.bgm, bgmVersion) : "/static/" + this.props.sound + ".ogg"
 
     let volume = this.props.bgm ? this.props.options.bgm :
       (this.props.sound.startsWith("voice/") ? this.props.options.voice : this.props.options.sound)

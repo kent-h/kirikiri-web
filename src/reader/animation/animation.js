@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import {LocateBGM} from "../../resources/lookup"
 import {withScroll} from "../scroll/watcher"
 import "./animation.css"
 import AudioPlayer from "./audio/audio-player"
@@ -61,7 +62,7 @@ class Animation extends Component {
     // neededBgm *must* be held to avoid accidentally canceling the load operation
     let neededBgm = (this.props.animation.bgmTimeline || []).reduce((sounds, keyframe) => {
       if (keyframe.bgm && !sounds[keyframe.bgm]) {
-        sounds[keyframe.bgm] = loadSound("/static/bgm/" + bgmVersion + "/" + keyframe.bgm + ".ogg")
+        sounds[keyframe.bgm] = loadSound(LocateBGM(keyframe.bgm, bgmVersion))
       }
       return sounds
     }, {})
