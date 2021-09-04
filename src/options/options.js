@@ -7,6 +7,7 @@ const getOptions = (s) => ({
   bgm: s.bgm / 100,
   voice: s.voice / 100,
   sound: s.sound / 100,
+  bgmVersion: s.bgmVersion,
   lang: s.lang,
   mature: s.mature,
   h: s.h,
@@ -25,6 +26,7 @@ class Options extends Component {
     const bgm = /bgm=([^;]*)(?:;|$)/.exec(cookies) || {}
     const voice = /voice=([^;]*)(?:;|$)/.exec(cookies) || {}
     const sound = /sound=([^;]*)(?:;|$)/.exec(cookies) || {}
+    const bgmVersion = /bgmVersion=([^;]*)(?:;|$)/.exec(cookies) || {}
     const lang = /lang=([^;]*)(?:;|$)/.exec(cookies) || {}
     const mature = /mature=([^;]*)(?:;|$)/.exec(cookies) || {}
     const h = /h=([^;]*)(?:;|$)/.exec(cookies) || {}
@@ -36,6 +38,7 @@ class Options extends Component {
       bgm: bgm[1] ? parseInt(bgm[1], 10) : 50,
       voice: voice[1] ? parseInt(voice[1], 10) : 50,
       sound: sound[1] ? parseInt(sound[1], 10) : 50,
+      bgmVersion: bgmVersion[1] || "vita",
       lang: lang[1] || "eng",
       mature: !(mature[1] === "false"),
       h: parseInt(h[1], 10) || 0,
@@ -91,6 +94,7 @@ class Options extends Component {
     document.cookie = "bgm=" + state.bgm + expires
     document.cookie = "voice=" + state.voice + expires
     document.cookie = "sound=" + state.sound + expires
+    document.cookie = "bgmVersion=" + state.bgmVersion + expires
     document.cookie = "lang=" + state.lang + expires
     document.cookie = "mature=" + state.mature + expires
     document.cookie = "h=" + state.h + expires

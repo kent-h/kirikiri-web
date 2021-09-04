@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {LocateBGM} from "../../resources/lookup"
+import {withOptions} from "../debug"
 import {withScroll} from "../scroll/watcher"
 import "./animation.css"
 import AudioPlayer from "./audio/audio-player"
@@ -56,13 +57,11 @@ class Animation extends Component {
       return audio
     }
 
-    const bgmVersion = "vita"
-
     // wait for music to load
     // neededBgm *must* be held to avoid accidentally canceling the load operation
     let neededBgm = (this.props.animation.bgmTimeline || []).reduce((sounds, keyframe) => {
       if (keyframe.bgm && !sounds[keyframe.bgm]) {
-        sounds[keyframe.bgm] = loadSound(LocateBGM(keyframe.bgm, bgmVersion))
+        sounds[keyframe.bgm] = loadSound(LocateBGM(keyframe.bgm, this.props.options.bgmVersion))
       }
       return sounds
     }, {})
@@ -153,5 +152,5 @@ class Animation extends Component {
   }
 }
 
-Animation = withScroll(Animation)
+Animation = withOptions(withScroll(Animation))
 export default Animation

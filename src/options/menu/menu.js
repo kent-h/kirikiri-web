@@ -1,7 +1,7 @@
 import React from "react"
 import "./menu.css"
 
-const Menu = (props) => (<>
+const Menu = props => <>
   <div className="menu-background" onClick={props.onClose} invisible={props.visible ? undefined : ""}/>
   <div className="menu" invisible={props.visible ? undefined : ""}>
     <div className="menu-push-bottom resizable-text">
@@ -10,9 +10,9 @@ const Menu = (props) => (<>
           Settings
         </div>
         <div className="menu-heading">
-          Volume
+          Audio
         </div>
-        {[{k: "Music", v: "bgm"}, {k: "Voices", v: "voice"}, {k: "Effects", v: "sound"}].map(elem => (
+        {[{k: "Voices", v: "voice"}, {k: "Effects", v: "sound"}, {k: "Music", v: "bgm"}].map(elem => (
           <div className="menu-line" key={elem.v}>
             <div className="menu-property">{elem.k}
               <div className="menu-property-value">{props[elem.v]}%</div>
@@ -24,7 +24,7 @@ const Menu = (props) => (<>
                      max="100"
                      step="5"
                      value={props[elem.v]}
-                     onChange={(e) => {
+                     onChange={e => {
                        const s = {}
                        s[elem.v] = e.target.value
                        props.setSaveState(s)
@@ -32,6 +32,23 @@ const Menu = (props) => (<>
             </div>
           </div>
         ))}
+
+        <div className="menu-line">
+          <div className="menu-property">Version</div>
+          <div className="menu-flex">
+            {[{k: "Vita", v: "vita"}, {k: "PS2", v: "ps2"}, {k: "Original", v: "original"}].map(elem => (
+              <div className="menu-flex-item" key={elem.v}>
+                <label>
+                  <input type="radio"
+                         value={elem.v}
+                         checked={props.bgmVersion === elem.v}
+                         onChange={e => props.setSaveState({bgmVersion: e.target.value})}/>
+                  {elem.k}
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <br/>
         <div className="menu-line">
@@ -43,7 +60,7 @@ const Menu = (props) => (<>
                   <input type="radio"
                          value={elem.v}
                          checked={props.lang === elem.v}
-                         onChange={(e) => props.setSaveState({lang: e.target.value})}/>
+                         onChange={e => props.setSaveState({lang: e.target.value})}/>
                   {elem.k}
                 </label>}
               </div>
@@ -66,7 +83,7 @@ const Menu = (props) => (<>
                     <input type="radio"
                            value={elem.v}
                            checked={props.mature === elem.v}
-                           onChange={(e) => props.setSaveState({mature: (e.target.value === "true")})}/>
+                           onChange={e => props.setSaveState({mature: (e.target.value === "true")})}/>
                     {elem.k}
                   </label>}
                 </div>
@@ -83,7 +100,7 @@ const Menu = (props) => (<>
                     <input type="radio"
                            value={elem.v}
                            checked={props.h === elem.v}
-                           onChange={(e) => props.setSaveState({h: parseInt(e.target.value, 10) || 0})}/>
+                           onChange={e => props.setSaveState({h: parseInt(e.target.value, 10) || 0})}/>
                     {elem.k}
                   </label>
                 </div>
@@ -101,6 +118,6 @@ const Menu = (props) => (<>
       }}/>
     </div>
   </div>
-</>)
+</>
 
 export default Menu

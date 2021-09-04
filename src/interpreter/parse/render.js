@@ -162,7 +162,7 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     if (seTimeline.length === 0 || seTimeline[seTimeline.length - 1].time !== time) {
       seTimeline.push({time: time, sounds: {}})
     }
-    seTimeline[seTimeline.length - 1].sounds[sound] = true
+    seTimeline[seTimeline.length - 1].sounds[sound.toLowerCase()] = true
   }
 
   let specialTokens = {}
