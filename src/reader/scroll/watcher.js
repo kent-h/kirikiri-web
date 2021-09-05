@@ -47,7 +47,6 @@ class ScrollWatcher extends Component {
   }
 
   onKeyDown(e) {
-    e.preventDefault()
     if (!this.props.isOnTop) {
       return
     }
@@ -58,6 +57,7 @@ class ScrollWatcher extends Component {
       (((e.keyCode === 32 || e.keyCode === 13) && e.shiftKey) || e.keyCode === 38 || e.keyCode === 37) ? -1 : 0
 
     if (moveDirection !== 0) {
+      e.preventDefault()
       if (this.state.visible) {
         const movedRecently = this.lastScrollTime && new Date() - this.lastScrollTime < 500
         let moveToSection = moveDirection + (movedRecently ? this.lastScrollSection : this.state.visible.id)

@@ -76,6 +76,7 @@ class Audio extends Component {
 
     return <ReactAudioPlayer autoPlay
                              volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
+                             loop={this.props.loop}
                              preload="auto"
                              src={src}/>
   }

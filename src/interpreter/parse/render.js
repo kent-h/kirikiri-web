@@ -59,7 +59,7 @@ const Render = (tokens, renderState, debug) => {
 
 const RenderChunk = (tokens, renderState, append, debug) => {
   renderState = renderState === undefined ? {
-    bgm: undefined, animationFrame: [], sectionID: 0, buildingSavePoints: [], savePoints: [],
+    bgm: undefined, se: {}, animationFrame: [], sectionID: 0, buildingSavePoints: [], savePoints: [],
   } : renderState
 
   const verbose = debug === 2
@@ -156,13 +156,34 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     }
   }
 
-  let seTimeline = []
-  const pushSound = (sound) => {
+  let seTimeline = [{time: 0, sounds: renderState.se}]
+  const getLastLoopedSe = () => {
+    const prevSe = seTimeline[seTimeline.length - 1].sounds
+    const sounds = {}
+    Object.keys(prevSe).forEach(k => {
+      if (prevSe[k].loop) {
+        sounds[k] = prevSe[k]
+      }
+    })
+    return sounds
+  }
+
+  const pushSound = (sound, fade, loop, stop) => {
     isDivider = true
-    if (seTimeline.length === 0 || seTimeline[seTimeline.length - 1].time !== time) {
-      seTimeline.push({time: time, sounds: {}})
+    if (seTimeline[seTimeline.length - 1].time !== time) {
+      seTimeline.push({time: time, sounds: getLastLoopedSe()})
     }
-    seTimeline[seTimeline.length - 1].sounds[sound.toLowerCase()] = true
+    const sounds = seTimeline[seTimeline.length - 1].sounds
+    if (sound) {
+      sounds[sound.toLowerCase()] =
+        stop ? {fadeOut: parseInt(fade, 10) || 0, stop: true} : {fadeIn: parseInt(fade, 10) || 0, loop: loop === "true"}
+    } else if (stop) {
+      Object.keys(sounds).forEach(k => {
+        if (sounds[k].loop) {
+          sounds[k] = {fadeOut: parseInt(fade, 10) || 0, stop: true}
+        }
+      })
+    }
   }
 
   let specialTokens = {}
@@ -184,11 +205,14 @@ const RenderChunk = (tokens, renderState, append, debug) => {
         case "fadeinse":
         case "playse":
           // TODO: handle looping
-          pushSound("sound/" + token.args.storage)
+          pushSound("sound/" + token.args.storage, token.args.time, token.args.loop)
           break
         case "stopse":
+        case "sestop":
         case "fadeoutse":
-          break // TODO: cancel looped sound effects
+          const sound = token.args.storage || token.args.file
+          pushSound(sound && "sound/" + sound, token.args.time, false, true)
+          break
         case "dash":
         case "dashcombo": // these use opacity values where 0 is fully visible
         case "dashcombot": // imag = initial_mag?, mag = scale, fliplr, cx, cy,
@@ -394,6 +418,7 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   return {
     animationFrame: lastFrames,
     bgm: bgmTimeline[bgmTimeline.length - 1].bgm,
+    se: getLastLoopedSe(),
     sectionID: sectionID,
     buildingSavePoints: buildingSavePoints,
     savePoints: savePoints,
