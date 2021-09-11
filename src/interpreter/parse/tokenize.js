@@ -6,11 +6,11 @@ import InterpretCommand from "./interpreter"
 // ;               comment            ^;(.*)$
 // *               anchor/save point  ^\*(.+)$
 // @               full-line tag      ^@(\S+)(.*)$
-// [               inline tag         \[([^\s\]]+)([^\]\r\n]*)\]
-// other non-empty text               (?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^@;*\[\r\n ])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)
+// [               inline tag         \[([^\s\]]+)((?:[^"\]\r\n]|"[^"]*"|'[^']')*)\]
+// other non-empty text               (?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^\[\r\n])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)
 // whitespace      ignored            (\s+)
 // eslint-disable-next-line
-const topLevelRegex = /^;(.*)$|^\*(.+)$|^@(\S+)(.*)$|\[([^\s\]]+)([^\]\r\n]*)\]|(?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^@;*\[\r\n ])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)|(\s+)/my
+const topLevelRegex = /^;(.*)$|^\*(.+)$|^@(\S+)(.*)$|\[([^\s\]]+)((?:[^"\]\r\n]|"[^"]*"|'[^']')*)\]|(?:(?:\r?\n)*(?:[^@;*\[\r\n ]| +[^\[\r\n])[^\[\r\n]*(?:(?:\r?\n)+(?:[^@;*\[\r\n][^\[\r\n]*)?)*)|(\s+)/my
 
 const Tokenize = (tokens, gameState, target) => {
   const stackFrame = gameState.stackFrame
@@ -69,7 +69,11 @@ const Tokenize = (tokens, gameState, target) => {
     if (stackFrame.fileIndex >= stackFrame.file.length) {
       tokens.push({type: "EOF", storage: stackFrame.storage})
     } else {
-      throw new Error("failed to parse near position" + stackFrame.fileIndex)
+      const lines = stackFrame.file.substr(0, stackFrame.fileIndex).split("\n")
+      const line = lines[lines.length - 1] + stackFrame.file.substr(stackFrame.fileIndex).split("\n")[0]
+      const pos = lines[lines.length - 1].length
+      const errStr = "failed to parse file " + stackFrame.storage + ", line " + lines.length + ", position " + (pos + 1) + "\n" + line + "\n" + (" ".repeat(pos)) + "^"
+      throw new Error(errStr)
     }
   }
 }

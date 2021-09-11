@@ -31,7 +31,7 @@
 
 .section-day {
   max-width: calc(80vw - 1em);
-  padding:   0.5em;
+  padding:   0.5em 0.5em 1em;
 }
 
 .section-day > .section-horizontal {
