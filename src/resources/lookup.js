@@ -15,11 +15,14 @@ export const LocateScript = (name, lang) => {
 }
 
 export const LocateBGM = (name, version) => {
-  let shortV = version === "vita" ? "v" : version === "ps2" ? "p" : version === "original" ? "o" : "c" // classic
+  let shortV = version === "vita" ? "v" : version === "ps2" ? "p" : version === "classic" ? "c" : "o" // original
   const possible = BGM[name] || ""
-  if (!possible.includes(shortV)) {
-    shortV = possible.charAt(-1) // if requested version is not available, return any valid version
+  while (!possible.includes(shortV)) { // if requested version is not available
+    if (shortV === "o") { // if desired was original
+      shortV = possible.charAt(0) // return any valid version
+    }
+    shortV = shortV === "v" ? "p" : "o" // return next-preferred valid version v->p->o & c->o
   }
-  const longV = shortV === "v" ? "vita" : shortV === "p" ? "ps2" : shortV === "o" ? "original" : "classic"
+  const longV = shortV === "v" ? "vita" : shortV === "p" ? "ps2" : shortV === "c" ? "classic" : "original"
   return "/static/bgm/" + longV + "/" + name + ".ogg"
 }
