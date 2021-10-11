@@ -61,15 +61,15 @@ const InterpretCommand = (tokens, gameState, tag) => {
     case "jump":
       tokens.push(tag)
 
-      // gameState.stackFrame.storage = tag.args.storage || stackFrame.storage
-      // gameState.stackFrame.target = tag.args.target
-      tokens.push({
-        type: "call",
-        gameState,
-        storage: tag.args.storage || stackFrame.storage,
-        target: tag.args.target && tag.args.target.substring(1),
-      })
-      return true
+      // // TODO: re-enable jump statements once "cond" tests are implemented.  This was causing an infinite loop when
+      // tokens.push({
+      //   type: "call",
+      //   gameState,
+      //   storage: tag.args.storage || stackFrame.storage,
+      //   target: tag.args.target && tag.args.target.substring(1),
+      // })
+      // return true
+      break
     case "call":
       tokens.push(tag)
 
@@ -87,6 +87,8 @@ const InterpretCommand = (tokens, gameState, tag) => {
 
         gameState.stackFrame = stackFrame.returnFrame
         Tokenize(tokens, gameState)
+      } else {
+        tokens.push({type: "HCF"})
       }
       return true
     case "iscript":

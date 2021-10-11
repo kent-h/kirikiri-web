@@ -4,13 +4,22 @@ import ScriptLoader from "../script-loader"
 import "./render.css"
 import {Tag, TagBlock, TagBlockInline} from "./tag/tag"
 
-const Render = (tokens, renderState, debug) => {
+const Render = (tokens, renderState, onPageReady, debug) => {
   const toDisplay = []
-  const append = (Component) => {
+  const appendSection = (Component) => {
     toDisplay.push(<Fragment key={toDisplay.length + 1}>{Component}</Fragment>)
   }
 
-  let betweenText = []
+  renderState = renderState === undefined ? {
+    bgm: undefined, se: {}, sectionID: 0,
+    layers: [], bgmTimeline: [], seTimeline: [],
+    buildingSavePoints: [], savePoints: [],
+    tokens: [], section: [],
+  } : renderState
+
+  const append = (Component) => {
+    renderState.section.push(<Fragment key={renderState.section.length + 1}>{Component}</Fragment>)
+  }
 
   tokens.forEach(token => {
     switch (token.type) {
@@ -18,37 +27,33 @@ const Render = (tokens, renderState, debug) => {
         // console.log(token.text) // ignore comments in general
         break
       case "t": // text
-        renderState = RenderChunk(betweenText, renderState, append, debug)
-        betweenText = []
+        renderState = RenderChunk(renderState, appendSection, debug)
         append(<span>{token.text}</span>)
         break
       case "*": // link
-        betweenText.push(token)
+        renderState.tokens.push(token)
         break
       case "@": // full-line tag
       case "[": // inline tag
         if (token.command.toLowerCase() === "align") {
-          renderState = RenderChunk(betweenText, renderState, append, debug)
-          betweenText = []
+          renderState = RenderChunk(renderState, appendSection, debug)
           append(<div style={{textAlign: "center"}}>{token.args.text}</div>)
         } else {
-          betweenText.push(token)
+          renderState.tokens.push(token)
         }
         break
-      case "EOF":
-        renderState = RenderChunk(betweenText, renderState, append, debug)
-        betweenText = []
-        // append(<div>--- end of {token.storage} ---</div>)
+      case "HCF":
+        renderState = RenderChunk(renderState, appendSection, debug, true)
+        onPageReady()
         break
       case "call": // jump or call statements require more page loading
-        renderState = RenderChunk(betweenText, renderState, append, debug)
-        betweenText = []
         toDisplay.push(
           <ScriptLoader key={"s"}
                         renderState={renderState}
                         gameState={token.gameState}
                         storage={token.storage}
-                        target={token.target}/>)
+                        target={token.target}
+                        onPageReady={onPageReady}/>)
         break
       default:
         console.log("warning: unhandled token type: " + token.type, token)
@@ -57,10 +62,10 @@ const Render = (tokens, renderState, debug) => {
   return toDisplay
 }
 
-const RenderChunk = (tokens, renderState, append, debug) => {
-  renderState = renderState === undefined ? {
-    bgm: undefined, se: {}, animationFrame: [], sectionID: 0, buildingSavePoints: [], savePoints: [],
-  } : renderState
+const RenderChunk = (renderState, appendSection, debug, forceSection) => {
+  const tokens = renderState.tokens
+
+  let section = renderState.section
 
   const verbose = debug === 2
 
@@ -71,10 +76,47 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   let time = 0
   let endTime = 0
 
-  let layers = renderState.animationFrame
-
+  let {layers, bgmTimeline, seTimeline} = renderState
 
   let {buildingSavePoints, savePoints} = renderState
+
+  const generateSection = () => {
+    if (isDivider) {
+      return
+    }
+    isDivider = true
+
+    const isNewSavePoint = buildingSavePoints.length !== 0
+    savePoints = isNewSavePoint ? buildingSavePoints : savePoints
+    buildingSavePoints = []
+
+    if (sectionID !== 0) {
+      appendSection(
+        <ScrollDetect key={"s" + sectionID}
+                      id={sectionID}
+                      savePoints={savePoints}
+                      isSavePointOwner={isNewSavePoint}
+                      timeline={layers}
+                      bgmTimeline={bgmTimeline}
+                      seTimeline={seTimeline}>
+          {section}
+        </ScrollDetect>)
+
+      let lastFrames = []
+      layers.forEach((animation, layer) => {
+        lastFrames[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
+      })
+      layers = lastFrames
+      bgmTimeline = [{time: 0, bgm: renderState.bgm}]
+      seTimeline = [{time: 0, sounds: renderState.se}]
+      section = []
+    }
+    sectionID++
+  }
+
+  const append = (Component) => {
+    section.push(<Fragment key={section.length + 1}>{Component}</Fragment>)
+  }
 
   const lastFrame = (layer) => {
     layer = layer === "base" ? 0 : (layer || 0)
@@ -88,7 +130,7 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   }
 
   const pushFrame = (layer, frame) => {
-    isDivider = true
+    generateSection()
     layer = layer === "base" ? 0 : (layer || 0)
     layers[layer] = layers[layer] || []
     layers[layer].push(frame)
@@ -143,11 +185,10 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     })
   }
 
-  let bgmTimeline = [{time: 0, bgm: renderState.bgm}]
   const pushBgm = (bgm, fadeTime) => {
-    isDivider = true
+    generateSection()
     fadeTime = parseInt(fadeTime || 0, 10)
-    const lastBgm = bgmTimeline[bgmTimeline.length - 1]
+    const lastBgm = bgmTimeline.length !== 0 ? bgmTimeline[bgmTimeline.length - 1] : []
     if (lastBgm.time !== time) { // if time has advanced, create a new frame
       bgmTimeline.push({time: time, bgm: bgm, fadeTime: fadeTime})
     } else { // else change info of last frame
@@ -156,9 +197,8 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     }
   }
 
-  let seTimeline = [{time: 0, sounds: renderState.se}]
   const getLastLoopedSe = () => {
-    const prevSe = seTimeline[seTimeline.length - 1].sounds
+    const prevSe = seTimeline.length !== 0 ? [seTimeline.length - 1].sounds || {} : {}
     const sounds = {}
     Object.keys(prevSe).forEach(k => {
       if (prevSe[k].loop) {
@@ -169,8 +209,8 @@ const RenderChunk = (tokens, renderState, append, debug) => {
   }
 
   const pushSound = (sound, fade, loop, stop) => {
-    isDivider = true
-    if (seTimeline[seTimeline.length - 1].time !== time) {
+    generateSection()
+    if (seTimeline.length === 0 || seTimeline[seTimeline.length - 1].time !== time) {
       seTimeline.push({time: time, sounds: getLastLoopedSe()})
     }
     const sounds = seTimeline[seTimeline.length - 1].sounds
@@ -309,19 +349,6 @@ const RenderChunk = (tokens, renderState, append, debug) => {
     }
   })
 
-  if (isDivider) {
-    const isNewSavePoint = buildingSavePoints.length !== 0
-    savePoints = isNewSavePoint ? buildingSavePoints : savePoints
-    buildingSavePoints = []
-
-    append(<ScrollDetect key={"s" + ++sectionID}
-                         id={sectionID}
-                         savePoints={savePoints}
-                         isSavePointOwner={isNewSavePoint}
-                         timeline={layers}
-                         bgmTimeline={bgmTimeline}
-                         seTimeline={seTimeline}/>)
-  }
 
   let tags = []
   let toRender = []
@@ -409,19 +436,21 @@ const RenderChunk = (tokens, renderState, append, debug) => {
 
   toRender.forEach(append)
 
-  // save final frame for next animation block to use
-  let lastFrames = []
-  layers.forEach((animation, layer) => {
-    lastFrames[layer] = [Object.assign({}, animation[animation.length - 1], {time: 0})]
-  })
+  if (forceSection) {
+    generateSection()
+  }
 
   return {
-    animationFrame: lastFrames,
-    bgm: bgmTimeline[bgmTimeline.length - 1].bgm,
+    bgm: bgmTimeline.length !== 0 ? bgmTimeline[bgmTimeline.length - 1].bgm : undefined,
     se: getLastLoopedSe(),
     sectionID: sectionID,
     buildingSavePoints: buildingSavePoints,
     savePoints: savePoints,
+    tokens: [],
+    section: section,
+    layers: layers,
+    bgmTimeline: bgmTimeline,
+    seTimeline: seTimeline,
   }
 }
 

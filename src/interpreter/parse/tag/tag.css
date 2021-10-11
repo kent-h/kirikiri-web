@@ -12,8 +12,7 @@
   overflow:   hidden;
   margin:     0 -0.5em;
 
-
-  max-height: calc(67vh - 4em);
+  max-height: 5.5em;
 }
 
 .tag-block-size-limiter:hover {
@@ -34,7 +33,7 @@
 
 
 .tag-block-inline-pin {
-  display:  inline-block;
+  display:  inline;
   position: relative;
   height:   0;
   width:    0;
@@ -42,19 +41,19 @@
 
 .tag-block-inline-size-limiter {
   position:    absolute;
-  top:         -1.1em;
-  left:        0;
+  top:         0;
+  left:        -2px;
   overflow:    hidden;
 
   border-left: 4px solid green;
-  margin-left: -2px;
 
   max-height:  1.4em;
+  z-index:     1;
 }
 
 .tag-block-inline-size-limiter:hover {
   max-height: none;
-  z-index:    1;
+  z-index:    2;
 }
 
 .tag-block-inline {

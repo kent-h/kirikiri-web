@@ -26,3 +26,46 @@ export const LocateBGM = (name, version) => {
   const longV = shortV === "v" ? "vita" : shortV === "p" ? "ps2" : shortV === "c" ? "classic" : "original"
   return "/static/bgm/" + longV + "/" + name + ".ogg"
 }
+
+export const PathToID = (params) => {
+  let r = {
+    "prologue": "プ",
+    "プロローグ": "プ",
+    "saber": "セ",
+    "セイバ": "セ",
+    "rin": "凛",
+    "凛": "凛",
+    "sakura": "桜",
+    "桜": "桜",
+  }[params.route]
+  const match = /^(\d+)\D*$/.exec(params.day)
+  if (match) {
+    r += match[1]
+  }
+  return r + "-" + params.chapter
+}
+
+export const IDToPath = (id, lang) => {
+  const match = /^(.)(\d*)-(\d*)/.exec(id)
+  if (match) {
+    const route = {
+      "eng": {
+        "プ": "prologue",
+        "セ": "saber",
+        "凛": "rin",
+        "桜": "sakura",
+      },
+      "jp": {
+        "プ": "プロローグ",
+        "セ": "セイバ",
+        "凛": "凛",
+        "桜": "桜",
+      },
+    }[lang][match[1]]
+    return route + "/" + (match[2] ? match[2] + (lang === "eng" ? ({
+      "1": "st",
+      "2": "nd",
+      "3": "rd",
+    }[match[2]] || "th") + "-day/" : "日目/") : "") + match[3]
+  }
+}

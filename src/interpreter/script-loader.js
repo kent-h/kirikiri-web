@@ -65,7 +65,7 @@ class ScriptLoader extends Component {
     Tokenize(tokens, gameState, this.props.target)
     let tokenTime = performance.now()
 
-    const display = Render(tokens, this.props.renderState, this.props.options.debugLevel)
+    const display = Render(tokens, this.props.renderState, this.props.onPageReady, this.props.options.debugLevel)
     let renderTime = performance.now()
 
     console.log("tokenize: " + (tokenTime - start) + "ms  render: " + (renderTime - tokenTime) + "ms")
@@ -75,7 +75,7 @@ class ScriptLoader extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.options.debugLevel !== this.props.options.debugLevel) {
       if (this.state.tokens) {
-        this.setState({display: Render(this.state.tokens, this.props.renderState, this.props.options.debugLevel)})
+        this.setState({display: Render(this.state.tokens, this.props.renderState, this.props.onPageReady, this.props.options.debugLevel)})
       }
     }
   }

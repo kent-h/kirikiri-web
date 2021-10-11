@@ -1,0 +1,21 @@
+.scroll-detect {
+  transition: opacity 0.4s ease-in;
+}
+
+.scroll-detect:first-child {
+  margin-top: 33vh;
+}
+
+.scroll-detect {
+  margin-bottom: 6em;
+}
+
+.scroll-detect > :not(.tag-block-pin):not(.tag-block-inline-pin) {
+  opacity:    0.2;
+  transition: opacity 0.45s ease-in;
+}
+
+.scroll-detect[focused] > :not(.tag-block-pin):not(.tag-block-inline-pin) {
+  opacity:    1;
+  transition: opacity 0.1s ease-out;
+}

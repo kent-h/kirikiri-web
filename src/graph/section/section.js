@@ -2,36 +2,12 @@ import React, {Component} from "react"
 import {Link, withRouter} from "react-router-dom"
 import {withOptions} from "../../reader/debug"
 import {scripts} from "../../resources/generated/scene-index"
+import {IDToPath} from "../../resources/lookup"
 import "./section.css"
-
-const idToPath = (id, lang) => {
-  const match = /^(.)(\d*)-(\d*)/.exec(id)
-  if (match) {
-    const route = {
-      "eng": {
-        "プ": "prologue",
-        "セ": "saber",
-        "凛": "rin",
-        "桜": "sakura",
-      },
-      "jp": {
-        "プ": "プロローグ",
-        "セ": "セイバ",
-        "凛": "凛",
-        "桜": "桜",
-      },
-    }[lang][match[1]]
-    return route + "/" + (match[2] ? match[2] + (lang === "eng" ? ({
-      "1": "st",
-      "2": "nd",
-      "3": "rd",
-    }[match[2]] || "th") + "-day/" : "日目/") : "") + match[3]
-  }
-}
 
 class Section extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.hoveredNext !== this.props.hoveredNext || nextProps.hoveredPrev !== this.props.hoveredPrev
+    return nextProps.hoveredNext !== this.props.hoveredNext || nextProps.hoveredPrev !== this.props.hoveredPrev || nextProps.options.debugLevel !== this.props.options.debugLevel
   }
 
   render() {
@@ -39,7 +15,8 @@ class Section extends Component {
       if (elem.id) {
         return <Link key={elemIndex}
                      className="graph-item"
-                     to={"/" + (scripts[elem.id] ? idToPath(elem.id, this.props.options.lang) : elem.id)}
+                     style={this.props.options.debugLevel ? {backgroundColor: scripts[elem.id] ? undefined : "red"} : {}}
+                     to={"/" + (scripts[elem.id] ? IDToPath(elem.id, this.props.options.lang) : elem.id)}
                      ref={this.props.refs[elem.id]}
                      hovered={this.props.hovered === elem.id ? "" : undefined}
                      next={this.props.hoveredNext[elem.id] ? "" : undefined}

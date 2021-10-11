@@ -1,0 +1,45 @@
+.choice-block {
+  text-align:    center;
+  margin-bottom: 40vh;
+  transition:    opacity ease-out 0.1s;
+}
+
+.scroll-detect:not([focused]) + .choice-block {
+  opacity:    20%;
+  transition: opacity ease-in 0.4s;
+}
+
+.choice-button {
+  position:      relative;
+  min-width:     60%;
+  padding:       0.25em 0.5em;
+  cursor:        pointer;
+  background:    none;
+  color:         #eeeeee;
+  font-size:     larger;
+
+  border:        0.05em solid #cccccc;
+  border-radius: 0.2em;
+}
+
+.choice-button:hover {
+  border-color: white;
+}
+
+.choice-button:after {
+  content:       '';
+  position:      absolute;
+  top:           -0.2em;
+  left:          -0.2em;
+  right:         -0.2em;
+  bottom:        -0.2em;
+  z-index:       -1;
+  border:        0.1em solid #cccccc;
+  border-radius: 0.35em;
+  background:    rgba(32, 32, 32, 0.8);
+}
+
+.choice-button:hover:after {
+  border-color: white;
+  background:   rgba(64, 64, 64, 0.8);
+}

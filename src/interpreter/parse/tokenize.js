@@ -67,7 +67,7 @@ const Tokenize = (tokens, gameState, target) => {
 
   if (!match) {
     if (stackFrame.fileIndex >= stackFrame.file.length) {
-      tokens.push({type: "EOF", storage: stackFrame.storage})
+      tokens.push({type: "HCF", storage: stackFrame.storage})
     } else {
       const lines = stackFrame.file.substr(0, stackFrame.fileIndex).split("\n")
       const line = lines[lines.length - 1] + stackFrame.file.substr(stackFrame.fileIndex).split("\n")[0]

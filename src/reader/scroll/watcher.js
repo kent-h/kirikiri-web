@@ -13,6 +13,7 @@ class ScrollWatcher extends Component {
   constructor(props) {
     super(props)
     this.onKeyDown = this.onKeyDown.bind(this)
+    this.scrollTo = this.scrollTo.bind(this)
     this.addAnchor = this.addAnchor.bind(this)
     this.onSectionVisibilityChange = this.onSectionVisibilityChange.bind(this)
 
@@ -32,7 +33,7 @@ class ScrollWatcher extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.visible.id !== this.state.visible.id) {
-      const section = this.linkRefs[this.state.visible.id + 1]
+      const section = this.linkRefs[this.state.visible.id]
       const newURL = this.props.location.pathname + this.props.location.search + (section && section.savePoints.length !== 0 ? ("#" + section.savePoints[0]) : "")
       this.props.history.replace(newURL)
     }
@@ -60,15 +61,17 @@ class ScrollWatcher extends Component {
       e.preventDefault()
       if (this.state.visible) {
         const movedRecently = this.lastScrollTime && new Date() - this.lastScrollTime < 500
-        let moveToSection = moveDirection + (movedRecently ? this.lastScrollSection : this.state.visible.id)
+        let currentSection = movedRecently ? this.lastScrollSection : this.state.visible.id
+        let moveToSection = moveDirection + currentSection
         let partialAdvance = false
-        if (!movedRecently) {
-          if (moveDirection > 0) { // if moving forwards, check to see if the current sections's text trails off the end of the screen
-            const section = this.linkRefs[moveToSection]
-            partialAdvance = section && section.ref.current && section.ref.current.node.getBoundingClientRect().top > window.innerHeight
+        if (!movedRecently || !this.linkRefs[moveToSection]) {
+          if (moveDirection > 0) { // if moving forwards, check to see if the current sections's text trails off the end of the screen, or if there is no next section
+            const section = this.linkRefs[currentSection]
+            const nextSection = this.linkRefs[moveToSection]
+            partialAdvance = !nextSection || (section && section.ref.current && section.ref.current.node.getBoundingClientRect().bottom > window.innerHeight * 4 / 5)
           } else { // if moving backwards, check that the top is in sight
-            const section = this.linkRefs[moveToSection + 1]
-            moveToSection += section && section.ref.current && section.ref.current.node.getBoundingClientRect().bottom < 0 ? 1 : 0
+            const section = this.linkRefs[currentSection]
+            moveToSection += section && section.ref.current && section.ref.current.node.getBoundingClientRect().top < 0 ? 1 : 0
           }
         }
         this.scrollTo(moveToSection, partialAdvance, true)
@@ -77,22 +80,25 @@ class ScrollWatcher extends Component {
   }
 
   scrollTo(moveToSection, partialAdvance, smooth) {
-    this.lastScrollTime = new Date()
-
     if (partialAdvance) {
+      this.lastScrollTime = new Date()
       this.lastScrollSection = moveToSection - 1
-      window.scrollBy({top: window.innerHeight * 0.66, behavior: smooth ? "smooth" : "auto"})
+      window.scrollBy({top: window.innerHeight * 0.4, behavior: smooth ? "smooth" : "auto"})
       return
     }
 
     const section = this.linkRefs[moveToSection]
     if (section && section.ref.current) {
+      this.lastScrollTime = new Date()
       this.lastScrollSection = moveToSection
       const rect = section.ref.current.node.getBoundingClientRect()
       window.scrollTo({
-        top: window.pageYOffset + rect.top + (moveToSection !== 1 ? rect.height / 2 : 0),
+        top: window.pageYOffset + rect.top - (moveToSection !== 1 ? window.innerHeight * 0.33 : window.innerHeight * 0.33),
         behavior: smooth ? "smooth" : "auto",
       })
+      // attempt to proactively update the visible section (to reduce latency of the text opacity transition)
+      // this could theoretically de-sync the scrolled section in certain situations
+      this.setState({nextVisible: Object.assign({}, this.includeCallbacks, {id: moveToSection})})
     }
     this.hasScrolled = true
   }
@@ -106,7 +112,7 @@ class ScrollWatcher extends Component {
 
     if (!this.hasScrolled && isSaveOwner) {
       if (savePoints.some(savePoint => ("#" + savePoint === this.savePointAtLoadTime))) {
-        this.scrollTo(id - 1, false, false)
+        this.scrollTo(id, false, false)
       }
     }
   }

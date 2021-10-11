@@ -1,11 +1,13 @@
 import React, {Component} from "react"
 import {InView} from "react-intersection-observer"
+import "./detect.css"
 import {withScrollDetect} from "./watcher"
 
 class ScrollDetect extends Component {
   constructor(props) {
     super(props)
     this.ref = React.createRef()
+    this.state = {visible: false}
   }
 
   componentDidMount() {
@@ -26,16 +28,20 @@ class ScrollDetect extends Component {
       }
     }
 
+    const focused = this.props.id === this.props.scroll.id
+
     return <InView as="div"
                    ref={this.ref}
-                   style={{height: this.props.id === 1 ? "33vh" : "67vh"}}
+                   className="scroll-detect"
+                   focused={focused ? "" : undefined}
                    children={undefined}
-                   rootMargin="10000000% 0px -100% 0px"
+                   rootMargin="10000000% 0px -60% 0px"
                    threshold={0}
                    skip={!makeActive}
                    onChange={(inView, entry) => {
+                     this.setState({visible: inView})
                      this.props.scroll.onSectionChange(this.props.id, inView, this.props.timeline, this.props.bgmTimeline, this.props.seTimeline, this.props.savePoints)
-                   }}/>
+                   }}>{this.props.children}</InView>
   }
 }
 
