@@ -23,6 +23,10 @@
   margin-right:     0.5em;
 }
 
+.graph-item[h][hovered] {
+  background-color: #332533;
+}
+
 .graph-item[hovered] {
   border-left-color:   #aaaaaa;
   border-right-color:  #aaaaaa;

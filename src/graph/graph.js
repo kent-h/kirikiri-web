@@ -1,10 +1,10 @@
 import React, {Component, createRef} from "react"
 import {withRouter} from "react-router-dom"
 import {withOptions} from "../reader/debug"
+import {graph, graphR, sections} from "../resources/generated/scene-index"
 import Arrows from "./arrows/arrows"
 import "./graph.css"
 import Navigation from "./navigation/navigation"
-import {graph, graphR, sections} from "../resources/generated/scene-index"
 import Section from "./section/section"
 
 const empty = {}
@@ -61,13 +61,12 @@ class Graph extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.options.lang !== this.props.options.lang) {
+    if (prevProps.options.lang !== this.props.options.lang || prevProps.options.h !== this.props.options.h) {
       this.setState({mustUpdate: this.state.mustUpdate + 1})
     }
   }
 
   onMouseOver(sceneID) {
-    console.log(buildLookup(sceneID, graph), buildLookup(sceneID, graphR))
     this.setState({
       hovered: sceneID,
       next: buildLookup(sceneID, graph),
