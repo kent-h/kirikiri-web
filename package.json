@@ -9,7 +9,7 @@
     "react": "^16.13.1",
     "react-audio-player": "^0.14.0",
     "react-dom": "^16.13.1",
-    "react-intersection-observer": "^8.29.0",
+    "react-intersection-observer": "^8.32.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"

@@ -35,7 +35,7 @@ class ScrollDetect extends Component {
                    className="scroll-detect"
                    focused={focused ? "" : undefined}
                    children={undefined}
-                   rootMargin="10000000% 0px -60% 0px"
+                   rootMargin="10000000% 0px -100% 0px"
                    threshold={0}
                    skip={!makeActive}
                    onChange={(inView, entry) => {

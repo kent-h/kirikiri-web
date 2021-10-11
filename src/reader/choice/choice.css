@@ -1,12 +1,14 @@
 .choice-block {
   text-align:    center;
   margin-bottom: 40vh;
-  transition:    opacity ease-out 0.1s;
+  margin-top:    15vh;
+  min-height:    5vh;
+  transition:    opacity ease-out 0.2s;
 }
 
 .scroll-detect:not([focused]) + .choice-block {
   opacity:    20%;
-  transition: opacity ease-in 0.4s;
+  transition: opacity ease-in 0.3s;
 }
 
 .choice-button {

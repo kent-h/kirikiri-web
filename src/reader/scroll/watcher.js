@@ -71,7 +71,7 @@ class ScrollWatcher extends Component {
             partialAdvance = !nextSection || (section && section.ref.current && section.ref.current.node.getBoundingClientRect().bottom > window.innerHeight * 4 / 5)
           } else { // if moving backwards, check that the top is in sight
             const section = this.linkRefs[currentSection]
-            moveToSection += section && section.ref.current && section.ref.current.node.getBoundingClientRect().top < 0 ? 1 : 0
+            moveToSection += section && section.ref.current && section.ref.current.node.getBoundingClientRect().top < window.innerHeight * -0.4 ? 1 : 0
           }
         }
         this.scrollTo(moveToSection, partialAdvance, true)
@@ -93,7 +93,7 @@ class ScrollWatcher extends Component {
       this.lastScrollSection = moveToSection
       const rect = section.ref.current.node.getBoundingClientRect()
       window.scrollTo({
-        top: window.pageYOffset + rect.top - (moveToSection !== 1 ? window.innerHeight * 0.33 : window.innerHeight * 0.33),
+        top: window.pageYOffset + rect.top - (moveToSection !== 1 ? window.innerHeight * -0.07 : window.innerHeight * -0.07),
         behavior: smooth ? "smooth" : "auto",
       })
       // attempt to proactively update the visible section (to reduce latency of the text opacity transition)
