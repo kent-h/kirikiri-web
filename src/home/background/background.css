@@ -1,0 +1,42 @@
+
+.home-background {
+  position:   fixed;
+  top:        50vh;
+  left:       50vw;
+  width:      100vw;
+  min-width:  133vh;
+
+  height:     100vh;
+  min-height: 75vw;
+
+  transform:  translate(-50%, -50%);
+  z-index:    -1;
+}
+
+.replaceable-image > img {
+  opacity:        0;
+  position:       absolute;
+  top:            0;
+  width:          100%;
+  mix-blend-mode: lighten;
+
+  transition:     opacity ease-in 2s;
+}
+
+.replaceable-image > img[visible] {
+  opacity:    1;
+
+  transition: opacity ease-out 2s;
+}
+
+.title-image {
+  position:   relative;
+  left:       50%;
+  transform:  translateX(-50%);
+  margin:     1.5em 0 4em;
+  width:      40vh;
+  min-width:  30vw;
+
+  height:     20vh;
+  min-height: 15vw;
+}

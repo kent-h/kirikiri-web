@@ -33,7 +33,9 @@
 
   color:       white;
   line-height: 1.4;
+}
 
+.text-shadow {
   text-shadow: 0 0 0.125em #343837, 0 0 0.125em #343837, 0 0 0.25em #000, 0 0 0.25em #000, 0 0 0.5em #000, 0 0 0.5em #000, 0 0 1em #000, 0 0 1em #000;
 }
 

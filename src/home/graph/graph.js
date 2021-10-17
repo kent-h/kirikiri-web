@@ -1,7 +1,8 @@
 import React, {Component, createRef} from "react"
 import {withRouter} from "react-router-dom"
-import {withOptions} from "../reader/debug"
-import {graph, graphR, sections} from "../resources/generated/scene-index"
+import {withOptions} from "../../reader/debug"
+import {graph, graphR, sections} from "../../resources/generated/scene-index"
+import {NumToRoute, RouteToNum} from "../../resources/lookup"
 import Arrows from "./arrows/arrows"
 import "./graph.css"
 import Navigation from "./navigation/navigation"
@@ -53,7 +54,7 @@ class Graph extends Component {
     }, {}))
     this.sectionRefs = [[createRef(), createRef()], [createRef(), createRef(), createRef()]]
 
-    this.state = {next: {}, prev: {}, pane: 0, paneMoving: true, mustUpdate: 0}
+    this.state = {next: {}, prev: {}, paneMoving: true, mustUpdate: 0}
   }
 
   componentDidMount() {
@@ -75,15 +76,17 @@ class Graph extends Component {
   }
 
   render() {
+    const routeNum = RouteToNum(this.props.match.params.route)
+
     const addArray = (array, direction, first, refs) => array.map((elem, elemIndex) => {
       if (elem.v) {
         const doneBefore = this.doneBefore
-        this.doneBefore = this.doneBefore || this.state.pane !== 0
+        this.doneBefore = this.doneBefore || routeNum !== 0
 
         let marginLeft = undefined
         if (elemIndex === 0 && refs && refs[0].current) {
           const start = refs[0].current
-          const end = (refs[this.state.pane] || refs[0]).current
+          const end = (refs[routeNum] || refs[0]).current
           if (start && end) {
             const sr = start.getBoundingClientRect()
             const er = end.getBoundingClientRect()
@@ -102,7 +105,7 @@ class Graph extends Component {
                     }}>
 
           {elem.section &&
-          <div className="section-day-descriptor">{sectionIDToDay(elem.section, this.props.options.lang)}</div>}
+          <div className="section-day-descriptor text-shadow">{sectionIDToDay(elem.section, this.props.options.lang)}</div>}
           {elem.section ?
             <Section key={elem.section}
                      section={elem}
@@ -118,13 +121,15 @@ class Graph extends Component {
       } else if (elem.h) {
         return <>
           {first && elemIndex === 1 &&
-          <Navigation pane={this.state.pane}
-                      onLeft={() => this.setState({
-                        pane: this.state.pane <= 0 ? 0 : this.state.pane - 1, paneMoving: this.state.pane !== 0,
-                      })}
-                      onRight={() => this.setState({
-                        pane: this.state.pane >= 2 ? 2 : this.state.pane + 1, paneMoving: this.state.pane !== 2,
-                      })}/>}
+          <Navigation pane={routeNum}
+                      onLeft={() => {
+                        this.props.history.replace("/" + NumToRoute(routeNum <= 0 ? 0 : routeNum - 1, this.props.options.lang))
+                        this.setState({paneMoving: routeNum !== 0})
+                      }}
+                      onRight={() => {
+                        this.props.history.replace("/" + NumToRoute(routeNum >= 2 ? 2 : routeNum + 1, this.props.options.lang))
+                        this.setState({paneMoving: routeNum !== 2})
+                      }}/>}
           <div key={elemIndex} className="section-horizontal">
             {addArray(elem.h, "h", false, first && this.sectionRefs[elemIndex - 1])}
           </div>
@@ -141,7 +146,7 @@ class Graph extends Component {
               hovered={this.state.hovered}
               hoveredNext={this.state.next}
               hoveredPrev={this.state.prev}
-              pane={this.state.pane}
+              pane={routeNum}
               paneMoving={this.state.paneMoving}
               mustUpdate={this.state.mustUpdate}/>}
 

@@ -27,6 +27,32 @@ export const LocateBGM = (name, version) => {
   return "/static/bgm/" + longV + "/" + name + ".ogg"
 }
 
+export const RouteToNum = route => {
+  return {
+    "saber": 0,
+    "セイバ": 0,
+    "rin": 1,
+    "凛": 1,
+    "sakura": 2,
+    "桜": 2,
+  }[route] || 0
+}
+
+export const NumToRoute = (route, lang) => {
+  return {
+    "eng": {
+      0: "saber",
+      1: "rin",
+      2: "sakura",
+    },
+    "jp": {
+      0: "セイバ",
+      1: "凛",
+      2: "桜",
+    },
+  }[lang][route] || (lang === "eng" ? "saber" : "セイバ")
+}
+
 export const PathToID = (params) => {
   let r = {
     "prologue": "プ",

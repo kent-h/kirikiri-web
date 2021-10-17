@@ -1,0 +1,17 @@
+.introduction {
+  margin-bottom: 3em;
+}
+
+.introduction-text {
+  width:       85vw;
+  max-width:   1400px;
+  margin:      1em auto;
+  color:       #dddddd;
+  text-align:  left;
+  line-height: 1.4;
+}
+
+.introduction-hr {
+  height:           2px;
+  background-image: linear-gradient(to right, rgba(63, 63, 63, 0), rgba(63, 63, 63, 0.7), rgba(63, 63, 63, 0));
+}

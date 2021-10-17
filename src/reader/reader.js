@@ -25,7 +25,7 @@ class Reader extends Component {
 
         <div className="text-area" hide={!options.canAutoplay ? "" : undefined}>
           {options.tick}
-          <div className="text resizable-text">
+          <div className="text text-shadow resizable-text">
             <ScriptLoader storage={this.props.match.params.script || scripts[PathToID(this.props.match.params)]}
                           onPageReady={() => this.setState({ready: true})}/>
             {this.state.ready && <Choice scriptID={PathToID(this.props.match.params)}/>}

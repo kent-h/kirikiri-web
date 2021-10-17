@@ -1,8 +1,8 @@
 .graph {
-  position:         relative;
-  background-color: #222222;
-  padding-top:      0.5em;
-  padding-bottom:   40vh;
+  position:       relative;
+  padding-top:    0.5em;
+  padding-bottom: 40vh;
+  color:          #dddddd;
 }
 
 .section-vertical {
@@ -39,23 +39,23 @@
 }
 
 .section-day[route=プ] {
-  background-color: #222233;
-  box-shadow:       0 0 0.5em 0.25em #2222aa;
+  background-color: rgba(34, 34, 51, 0.2);
+  box-shadow:       0 0 0.25em 0 #000000, 0 0 0.5em 0.25em rgba(63, 63, 255, 0.5);
 }
 
 .section-day[route=セ] {
-  background-color: #333322;
-  box-shadow:       0 0 0.5em 0.25em #aaaa22;
+  background-color: rgba(51, 51, 34, 0.2);
+  box-shadow:       0 0 0.25em 0 #000000, 0 0 0.5em 0.25em rgba(255, 255, 0, 0.5);
 }
 
 .section-day[route=凛] {
-  background-color: #332222;
-  box-shadow:       0 0 0.5em 0.25em #aa0000;
+  background-color: rgba(51, 34, 34, 0.2);
+  box-shadow:       0 0 0.25em 0 #000000, 0 0 0.5em 0.25em rgba(191, 0, 0, 0.5);
 }
 
 .section-day[route=桜] {
-  background-color: #332233;
-  box-shadow:       0 0 0.5em 0.25em #aa00aa;
+  background-color: rgba(51, 34, 51, 0.2);
+  box-shadow:       0 0 0.25em 0 #000000, 0 0 0.5em 0.25em rgba(191, 0, 191, 0.5);
 }
 
 
@@ -91,5 +91,5 @@
   font-size:     larger;
   margin-bottom: 0.5em;
   margin-left:   0.25em;
-  color:         #aaaaaa;
+  opacity:       0.9;
 }

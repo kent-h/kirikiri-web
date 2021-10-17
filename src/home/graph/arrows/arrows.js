@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {graph} from "../../resources/generated/scene-index"
+import {graph} from "../../../resources/generated/scene-index"
 import "./arrows.css"
 import Section from "./section/section"
 

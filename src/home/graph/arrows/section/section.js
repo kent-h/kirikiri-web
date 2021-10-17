@@ -14,7 +14,9 @@ class Section extends Component {
     const ry = -this.props.rRect.top
 
     const lines = []
+    const borderLines = []
     const linesOnTop = []
+    const borderLinesOnTop = []
 
     this.props.links.forEach((link, linkIndex) => {
       const startRef = this.props.positions[link.from]
@@ -24,24 +26,30 @@ class Section extends Component {
         const endRect = endRef.current.getBoundingClientRect()
         const highlight = this.props.hovered === link.from || this.props.hovered === link.to
 
-        const line = <line className="graph-svg-line" fill="none" strokeWidth="2"
+        const x1 = rx + startRect.left + startRect.width / 2
+        const y1 = ry + startRect.bottom - 2
+        const x2 = rx + endRect.left + endRect.width / 2
+        const y2 = ry + endRect.top + 2
+
+        const border = <line className="graph-svg-line" border=""
+                             key={linkIndex + "bg"}
+                             highlight={highlight ? "" : undefined}
+                             x1={x1} y1={y1} x2={x2} y2={y2}/>
+        const line = <line className="graph-svg-line"
                            key={linkIndex}
                            highlight={highlight ? "" : undefined}
-                           x1={rx + startRect.left + startRect.width / 2}
-                           y1={ry + startRect.bottom}
-                           x2={rx + endRect.left + endRect.width / 2}
-                           y2={ry + endRect.top}/>
+                           x1={x1} y1={y1} x2={x2} y2={y2}/>
         if (highlight) {
+          borderLinesOnTop.push(border)
           linesOnTop.push(line)
         } else {
+          borderLines.push(border)
           lines.push(line)
         }
-      } else {
-        // console.log(link)
       }
     })
 
-    return lines.concat(linesOnTop)
+    return borderLines.concat(lines, borderLinesOnTop, linesOnTop)
   }
 }
 

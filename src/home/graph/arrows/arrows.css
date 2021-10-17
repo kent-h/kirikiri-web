@@ -1,0 +1,39 @@
+.graph-arrows-svg {
+  position:       absolute;
+  top:            0;
+  bottom:         0;
+  left:           0;
+  right:          0;
+  pointer-events: none;
+  z-index:        2;
+  opacity:        1;
+  transition:     opacity 0.2s ease-in;
+}
+
+.graph-arrows-svg[updating] {
+  opacity:    0;
+  transition: opacity 0.2s ease-out;
+}
+
+.graph-svg-line {
+  fill:           none;
+  stroke:         #333333;
+  stroke-width:   3;
+
+  stroke-opacity: 0.5;
+}
+
+.graph-svg-line[border] {
+  stroke:       #cccccc;
+  stroke-width: 6;
+  stroke-opacity: 0.2;
+}
+
+.graph-svg-line[border][highlight] {
+  stroke: #00cccc;
+  stroke-opacity: 0.4;
+}
+
+.graph-svg-line:not([border])[highlight] {
+  stroke-opacity: 1;
+}

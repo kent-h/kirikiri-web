@@ -13,7 +13,7 @@
   width:            10vw;
   height:           100vh;
   margin-bottom:    -100vh;
-  background-color: rgba(34, 34, 34, 0.5);
+  background-image: linear-gradient(rgba(34, 34, 34, 0.0), rgba(34, 34, 34, 0.6), rgba(34, 34, 34, 0.6), rgba(34, 34, 34, 0));
   pointer-events:   auto;
   transition:       opacity 0.5s ease-out;
 }

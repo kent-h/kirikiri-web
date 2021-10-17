@@ -1,8 +1,8 @@
 import React, {Component} from "react"
 import {Link, withRouter} from "react-router-dom"
-import {withOptions} from "../../reader/debug"
-import {scripts} from "../../resources/generated/scene-index"
-import {IDToPath} from "../../resources/lookup"
+import {withOptions} from "../../../reader/debug"
+import {scripts} from "../../../resources/generated/scene-index"
+import {IDToPath} from "../../../resources/lookup"
 import "./section.css"
 
 const hRegex = /^[^-]+-1\d\d$/
