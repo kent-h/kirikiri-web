@@ -1,39 +1,52 @@
-import React from "react"
+import React, {Component} from "react"
 import "./introduction.css"
 
-const Introduction = () =>
-  <>
-    <div className="introduction">
-      {/*<img className="introduction-image" src={"/static/images/" + "tb_logo6_fate" + ".webp"} alt=""/>*/}
-      <div className="introduction-text resizable-text text-shadow">
-        <div style={{
-          position: "relative",
-          fontSize: "larger",
-          textAlign: "center",
-        }}>
-          <span style={{whiteSpace: "pre"}}>
-            Hold on, where am I?
-          </span> <span style={{whiteSpace: "pre"}}>
-          And what's all this about then?
-        </span>
-        </div>
-        <br/>
+class Introduction extends Component {
+  constructor(props) {
+    super(props)
+
+    this.updateCookie = this.updateCookie.bind(this)
+
+    this.state = {rerender: 0}
+  }
+
+  updateCookie(name, value) {
+    const expires = ";SameSite=Strict;expires=" + new Date().setFullYear(new Date().getFullYear() + 10)
+    document.cookie = name + "=" + value + expires
+    this.setState({rerender: this.state.rerender + 1})
+  }
+
+  render() {
+    const showHowTo = (/howto=([^;]*)(?:;|$)/.exec(document.cookie) || {})[1] === "true"
+    const showThanks = (/thanks=([^;]*)(?:;|$)/.exec(document.cookie) || {})[1] === "true"
+
+    return <div className="introduction-text resizable-text text-shadow">
+      <div style={{textAlign: "center"}}>
         This is a web version of <i>Fate/Stay Night</i>,
-        a <a style={{color: "lightblue"}}
-             href="https://en.wikipedia.org/wiki/Fate/stay_night">visual novel by Type-Moon</a>.
-        It is intended to be used for cross-referencing, to easily find & re-read scenes.
+        a <a href="https://en.wikipedia.org/wiki/Fate/stay_night">visual novel by Type-Moon</a>.
+      </div>
+      <div style={{textAlign: "center"}}>
+        Our goal is to make it simple to find or share a favorite scene, without having to navigate the full game.
+      </div>
+      <br/>
+      <br/>
+      <div className="introduction-dropdown">
+        <div onClick={() => this.updateCookie("howto", !showHowTo)}>
+          How to Use this Site {showHowTo ? "▼" : "▶"}
+        </div>
+      </div>
+      {showHowTo && <div>
+        <br/>
+        <i>TL;DR: Scroll down & click any scene to go read it.</i>
+        You can press &lt;ESC&gt; at any time to adjust settings.
         <br/>
         <br/>
-        <i>TL;DR: Scroll down & click any scene to go read it.</i> You can press &lt;ESC&gt; at any time to adjust
-        settings.
-        <br/>
-        <br/>
-        First, a disclaimer: If you are looking to read the Fate/Stay Night VN, I <i>highly</i> recommend installing it
+        First, a disclaimer: If you are looking to read the Fate/Stay Night VN, I <i>highly</i> recommend installing
+        it
         rather than trying to read it here.
         Saving, loading, flags, achievements, and most of the choose-your-own-path gameplay is missing;
         you're also probably going to end up seeing spoilers that you shouldn't, or end up on the wrong path.
-        See <a style={{color: "lightblue"}}
-               href="https://www.reddit.com/r/fatestaynight/comments/7qh6ho/fatestay_night_vn_installation_guide_vii/">
+        See <a href="https://www.reddit.com/r/fatestaynight/comments/7qh6ho/fatestay_night_vn_installation_guide_vii/">
         this reddit thread</a> for a very good installation guide.
         <br/>
         <br/>
@@ -56,38 +69,48 @@ const Introduction = () =>
         You'll notice that the page detects how far you've scrolled,
         and uses this to set the appropriate music, play animations & sounds,
         and generally replicate the experience of reading in the VN.
-        <br/>
-        In addition, the page's URL will update as you progress.
-        You can save this URL at any time to return to the same spot later, or to send someone else there.
+        In addition, the page's URL will update as you progress;
+        you can save this URL at any time to return to the same spot later, or to send someone else there.
         <br/>
         <br/>
         Press &lt;ESC&gt; at any time to access the settings menu
         (on mobile, this can be opened using the <i>tick</i> in the top-left corner).
         <br/>
-        You can also use '~' (tilda) to cycle through debug modes (and to turn it off in case you hit it by accident).
+        You can also use '~' (tilda) to cycle through debug modes (and to turn debugging off in case you hit it by
+        accident).
         <br/>
         <br/>
         <br/>
-        The code is <a style={{color: "lightblue"}}
-                       href="https://github.com/Kent-H/kirikiri-web">available on github</a>.
+        {/*Please leave feedback on <a href="">this reddit thread</a>.*/}
+        {/*<br/>*/}
+        {/*<br/>*/}
+        The code is <a href="https://github.com/Kent-H/kirikiri-web">available on github</a>.
         (There is a secondary repo containing conversion scripts & other tools which is private for now,
         please reach out if you would like access.)
         <br/>
         <br/>
-        <br/>
-        <div style={{fontSize: "larger", textAlign: "center"}}>Acknowledgements</div>
-        <br/>
+      </div>}
+      <br/>
+      <div className="introduction-dropdown">
+        <div onClick={() => this.updateCookie("thanks", !showThanks)}>
+          Acknowledgements {showThanks ? "▼" : "▶"}
+        </div>
+      </div>
+      <br/>
+      {showThanks && <div>
         This project was inspired by
-        Seorin's <a style={{color: "lightblue"}} href="https://lparchive.org/Fatestay-night/">F/SN playthroughs</a> over
-        on the <a style={{color: "lightblue"}} href="https://lparchive.org/">Let's Play Archive</a>.
-        I originally went searching for a text-only version of <i>fate/</i> to facilitate searching & cross-referencing,
+        Seorin's <a href="https://lparchive.org/Fatestay-night/">F/SN playthroughs</a> over
+        on the <a href="https://lparchive.org/">Let's Play Archive</a>.
+        I originally went searching for a text-only version of <i>fate/</i> to facilitate searching &
+        cross-referencing,
         but Seorin's work demonstrated to me that the whole game could be very comfortably enjoyed in a plain-text
         format.
         All I really thought was missing was a dark theme,
         and some way to have music queued up automatically in the background.
         <br/>
         <br/>
-        A special thanks to the Mirror-Moon team, it has been a joy to read through & reverse-engineer the source code.
+        A special thanks to the Mirror-Moon team, it has been a joy to read through & reverse-engineer the source
+        code.
         Bits of each contributor's personality are scattered throughout, and it has been a truly unique experience to
         open up a project that's been meticulously curated by so many passionate people over the years.
         None of this would have been possible without relying on their work.
@@ -104,15 +127,16 @@ const Introduction = () =>
         <br/>
         <div style={{textAlign: "center"}}>
           <i>Thanks for playing</i>,
-        </div>
-        <br/>
-        <div style={{textAlign: "center"}}>
+          <br/>
+          <br/>
           - Kent Hagerman
         </div>
         <br/>
-        <div className="introduction-hr"/>
-      </div>
+      </div>}
+      <br/>
+      <div className="introduction-hr"/>
     </div>
-  </>
+  }
+}
 
 export default Introduction

@@ -1,14 +1,37 @@
-.introduction {
-  margin-bottom: 3em;
-}
-
 .introduction-text {
   width:       85vw;
   max-width:   1400px;
-  margin:      1em auto;
+  margin:      0 auto 3em;
   color:       #dddddd;
   text-align:  left;
   line-height: 1.4;
+}
+
+.introduction-text a {
+  color: lightblue;
+}
+
+@media (pointer: fine) {
+  .introduction-text a:hover {
+    color: lightsteelblue;
+  }
+}
+
+.introduction-dropdown {
+  text-align: center;
+}
+
+.introduction-dropdown > div {
+  display:     inline-block;
+  font-size:   larger;
+  user-select: none;
+  cursor:      pointer;
+}
+
+@media (pointer: fine) {
+  .introduction-dropdown > div:hover {
+    color: lightsteelblue;
+  }
 }
 
 .introduction-hr {
