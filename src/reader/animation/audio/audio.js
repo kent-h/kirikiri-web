@@ -69,7 +69,7 @@ class Audio extends Component {
 
 
   render() {
-    const src = this.props.bgm ? LocateBGM(this.props.bgm, this.props.options.bgmVersion) : "/static/" + this.props.sound + ".ogg"
+    const src = this.props.bgm ? LocateBGM(this.props.bgm, this.props.options.bgmVersion) : "/static/" + this.props.sound
 
     let volume = this.props.bgm ? this.props.options.bgm :
       (this.props.sound.startsWith("voice/") ? this.props.options.voice : this.props.options.sound)
@@ -77,8 +77,12 @@ class Audio extends Component {
     return <ReactAudioPlayer autoPlay
                              volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
                              loop={this.props.loop}
-                             preload="auto"
-                             src={src}/>
+                             preload="auto">
+      <>
+        <source src={src + ".ogg"} type="audio/ogg"/>
+        <source src={src + ".aac"} type="audio/aac"/>
+      </>
+    </ReactAudioPlayer>
   }
 }
 

@@ -53,7 +53,9 @@ class Animation extends Component {
         audio.oncanplaythrough = () => resolve(true)
         audio.onerror = () => resolve(false)
       }))
-      audio.src = file
+      audio.innerHTML =
+        "<source src=\"" + file + ".ogg\" type=\"audio/ogg\"/>" +
+        "<source src=\"" + file + ".aac\" type=\"audio/aac\"/>"
       return audio
     }
 
@@ -71,7 +73,7 @@ class Animation extends Component {
     let neededSe = (this.props.animation.seTimeline || []).reduce((sounds, keyframe) => (
       Object.keys(keyframe.sounds).reduce((sounds, sound) => {
         if (!sounds[sound]) {
-          sounds[sound] = loadSound("/static/" + sound + ".ogg")
+          sounds[sound] = loadSound("/static/" + sound)
         }
         return sounds
       }, sounds)

@@ -24,7 +24,7 @@ export const LocateBGM = (name, version) => {
     shortV = shortV === "v" ? "p" : "o" // return next-preferred valid version v->p->o & c->o
   }
   const longV = shortV === "v" ? "vita" : shortV === "p" ? "ps2" : shortV === "c" ? "classic" : "original"
-  return "/static/bgm/" + longV + "/" + name + ".ogg"
+  return "/static/bgm/" + longV + "/" + name
 }
 
 export const RouteToNum = route => {

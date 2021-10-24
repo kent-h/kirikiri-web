@@ -198,7 +198,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   }
 
   const getLastLoopedSe = () => {
-    const prevSe = seTimeline.length !== 0 ? [seTimeline.length - 1].sounds || {} : {}
+    const prevSe = seTimeline.length !== 0 ? seTimeline[seTimeline.length - 1].sounds || {} : {}
     const sounds = {}
     Object.keys(prevSe).forEach(k => {
       if (prevSe[k].loop) {
