@@ -55,7 +55,7 @@ class Animation extends Component {
       }))
       audio.innerHTML =
         "<source src=\"" + file + ".ogg\" type=\"audio/ogg\"/>" +
-        "<source src=\"" + file + ".aac\" type=\"audio/aac\"/>"
+        "<source src=\"" + file + ".m4a\" type=\"audio/mp4\"/>"
       return audio
     }
 

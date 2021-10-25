@@ -80,7 +80,7 @@ class Audio extends Component {
                              preload="auto">
       <>
         <source src={src + ".ogg"} type="audio/ogg"/>
-        <source src={src + ".aac"} type="audio/aac"/>
+        <source src={src + ".m4a"} type="audio/mp4"/>
       </>
     </ReactAudioPlayer>
   }
