@@ -76,6 +76,10 @@
   bottom:           0;
   background-color: rgba(34, 34, 34, 0.6);
   transition:       opacity 0.2s ease-out;
+  cursor:           pointer;
+
+  /* push the link-logos down a bit */
+  padding-top:      0.75em;
 }
 
 .click-to-start[hide] {
@@ -83,7 +87,7 @@
   pointer-events: none;
 }
 
-.click-to-start > div {
+.click-to-start > div:not(:first-child) {
   margin:      50vh auto 0;
   font-size:   180%;
   text-align:  center;

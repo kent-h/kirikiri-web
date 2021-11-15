@@ -17,7 +17,6 @@
 .replaceable-image > img {
   opacity:        0;
   position:       absolute;
-  top:            0;
   width:          100%;
   mix-blend-mode: lighten;
 
@@ -30,14 +29,19 @@
   transition: opacity ease-out 2s;
 }
 
-.title-image {
-  position:   relative;
-  left:       50%;
-  transform:  translateX(-50%);
-  margin-top: 1.5em;
-  width:      100vh;
-  max-width:  100%;
+.top-section {
+  margin-top: 0.75em;
+}
 
-  height:     60vh;
-  max-height: 60vw;
+.title-image {
+  position:    relative;
+  left:        50%;
+  transform:   translateX(-50%);
+  padding-top: 0.75em;
+  width:       100vh;
+  max-width:   100%;
+  overflow:    hidden;
+
+  height:      60vh;
+  max-height:  60vw;
 }

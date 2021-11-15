@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {withRouter} from "react-router"
 import ScriptLoader from "../interpreter/script-loader"
+import Links from "../home/links/links"
 import {scripts} from "../resources/generated/scene-index"
 import {PathToID} from "../resources/lookup"
 import Animation from "./animation/animation"
@@ -35,6 +36,7 @@ class Reader extends Component {
         <div className="click-to-start resizable-text"
              hide={options.canAutoplay ? "" : undefined}
              onClick={options.setAutoplay}>
+          <Links/>
           <div>
             <div>Click to start</div>
             Press &lt;ESC&gt; to adjust settings

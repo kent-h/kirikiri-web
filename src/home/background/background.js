@@ -1,5 +1,6 @@
 import React from "react"
 import {withRouter} from "react-router"
+import Links from "../links/links"
 import "./background.css"
 
 let Background = props => {
@@ -28,14 +29,17 @@ let Background = props => {
       {/*<img src={"/static/images/" + "tb_back_hf" + ".webp"} visible={route === "hf" ? "" : undefined} alt=""/>*/}
     </div>
 
-    <div className="title-image replaceable-image">
-      <img src={"/static/images/" + "ta_logo6_fate" + ".webp"} visible={route === "fate" ? "" : undefined} alt=""/>
-      <img src={"/static/images/" + "ta_logo6_ubw" + ".webp"} visible={route === "ubw" ? "" : undefined} alt=""/>
-      <img src={"/static/images/" + "ta_logo6_hf" + ".webp"} visible={route === "hf" ? "" : undefined} alt=""/>
+    <div className="top-section">
+      <Links/>
+      <div className="title-image replaceable-image">
+        <img src={"/static/images/" + "ta_logo6_fate" + ".webp"} visible={route === "fate" ? "" : undefined} alt=""/>
+        <img src={"/static/images/" + "ta_logo6_ubw" + ".webp"} visible={route === "ubw" ? "" : undefined} alt=""/>
+        <img src={"/static/images/" + "ta_logo6_hf" + ".webp"} visible={route === "hf" ? "" : undefined} alt=""/>
 
-      {/*<img src={"/static/images/" + "tb_logo6_fate" + ".webp"} visible={route === "fate" ? "" : undefined} alt=""/>*/}
-      {/*<img src={"/static/images/" + "tb_logo6_ubw" + ".webp"} visible={route === "ubw" ? "" : undefined} alt=""/>*/}
-      {/*<img src={"/static/images/" + "tb_logo6_hf" + ".webp"} visible={route === "hf" ? "" : undefined} alt=""/>*/}
+        {/*<img src={"/static/images/" + "tb_logo6_fate" + ".webp"} visible={route === "fate" ? "" : undefined} alt=""/>*/}
+        {/*<img src={"/static/images/" + "tb_logo6_ubw" + ".webp"} visible={route === "ubw" ? "" : undefined} alt=""/>*/}
+        {/*<img src={"/static/images/" + "tb_logo6_hf" + ".webp"} visible={route === "hf" ? "" : undefined} alt=""/>*/}
+      </div>
     </div>
   </>
 }

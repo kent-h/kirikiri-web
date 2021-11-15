@@ -1,0 +1,27 @@
+.links-logos {
+  float:            right;
+  /* margin-top is ALSO +0.75em on the parent div */
+  margin:           0.75vw calc(1em + 1vw) 0 0;
+
+  background-color: rgba(0, 0, 0, 0.33);
+  box-shadow:       0 0 1em 0.75em rgba(0, 0, 0, 0.33);
+  border-radius:    calc(1em + 1vw);
+  height:           calc(2em + 2vw);
+}
+
+.links-logos :not(:first-child) {
+  margin-left: calc(1em + 1vw);
+}
+
+.links-logos img {
+  transform: translateY(-1em) translateY(-1vw) translateY(50%);
+  width:     calc(2em + 2vw);
+
+  opacity:   0.5;
+}
+
+@media (pointer: fine) {
+  .links-logos :hover img {
+    opacity: 0.75;
+  }
+}

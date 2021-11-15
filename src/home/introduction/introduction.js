@@ -81,7 +81,7 @@ class Introduction extends Component {
         <br/>
         <br/>
         <br/>
-        Please leave feedback on <a href="https://www.reddit.com/r/fatestaynight/comments/qbccnu/web_version_of_fatestay_night/">this reddit thread</a>.
+        Please leave feedback <a href="https://discord.gg/ejespgUpgg">on discord</a>.
         <br/>
         <br/>
         The code is <a href="https://github.com/Kent-H/kirikiri-web">available on github</a>.
