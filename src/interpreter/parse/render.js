@@ -35,11 +35,9 @@ const Render = (tokens, renderState, onPageReady, debug) => {
         break
       case "@": // full-line tag
       case "[": // inline tag
+        renderState.tokens.push(token)
         if (token.command.toLowerCase() === "align") {
           renderState = RenderChunk(renderState, appendSection, debug)
-          append(<div style={{textAlign: "center"}}>{token.args.text}</div>)
-        } else {
-          renderState.tokens.push(token)
         }
         break
       case "HCF":
@@ -61,6 +59,8 @@ const Render = (tokens, renderState, onPageReady, debug) => {
   })
   return toDisplay
 }
+
+const lineRegex = /^(line)(\d+)$/
 
 const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   const tokens = renderState.tokens
@@ -358,7 +358,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     switch (token.type) {
       case "@": // full-line tag
       case "[": // inline tag
-        switch (token.command.toLowerCase()) {
+        const command = token.command.toLowerCase()
+        switch (command) {
           case "r":
             specialTag = false
             if (!isDivider) {
@@ -372,6 +373,10 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
               specialTag = "salmon"
               render = (<><br/><br/><br/></>)
             }
+            break
+          case "align":
+            specialTag = "lightyellow"
+            render = <div style={{textAlign: "center"}}>{token.args.text}</div>
             break
           case "macro":
             specialTag = false
@@ -390,8 +395,19 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             specialTag = false
             render = ("--- page generation halted at [s] ---")
             break
+          case "wacky":
+            specialTag = "lightyellow"
+            render = <span>{String.fromCharCode(0xB0 + parseInt(token.args.len, 10) - 1)}</span>
+            break
           default:
-            specialTag = false
+            const match = lineRegex.exec(command)
+            if (match) {
+              specialTag = "lightyellow"
+              // from trial and error, +2 appears to give the correct line length
+              render = <span>{String.fromCharCode(0xC0 + parseInt(match[2], 10)+2 - 1)}</span>
+            }else {
+              specialTag = false
+            }
         }
         break
       case ";": // comment

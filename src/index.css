@@ -1,8 +1,13 @@
+@font-face {
+  font-family: 'FateLine';
+  src: local('FateLine'), url(./resources/generated/FateLine.ttf) format('truetype');
+}
+
 body {
   overflow-y:              scroll;
   position:                relative;
   margin:                  0;
-  font-family:             -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:             FateLine, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
                            sans-serif;
   -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
