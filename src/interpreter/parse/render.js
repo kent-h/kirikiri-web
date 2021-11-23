@@ -36,7 +36,8 @@ const Render = (tokens, renderState, onPageReady, debug) => {
       case "@": // full-line tag
       case "[": // inline tag
         renderState.tokens.push(token)
-        if (token.command.toLowerCase() === "align") {
+        const command = token.command.toLowerCase()
+        if (command === "align" || command === "wacky" || command.startsWith("line")) {
           renderState = RenderChunk(renderState, appendSection, debug)
         }
         break
