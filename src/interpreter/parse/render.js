@@ -188,6 +188,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
 
   const pushBgm = (bgm, fadeTime) => {
     generateSection()
+    bgm = bgm && bgm.split(".")[0]
     fadeTime = parseInt(fadeTime || 0, 10)
     const lastBgm = bgmTimeline.length !== 0 ? bgmTimeline[bgmTimeline.length - 1] : []
     if (lastBgm.time !== time) { // if time has advanced, create a new frame
@@ -216,7 +217,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     }
     const sounds = seTimeline[seTimeline.length - 1].sounds
     if (sound) {
-      sounds[sound.toLowerCase()] =
+      sounds[sound.toLowerCase().split(".")[0]] =
         stop ? {fadeOut: parseInt(fade, 10) || 0, stop: true} : {fadeIn: parseInt(fade, 10) || 0, loop: loop === "true"}
     } else if (stop) {
       Object.keys(sounds).forEach(k => {
@@ -377,7 +378,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             break
           case "align":
             specialTag = "lightyellow"
-            render = <div style={{textAlign: "center"}}>{token.args.text}</div>
+            render = <div style={{textAlign: token.args.anchor || "center"}}>{token.args.text}</div>
             break
           case "macro":
             specialTag = false
@@ -405,8 +406,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             if (match) {
               specialTag = "lightyellow"
               // from trial and error, +2 appears to give the correct line length
-              render = <span>{String.fromCharCode(0xC0 + parseInt(match[2], 10)+2 - 1)}</span>
-            }else {
+              render = <span>{String.fromCharCode(0xC0 + parseInt(match[2], 10) + 2 - 1)}</span>
+            } else {
               specialTag = false
             }
         }

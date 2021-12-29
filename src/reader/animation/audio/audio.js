@@ -74,7 +74,8 @@ class Audio extends Component {
     let volume = this.props.bgm ? this.props.options.bgm :
       (this.props.sound.startsWith("voice/") ? this.props.options.voice : this.props.options.sound)
 
-    return <ReactAudioPlayer autoPlay
+    return <ReactAudioPlayer key={src}
+                             autoPlay
                              volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
                              loop={this.props.loop}
                              preload="auto">

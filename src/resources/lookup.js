@@ -16,7 +16,10 @@ export const LocateScript = (name, lang) => {
 
 export const LocateBGM = (name, version) => {
   let shortV = version === "vita" ? "v" : version === "ps2" ? "p" : version === "classic" ? "c" : "o" // original
-  const possible = BGM[name] || ""
+  const possible = BGM[name]
+  if (!possible) {
+    return
+  }
   while (!possible.includes(shortV)) { // if requested version is not available
     if (shortV === "o") { // if desired was original
       shortV = possible.charAt(0) // return any valid version

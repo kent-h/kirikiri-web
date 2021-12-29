@@ -47,6 +47,9 @@ class Animation extends Component {
       }, images)), {})
 
     const loadSound = (file) => {
+      if (!file) {
+        return
+      }
       const audio = new Audio()
       audio.preload = "auto"
       promises.push(new Promise(resolve => {
@@ -63,7 +66,10 @@ class Animation extends Component {
     // neededBgm *must* be held to avoid accidentally canceling the load operation
     let neededBgm = (this.props.animation.bgmTimeline || []).reduce((sounds, keyframe) => {
       if (keyframe.bgm && !sounds[keyframe.bgm]) {
-        sounds[keyframe.bgm] = loadSound(LocateBGM(keyframe.bgm, this.props.options.bgmVersion))
+        const audio = loadSound(LocateBGM(keyframe.bgm, this.props.options.bgmVersion))
+        if (audio) {
+          sounds[keyframe.bgm] = audio
+        }
       }
       return sounds
     }, {})
@@ -73,7 +79,10 @@ class Animation extends Component {
     let neededSe = (this.props.animation.seTimeline || []).reduce((sounds, keyframe) => (
       Object.keys(keyframe.sounds).reduce((sounds, sound) => {
         if (!sounds[sound]) {
-          sounds[sound] = loadSound("/static/" + sound)
+          const audio = loadSound("/static/" + sound)
+          if (audio) {
+            sounds[sound] = audio
+          }
         }
         return sounds
       }, sounds)
@@ -81,6 +90,7 @@ class Animation extends Component {
 
     const continueRet = await Promise.race([abortPromise, Promise.all(promises)])
     if (!continueRet) {
+      // abort loading
       Object.keys(neededImg).forEach(key => {
         neededImg[key].src = ""
         delete neededImg[key]

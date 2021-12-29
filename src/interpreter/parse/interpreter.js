@@ -33,21 +33,34 @@ const InterpretCommand = (tokens, gameState, tag) => {
         if (macroCommand.type !== "t") {
           const args = Object.assign({}, macroCommand.args)
           // handle '%value' arguments
-          Object.keys(args).forEach(key => {
-            const value = args[key]
+          Object.keys(macroCommand.args).forEach(key => {
+            const value = macroCommand.args[key]
             if (typeof value === "string" && value.startsWith("%")) {
-              args[key] = tag.args[value.substring(1)]
+              let val = tag.args[value.substring(1)]
+              if (val === undefined) {
+                val = tag.args[key]
+              }
+              if (val !== undefined) {
+                args[key] = val
+              } else {
+                delete args[key]
+              }
             }
           })
           // handle '*' argument
           if (macroCommand.args["*"]) {
             delete args["*"]
-            Object.assign(args, tag.args)
+            Object.keys(tag.args).forEach(key => {
+              if (!args.hasOwnProperty(key)) {
+                args[key] = tag.args[key]
+              }
+            })
           }
 
           cmd = {
             type: macroCommand.type,
             command: macroCommand.command,
+            originalArgs: macroCommand.args, // only for debug printing
             args: args,
             depth: (tag.depth || 0) + 1,
           }
