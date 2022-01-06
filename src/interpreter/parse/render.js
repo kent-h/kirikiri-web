@@ -399,14 +399,14 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             break
           case "wacky":
             specialTag = "lightyellow"
-            render = <span>{String.fromCharCode(0xB0 + parseInt(token.args.len, 10) - 1)}</span>
+            render = <span>{String.fromCharCode(0xE000 + parseInt(token.args.len, 10) - 1)}</span>
             break
           default:
             const match = lineRegex.exec(command)
             if (match) {
               specialTag = "lightyellow"
               // from trial and error, +2 appears to give the correct line length
-              render = <span>{String.fromCharCode(0xC0 + parseInt(match[2], 10) + 2 - 1)}</span>
+              render = <span>{String.fromCharCode(0xE010 + parseInt(match[2], 10) + 2 - 1)}</span>
             } else {
               specialTag = false
             }
