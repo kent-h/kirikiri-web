@@ -4,18 +4,27 @@ import {withOptions} from "../debug"
 import {withScroll} from "../scroll/watcher"
 import "./animation.css"
 import AudioPlayer from "./audio/audio-player"
-import Layer from "./layer/layer"
+import setupGL from "./gl/setup"
 
 
 class Animation extends Component {
   constructor(props) {
     super(props)
 
+    this.ref = React.createRef()
+
     this.state = {animation: [], animationID: 0, bgmTimeline: [], seTimeline: []}
   }
 
   componentDidMount() {
+    this.graphics = setupGL(this.ref.current)
     this.prepareAnimation()
+  }
+
+  componentWillUnmount() {
+    if (this.graphics) {
+      this.graphics.shutdown()
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -123,6 +132,7 @@ class Animation extends Component {
           }
         })
       })
+      Object.keys(neededImg).forEach(name => this.graphics.imageReady(name, neededImg[name]))
     }
     return continueRet
   }
@@ -145,24 +155,8 @@ class Animation extends Component {
   }
 
   render() {
-    const positions = ["large-background-holder-left background-blur", "large-background-holder-right background-blur", "large-background-holder-bottom background-blur", "background-holder"]
-
     return <>
-      {positions.map(position => (
-        <div key={position} className={position}>
-          <div className="background-margin-hack">
-            <div className="background-image-holder">
-              {this.state.animationID !== 0 && Object.keys(this.state.animation).map(layerID => {
-                const layer = this.state.animation[layerID]
-                return <Layer key={this.props.freezeFrame + layerID}
-                              layer={layerID}
-                              animationID={this.state.animationID}
-                              animation={this.props.freezeFrame && layer.length !== 0 ? [layer[0]] : layer}/>
-              })}
-            </div>
-          </div>
-        </div>
-      ))}
+      <canvas ref={this.ref} className="gl-canvas"/>
       {!this.props.freezeFrame &&
       <AudioPlayer animationID={this.state.animationID}
                    bgmTimeline={this.state.bgmTimeline || []}

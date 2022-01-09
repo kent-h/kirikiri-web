@@ -1,82 +1,8 @@
-.large-background-holder-left {
-  position:         fixed;
-  top:              50%;
-  left:             0;
-  width:            133.333333333vh;
-  max-width:        100%;
-  min-width:        calc(50vw - 66.666666667vh);
-
-  z-index:          -3;
-  transform:        translateY(-50%);
-
-  background-color: rgba(0, 0, 0, 0.5);
-
-  overflow:         hidden;
-}
-
-.large-background-holder-right {
-  position:         fixed;
-  top:              50%;
-  right:            0;
-  width:            133.333333333vh;
-  max-width:        100%;
-  min-width:        calc(50vw - 66.666666667vh);
-
-  z-index:          -3;
-  transform:        translateY(-50%);
-
-  background-color: rgba(0, 0, 0, 0.5);
-
-  overflow:         hidden;
-}
-
-.large-background-holder-bottom {
-  position:         fixed;
-  bottom:           0;
-  left:             50%;
-  width:            100%;
-  min-width:        calc(133.33333333vh - 100%);
-  max-width:        133vh;
-
-  z-index:          -2;
-  transform:        translateX(-50%);
-
-  background-color: rgba(0, 0, 0, 1);
-
-  overflow:         hidden;
-}
-
-.background-blur {
-  filter:         brightness(60%) blur(1em);
-  pointer-events: none;
-}
-
-.background-holder {
-  position:         fixed;
-  top:              0;
-  left:             50%;
-  width:            100%;
-  max-width:        133.333333333vh;
-
-  z-index:          -1;
-  transform:        translateX(-50%);
-  box-shadow:       0 0 2em rgba(0, 0, 0, 0.5);
-
-  background-color: black;
-}
-
-.background-margin-hack {
-  margin-bottom: 75%;
-  height:        0;
-  overflow:      visible;
-}
-
-.background-image-holder {
-  position:         absolute;
-  top:              0;
-  left:             0;
-  right:            0;
-  bottom:           0;
-  overflow:         hidden;
-  background-color: black;
+.gl-canvas {
+  position: fixed;
+  top:      0;
+  left:     0;
+  width:    100%;
+  height:   100vh;
+  z-index:  -1;
 }
