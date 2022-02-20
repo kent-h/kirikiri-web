@@ -67,45 +67,43 @@ const Menu = props => <>
             ))}
           </div>
         </div>
+        
+        <br/>
+        <div className="menu-heading">
+          Content
+        </div>
 
-        <div style={{opacity: 0.2}}>
-          <br/>
-          <div className="menu-heading">
-            Content (WIP)
+        <div className="menu-line">
+          <div className="menu-property">Mature</div>
+          <div className="menu-flex">
+            {[{k: "Show", v: true}, {k: "Hide", v: false}, {v: "none"}].map(elem => (
+              <div className="menu-flex-item" key={elem.v}>
+                {elem.k && <label>
+                  <input type="radio"
+                         value={elem.v}
+                         checked={props.mature === elem.v}
+                         onChange={e => props.setSaveState({mature: (e.target.value === "true")})}/>
+                  {elem.k}
+                </label>}
+              </div>
+            ))}
           </div>
+        </div>
 
-          <div className="menu-line">
-            <div className="menu-property">Mature</div>
-            <div className="menu-flex">
-              {[{k: "Show", v: true}, {k: "Hide", v: false}, {v: "none"}].map(elem => (
-                <div className="menu-flex-item" key={elem.v}>
-                  {elem.k && <label>
-                    <input type="radio"
-                           value={elem.v}
-                           checked={props.mature === elem.v}
-                           onChange={e => props.setSaveState({mature: (e.target.value === "true")})}/>
-                    {elem.k}
-                  </label>}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="menu-line">
-            <div className="menu-property">H</div>
-            <div className="menu-flex">
-              {[{k: "Censor", v: 0}, {k: "Uncensor", v: 1}, {k: "Decensor", v: 2}].map(elem => (
-                <div className="menu-flex-item" key={elem.v}>
-                  <label>
-                    <input type="radio"
-                           value={elem.v}
-                           checked={props.h === elem.v}
-                           onChange={e => props.setSaveState({h: parseInt(e.target.value, 10) || 0})}/>
-                    {elem.k}
-                  </label>
-                </div>
-              ))}
-            </div>
+        <div className="menu-line">
+          <div className="menu-property">H</div>
+          <div className="menu-flex">
+            {[{k: "Censor", v: 0}, {k: "Uncensor", v: 1}, {k: "Decensor", v: 2}].map(elem => (
+              <div className="menu-flex-item" key={elem.v}>
+                <label>
+                  <input type="radio"
+                         value={elem.v}
+                         checked={props.h === elem.v}
+                         onChange={e => props.setSaveState({h: parseInt(e.target.value, 10) || 0})}/>
+                  {elem.k}
+                </label>
+              </div>
+            ))}
           </div>
         </div>
 

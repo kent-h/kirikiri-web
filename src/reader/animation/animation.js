@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {LocateBGM} from "../../resources/lookup"
+import {LocateBGM, LocateImage} from "../../resources/lookup"
 import {withOptions} from "../debug"
 import {withScroll} from "../scroll/watcher"
 import "./animation.css"
@@ -37,9 +37,9 @@ class Animation extends Component {
             const img = new Image()
             promises.push(new Promise(resolve => {
               img.onload = () => resolve(true)
-              img.onerror = () => resolve(false)
+              img.onerror = () => resolve(true)
             }))
-            img.src = "/static/images/" + name + ".webp"
+            img.src = LocateImage(name, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)
             images[name] = img
           }
         }
@@ -51,14 +51,18 @@ class Animation extends Component {
         return
       }
       const audio = new Audio()
-      audio.preload = "auto"
-      promises.push(new Promise(resolve => {
-        audio.oncanplaythrough = () => resolve(true)
-        audio.onerror = () => resolve(false)
-      }))
+      audio.preload = "none"
       audio.innerHTML =
         "<source src=\"" + file + ".ogg\" type=\"audio/ogg\"/>" +
         "<source src=\"" + file + ".m4a\" type=\"audio/mp4\"/>"
+      promises.push(new Promise(resolve => {
+        audio.oncanplaythrough = () => resolve(true)
+        audio.onerror = () => resolve(true)
+        let first = true
+        audio.firstElementChild.onerror = () => first ? (first = false) : resolve(true)
+        audio.lastElementChild.onerror = () => first ? (first = false) : resolve(true)
+      }))
+      audio.preload = "auto"
       return audio
     }
 

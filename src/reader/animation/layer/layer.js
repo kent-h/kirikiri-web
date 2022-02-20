@@ -1,4 +1,6 @@
 import React, {Component} from "react"
+import {LocateImage} from "../../../resources/lookup"
+import {withOptions} from "../../debug"
 import "./layer.css"
 
 
@@ -65,7 +67,7 @@ class Layer extends Component {
       <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.animationID}
            className="background-image-layer"
            layer={this.props.layer}
-           src={"/static/images/" + keyframe.contents.image + ".webp"}
+           src={LocateImage(keyframe.contents.image, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)}
            style={{
              transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
              top: keyframe.top && (keyframe.top / 6) + "%",
@@ -83,7 +85,7 @@ class Layer extends Component {
         <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.animationID}
              className="background-image-layer"
              layer={this.props.layer}
-             src={"/static/images/" + last.contents.image + ".webp"}
+             src={LocateImage(last.contents.image, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)}
              style={{
                // keyframe transform will have the correct duration
                transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
@@ -99,4 +101,5 @@ class Layer extends Component {
   }
 }
 
+Layer = withOptions(Layer)
 export default Layer

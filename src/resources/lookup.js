@@ -1,4 +1,13 @@
-import {BGM} from "./generated/asset-dictionary"
+import {
+  BGM,
+  EngImages,
+  HImages,
+  HImagesBellandy,
+  HImagesBishopcruz,
+  HImagesDefaultArtist,
+  HImagesOriginal,
+  MatureImages,
+} from "./generated/asset-dictionary"
 import {SharedScripts} from "./generated/asset-dictionary.js"
 
 const sharedScriptsMap = SharedScripts.reduce((map, item) => {
@@ -28,6 +37,58 @@ export const LocateBGM = (name, version) => {
   }
   const longV = shortV === "v" ? "vita" : shortV === "p" ? "ps2" : shortV === "c" ? "classic" : "original"
   return "/static/bgm/" + longV + "/" + name
+}
+
+const engImagesMap = EngImages.reduce((map, item) => {
+  map[item] = true
+  return map
+}, {})
+const matureImagesMap = MatureImages.reduce((map, item) => {
+  map[item] = true
+  return map
+}, {})
+const hImagesMap = HImages.reduce((map, item) => {
+  map[item] = true
+  return map
+}, {})
+const hImagesArtistsMap = {
+  "1": HImagesBishopcruz.reduce((map, item) => {
+    map[item] = true
+    return map
+  }, {}),
+  "2": HImagesBellandy.reduce((map, item) => {
+    map[item] = true
+    return map
+  }, {}),
+  "3": HImagesOriginal.reduce((map, item) => {
+    map[item] = true
+    return map
+  }, {}),
+}
+
+export const LocateImage = (name, lang, mature, h, hArtist) => {
+  if (lang === "eng" && engImagesMap[name]) {
+    return "/static/images/eng/" + name + ".webp"
+  }
+  if (mature && matureImagesMap[name]) {
+    return "/static/images/mature/" + name + ".webp"
+  }
+  if (h) {
+    if (h === 2) {
+      hArtist = hArtist || HImagesDefaultArtist[name]
+      if ((hImagesArtistsMap[hArtist] || {})[name]) {
+        return "/static/images/h/" + {
+          "1": "bishopcruz",
+          "2": "bellandy",
+          "3": "original",
+        }[hArtist] + "/" + name + ".webp"
+      }
+    }
+    if (hImagesMap[name]) {
+      return "/static/images/h/" + name + ".webp"
+    }
+  }
+  return "/static/images/" + name + ".webp"
 }
 
 export const RouteToNum = route => {
