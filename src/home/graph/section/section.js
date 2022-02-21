@@ -29,7 +29,7 @@ class Section extends Component {
                 prev={this.props.hoveredPrev[elem.id] ? "" : undefined}
                 onMouseOver={() => this.props.onMouseOver(elem.id)}
                 onMouseOut={this.props.onMouseOut}>
-            {elem.eng}
+            {elem[this.props.options.lang]}
           </Link>
       } else if (elem.v) {
         return <div className="section-vertical">

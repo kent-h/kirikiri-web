@@ -8716,6 +8716,7 @@ export const scripts = {
   "セ11-19": "セイバールート十一日目-19",
   "セ11-20": "セイバールート十一日目-20",
   "セ11-21": "セイバールート十一日目-21",
+  "セ11-118": "セイバールート十一日目-118",
   "セ12-0": "セイバールート十二日目-00",
   "セ12-1": "セイバールート十二日目-01",
   "セ12-2": "セイバールート十二日目-02",
@@ -8760,6 +8761,7 @@ export const scripts = {
   "セ14-11": "セイバールート十四日目-11",
   "セ14-12": "セイバールート十四日目-12",
   "セ14-101": "セイバールート十四日目-101",
+  "セ14-111": "セイバールート十四日目-111",
   "セ15-0": "セイバールート十五日目-00",
   "セ15-1": "セイバールート十五日目-01",
   "セ15-2": "セイバールート十五日目-02",
@@ -9003,6 +9005,7 @@ export const scripts = {
   "凛14-35": "凛ルート十四日目-35",
   "凛14-36": "凛ルート十四日目-36",
   "凛14-37": "凛ルート十四日目-37",
+  "凛14-108": "凛ルート十四日目-108",
   "凛14-130": "凛ルート十四日目-130",
   "凛3-0": "凛ルート三日目-00",
   "凛3-1": "凛ルート三日目-01",
@@ -9156,6 +9159,7 @@ export const scripts = {
   "桜11-14": "桜ルート十一日目-14",
   "桜11-15": "桜ルート十一日目-15",
   "桜11-16": "桜ルート十一日目-16",
+  "桜11-115": "桜ルート十一日目-115",
   "桜12-0": "桜ルート十二日目-00",
   "桜12-1": "桜ルート十二日目-01",
   "桜12-2": "桜ルート十二日目-02",
@@ -9170,6 +9174,7 @@ export const scripts = {
   "桜12-12": "桜ルート十二日目-12",
   "桜12-13": "桜ルート十二日目-13",
   "桜12-14": "桜ルート十二日目-14",
+  "桜12-113": "桜ルート十二日目-113",
   "桜13-0": "桜ルート十三日目-00",
   "桜13-1": "桜ルート十三日目-01",
   "桜13-2": "桜ルート十三日目-02",
@@ -9284,6 +9289,7 @@ export const scripts = {
   "桜5-20": "桜ルート五日目-20",
   "桜5-21": "桜ルート五日目-21",
   "桜5-22": "桜ルート五日目-22",
+  "桜5-117": "桜ルート五日目-117",
   "桜6-0": "桜ルート六日目-00",
   "桜6-1": "桜ルート六日目-01",
   "桜6-2": "桜ルート六日目-02",
@@ -9386,148 +9392,157 @@ export const scripts = {
   "桜9-39": "桜ルート九日目-39",
   "桜9-40": "桜ルート九日目-40",
   "桜9-41": "桜ルート九日目-41",
+  "桜9-130": "桜ルート九日目-130",
 }
 
 export const sections = {
   v: [{
     v: [{
       section: "プ", v: [
-        {id: "プ-1", eng: "2 days ago - Prologue"},
-        {id: "プ-2", eng: "1 day ago - Prologue"},
-        {id: "プ-3", eng: "The day - Prologue"},
+        {id: "プ-1", eng: "2 days ago - Prologue", jp: ""},
+        {id: "プ-2", eng: "1 day ago - Prologue", jp: ""},
+        {id: "プ-3", eng: "The day - Prologue", jp: ""},
       ],
     }, {
       section: "セ1", v: [
-        {id: "セ1-0", eng: "1st Day: Recollection of ten years ago-Morning/Rebirth"},
+        {id: "セ1-0", eng: "1st Day: Recollection of ten years ago-Morning/Rebirth", jp: "一日目・十年前の回想〜朝/Rebirth"},
         {
           h: [
-            {id: "セ1-1", eng: "1st Day: Breakfast preparation/Matou Sakura (I)"},
-            {id: "セ1-2", eng: "1st Day: Morning training/Dojo scenery"},
+            {id: "セ1-1", eng: "1st Day: Breakfast preparation/Matou Sakura (I)", jp: "一日目・朝の支度/間桐桜（Ⅰ）"},
+            {id: "セ1-2", eng: "1st Day: Morning training/Dojo scenery", jp: "一日目・朝の鍛練/道場風景"},
           ],
         },
-        {id: "セ1-6", eng: "1st Day: Breakfast/Morning in the Emiya household"},
-        {id: "セ1-3", eng: "1st Day: School-After school/Everyday (I)"},
+        {id: "セ1-6", eng: "1st Day: Breakfast/Morning in the Emiya household", jp: "一日目・朝食/衛宮邸の朝"},
+        {id: "セ1-3", eng: "1st Day: School-After school/Everyday (I)", jp: "一日目・学校〜放課後/日常（Ⅰ）"},
         {
           h: [
-            {id: "セ1-4", eng: "1st Day: After school/Flower on a high peak"},
-            {id: "セ1-5", eng: "1st Day: After school/Brownie chocolate cake"},
+            {id: "セ1-4", eng: "1st Day: After school/Flower on a high peak", jp: "一日目・放課後/高嶺の花"},
+            {id: "セ1-5", eng: "1st Day: After school/Brownie chocolate cake", jp: "一日目・放課後/ブラウニーチョコケーキ"},
           ],
         },
-        {id: "セ1-7", eng: "1st Day: Returning home at night/A white girl"},
-        {id: "セ1-9", eng: "1st Day: After dinner/Well done"},
+        {id: "セ1-7", eng: "1st Day: Returning home at night/A white girl", jp: "一日目・夜の帰宅/白い少女"},
+        {id: "セ1-9", eng: "1st Day: After dinner/Well done", jp: "一日目・夕食後/おつかれさまでした。"},
         {
           h: [
-            {id: "セ1-11", eng: "1st Day: Night/The return of the orange man"},
-            {id: "セ1-12", eng: "1st Day: Night/Well done even more"},
-            {id: "セ1-13", eng: "1st Day: Night/Taking Sakura home, introductory chapter"},
-            {id: "セ1-14", eng: "1st Day: Night/Taking Sakura home, advanced chapter"},
+            {id: "セ1-11", eng: "1st Day: Night/The return of the orange man", jp: "一日目・夜/みかん星人の逆襲"},
+            {id: "セ1-12", eng: "1st Day: Night/Well done even more", jp: "一日目・夜/更におつかれさまでした。"},
+            {id: "セ1-13", eng: "1st Day: Night/Taking Sakura home, introductory chapter", jp: "一日目・夜/桜を送る、初級編"},
+            {id: "セ1-14", eng: "1st Day: Night/Taking Sakura home, advanced chapter", jp: "一日目・夜/桜を送る、上級編"},
           ],
         },
-        {id: "セ1-15", eng: "1st Day: Bedtime/Training (Magic Circuit)"},
+        {id: "セ1-15", eng: "1st Day: Bedtime/Training (Magic Circuit)", jp: "一日目・就寝/鍛練（魔術回路）"},
       ],
     }, {
       section: "セ2", v: [
         {
           h: [
-            {id: "セ2-13", eng: "2nd Day: Awakening/Trivial changes"},
-            {id: "セ2-0", eng: "2nd Day: Awakening/Morning in the Emiya household"},
+            {id: "セ2-13", eng: "2nd Day: Awakening/Trivial changes", jp: "二日目・目覚め/些細な変動"},
+            {id: "セ2-0", eng: "2nd Day: Awakening/Morning in the Emiya household", jp: "二日目・目覚め/衛宮邸の朝"},
           ],
         },
         {
           h: [
-            {id: "セ2-5", eng: "2nd Day: Morning/Dojo scenery"},
-            {id: "セ2-6", eng: "2nd Day: Morning/Dojo scenery"},
-            {id: "セ2-3", eng: "2nd Day: Breakfast preparation with Sakura/Signs"},
+            {id: "セ2-5", eng: "2nd Day: Morning/Dojo scenery", jp: "二日目・朝/道場風景"},
+            {id: "セ2-6", eng: "2nd Day: Morning/Dojo scenery", jp: "二日目・朝/道場風景"},
+            {id: "セ2-3", eng: "2nd Day: Breakfast preparation with Sakura/Signs", jp: "二日目・桜と朝食の支度/兆し"},
           ],
         },
-        {id: "セ2-15", eng: "2nd Day: Breakfast/Morning in the Emiya household"},
-        {id: "セ2-7", eng: "2nd Day: School/Everyday (II)"},
+        {id: "セ2-15", eng: "2nd Day: Breakfast/Morning in the Emiya household", jp: "二日目・朝食/衛宮邸の朝"},
+        {id: "セ2-7", eng: "2nd Day: School/Everyday (II)", jp: "二日目・学校/日常（Ⅱ）"},
         {
           h: [
-            {id: "セ2-9", eng: "2nd Day: After school/Choice"},
-            {id: "セ2-16", eng: "2nd Day: After school/Pipeline"},
-          ],
-        },
-        {
-          h: [
-            {id: "セ2-10", eng: "2nd Day: After school, Sakura’s classroom/Matou Sakura (II)"},
-            {id: "セ2-8", eng: "2nd Day: After School-Part time job/Tohsaka Rin (I)"},
+            {id: "セ2-9", eng: "2nd Day: After school/Choice", jp: "二日目・放課後/選択肢"},
+            {id: "セ2-16", eng: "2nd Day: After school/Pipeline", jp: "二日目・放課後/パイプライン"},
           ],
         },
         {
           h: [
-            {id: "セ2-4", eng: "2nd Day: After school-Part time job/Tohsaka Rin (I)"},
-            {id: "セ2-1", eng: "2nd Day: Dinner/Love’s magical ranger force"},
+            {
+              id: "セ2-10",
+              eng: "2nd Day: After school, Sakura’s classroom/Matou Sakura (II)",
+              jp: "二日目・放課後・桜の教室/間桐桜（Ⅱ）",
+            },
+            {id: "セ2-8", eng: "2nd Day: After School-Part time job/Tohsaka Rin (I)", jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）"},
           ],
         },
-        {id: "セ2-14", eng: "2nd Day: Night-Matou household/Old man"},
+        {
+          h: [
+            {id: "セ2-4", eng: "2nd Day: After school-Part time job/Tohsaka Rin (I)", jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）"},
+            {id: "セ2-1", eng: "2nd Day: Dinner/Love’s magical ranger force", jp: "二日目・夕食/恋のマジカルレンジャーフォース"},
+          ],
+        },
+        {id: "セ2-14", eng: "2nd Day: Night-Matou household/Old man", jp: "二日目・夜〜間桐邸/翁"},
       ],
     },
     ],
   }, {
     h: [{
       section: "セ3", v: [
-        {id: "セ3-8", eng: "3rd Day: Awakening-Morning/What is burned in"},
+        {id: "セ3-8", eng: "3rd Day: Awakening-Morning/What is burned in", jp: "三日目・目覚め〜朝/焼きついたもの"},
         {
           h: [
-            {id: "セ3-9", eng: "3rd Day: Morning-Journey to school/Unnatural mark"},
-            {id: "セ3-10", eng: "3rd Day: Morning-Journey to school/Worsening bruise"},
+            {id: "セ3-9", eng: "3rd Day: Morning-Journey to school/Unnatural mark", jp: "三日目・朝〜登校/不自然な痣"},
+            {id: "セ3-10", eng: "3rd Day: Morning-Journey to school/Worsening bruise", jp: "三日目・朝〜登校/悪化する痣"},
           ],
         },
-        {id: "セ3-1", eng: "3rd Day: After School-Night/Night of fate"},
-        {id: "セ3-16", eng: "3rd Day: Night-Returning home/One more time"},
-        {id: "セ3-0", eng: "Summoning of Saber. VS Lancer/Promised sign"},
-        {id: "セ3-17", eng: "3rd Day: Lecture on Masters/Tohsaka Rin (II)"},
-        {id: "セ3-2", eng: "3rd Day: Kotomine Church/Alter ego"},
+        {id: "セ3-1", eng: "3rd Day: After School-Night/Night of fate", jp: "三日目・放課後〜夜/運命の夜"},
+        {id: "セ3-16", eng: "3rd Day: Night-Returning home/One more time", jp: "三日目・夜〜帰宅/もういちど"},
+        {id: "セ3-0", eng: "Summoning of Saber. VS Lancer/Promised sign", jp: "セイバー召喚。ＶＳランサー/プロミスト・サイン"},
+        {id: "セ3-17", eng: "3rd Day: Lecture on Masters/Tohsaka Rin (II)", jp: "三日目・マスター講座/遠坂凛（Ⅱ）"},
+        {id: "セ3-2", eng: "3rd Day: Kotomine Church/Alter ego", jp: "三日目・言峰教会/オルター・エゴ"},
         {
           h: [
-            {id: "セ3-18", eng: "3rd Day: Kotomine Church/Decision"},
-            {id: "セ3-4", eng: "3rd Day: Night/Forest of no return"},
-          ],
-        },
-        {
-          h: [
-            {id: "セ3-5", eng: "The Strongest Enemy"},
-            {id: "セ3-11", eng: "Tiger Dojo 1"},
+            {id: "セ3-18", eng: "3rd Day: Kotomine Church/Decision", jp: "三日目・言峰教会/決意。"},
+            {id: "セ3-4", eng: "3rd Day: Night/Forest of no return", jp: "三日目・夜/帰らずの森"},
           ],
         },
         {
           h: [
-            {id: "セ3-6", eng: "3rd Day: Late night/Canary’s cage"},
-            {id: "セ3-7", eng: "3rd Day: Last/Distortion (I)"},
+            {id: "セ3-5", eng: "The Strongest Enemy", jp: "最強の敵"},
+            {id: "セ3-11", eng: "Tiger Dojo 1", jp: "タイガー道場1"},
           ],
         },
         {
           h: [
-            {id: "セ3-12", eng: "3rd Day: Intermission/Worms from hell"},
-            {id: "セ3-19", eng: "Tiger Dojo 2"},
+            {id: "セ3-6", eng: "3rd Day: Late night/Canary’s cage", jp: "三日目・深夜/金糸雀の篭"},
+            {id: "セ3-7", eng: "3rd Day: Last/Distortion (I)", jp: "三日目・ラスト/ディストレーション（Ⅰ）"},
+          ],
+        },
+        {
+          h: [
+            {id: "セ3-12", eng: "3rd Day: Intermission/Worms from hell", jp: "三日目・幕間/奈落の虫"},
+            {id: "セ3-19", eng: "Tiger Dojo 2", jp: "タイガー道場2"},
           ],
         },
       ],
     }, {
       section: "凛3", v: [
-        {id: "凛3-9", eng: "3rd Day: Night/First Command Spell"},
-        {id: "凛3-10", eng: "3rd Day: Night-Rin-Church/Master Registration"},
-        {id: "凛3-11", eng: "3rd Day: Night, Returning home-Illya/Another night-VS Berserker"},
-        {id: "凛3-0", eng: "VS Berserker/Choice"},
+        {id: "凛3-9", eng: "3rd Day: Night/First Command Spell", jp: "三日目・夜/令呪、一回目"},
+        {id: "凛3-10", eng: "3rd Day: Night-Rin-Church/Master Registration", jp: "三日目・夜〜凛〜教会/マスター登録"},
+        {
+          id: "凛3-11",
+          eng: "3rd Day: Night, Returning home-Illya/Another night-VS Berserker",
+          jp: "三日目・夜・帰宅〜イリヤ/もう一つの夜〜ＶＳバーサーカー",
+        },
+        {id: "凛3-0", eng: "VS Berserker/Choice", jp: "ＶＳバーサーカー/選択肢"},
         {
           h: [
-            {id: "凛3-1", eng: "VS Berserker/Go where"},
-            {id: "凛3-3", eng: "VS Berserker/Equal match-Archer’s shot"},
-            {id: "凛3-2", eng: "VS Berserker/Third death"},
+            {id: "凛3-1", eng: "VS Berserker/Go where", jp: "ＶＳバーサーカー/何処に向かう"},
+            {id: "凛3-3", eng: "VS Berserker/Equal match-Archer’s shot", jp: "ＶＳバーサーカー/互角の戦い〜アーチャーの狙撃"},
+            {id: "凛3-2", eng: "VS Berserker/Third death", jp: "ＶＳバーサーカー/三度目の死"},
           ],
         },
         {
           h: [
-            {id: "凛3-4", eng: "VS Berserker/Third death"},
-            {id: "凛3-5", eng: "VS Berserker/Equal match-Archer’s shot"},
-            {id: "凛3-7", eng: "VS Berserker/Distortion (II)"},
+            {id: "凛3-4", eng: "VS Berserker/Third death", jp: "ＶＳバーサーカー/三度目の死"},
+            {id: "凛3-5", eng: "VS Berserker/Equal match-Archer’s shot", jp: "ＶＳバーサーカー/互角の戦い〜アーチャーの狙撃"},
+            {id: "凛3-7", eng: "VS Berserker/Distortion (II)", jp: "ＶＳバーサーカー/ディストレーション（Ⅱ）"},
           ],
         },
         {
           h: [
-            {id: "凛3-6", eng: "VS Berserker/Calling voice"},
-            {id: "凛3-12", eng: "Tiger Dojo 15"},
+            {id: "凛3-6", eng: "VS Berserker/Calling voice", jp: "ＶＳバーサーカー/呼び戻す声"},
+            {id: "凛3-12", eng: "Tiger Dojo 15", jp: "タイガー道場15"},
           ],
         },
       ],
@@ -9537,792 +9552,940 @@ export const sections = {
     h: [{
       v: [{
         section: "セ4", v: [
-          {id: "セ4-0", eng: "4th Day: Awakening-My room/Principle of action-Tohsaka Rin (III)"},
+          {
+            id: "セ4-0",
+            eng: "4th Day: Awakening-My room/Principle of action-Tohsaka Rin (III)",
+            jp: "四日目・目覚め〜自室/行動原理〜遠坂凛（Ⅲ）",
+          },
           {
             h: [
-              {id: "セ4-1", eng: "4th Day: Rin’s question/Understanding the current situation"},
-              {id: "セ4-2", eng: "4th Day: Rin’s question/The serious stuff"},
-              {id: "セ4-3", eng: "4th Day: Rin’s question/Invitation refusal"},
+              {id: "セ4-1", eng: "4th Day: Rin’s question/Understanding the current situation", jp: "四日目・凛の質問/現状把握"},
+              {id: "セ4-2", eng: "4th Day: Rin’s question/The serious stuff", jp: "四日目・凛の質問/真面目な話"},
+              {id: "セ4-3", eng: "4th Day: Rin’s question/Invitation refusal", jp: "四日目・凛の質問/勧誘お断り"},
             ],
           },
-          {id: "セ4-4", eng: "4th Day: Morning/Rin’s proposal"},
+          {id: "セ4-4", eng: "4th Day: Morning/Rin’s proposal", jp: "四日目・朝/凛の提案"},
           {
             h: [
-              {id: "セ4-18", eng: "4th Day: Morning/Contract established"},
-              {id: "セ4-5", eng: "4th Day: Before noon/Solo&Only"},
+              {id: "セ4-18", eng: "4th Day: Morning/Contract established", jp: "四日目・朝/契約成立"},
+              {id: "セ4-5", eng: "4th Day: Before noon/Solo&Only", jp: "四日目・午前中/ソロ＆オンリー"},
             ],
           },
-          {id: "セ4-6", eng: "4th Day: Before noon/Saber (I)"},
+          {id: "セ4-6", eng: "4th Day: Before noon/Saber (I)", jp: "四日目・午前/セイバー（Ⅰ）"},
           {
             h: [
-              {id: "セ4-7", eng: "4th Day/No concern for safety"},
-              {id: "セ4-9", eng: "4th Day/Funny clothes"},
-              {id: "セ4-8", eng: "4th Day: Afternoon/Saber’s circumstances"},
+              {id: "セ4-7", eng: "4th Day/No concern for safety", jp: "四日目/安否無用"},
+              {id: "セ4-9", eng: "4th Day/Funny clothes", jp: "四日目/ファニードレス"},
+              {id: "セ4-8", eng: "4th Day: Afternoon/Saber’s circumstances", jp: "四日目・午後/セイバーの事情"},
             ],
           },
-          {id: "セ4-10", eng: "4th Day: Afternoon/Saber’s circumstances"},
-          {id: "セ4-11", eng: "4th Day: Dinner/Buddy Saber, buddy Rin"},
-          {id: "セ4-12", eng: "4th Day: Night/Is my Master aptitude low?"},
-          {id: "セ4-15", eng: "4th Day Bedtime: Shed/Star in the fog"},
+          {id: "セ4-10", eng: "4th Day: Afternoon/Saber’s circumstances", jp: "四日目・午後/セイバーの事情"},
+          {id: "セ4-11", eng: "4th Day: Dinner/Buddy Saber, buddy Rin", jp: "四日目・夕食/仲良しセイバー、仲良し凛"},
+          {id: "セ4-12", eng: "4th Day: Night/Is my Master aptitude low?", jp: "四日目・夜/マスター適性、低めでしょうか？"},
+          {id: "セ4-15", eng: "4th Day Bedtime: Shed/Star in the fog", jp: "四日目就寝・土蔵/霧中の星"},
         ],
       }, {
         section: "セ5", v: [
-          {id: "セ5-0", eng: "5th Day: Morning/Rose and hydrangea"},
-          {id: "セ5-4", eng: "5th Day: Breakfast-Way to school/Waku-waku Fuji-Nee land-Matou brother and sister"},
-          {id: "セ5-5", eng: "5th Day: Lunchtime/Choice"},
+          {id: "セ5-0", eng: "5th Day: Morning/Rose and hydrangea", jp: "五日目・朝/薔薇と紫陽花"},
+          {
+            id: "セ5-4",
+            eng: "5th Day: Breakfast-Way to school/Waku-waku Fuji-Nee land-Matou brother and sister",
+            jp: "五日目・朝食〜登校/わくわく藤ねえランド〜間桐の兄妹",
+          },
+          {id: "セ5-5", eng: "5th Day: Lunchtime/Choice", jp: "五日目・昼休み/選択肢"},
           {
             h: [
-              {id: "セ5-6", eng: "5th Day: Lunchtime/Tohsaka Rin (IV)"},
-              {id: "セ5-7", eng: "5th Day: Lunchtime/Matou Sakura (III)-The anger of the great devil"},
+              {id: "セ5-6", eng: "5th Day: Lunchtime/Tohsaka Rin (IV)", jp: "五日目・昼休み/遠坂凛（Ⅳ）"},
+              {
+                id: "セ5-7",
+                eng: "5th Day: Lunchtime/Matou Sakura (III)-The anger of the great devil",
+                jp: "五日目・昼休み/間桐桜（Ⅲ）〜大魔神怒る",
+              },
             ],
           },
-          {id: "セ5-8", eng: "5th Day: Return home-Evening/Question for Saber"},
+          {id: "セ5-8", eng: "5th Day: Return home-Evening/Question for Saber", jp: "五日目・下校〜夕方/セイバーへの質問"},
           {
             h: [
-              {id: "セ5-9", eng: "5th Day: Question/Survivor"},
-              {id: "セ5-10", eng: "5th Day: Question/Unknown"},
-              {id: "セ5-11", eng: "5th Day: Question/Vela Gulf"},
+              {id: "セ5-9", eng: "5th Day: Question/Survivor", jp: "五日目・質問/サバイバー"},
+              {id: "セ5-10", eng: "5th Day: Question/Unknown", jp: "五日目・質問/アンノウン"},
+              {id: "セ5-11", eng: "5th Day: Question/Vela Gulf", jp: "五日目・質問/ヴェラガルフ"},
             ],
           },
-          {id: "セ5-12", eng: "5th Day: Dinner/You too"},
-          {id: "セ5-14", eng: "5th Day: Dinner-Bedtime/Clash of the lion and the tiger"},
+          {id: "セ5-12", eng: "5th Day: Dinner/You too", jp: "五日目・夕食/君も一緒に"},
+          {id: "セ5-14", eng: "5th Day: Dinner-Bedtime/Clash of the lion and the tiger", jp: "五日目・夕食〜就寝/激突、ライオン対トラ"},
         ],
       }, {
         section: "セ6", v: [
-          {id: "セ6-12", eng: "6th Day: Breakfast-Way to school/Morning at the Emiya household: Festival"},
-          {id: "セ6-0", eng: "6th Day: School-Matou household/The fourth Master"},
-          {id: "セ6-1", eng: "6th Day: Shinji’s invitation, breakdown/Choice"},
+          {
+            id: "セ6-12",
+            eng: "6th Day: Breakfast-Way to school/Morning at the Emiya household: Festival",
+            jp: "六日目・朝食〜登校/衛宮家の朝・お祭り編",
+          },
+          {id: "セ6-0", eng: "6th Day: School-Matou household/The fourth Master", jp: "六日目・学校〜間桐邸/第四のマスター"},
+          {id: "セ6-1", eng: "6th Day: Shinji’s invitation, breakdown/Choice", jp: "六日目・慎二の誘い、決裂/選択肢"},
           {
             h: [
-              {id: "セ6-3", eng: "6th Day: Return from the Matou household/Lady of fresh blood"},
-              {id: "セ6-4", eng: "6th Day: Return from the Matou household/Averting one’s gaze"},
+              {id: "セ6-3", eng: "6th Day: Return from the Matou household/Lady of fresh blood", jp: "六日目・間桐邸帰り/鮮血淑女"},
+              {
+                id: "セ6-4",
+                eng: "6th Day: Return from the Matou household/Averting one’s gaze",
+                jp: "六日目・間桐邸帰り/視線を合わさず",
+              },
             ],
           },
-          {id: "セ6-13", eng: "6th Day: Return home-Dinner/Everyone getting along"},
-          {id: "セ6-5", eng: "6th Day: Night/Strategy Meeting. Should we challenge Ryuudou temple?"},
+          {id: "セ6-13", eng: "6th Day: Return home-Dinner/Everyone getting along", jp: "六日目・帰宅〜夕食/みんな仲良く"},
+          {
+            id: "セ6-5",
+            eng: "6th Day: Night/Strategy Meeting. Should we challenge Ryuudou temple?",
+            jp: "六日目・夜/作戦会議。柳洞寺に挑むべきか？",
+          },
           {
             h: [
-              {id: "セ6-7", eng: "6th Day: Night/Conflict between the two"},
-              {id: "セ6-6", eng: "6th Day: Late night-Ryuudou temple/Missing Ariadne"},
+              {id: "セ6-7", eng: "6th Day: Night/Conflict between the two", jp: "六日目・夜/二人の齟齬"},
+              {id: "セ6-6", eng: "6th Day: Late night-Ryuudou temple/Missing Ariadne", jp: "六日目・深夜〜柳洞寺/ミッシング・アリアドネ"},
             ],
           },
           {
             h: [
-              {id: "セ6-8", eng: "Intermission/Elegant moonlight-VS Assassin"},
-              {id: "セ6-15", eng: "Tiger Dojo 3"},
+              {id: "セ6-8", eng: "Intermission/Elegant moonlight-VS Assassin", jp: "幕間/月下流麗〜ＶＳアサシン"},
+              {id: "セ6-15", eng: "Tiger Dojo 3", jp: "タイガー道場3"},
             ],
           },
-          {id: "セ6-9", eng: "6th Day: Late night/Absence of Saber"},
-          {id: "セ6-14", eng: "Intermission/“Demonic Sword”-VS Assassin 2"},
-          {id: "セ6-10", eng: "6th Day: Return home-Contract/Boy Meets Girl (I)"},
+          {id: "セ6-9", eng: "6th Day: Late night/Absence of Saber", jp: "六日目・深夜/セイバー不在"},
+          {id: "セ6-14", eng: "Intermission/“Demonic Sword”-VS Assassin 2", jp: "幕間/「魔剣」〜ＶＳアサシン２"},
+          {id: "セ6-10", eng: "6th Day: Return home-Contract/Boy Meets Girl (I)", jp: "六日目・帰還〜契約/ボーイ・ミーツ・ガール（Ⅰ）"},
         ],
       }, {
         section: "セ7", v: [
-          {id: "セ7-0", eng: "7th Day: Awakening-Morning/Superhero and the usual breakfast"},
-          {id: "セ7-2", eng: "7th Day: Before noon: Training swordsmanship/Life guard"},
+          {
+            id: "セ7-0",
+            eng: "7th Day: Awakening-Morning/Superhero and the usual breakfast",
+            jp: "七日目・目覚め〜朝/正義の味方といつもの朝食",
+          },
+          {id: "セ7-2", eng: "7th Day: Before noon: Training swordsmanship/Life guard", jp: "七日目・午前・剣の修行/ライフ・ガード"},
           {
             h: [
-              {id: "セ7-4", eng: "7th Day: Conversation with Saber/What to pour into the Grail"},
-              {id: "セ7-5", eng: "7th Day: Conversation with Saber/Hero apocalypse story"},
-              {id: "セ7-6", eng: "7th Day: Conversation with Saber/Saber-san angry"},
+              {
+                id: "セ7-4",
+                eng: "7th Day: Conversation with Saber/What to pour into the Grail",
+                jp: "七日目・セイバーとの会話/杯に注ぐもの",
+              },
+              {id: "セ7-5", eng: "7th Day: Conversation with Saber/Hero apocalypse story", jp: "七日目・セイバーとの会話/英雄黙示譚"},
+              {id: "セ7-6", eng: "7th Day: Conversation with Saber/Saber-san angry", jp: "七日目・セイバーとの会話/セイバーさんご立腹"},
             ],
           },
-          {id: "セ7-7", eng: "7th Day: Noon/The daughter of winter-Illya (I)"},
-          {id: "セ7-28", eng: "7th Day: Return home-Before dinner/Shirou peeping incident: Prelude"},
-          {id: "セ7-1", eng: "7th Day: After dinner/Magic Lecture (Magic Crest)"},
-          {id: "セ7-3", eng: "7th Day: Late night-Bedtime/Differing person"},
-          {id: "セ7-8", eng: "8th Day: Morning-Training swordsmanship/Life guard & safe"},
+          {id: "セ7-7", eng: "7th Day: Noon/The daughter of winter-Illya (I)", jp: "七日目・昼/冬の娘〜イリヤ（Ⅰ）"},
+          {
+            id: "セ7-28",
+            eng: "7th Day: Return home-Before dinner/Shirou peeping incident: Prelude",
+            jp: "七日目・帰宅〜夕食前/士郎覗き事件・序",
+          },
+          {id: "セ7-1", eng: "7th Day: After dinner/Magic Lecture (Magic Crest)", jp: "七日目・夕食後/魔術講座（魔術刻印）"},
+          {id: "セ7-3", eng: "7th Day: Late night-Bedtime/Differing person", jp: "七日目・深夜〜就寝/異なる者"},
+          {id: "セ7-8", eng: "8th Day: Morning-Training swordsmanship/Life guard & safe", jp: "八日目・朝〜剣の修行/ライフガード＆セーフ"},
           {
             h: [
-              {id: "セ7-12", eng: "8th Day: Conversation with Saber/Hero apocalypse story"},
-              {id: "セ7-13", eng: "8th Day: Conversation with Saber/Saber-san angry"},
-              {id: "セ7-14", eng: "8th Day: Conversation with Saber/What to pour into the Grail"},
-              {id: "セ7-15", eng: "8th Day: Conversation with Saber/Saber-san angry"},
-              {id: "セ7-16", eng: "8th Day: Conversation with Saber/What to pour into the Grail"},
-              {id: "セ7-17", eng: "8th Day: Conversation with Saber/Hero apocalypse story"},
+              {id: "セ7-12", eng: "8th Day: Conversation with Saber/Hero apocalypse story", jp: "八日目・セイバーとの会話/英雄黙示譚"},
+              {id: "セ7-13", eng: "8th Day: Conversation with Saber/Saber-san angry", jp: "八日目・セイバーとの会話/セイバーさんご立腹"},
+              {
+                id: "セ7-14",
+                eng: "8th Day: Conversation with Saber/What to pour into the Grail",
+                jp: "八日目・セイバーとの会話/杯に注ぐもの",
+              },
+              {id: "セ7-15", eng: "8th Day: Conversation with Saber/Saber-san angry", jp: "八日目・セイバーとの会話/セイバーさんご立腹"},
+              {
+                id: "セ7-16",
+                eng: "8th Day: Conversation with Saber/What to pour into the Grail",
+                jp: "八日目・セイバーとの会話/杯に注ぐもの",
+              },
+              {id: "セ7-17", eng: "8th Day: Conversation with Saber/Hero apocalypse story", jp: "八日目・セイバーとの会話/英雄黙示譚"},
             ],
           },
-          {id: "セ7-18", eng: "8th Day: Noon/Shopping district"},
+          {id: "セ7-18", eng: "8th Day: Noon/Shopping district", jp: "八日目・昼/商店街"},
           {
             h: [
-              {id: "セ7-19", eng: "8th Day: Lunch/Last stand Saber"},
-              {id: "セ7-20", eng: "8th Day: Lunch/Daughter of winter-Illya (II)"},
+              {id: "セ7-19", eng: "8th Day: Lunch/Last stand Saber", jp: "八日目・昼食/背水セイバー"},
+              {id: "セ7-20", eng: "8th Day: Lunch/Daughter of winter-Illya (II)", jp: "八日目・昼/冬の娘〜イリヤ（Ⅱ）"},
             ],
           },
-          {id: "セ7-29", eng: "8th Day: Afternoon/Issei’s get well visit-Types of smiles"},
-          {id: "セ7-21", eng: "8th Day: Before Dinner/Choice"},
+          {id: "セ7-29", eng: "8th Day: Afternoon/Issei’s get well visit-Types of smiles", jp: "八日目・午後/笑顔の種類"},
+          {id: "セ7-21", eng: "8th Day: Before Dinner/Choice", jp: "八日目・夕食前/選択肢"},
           {
             h: [
-              {id: "セ7-22", eng: "8th Day: Afternoon/Funny lion"},
-              {id: "セ7-23", eng: "8th Day: Afternoon/Orange pekoe mystery"},
-              {id: "セ7-24", eng: "8th Day: Afternoon/Golden bath"},
+              {id: "セ7-22", eng: "8th Day: Afternoon/Funny lion", jp: "八日目・夕方/ファニーライオン"},
+              {id: "セ7-23", eng: "8th Day: Afternoon/Orange pekoe mystery", jp: "八日目・夕方/オレンジペコーの怪"},
+              {id: "セ7-24", eng: "8th Day: Afternoon/Golden bath", jp: "八日目・夕方/金色の湯浴み"},
             ],
           },
-          {id: "セ7-25", eng: "8th Day: Night/Bare-Knuckle Rin"},
-          {id: "セ7-27", eng: "8th Day: Night/Magic Lecture (Switch)"},
+          {id: "セ7-25", eng: "8th Day: Night/Bare-Knuckle Rin", jp: "八日目・夜/ベアナックラーリン"},
+          {id: "セ7-27", eng: "8th Day: Night/Magic Lecture (Switch)", jp: "八日目・夜/魔術講座（スイッチ）"},
         ],
       }, {
         section: "セ9", v: [
-          {id: "セ9-15", eng: "9th Day: Awakening-Breakfast/Infringed table"},
-          {id: "セ9-0", eng: "9th Day: Before noon-Afternoon/Training swordsmanship-Rin’s lecture"},
+          {id: "セ9-15", eng: "9th Day: Awakening-Breakfast/Infringed table", jp: "九日目・起床〜朝食/侵食される食卓"},
           {
-            h: [
-              {id: "セ9-1", eng: "9th Day: Sequel/“Works”"},
-              {id: "セ9-2", eng: "9th Day: Afternoon/Let’s Hachikou"},
-            ],
-          },
-          {id: "セ9-3", eng: "9th Day: Afternoon/Blood Temple-VS Rider (I)"},
-          {
-            h: [
-              {id: "セ9-4", eng: "VS Rider (I)/Attack"},
-              {id: "セ9-5", eng: "VS Rider (I)/Defense"},
-            ],
-          },
-          {id: "セ9-6", eng: "VS Rider (I)/Sparks"},
-          {
-            h: [
-              {id: "セ9-8", eng: "VS Rider (I)/Fall down, your mind"},
-              {id: "セ9-7", eng: "VS Rider (I)/Melty Blood"},
-            ],
+            id: "セ9-0",
+            eng: "9th Day: Before noon-Afternoon/Training swordsmanship-Rin’s lecture",
+            jp: "九日目・午前〜午後/剣の稽古〜凛の授業",
           },
           {
             h: [
-              {id: "セ9-9", eng: "VS Rider (I)/Summoning Saber"},
-              {id: "セ9-10", eng: "VS Rider (I)/Summoning and rescue"},
-              {id: "セ9-11", eng: "VS Rider (I)/Rafflesia umbrella"},
-              {id: "セ9-16", eng: "Tiger Dojo 4"},
+              {id: "セ9-1", eng: "9th Day: Sequel/“Works”", jp: "九日目・余談/「ワークス」"},
+              {id: "セ9-2", eng: "9th Day: Afternoon/Let’s Hachikou", jp: "九日目・午後/レッツハチ公"},
+            ],
+          },
+          {id: "セ9-3", eng: "9th Day: Afternoon/Blood Temple-VS Rider (I)", jp: "九日目・午後/鮮血神殿〜ＶＳライダー（Ⅰ）"},
+          {
+            h: [
+              {id: "セ9-4", eng: "VS Rider (I)/Attack", jp: "ＶＳライダー（Ⅰ）/攻撃"},
+              {id: "セ9-5", eng: "VS Rider (I)/Defense", jp: "ＶＳライダー（Ⅰ）/防御"},
+            ],
+          },
+          {id: "セ9-6", eng: "VS Rider (I)/Sparks", jp: "ＶＳライダー（Ⅰ）/スパークス"},
+          {
+            h: [
+              {id: "セ9-8", eng: "VS Rider (I)/Fall down, your mind", jp: "ＶＳライダー（Ⅰ）/フォールダウン、ユアマインド"},
+              {id: "セ9-7", eng: "VS Rider (I)/Melty Blood", jp: "ＶＳライダー（Ⅰ）/メルティブラッド"},
             ],
           },
           {
             h: [
-              {id: "セ9-12", eng: "VS Rider (I)/Crazy train"},
-              {id: "セ9-17", eng: "Tiger Dojo 5"},
+              {id: "セ9-9", eng: "VS Rider (I)/Summoning Saber", jp: "ＶＳライダー（Ⅰ）/セイバー召喚"},
+              {id: "セ9-10", eng: "VS Rider (I)/Summoning and rescue", jp: "ＶＳライダー（Ⅰ）/召喚と救出"},
+              {id: "セ9-11", eng: "VS Rider (I)/Rafflesia umbrella", jp: "ＶＳライダー（Ⅰ）/ラフレシア・アンブレラ"},
+              {id: "セ9-16", eng: "Tiger Dojo 4", jp: "タイガー道場4"},
             ],
           },
-          {id: "セ9-14", eng: "9th Day: Night/Boy meets girl (II)"},
+          {
+            h: [
+              {id: "セ9-12", eng: "VS Rider (I)/Crazy train", jp: "ＶＳライダー（Ⅰ）/クレイジー・トレイン"},
+              {id: "セ9-17", eng: "Tiger Dojo 5", jp: "タイガー道場5"},
+            ],
+          },
+          {id: "セ9-14", eng: "9th Day: Night/Boy meets girl (II)", jp: "九日目・夜/ボーイ・ミーツ・ガール（Ⅱ）"},
         ],
       }, {
         section: "セ10", v: [
-          {id: "セ10-0", eng: "10th Day: Awakening-Morning/Strategy meeting"},
-          {id: "セ10-9", eng: "10th Day: Afternoon-Memory of ten years ago/Portrait"},
-          {id: "セ10-2", eng: "VS Rider (II)/Assault"},
+          {id: "セ10-0", eng: "10th Day: Awakening-Morning/Strategy meeting", jp: "十日目・起床〜朝/作戦会議"},
+          {id: "セ10-9", eng: "10th Day: Afternoon-Memory of ten years ago/Portrait", jp: "十日目・午後〜十年前の回想/ポートレイト"},
+          {id: "セ10-2", eng: "VS Rider (II)/Assault", jp: "ＶＳライダー（Ⅱ）/強襲"},
           {
             h: [
-              {id: "セ10-1", eng: "VS Rider (II)/Death Circus"},
-              {id: "セ10-3", eng: "10th Day-Morning/Nutcracker doll"},
+              {id: "セ10-1", eng: "VS Rider (II)/Death Circus", jp: "ＶＳライダー（Ⅱ）/デス・サーカス"},
+              {id: "セ10-3", eng: "10th Day-Morning/Nutcracker doll", jp: "十日目〜朝/くるみ割り人形"},
             ],
           },
           {
             h: [
-              {id: "セ10-4", eng: "VS Rider (II)/Sword of Promised Victory"},
-              {id: "セ10-10", eng: "Tiger Dojo 6"},
+              {id: "セ10-4", eng: "VS Rider (II)/Sword of Promised Victory", jp: "ＶＳライダー（Ⅱ）/約束された勝利の剣"},
+              {id: "セ10-10", eng: "Tiger Dojo 6", jp: "タイガー道場6"},
             ],
           },
           {
             h: [
-              {id: "セ10-5", eng: "10th Day: Night/Remains of Tragedy"},
-              {id: "セ10-6", eng: "10th Day: Night/Boy meets girl (III)"},
+              {id: "セ10-5", eng: "10th Day: Night/Remains of Tragedy", jp: "十日目・夜/惨劇の跡"},
+              {id: "セ10-6", eng: "10th Day: Night/Boy meets girl (III)", jp: "十日目・夜/ボーイ・ミーツ・ガール（Ⅲ）"},
             ],
           },
-          {id: "セ10-7", eng: "10th Day: Bedtime/Reparation for victory"},
+          {id: "セ10-7", eng: "10th Day: Bedtime/Reparation for victory", jp: "十日目・就寝/勝利の代償"},
         ],
       }, {
         section: "セ11", v: [
-          {id: "セ11-0", eng: "11th Day: Awakening-Outside/The king’s memories-Follow through"},
-          {id: "セ11-16", eng: "11th Day: Morning in the park/Charming white eyes-Illya (III)"},
+          {
+            id: "セ11-0",
+            eng: "11th Day: Awakening-Outside/The king’s memories-Follow through",
+            jp: "十一日目・起床〜外へ/王の記憶〜残心",
+          },
+          {
+            id: "セ11-16",
+            eng: "11th Day: Morning in the park/Charming white eyes-Illya (III)",
+            jp: "十一日目・朝の公園/白い呪眼〜イリヤ（Ⅲ）",
+          },
           {
             h: [
-              {id: "セ11-2", eng: "11th Day: Einzbern Castle/Refusal and escape"},
-              {id: "セ11-1", eng: "11th Day: Einzbern Castle/Heaven’s dress"},
+              {id: "セ11-2", eng: "11th Day: Einzbern Castle/Refusal and escape", jp: "十一日目・アインツベルン城/拒絶と脱出"},
+              {id: "セ11-1", eng: "11th Day: Einzbern Castle/Heaven’s dress", jp: "十一日目・アインツベルン城/天のドレス"},
             ],
           },
           {
             h: [
-              {id: "セ11-3", eng: "11th Day: Einzbern Castle/Small resistance"},
-              {id: "セ11-4", eng: "11th Day: Einzbern Castle/Means of escape"},
-              {id: "セ11-5", eng: "11th Day: Einzbern Castle/Stuffed animal room murder case"},
-              {id: "セ11-20", eng: "Tiger Dojo 7"},
+              {id: "セ11-3", eng: "11th Day: Einzbern Castle/Small resistance", jp: "十一日目・アインツベルン城/小さな抵抗"},
+              {id: "セ11-4", eng: "11th Day: Einzbern Castle/Means of escape", jp: "十一日目・アインツベルン城/活路を見出す"},
+              {
+                id: "セ11-5",
+                eng: "11th Day: Einzbern Castle/Stuffed animal room murder case",
+                jp: "十一日目・アインツベルン城/ぬいぐるみ部屋殺人事件",
+              },
+              {id: "セ11-20", eng: "Tiger Dojo 7", jp: "タイガー道場7"},
             ],
           },
-          {id: "セ11-17", eng: "11th Day: Einzbern Castle lobby/A distant back"},
-          {id: "セ11-19", eng: "11th Day: Escape from Einzbern Castle/Elopement"},
+          {id: "セ11-17", eng: "11th Day: Einzbern Castle lobby/A distant back", jp: "十一日目・アインツベルン城ロビー/遠い背中"},
+          {id: "セ11-19", eng: "11th Day: Escape from Einzbern Castle/Elopement", jp: "十一日目・アインツベルン城脱出/逃避行"},
           {
             h: [
-              {id: "セ11-18", eng: "11th Day: Ruins in the forest/Dragon’s core"},
-              {id: "セ11-118", eng: "11th Day: Ruins in the forest/Boy meets girl & girl"},
+              {id: "セ11-18", eng: "11th Day: Ruins in the forest/Dragon’s core", jp: "十一日目・森の廃墟/竜の炉心"},
+              {
+                id: "セ11-118",
+                eng: "11th Day: Ruins in the forest/Boy meets girl & girl",
+                jp: "十一日目・森の廃墟/ボーイ・ミーツ・ガール＆ガール",
+              },
             ],
           },
-          {id: "セ11-6", eng: "Intermission: Archer and Berserker/11th Day: Dawn in the ruins"},
+          {
+            id: "セ11-6",
+            eng: "Intermission: Archer and Berserker/11th Day: Dawn in the ruins",
+            jp: "幕間・弓兵と狂戦士/十一日目・廃墟の夜明け",
+          },
           {
             h: [
-              {id: "セ11-7", eng: "Morning in the ruins/Boy meets girl (IV)"},
-              {id: "セ11-8", eng: "Morning in the ruins/Gold rush?"},
+              {id: "セ11-7", eng: "Morning in the ruins/Boy meets girl (IV)", jp: "廃墟の朝/ボーイ・ミーツ・ガール（Ⅳ）"},
+              {id: "セ11-8", eng: "Morning in the ruins/Gold rush?", jp: "廃墟の朝/ごーるど・らっしゅ？"},
             ],
           },
-          {id: "セ11-9", eng: "VS Berserker/Replay of the legend"},
+          {id: "セ11-9", eng: "VS Berserker/Replay of the legend", jp: "ＶＳバーサーカー/神話再生"},
           {
             h: [
-              {id: "セ11-10", eng: "VS Berserker/Small resistance"},
-              {id: "セ11-11", eng: "VS Berserker/Developing means"},
+              {id: "セ11-10", eng: "VS Berserker/Small resistance", jp: "ＶＳバーサーカー/小さな抵抗"},
+              {id: "セ11-11", eng: "VS Berserker/Developing means", jp: "ＶＳバーサーカー/活路を見出す"},
             ],
           },
-          {id: "セ11-12", eng: "VS Berserker/Twelve Labors"},
+          {id: "セ11-12", eng: "VS Berserker/Twelve Labors", jp: "ＶＳバーサーカー/十二の試練"},
           {
             h: [
-              {id: "セ11-13", eng: "VS Berserker/Night without dawn"},
-              {id: "セ11-14", eng: "VS Berserker/And thus I pray, Unlimited Blade Works"},
+              {id: "セ11-13", eng: "VS Berserker/Night without dawn", jp: "ＶＳバーサーカー/明けない夜"},
+              {
+                id: "セ11-14",
+                eng: "VS Berserker/And thus I pray, Unlimited Blade Works",
+                jp: "ＶＳバーサーカー/And thus I pray,unlimited blade works.",
+              },
             ],
           },
-          {id: "セ11-21", eng: "Tiger Dojo 8"},
+          {id: "セ11-21", eng: "Tiger Dojo 8", jp: "タイガー道場8"},
         ],
       }, {
         section: "セ12", v: [
-          {id: "セ12-13", eng: "12th Day: Awakening-Morning/The king’s memories-Saber acting strange"},
-          {id: "セ12-0", eng: "12th Day: Breakfast preparation/Saber, Rin, Illya: A great morning battle"},
+          {
+            id: "セ12-13",
+            eng: "12th Day: Awakening-Morning/The king’s memories-Saber acting strange",
+            jp: "十二日目・起床〜朝/王の記憶〜おかしなセイバー",
+          },
+          {
+            id: "セ12-0",
+            eng: "12th Day: Breakfast preparation/Saber, Rin, Illya: A great morning battle",
+            jp: "十二日目・朝食/ハンバーグ争奪戦",
+          },
           {
             h: [
-              {id: "セ12-1", eng: "12th Day: Morning/Saber, sulking"},
-              {id: "セ12-2", eng: "12th Day: Morning/Illya, sulking"},
+              {id: "セ12-1", eng: "12th Day: Morning/Saber, sulking", jp: "十二日目・朝/セイバー、拗ねる"},
+              {id: "セ12-2", eng: "12th Day: Morning/Illya, sulking", jp: "十二日目・朝/イリヤ、拗ねる"},
             ],
           },
-          {id: "セ12-3", eng: "12th Day: Morning-Noon/Training swordsmanship-Saber still acting strangely"},
+          {
+            id: "セ12-3",
+            eng: "12th Day: Morning-Noon/Training swordsmanship-Saber still acting strangely",
+            jp: "十二日目・午前〜昼/剣の修行〜やっぱりおかしなセイバー",
+          },
           {
             h: [
-              {id: "セ12-4", eng: "Lunchtime/Obedient nod"},
-              {id: "セ12-5", eng: "Lunchtime/Saber, blushing"},
-              {id: "セ12-6", eng: "Lunchtime/Brave leader Hungryheart"},
+              {id: "セ12-4", eng: "Lunchtime/Obedient nod", jp: "お昼の時間/素直に頷く"},
+              {id: "セ12-5", eng: "Lunchtime/Saber, blushing", jp: "お昼の時間/セイバー、赤面"},
+              {id: "セ12-6", eng: "Lunchtime/Brave leader Hungryheart", jp: "お昼の時間/闘将ハングリーハート"},
             ],
           },
-          {id: "セ12-14", eng: "12th Day: Lunch/Lunchtime"},
-          {id: "セ12-7", eng: "12th Day: Afternoon/Magic Lecture (Permit)"},
+          {id: "セ12-14", eng: "12th Day: Lunch/Lunchtime", jp: "十二日目・昼食/ランチタイム"},
+          {id: "セ12-7", eng: "12th Day: Afternoon/Magic Lecture (Permit)", jp: "十二日目・午後/魔術講座（仮免許）"},
           {
             h: [
-              {id: "セ12-8", eng: "How and why questions/About the projection magic"},
-              {id: "セ12-9", eng: "How and why questions/So, it’s strong"},
-              {id: "セ12-10", eng: "How and why questions/Is silence best?"},
+              {id: "セ12-8", eng: "How and why questions/About the projection magic", jp: "なぜなにクエスチョン/投影魔術について"},
+              {id: "セ12-9", eng: "How and why questions/So, it’s strong", jp: "なぜなにクエスチョン/頑丈なんだ"},
+              {id: "セ12-10", eng: "How and why questions/Is silence best?", jp: "なぜなにクエスチョン/沈黙は美徳とか"},
             ],
           },
-          {id: "セ12-11", eng: "12th Day: Rin’s guest room/Saber (II)"},
-          {id: "セ12-12", eng: "12th Day: Dinner-Dressing room/Peeping incident: Caught red-handed"},
-          {id: "セ12-15", eng: "12th Day: Night-Bedtime/Saber (III)"},
+          {id: "セ12-11", eng: "12th Day: Rin’s guest room/Saber (II)", jp: "十二日目・凛の客間/セイバー（Ⅱ）"},
+          {
+            id: "セ12-12",
+            eng: "12th Day: Dinner-Dressing room/Peeping incident: Caught red-handed",
+            jp: "十二日目・夕食〜脱衣場/覗き事件・現行犯逮捕",
+          },
+          {id: "セ12-15", eng: "12th Day: Night-Bedtime/Saber (III)", jp: "十二日目・夜〜就寝/セイバー（Ⅲ）"},
         ],
       }, {
         section: "セ13", v: [
-          {id: "セ13-3", eng: "13th Day: Awakening/The king’s memories"},
-          {id: "セ13-12", eng: "13th Day: Breakfast/Sweets"},
-          {id: "セ13-6", eng: "13th Day: Training swordsmanship-Lunchtime/Saber (IV)"},
-          {id: "セ13-13", eng: "13th Day: Afternoon/Tohsaka Sensei’s misunderstanding-Saber’s contradiction"},
-          {id: "セ13-0", eng: "13th Day: Night, use of the Holy Grail/Saber (V)-VS Caster"},
+          {id: "セ13-3", eng: "13th Day: Awakening/The king’s memories", jp: "十三日目・起床/王の記憶"},
+          {id: "セ13-12", eng: "13th Day: Breakfast/Sweets", jp: "十三日目・朝食/スイート"},
+          {id: "セ13-6", eng: "13th Day: Training swordsmanship-Lunchtime/Saber (IV)", jp: "十三日目・剣の稽古〜昼食/セイバー（Ⅳ）"},
+          {
+            id: "セ13-13",
+            eng: "13th Day: Afternoon/Tohsaka Sensei’s misunderstanding-Saber’s contradiction",
+            jp: "十三日目・午後/遠坂先生の勘違い〜セイバーの矛盾",
+          },
+          {
+            id: "セ13-0",
+            eng: "13th Day: Night, use of the Holy Grail/Saber (V)-VS Caster",
+            jp: "十三日目・夜、聖杯の使い道/セイバー（Ⅴ）〜ＶＳキャスター",
+          },
           {
             h: [
-              {id: "セ13-2", eng: "VS Caster/Melee"},
-              {id: "セ13-1", eng: "VS Caster/Walpurgis night"},
+              {id: "セ13-2", eng: "VS Caster/Melee", jp: "ＶＳキャスター/乱戦"},
+              {id: "セ13-1", eng: "VS Caster/Walpurgis night", jp: "ＶＳキャスター/ワルプルギスの夜"},
             ],
           },
           {
             h: [
-              {id: "セ13-4", eng: "VS Caster/Premonition"},
-              {id: "セ13-5", eng: "VS Caster/Walpurgis night"},
+              {id: "セ13-4", eng: "VS Caster/Premonition", jp: "ＶＳキャスター/予感"},
+              {id: "セ13-5", eng: "VS Caster/Walpurgis night", jp: "ＶＳキャスター/ワルプルギスの夜"},
             ],
           },
           {
             h: [
-              {id: "セ13-9", eng: "VS Caster/The eighth Servant"},
-              {id: "セ13-8", eng: "VS Caster/Witch’s mark"},
-              {id: "セ13-15", eng: "Tiger Dojo 9"},
+              {id: "セ13-9", eng: "VS Caster/The eighth Servant", jp: "ＶＳキャスター/第八のサーヴァント"},
+              {id: "セ13-8", eng: "VS Caster/Witch’s mark", jp: "ＶＳキャスター/魔女の烙印"},
+              {id: "セ13-15", eng: "Tiger Dojo 9", jp: "タイガー道場9"},
             ],
           },
           {
             h: [
-              {id: "セ13-7", eng: "13th Day: Night: Meeting/Ten years ago (I)"},
-              {id: "セ13-16", eng: "Tiger Dojo 10"},
+              {id: "セ13-7", eng: "13th Day: Night: Meeting/Ten years ago (I)", jp: "十三日目・夜・会議/十年前（Ⅰ）"},
+              {id: "セ13-16", eng: "Tiger Dojo 10", jp: "タイガー道場10"},
             ],
           },
-          {id: "セ13-11", eng: "13th Day: Late night-To the church/Ten years ago (II)"},
-          {id: "セ13-14", eng: "13th Day: Late night/You’re my only star"},
+          {id: "セ13-11", eng: "13th Day: Late night-To the church/Ten years ago (II)", jp: "十三日目・深夜〜教会へ/十年前（Ⅱ）"},
+          {id: "セ13-14", eng: "13th Day: Late night/You’re my only star", jp: "十三日目・深夜／Youre My Only Star"},
         ],
       }, {
         section: "セ14", v: [
-          {id: "セ14-6", eng: "14th Day: Morning-Date/Hurry go round"},
-          {id: "セ14-8", eng: "14th Day: Date/Boy meets girl (V)"},
-          {id: "セ14-7", eng: "14th Day: Date/Present"},
-          {id: "セ14-9", eng: "14th Day: Return home/Parting at the bridge"},
-          {id: "セ14-10", eng: "14th Day: Night-To town/Last boy meets girl"},
-          {id: "セ14-0", eng: "Encounter/Oldest king"},
-          {id: "セ14-2", eng: "VS Gilgamesh/What I want to protect"},
+          {id: "セ14-6", eng: "14th Day: Morning-Date/Hurry go round", jp: "十四日目・朝〜デート/ハリー・ゴー・ランド"},
+          {id: "セ14-8", eng: "14th Day: Date/Boy meets girl (V)", jp: "十四日目・デート/ボーイ・ミーツ・ガール（Ⅴ）"},
+          {id: "セ14-7", eng: "14th Day: Date/Present", jp: "十四日目・デート/プレゼント"},
+          {id: "セ14-9", eng: "14th Day: Return home/Parting at the bridge", jp: "十四日目・帰宅/橋上の別れ"},
+          {id: "セ14-10", eng: "14th Day: Night-To town/Last boy meets girl", jp: "十四日目・夜〜街へ/ラスト・ボーイ・ミーツ・ガール"},
+          {id: "セ14-0", eng: "Encounter/Oldest king", jp: "遭遇/最古の王"},
+          {id: "セ14-2", eng: "VS Gilgamesh/What I want to protect", jp: "ＶＳギルガメッシュ/守りたいもの"},
           {
             h: [
-              {id: "セ14-4", eng: "VS Gilgamesh/Wish"},
-              {id: "セ14-3", eng: "VS Gilgamesh/One end"},
+              {id: "セ14-4", eng: "VS Gilgamesh/Wish", jp: "ＶＳギルガメッシュ/願い"},
+              {id: "セ14-3", eng: "VS Gilgamesh/One end", jp: "ＶＳギルガメッシュ/一つの結末"},
             ],
           },
           {
             h: [
-              {id: "セ14-111", eng: "14th Day: Night: My room/What I’ve gained"},
-              {id: "セ14-11", eng: "14th Day: Night: My room/What I’ve gained"},
-              {id: "セ14-12", eng: "Tiger Dojo 11"},
+              {id: "セ14-111", eng: "14th Day: Night: My room/What I’ve gained", jp: "十四日目・夜・自室/手に入れたもの"},
+              {id: "セ14-11", eng: "14th Day: Night: My room/What I’ve gained", jp: "十四日目・夜・自室/手に入れたもの"},
+              {id: "セ14-12", eng: "Tiger Dojo 11", jp: "タイガー道場11"},
             ],
           },
-          {id: "セ14-101", eng: "14th Day: Night: My room/Temporary dream"},
+          {id: "セ14-101", eng: "14th Day: Night: My room/Temporary dream", jp: "十四日目・夜・自室/いっときのユメ"},
         ],
       }, {
         section: "セ15", v: [
-          {id: "セ15-0", eng: "15th Day: Awakening-To the church/Spiral ladder"},
+          {id: "セ15-0", eng: "15th Day: Awakening-To the church/Spiral ladder", jp: "十五日目・起床〜教会へ/スパイラル・ラダー"},
           {
             h: [
-              {id: "セ15-2", eng: "15th Day: Church underground/Price of survival, settlement with fate"},
-              {id: "セ15-1", eng: "15th Day: Before noon/Time limit"},
+              {
+                id: "セ15-2",
+                eng: "15th Day: Church underground/Price of survival, settlement with fate",
+                jp: "十五日目・教会地下/生存代償、因縁清算",
+              },
+              {id: "セ15-1", eng: "15th Day: Before noon/Time limit", jp: "十五日目・午前/タイム・リミット"},
             ],
           },
           {
             h: [
-              {id: "セ15-18", eng: "Intermission/Saber, to the church"},
-              {id: "セ15-23", eng: "Tiger Dojo 12"},
+              {id: "セ15-18", eng: "Intermission/Saber, to the church", jp: "幕間/セイバー、教会へ"},
+              {id: "セ15-23", eng: "Tiger Dojo 12", jp: "タイガー道場12"},
             ],
           },
-          {id: "セ15-19", eng: "15th Day: Church underground/Go along the cheek"},
-          {id: "セ15-20", eng: "Intermission/Conflict"},
+          {id: "セ15-19", eng: "15th Day: Church underground/Go along the cheek", jp: "十五日目・教会地下/ほほをつたう"},
+          {id: "セ15-20", eng: "Intermission/Conflict", jp: "幕間/葛藤"},
           {
             h: [
-              {id: "セ15-21", eng: "15th Day: Church/That which cannot be surrendered"},
-              {id: "セ15-3", eng: "15th Day: Church underground/That which cannot be changed"},
-            ],
-          },
-          {
-            h: [
-              {id: "セ15-22", eng: "15th Day: Escape-Foreigner’s cemetery/Shining star"},
-              {id: "セ15-24", eng: "Tiger Dojo 13"},
-            ],
-          },
-          {id: "セ15-14", eng: "15th Day: Return home-Rin/Choice"},
-          {
-            h: [
-              {id: "セ15-15", eng: "Question/Nod"},
-              {id: "セ15-16", eng: "Question/Question"},
-            ],
-          },
-          {id: "セ15-4", eng: "15th Day: Night/Before the decisive battle"},
-          {
-            h: [
-              {id: "セ15-7", eng: "15th Day: In the shed/Strategy meeting"},
-              {id: "セ15-5", eng: "15th Day: Night/Final training"},
-              {id: "セ15-6", eng: "15th Day: Night/Decision"},
+              {id: "セ15-21", eng: "15th Day: Church/That which cannot be surrendered", jp: "十五日目・教会/ゆずれぬとが"},
+              {id: "セ15-3", eng: "15th Day: Church underground/That which cannot be changed", jp: "十五日目・教会地下/変えられぬもの"},
             ],
           },
           {
             h: [
-              {id: "セ15-10", eng: "15th Day: Night/Holy Sword restoration"},
-              {id: "セ15-8", eng: "15th Day: Night: Shed/Trump unknown"},
-              {id: "セ15-9", eng: "15th Day: Night: Shed/Trump unknown"},
+              {id: "セ15-22", eng: "15th Day: Escape-Foreigner’s cemetery/Shining star", jp: "十五日目・脱出〜外人墓地/輝ける星"},
+              {id: "セ15-24", eng: "Tiger Dojo 13", jp: "タイガー道場13"},
+            ],
+          },
+          {id: "セ15-14", eng: "15th Day: Return home-Rin/Choice", jp: "十五日目・帰宅〜凛/選択肢"},
+          {
+            h: [
+              {id: "セ15-15", eng: "Question/Nod", jp: "質問/頷く"},
+              {id: "セ15-16", eng: "Question/Question", jp: "質問/問い"},
+            ],
+          },
+          {id: "セ15-4", eng: "15th Day: Night/Before the decisive battle", jp: "十五日目・夜/決戦前"},
+          {
+            h: [
+              {id: "セ15-7", eng: "15th Day: In the shed/Strategy meeting", jp: "十五日目・土蔵内/作戦会議"},
+              {id: "セ15-5", eng: "15th Day: Night/Final training", jp: "十五日目・夜/最後の稽古"},
+              {id: "セ15-6", eng: "15th Day: Night/Decision", jp: "十五日目・夜/決意"},
             ],
           },
           {
             h: [
-              {id: "セ15-11", eng: "Fate／stay night (I)"},
-              {id: "セ15-12", eng: "15th Day: Decisive battle/Holy Grail completed"},
+              {id: "セ15-10", eng: "15th Day: Night/Holy Sword restoration", jp: "十五日目・夜/聖剣返還"},
+              {id: "セ15-8", eng: "15th Day: Night: Shed/Trump unknown", jp: "十五日目・夜・土蔵/切り札不明"},
+              {id: "セ15-9", eng: "15th Day: Night: Shed/Trump unknown", jp: "十五日・夜・土蔵/切り札不明"},
             ],
           },
           {
             h: [
-              {id: "セ15-13", eng: "Fate／stay night (II)"},
-              {id: "セ15-25", eng: "Tiger Dojo 14"},
+              {id: "セ15-11", eng: "Fate／stay night (I)", jp: "フェイト／ステイナイト（Ⅰ）"},
+              {id: "セ15-12", eng: "15th Day: Decisive battle/Holy Grail completed", jp: "十五日目・決戦/聖杯成就"},
             ],
           },
-          {id: "セ15-17", eng: "Gold separation"},
+          {
+            h: [
+              {id: "セ15-13", eng: "Fate／stay night (II)", jp: "フェイト／ステイナイト（Ⅱ）"},
+              {id: "セ15-25", eng: "Tiger Dojo 14", jp: "タイガー道場14"},
+            ],
+          },
+          {id: "セ15-17", eng: "Gold separation", jp: "黄金の別離。"},
         ],
       },
       ],
     }, {
       v: [{
         section: "凛4", v: [
-          {id: "凛4-0", eng: "4th Day: Awakening-My room/Separation with Rin-Saber"},
+          {id: "凛4-0", eng: "4th Day: Awakening-My room/Separation with Rin-Saber", jp: "四日目・目覚め〜自室/凛との決別〜セイバー"},
           {
             h: [
-              {id: "凛4-1", eng: "Conversation/Flawless blindspot"},
-              {id: "凛4-2", eng: "Conversation/Self-healing"},
+              {id: "凛4-1", eng: "Conversation/Flawless blindspot", jp: "会話中/無傷の死角"},
+              {id: "凛4-2", eng: "Conversation/Self-healing", jp: "会話中/自然治癒"},
             ],
           },
-          {id: "凛4-10", eng: "4th Day: Dojo-Phone/Saber’s compromise-Mistake that is yet to be seen"},
-          {id: "凛4-3", eng: "4th Day: Afternoon: School/Telephone murder Fuji"},
+          {
+            id: "凛4-10",
+            eng: "4th Day: Dojo-Phone/Saber’s compromise-Mistake that is yet to be seen",
+            jp: "四日目・道場〜電話/セイバーの和解〜まだ見ぬ過ち",
+          },
+          {id: "凛4-3", eng: "4th Day: Afternoon: School/Telephone murder Fuji", jp: "四日目・午後・学校/テレフォンマーダー藤"},
           {
             h: [
-              {id: "凛4-4", eng: "4th Day: Archery range/Shooting"},
-              {id: "凛4-5", eng: "4th Day: Student council room/Breathing"},
-              {id: "凛4-6", eng: "4th Day: Showing around school/Do not play with the sheath"},
+              {id: "凛4-4", eng: "4th Day: Archery range/Shooting", jp: "四日目・弓道場/立射"},
+              {id: "凛4-5", eng: "4th Day: Student council room/Breathing", jp: "四日目・生徒会室/是の呼吸"},
+              {
+                id: "凛4-6",
+                eng: "4th Day: Showing around school/Do not play with the sheath",
+                jp: "四日目・学校案内/鞘で遊んではいけません",
+              },
             ],
           },
-          {id: "凛4-7", eng: "4th Day: Returning home-Dinner/Introduce Saber to Fuji-Nee-Girls United?"},
+          {
+            id: "凛4-7",
+            eng: "4th Day: Returning home-Dinner/Introduce Saber to Fuji-Nee-Girls United?",
+            jp: "四日目・帰宅〜夕食/藤ねえたちにセイバーを紹介〜女の子同盟？",
+          },
           {
             h: [
-              {id: "凛4-9", eng: "4th Day: Night-Bedtime/Training, meditation"},
-              {id: "凛4-12", eng: "4th Day: Bedtime/Training in magic"},
+              {id: "凛4-9", eng: "4th Day: Night-Bedtime/Training, meditation", jp: "四日目・夜〜就寝/鍛練、瞑想"},
+              {id: "凛4-12", eng: "4th Day: Bedtime/Training in magic", jp: "四日目・就寝/魔術鍛練"},
             ],
           },
-          {id: "凛4-11", eng: "Intermission/Tohsaka Rin (II)"},
+          {id: "凛4-11", eng: "Intermission/Tohsaka Rin (II)", jp: "幕間/遠坂凛（Ⅱ）"},
         ],
       }, {
         section: "凛5", v: [
-          {id: "凛5-0", eng: "5th Day: Morning/Choice"},
+          {id: "凛5-0", eng: "5th Day: Morning/Choice", jp: "五日目・朝/選択肢。"},
           {
             h: [
-              {id: "凛5-1", eng: "5th Day: Morning/See how Saber’s doing"},
-              {id: "凛5-2", eng: "5th Day: Morning/Preparation of breakfast with Sakura"},
-              {id: "凛5-3", eng: "5th Day: Morning/Fuji-Nee Jigoku Guruma"},
+              {id: "凛5-1", eng: "5th Day: Morning/See how Saber’s doing", jp: "五日目・朝/セイバーの様子を見る"},
+              {id: "凛5-2", eng: "5th Day: Morning/Preparation of breakfast with Sakura", jp: "五日目・朝/桜と朝食の支度"},
+              {id: "凛5-3", eng: "5th Day: Morning/Fuji-Nee Jigoku Guruma", jp: "五日目・朝/藤ねえ地獄車"},
             ],
           },
-          {id: "凛5-20", eng: "5th Day: Breakfast-Way to school/Everyday (II)"},
+          {id: "凛5-20", eng: "5th Day: Breakfast-Way to school/Everyday (II)", jp: "五日目・朝食〜登校/日常（Ⅱ）"},
           {
             h: [
-              {id: "凛5-21", eng: "5th Day: Morning, school/Tohsaka Rin, Mitsuzuri Ayako"},
-              {id: "凛5-27", eng: "5th Day: School/Compensation for the pride"},
+              {id: "凛5-21", eng: "5th Day: Morning, school/Tohsaka Rin, Mitsuzuri Ayako", jp: "五日目・朝、学校/遠坂凛、美綴綾子"},
+              {id: "凛5-27", eng: "5th Day: School/Compensation for the pride", jp: "五日目・学校/誇りの代償"},
             ],
           },
-          {id: "凛5-4", eng: "5th Day: After school/Tohsaka Rin (III)"},
+          {id: "凛5-4", eng: "5th Day: After school/Tohsaka Rin (III)", jp: "五日目・放課後/遠坂凛（Ⅲ）"},
           {
             h: [
-              {id: "凛5-6", eng: "VS Tohsaka Rin/Panic sonic roller coaster"},
-              {id: "凛5-5", eng: "5th Day: After school/Texture"},
-            ],
-          },
-          {
-            h: [
-              {id: "凛5-9", eng: "5th Day: Staredown-To the woods/Hanging death-VS Rider"},
-              {id: "凛5-25", eng: "Tiger Dojo 16"},
+              {id: "凛5-6", eng: "VS Tohsaka Rin/Panic sonic roller coaster", jp: "ＶＳ遠坂凛/パニックソニックコースター"},
+              {id: "凛5-5", eng: "5th Day: After school/Texture", jp: "五日目・放課後/テクスチャー"},
             ],
           },
           {
             h: [
-              {id: "凛5-11", eng: "VS Rider/Fighting back"},
-              {id: "凛5-12", eng: "VS Rider/Hard fighting"},
-              {id: "凛5-10", eng: "VS Rider/Spider’s captive"},
+              {
+                id: "凛5-9",
+                eng: "5th Day: Staredown-To the woods/Hanging death-VS Rider",
+                jp: "五日目・睨み合い〜雑木林へ/絞首刑〜ＶＳライダー",
+              },
+              {id: "凛5-25", eng: "Tiger Dojo 16", jp: "タイガー道場16"},
             ],
           },
           {
             h: [
-              {id: "凛5-13", eng: "5th Day: Woods-Tohsaka residence/Rin’s treatment"},
-              {id: "凛5-26", eng: "Tiger Dojo 17"},
+              {id: "凛5-11", eng: "VS Rider/Fighting back", jp: "ＶＳライダー/応戦"},
+              {id: "凛5-12", eng: "VS Rider/Hard fighting", jp: "ＶＳライダー/奮戦"},
+              {id: "凛5-10", eng: "VS Rider/Spider’s captive", jp: "ＶＳライダー/蜘蛛の虜"},
             ],
           },
           {
             h: [
-              {id: "凛5-14", eng: "5th Day: Rin’s room/Natural-healing body"},
-              {id: "凛5-15", eng: "5th Day: Rin’s room/Healing still present"},
+              {id: "凛5-13", eng: "5th Day: Woods-Tohsaka residence/Rin’s treatment", jp: "五日目・雑木林〜遠坂邸/凛の治療"},
+              {id: "凛5-26", eng: "Tiger Dojo 17", jp: "タイガー道場17"},
             ],
           },
-          {id: "凛5-22", eng: "5th Day: Rin’s room/Cooperation established"},
-          {id: "凛5-23", eng: "5th Day: Return home/Definition of a hero"},
-          {id: "凛5-24", eng: "5th Day: Dinner/Tonight’s dinner"},
-          {id: "凛5-16", eng: "5th Day: Night/Inform Saber about cooperation with Rin"},
           {
             h: [
-              {id: "凛5-17", eng: "5th Day: Bedtime/Warning"},
-              {id: "凛5-18", eng: "5th Day: Bedtime/Agreement"},
+              {id: "凛5-14", eng: "5th Day: Rin’s room/Natural-healing body", jp: "五日目・凛の部屋/自然治癒の体"},
+              {id: "凛5-15", eng: "5th Day: Rin’s room/Healing still present", jp: "五日目・凛の部屋/治癒健在"},
+            ],
+          },
+          {id: "凛5-22", eng: "5th Day: Rin’s room/Cooperation established", jp: "五日目・凛の部屋/協力関係、成立"},
+          {id: "凛5-23", eng: "5th Day: Return home/Definition of a hero", jp: "五日目・帰宅/英雄の定義"},
+          {id: "凛5-24", eng: "5th Day: Dinner/Tonight’s dinner", jp: "五日目・夕食/本日の夕食"},
+          {
+            id: "凛5-16",
+            eng: "5th Day: Night/Inform Saber about cooperation with Rin",
+            jp: "五日目・夜/セイバーに、凛と協力関係になったと報告。",
+          },
+          {
+            h: [
+              {id: "凛5-17", eng: "5th Day: Bedtime/Warning", jp: "五日目・就寝/忠告"},
+              {id: "凛5-18", eng: "5th Day: Bedtime/Agreement", jp: "五日目・就寝/同意"},
             ],
           },
         ],
       }, {
         section: "凛6", v: [
-          {id: "凛6-13", eng: "Intermission/A story"},
-          {id: "凛6-8", eng: "6th Day: Morning-School/Shinji and Mitsuzuri"},
-          {id: "凛6-9", eng: "6th Day: After school/Boundary field search"},
-          {id: "凛6-10", eng: "6th Day: After school/Master identified"},
-          {id: "凛6-0", eng: "6th Day: Return home, before dinner/Fuji-Nee’s three minute ducking"},
+          {id: "凛6-13", eng: "Intermission/A story", jp: "幕間/ある話。"},
+          {id: "凛6-8", eng: "6th Day: Morning-School/Shinji and Mitsuzuri", jp: "六日目・朝〜学校/慎二と美綴"},
+          {id: "凛6-9", eng: "6th Day: After school/Boundary field search", jp: "六日目・放課後/結界探し"},
+          {id: "凛6-10", eng: "6th Day: After school/Master identified", jp: "六日目・放課後/マスター判明"},
+          {
+            id: "凛6-0",
+            eng: "6th Day: Return home, before dinner/Fuji-Nee’s three minute ducking",
+            jp: "六日目・帰宅、夕食前/藤ねえの三分間ダッキング",
+          },
           {
             h: [
-              {id: "凛6-1", eng: "6th Day: Before dinner/Assault, stop the okonomiyaki bowl"},
-              {id: "凛6-2", eng: "6th Day: Matou household/People at the Matou household"},
-              {id: "凛6-3", eng: "6th Day: Dojo/Report about today"},
+              {id: "凛6-1", eng: "6th Day: Before dinner/Assault, stop the okonomiyaki bowl", jp: "六日目・夕食前/強襲、お好み焼き丼阻止"},
+              {id: "凛6-2", eng: "6th Day: Matou household/People at the Matou household", jp: "六日目・〜間桐邸/間桐家の人々"},
+              {id: "凛6-3", eng: "6th Day: Dojo/Report about today", jp: "六日目・〜道場/今日の報告"},
             ],
           },
           {
             h: [
-              {id: "凛6-4", eng: "6th Day: After dinner, training/Tiger Dojo, extra edition"},
-              {id: "凛6-5", eng: "6th Day: After dinner, training/Peaceful moment"},
+              {
+                id: "凛6-4",
+                eng: "6th Day: After dinner, training/Tiger Dojo, extra edition",
+                jp: "六日目・夕食後、剣の稽古/タイガー道場、番外編",
+              },
+              {id: "凛6-5", eng: "6th Day: After dinner, training/Peaceful moment", jp: "六日目・夕食後、剣の稽古/平和な一時"},
             ],
           },
-          {id: "凛6-6", eng: "6th Day: Midnight/Calling"},
-          {id: "凛6-14", eng: "Intermission/Saber VS Assassin"},
-          {id: "凛6-11", eng: "6th Day: Ryuudou Temple/Archer VS Caster"},
-          {id: "凛6-12", eng: "6th Day: Ryuudou Temple/Fall down, your mind"},
+          {id: "凛6-6", eng: "6th Day: Midnight/Calling", jp: "六日目・深夜/コーリング"},
+          {id: "凛6-14", eng: "Intermission/Saber VS Assassin", jp: "幕間/セイバーＶＳアサシン"},
+          {id: "凛6-11", eng: "6th Day: Ryuudou Temple/Archer VS Caster", jp: "六日目・柳洞寺境内/アーチャーＶＳキャスター"},
+          {id: "凛6-12", eng: "6th Day: Ryuudou Temple/Fall down, your mind", jp: "六日目・柳洞寺境内/フォールダウン、ユアマインド"},
         ],
       }, {
         section: "凛7", v: [
-          {id: "凛7-11", eng: "7th Day: Morning-Training swordsmanship/Saber unhappy"},
-          {id: "凛7-0", eng: "7th Day: School, lunchtime/Creeping shadow of the demon"},
+          {id: "凛7-11", eng: "7th Day: Morning-Training swordsmanship/Saber unhappy", jp: "七日目・朝〜剣の稽古/セイバー、不機嫌"},
+          {id: "凛7-0", eng: "7th Day: School, lunchtime/Creeping shadow of the demon", jp: "七日目・学校・昼休み/忍び寄るアクマの影"},
           {
             h: [
-              {id: "凛7-1", eng: "7th Day: Lunchtime/Smart move"},
-              {id: "凛7-2", eng: "7th Day: Lunchtime/Magical bullet shooter"},
-              {id: "凛7-3", eng: "7th Day: Lunchtime/Magical bullet shooter"},
+              {id: "凛7-1", eng: "7th Day: Lunchtime/Smart move", jp: "七日目・昼休み/賢明な判断"},
+              {id: "凛7-2", eng: "7th Day: Lunchtime/Magical bullet shooter", jp: "七日目・昼休み/魔弾の射手"},
+              {id: "凛7-3", eng: "7th Day: Lunchtime/Magical bullet shooter", jp: "七日目・昼休み/魔弾の射手"},
             ],
           },
-          {id: "凛7-12", eng: "7th Day: Rooftop/Tohsaka Rin (IV)"},
-          {id: "凛7-4", eng: "7th Day: Boundary field activation/Choice"},
+          {id: "凛7-12", eng: "7th Day: Rooftop/Tohsaka Rin (IV)", jp: "七日目・屋上/遠坂凛（Ⅳ）"},
+          {id: "凛7-4", eng: "7th Day: Boundary field activation/Choice", jp: "七日目・結界発動/選択肢"},
           {
             h: [
-              {id: "凛7-5", eng: "7th Day: Bloodfort/Rin’s warning"},
-              {id: "凛7-6", eng: "7th Day: Bloodfort/Command Spell, second time"},
+              {id: "凛7-5", eng: "7th Day: Bloodfort/Rin’s warning", jp: "七日目・鮮血神殿/凛の忠告"},
+              {id: "凛7-6", eng: "7th Day: Bloodfort/Command Spell, second time", jp: "七日目・鮮血神殿/令呪、二回目"},
             ],
           },
-          {id: "凛7-8", eng: "7th Day: Bloodfort/Rider’s death"},
-          {id: "凛7-9", eng: "7th Day: Woods/Quarrel"},
-          {id: "凛7-7", eng: "7th Day: Return home-Bedtime/Thinking in the night"},
+          {id: "凛7-8", eng: "7th Day: Bloodfort/Rider’s death", jp: "七日目・鮮血神殿/ライダーの死"},
+          {id: "凛7-9", eng: "7th Day: Woods/Quarrel", jp: "七日目・〜雑木林/諍い"},
+          {id: "凛7-7", eng: "7th Day: Return home-Bedtime/Thinking in the night", jp: "七日目・帰宅〜就寝/夜に想う"},
         ],
       }, {
         section: "凛8", v: [
-          {id: "凛8-9", eng: "Intermission/A story"},
-          {id: "凛8-8", eng: "8th Day: Morning-Way to school/Rin-sama angry"},
-          {id: "凛8-0", eng: "8th Day: Lunchtime, student council room/Suspicion towards Issei is lifted, but…?"},
+          {id: "凛8-9", eng: "Intermission/A story", jp: "幕間/ある話。"},
+          {id: "凛8-8", eng: "8th Day: Morning-Way to school/Rin-sama angry", jp: "八日目・朝〜登校/凛さまご立腹"},
+          {
+            id: "凛8-0",
+            eng: "8th Day: Lunchtime, student council room/Suspicion towards Issei is lifted, but…?",
+            jp: "八日目・昼休み・生徒会室/一成への疑惑は晴れたが……？",
+          },
           {
             h: [
-              {id: "凛8-10", eng: "8th Day: Student council room/Chasing too far prohibited"},
-              {id: "凛8-1", eng: "8th Day: Student council room/Hypnos"},
+              {id: "凛8-10", eng: "8th Day: Student council room/Chasing too far prohibited", jp: "八日目・生徒会室/深追い厳禁"},
+              {id: "凛8-1", eng: "8th Day: Student council room/Hypnos", jp: "八日目・生徒会室/ヒュプノス"},
             ],
           },
           {
             h: [
-              {id: "凛8-11", eng: "Intermission/Another blessing for this loser"},
-              {id: "凛8-12", eng: "Tiger Dojo 18"},
+              {id: "凛8-11", eng: "Intermission/Another blessing for this loser", jp: "幕間/この敗者に今一度の祝福を"},
+              {id: "凛8-12", eng: "Tiger Dojo 18", jp: "タイガー道場18"},
             ],
           },
-          {id: "凛8-2", eng: "8th Day: After school/Choice"},
+          {id: "凛8-2", eng: "8th Day: After school/Choice", jp: "八日目・放課後/選択肢。"},
           {
             h: [
-              {id: "凛8-3", eng: "8th Day: After school-Matou household/The strange two"},
-              {id: "凛8-4", eng: "8th Day: After school-Return home/Contact via phone"},
-              {id: "凛8-5", eng: "8th Day: After school-Shopping district/Strange maid"},
+              {id: "凛8-3", eng: "8th Day: After school-Matou household/The strange two", jp: "八日目・放課後〜間桐邸/あやしい二人"},
+              {id: "凛8-4", eng: "8th Day: After school-Return home/Contact via phone", jp: "八日目・放課後〜帰宅/電話で連絡"},
+              {id: "凛8-5", eng: "8th Day: After school-Shopping district/Strange maid", jp: "八日目・放課後〜商店街/おかしなメイド"},
             ],
           },
-          {id: "凛8-6", eng: "8th Day: Dinner-Bedtime/Reason"},
+          {id: "凛8-6", eng: "8th Day: Dinner-Bedtime/Reason", jp: "八日目・夕食〜就寝/その理由"},
         ],
       }, {
         section: "凛9", v: [
-          {id: "凛9-7", eng: "Intermission/A story of a knight"},
-          {id: "凛9-8", eng: "9th Day: Morning-After school/Guests at the Ryuudou Temple"},
-          {id: "凛9-0", eng: "9th Day: Night/Ambush, decisive action"},
+          {id: "凛9-7", eng: "Intermission/A story of a knight", jp: "幕間/ある騎士の物語。"},
+          {id: "凛9-8", eng: "9th Day: Morning-After school/Guests at the Ryuudou Temple", jp: "九日目・朝〜放課後/柳洞寺の客人"},
+          {id: "凛9-0", eng: "9th Day: Night/Ambush, decisive action", jp: "九日目・夜/奇襲、決行"},
           {
             h: [
-              {id: "凛9-1", eng: "9th Day: Night, ambush/Stop"},
-              {id: "凛9-2", eng: "9th Day: Night, ambush/Watch"},
+              {id: "凛9-1", eng: "9th Day: Night, ambush/Stop", jp: "九日目・夜・奇襲/止める"},
+              {id: "凛9-2", eng: "9th Day: Night, ambush/Watch", jp: "九日目・夜・奇襲/見届ける"},
             ],
           },
-          {id: "凛9-12", eng: "9th Day: Ambush/Master of the magus"},
-          {id: "凛9-9", eng: "Intermission/Poisonous snake, jack of all trades"},
-          {id: "凛9-3", eng: "9th Day: Ambush/Defeat"},
+          {id: "凛9-12", eng: "9th Day: Ambush/Master of the magus", jp: "九日目・奇襲/魔術師の主"},
+          {id: "凛9-9", eng: "Intermission/Poisonous snake, jack of all trades", jp: "幕間/毒蛇百芸"},
+          {id: "凛9-3", eng: "9th Day: Ambush/Defeat", jp: "九日目・奇襲/敗北"},
           {
             h: [
-              {id: "凛9-5", eng: "9th Day: Ambush/Fight back, projection magic"},
-              {id: "凛9-4", eng: "9th Day: Ambush/Killer"},
+              {id: "凛9-5", eng: "9th Day: Ambush/Fight back, projection magic", jp: "九日目・奇襲/応戦、投影魔術"},
+              {id: "凛9-4", eng: "9th Day: Ambush/Killer", jp: "九日目・奇襲/殺人鬼"},
             ],
           },
           {
             h: [
-              {id: "凛9-13", eng: "9th Day: Night, intersection/Plan failed, Rin’s wonder"},
-              {id: "凛9-14", eng: "Tiger Dojo 19"},
+              {id: "凛9-13", eng: "9th Day: Night, intersection/Plan failed, Rin’s wonder", jp: "九日目・夜・交差点/作戦失敗、凛の疑惑"},
+              {id: "凛9-14", eng: "Tiger Dojo 19", jp: "タイガー道場19"},
             ],
           },
-          {id: "凛9-10", eng: "9th Day: Bedtime/Rebound"},
-          {id: "凛9-11", eng: "Intermission/Result of Utnapishtim"},
+          {id: "凛9-10", eng: "9th Day: Bedtime/Rebound", jp: "九日目・就寝/リバウンド"},
+          {id: "凛9-11", eng: "Intermission/Result of Utnapishtim", jp: "幕間/ナピシュチムの末"},
         ],
       }, {
         section: "凛10", v: [
-          {id: "凛10-6", eng: "10th Day: Awakening-School-Return home/Half the body paralyzed"},
-          {id: "凛10-7", eng: "10th Day: Afternoon/Rin strikes back!"},
-          {id: "凛10-0", eng: "10th Day: Before dinner/Fuji-Nee VS Rin"},
+          {
+            id: "凛10-6",
+            eng: "10th Day: Awakening-School-Return home/Half the body paralyzed",
+            jp: "十日目・起床〜学校〜帰宅/麻痺した半身",
+          },
+          {id: "凛10-7", eng: "10th Day: Afternoon/Rin strikes back!", jp: "十日目・午後/リン・ストライクバック！"},
+          {id: "凛10-0", eng: "10th Day: Before dinner/Fuji-Nee VS Rin", jp: "十日目・夕食前/藤ねえＶＳ凛"},
           {
             h: [
-              {id: "凛10-1", eng: "10th Day: Night/Conversation on projection magic"},
-              {id: "凛10-2", eng: "10th Day: Night, dojo/Wild Wild England"},
-              {id: "凛10-3", eng: "10th Day: Night, living room/Which one do you like?"},
+              {id: "凛10-1", eng: "10th Day: Night/Conversation on projection magic", jp: "十日目・夜/投影魔術の話"},
+              {id: "凛10-2", eng: "10th Day: Night, dojo/Wild Wild England", jp: "十日目・夜・道場/ワイルドワイルドイングランド"},
+              {id: "凛10-3", eng: "10th Day: Night, living room/Which one do you like?", jp: "十日目・夜・居間/どっちが好きなの？"},
             ],
           },
-          {id: "凛10-4", eng: "10th Day: Night, porch/Tohsaka Rin (V)-Shirou’s defect"},
-          {id: "凛10-8", eng: "10th Day: Bedtime-Shed/Night training-Warning"},
+          {id: "凛10-4", eng: "10th Day: Night, porch/Tohsaka Rin (V)-Shirou’s defect", jp: "十日目・夜・縁側/遠坂凛（Ⅴ）〜士郎の瑕"},
+          {id: "凛10-8", eng: "10th Day: Bedtime-Shed/Night training-Warning", jp: "十日目・就寝〜土蔵/夜の鍛練〜警告"},
         ],
       }, {
         section: "凛11", v: [
-          {id: "凛11-0", eng: "11th Day: Early morning/Bread disappearing incident"},
+          {id: "凛11-0", eng: "11th Day: Early morning/Bread disappearing incident", jp: "十一日目・早朝/食パン消失事件"},
           {
             h: [
-              {id: "凛11-1", eng: "11th Day: Early morning, outbuilding/You’re the culprit"},
-              {id: "凛11-2", eng: "11th Day: Early morning/Legend of the fastest one in Miyama City"},
+              {id: "凛11-1", eng: "11th Day: Early morning, outbuilding/You’re the culprit", jp: "十一日目・早朝・離れ/犯人はオマエ"},
+              {
+                id: "凛11-2",
+                eng: "11th Day: Early morning/Legend of the fastest one in Miyama City",
+                jp: "十一日目・早朝〜/深山町最速伝説",
+              },
             ],
           },
           {
             h: [
-              {id: "凛11-9", eng: "11th Day: Shopping district/Life signal lighted"},
-              {id: "凛11-3", eng: "11th Day: Rin’s guest room/Good morning?"},
+              {id: "凛11-9", eng: "11th Day: Shopping district/Life signal lighted", jp: "十一日目・〜商店街へ/ライフシグナル大回灯"},
+              {id: "凛11-3", eng: "11th Day: Rin’s guest room/Good morning?", jp: "十一日目・凛の客間/グッドモーニング？"},
             ],
           },
-          {id: "凛11-10", eng: "11th Day: Breakfast/Culprit arrest"},
-          {id: "凛11-11", eng: "11th Day: Morning/Let’s go on a date!"},
-          {id: "凛11-4", eng: "11th Day: Shinto/Special?"},
-          {id: "凛11-8", eng: "11th Day: Afternoon, return home/Caster’s attack"},
+          {id: "凛11-10", eng: "11th Day: Breakfast/Culprit arrest", jp: "十一日目・朝食/犯人逮捕"},
+          {id: "凛11-11", eng: "11th Day: Morning/Let’s go on a date!", jp: "十一日目・朝/デートに行こう！"},
+          {id: "凛11-4", eng: "11th Day: Shinto/Special?", jp: "十一日目・新都/スペシャル？"},
+          {id: "凛11-8", eng: "11th Day: Afternoon, return home/Caster’s attack", jp: "十一日目・午後・帰宅/キャスター襲来"},
           {
             h: [
-              {id: "凛11-6", eng: "Refusal/Distortion (III)-Rule Breaker"},
-              {id: "凛11-5", eng: "11th Day: Capsule/Hazy"},
+              {id: "凛11-6", eng: "Refusal/Distortion (III)-Rule Breaker", jp: "拒否/ディストレーション（Ⅲ）〜ルールブレイカー"},
+              {id: "凛11-5", eng: "11th Day: Capsule/Hazy", jp: "十一日目・カプセル/朧"},
             ],
           },
           {
             h: [
-              {id: "凛11-12", eng: "11th Day: Escape-To the Tohsaka household/Withdrawal"},
-              {id: "凛11-17", eng: "Tiger Dojo 20"},
+              {id: "凛11-12", eng: "11th Day: Escape-To the Tohsaka household/Withdrawal", jp: "十一日目・逃走〜遠坂邸へ/戦線離脱"},
+              {id: "凛11-17", eng: "Tiger Dojo 20", jp: "タイガー道場20"},
             ],
           },
-          {id: "凛11-15", eng: "Intermission/Tohsaka Rin (VI)"},
-          {id: "凛11-16", eng: "11th Day: Night, building rooftop/Distance"},
-          {id: "凛11-13", eng: "Intermission/Witch’s plan"},
-          {id: "凛11-14", eng: "11th Day: Return home-My room/Reason to fight"},
+          {id: "凛11-15", eng: "Intermission/Tohsaka Rin (VI)", jp: "幕間/遠坂凛（Ⅵ）"},
+          {id: "凛11-16", eng: "11th Day: Night, building rooftop/Distance", jp: "十一日目・夜・ビル屋上/ディスタンス"},
+          {id: "凛11-13", eng: "Intermission/Witch’s plan", jp: "幕間/魔女の思惑"},
+          {id: "凛11-14", eng: "11th Day: Return home-My room/Reason to fight", jp: "十一日目・帰宅〜自室/戦う理由"},
         ],
       }, {
         section: "凛12", v: [
-          {id: "凛12-14", eng: "Intermission/Holy woman violated|Intermission/Captured knight|gmature"},
+          {id: "凛12-14", eng: "Intermission/Holy woman violated|Intermission/Captured knight|gmature", jp: "幕間/囚われの騎士"},
           {
             h: [
-              {id: "凛12-0", eng: "12th Day: To battle/Choice"},
-              {id: "凛12-15", eng: "12th Day: To battle/Source of information"},
+              {id: "凛12-0", eng: "12th Day: To battle/Choice", jp: "十二日目・戦いへ/選択肢"},
+              {id: "凛12-15", eng: "12th Day: To battle/Source of information", jp: "十二日目・戦いへ/情報源"},
             ],
           },
           {
             h: [
-              {id: "凛12-1", eng: "12th Day: Shinto/Search and lure"},
-              {id: "凛12-3", eng: "12th Day: Church/Bad luck"},
+              {id: "凛12-1", eng: "12th Day: Shinto/Search and lure", jp: "十二日目・新都へ/囮探索"},
+              {id: "凛12-3", eng: "12th Day: Church/Bad luck", jp: "十二日目・教会/バッドラック"},
             ],
           },
           {
             h: [
-              {id: "凛12-12", eng: "Intermission/Unlimited───"},
-              {id: "凛12-2", eng: "12th Day: Church-Palm/Artificial Noble Phantasm"},
-              {id: "凛12-10", eng: "12th Day: Church-Palm/Artificial Noble Phantasm"},
-              {id: "凛12-11", eng: "12th Day: Church-Palm/Artificial Noble Phantasm"},
+              {id: "凛12-12", eng: "Intermission/Unlimited───", jp: "幕間/無限の───"},
+              {id: "凛12-2", eng: "12th Day: Church-Palm/Artificial Noble Phantasm", jp: "十二日目・教会〜掌/人工宝具"},
+              {id: "凛12-10", eng: "12th Day: Church-Palm/Artificial Noble Phantasm", jp: "十二日目・教会〜掌/人工宝具"},
+              {id: "凛12-11", eng: "12th Day: Church-Palm/Artificial Noble Phantasm", jp: "十二日目・教会〜掌/人工宝具"},
             ],
           },
           {
             h: [
-              {id: "凛12-4", eng: "12th Day: Night-Church basement/Confrontation between Rin and Caster"},
-              {id: "凛12-16", eng: "Tiger Dojo 21"},
+              {
+                id: "凛12-4",
+                eng: "12th Day: Night-Church basement/Confrontation between Rin and Caster",
+                jp: "十二日目・夜〜教会地下/対峙する凛とキャスター",
+              },
+              {id: "凛12-16", eng: "Tiger Dojo 21", jp: "タイガー道場21"},
             ],
           },
           {
             h: [
-              {id: "凛12-6", eng: "12th Day: Confrontation/Estrangement"},
-              {id: "凛12-5", eng: "12th Day: Church basement/Sword and magic"},
+              {id: "凛12-6", eng: "12th Day: Confrontation/Estrangement", jp: "十二日目・対峙/離反"},
+              {id: "凛12-5", eng: "12th Day: Church basement/Sword and magic", jp: "十二日目・教会地下/剣と魔術"},
             ],
           },
           {
             h: [
-              {id: "凛12-7", eng: "12th Day: Confrontation/Resistance of the body"},
-              {id: "凛12-17", eng: "Tiger Dojo 22"},
+              {id: "凛12-7", eng: "12th Day: Confrontation/Resistance of the body", jp: "十二日目・対峙/肉体反抗"},
+              {id: "凛12-17", eng: "Tiger Dojo 22", jp: "タイガー道場22"},
             ],
           },
-          {id: "凛12-8", eng: "12th Day: Confrontation/Desperate projection-return alive"},
-          {id: "凛12-13", eng: "12th Day: Foreigners’ cemetery/Tohsaka Rin (VII)"},
+          {id: "凛12-8", eng: "12th Day: Confrontation/Desperate projection-return alive", jp: "十二日目・対峙/決死の投影〜生還"},
+          {id: "凛12-13", eng: "12th Day: Foreigners’ cemetery/Tohsaka Rin (VII)", jp: "十二日目・夜の外人墓地/遠坂凛（Ⅶ）"},
         ],
       }, {
         section: "凛13", v: [
-          {id: "凛13-11", eng: "12th Day: Return home-Dinner/Warm dinnertime"},
-          {id: "凛13-0", eng: "12th Day: Strategy meeting/Is there a way?"},
+          {id: "凛13-11", eng: "12th Day: Return home-Dinner/Warm dinnertime", jp: "十二日目・帰宅〜夕食/温かな夕食"},
+          {id: "凛13-0", eng: "12th Day: Strategy meeting/Is there a way?", jp: "十二日目・作戦会議/打開策、ある？"},
           {
             h: [
-              {id: "凛13-1", eng: "Rin’s smile/The scary type"},
-              {id: "凛13-2", eng: "Rin’s distress/The serious type"},
-              {id: "凛13-3", eng: "Rin’s smile/The good type"},
+              {id: "凛13-1", eng: "Rin’s smile/The scary type", jp: "凛の笑顔/怖いタイプ"},
+              {id: "凛13-2", eng: "Rin’s distress/The serious type", jp: "凛の憂い/真面目なタイプ"},
+              {id: "凛13-3", eng: "Rin’s smile/The good type", jp: "凛の笑顔/なんかいいタイプ"},
             ],
           },
-          {id: "凛13-12", eng: "12th Day: Nap/Plan determined, sleep"},
-          {id: "凛13-13", eng: "Intermission/Princess Medea"},
-          {id: "凛13-14", eng: "13th Day: Awakening-To the forest/Winter forest, the great devil gets really angry"},
-          {id: "凛13-21", eng: "13th Day/Entering Einzbern Castle"},
-          {id: "凛13-4", eng: "13th Day: Einzbern Castle/Gilgamesh VS Berserker"},
+          {id: "凛13-12", eng: "12th Day: Nap/Plan determined, sleep", jp: "十二日目・〜仮眠/方針決定、睡眠"},
+          {id: "凛13-13", eng: "Intermission/Princess Medea", jp: "幕間/王女メディア"},
+          {
+            id: "凛13-14",
+            eng: "13th Day: Awakening-To the forest/Winter forest, the great devil gets really angry",
+            jp: "十三日目・目覚め〜森へ/冬の森、大魔神かなり怒る",
+          },
+          {id: "凛13-21", eng: "13th Day/Entering Einzbern Castle", jp: "十三日目/アインツベルン城侵入"},
+          {id: "凛13-4", eng: "13th Day: Einzbern Castle/Gilgamesh VS Berserker", jp: "十三日目・アインツベルン城/ギルガメッシュＶＳバーサーカー"},
           {
             h: [
-              {id: "凛13-15", eng: "Decision/Distortion (IV)"},
-              {id: "凛13-6", eng: "Decision/Illya’s death"},
+              {id: "凛13-15", eng: "Decision/Distortion (IV)", jp: "決断/ディストレーション（Ⅳ）"},
+              {id: "凛13-6", eng: "Decision/Illya’s death", jp: "決断/イリヤの死。"},
             ],
           },
-          {id: "凛13-16", eng: "Intermission/Winter forest"},
-          {id: "凛13-17", eng: "Einzbern Castle/Puppet master"},
-          {id: "凛13-18", eng: "Einzbern Castle/Your distortion"},
-          {id: "凛13-5", eng: "Einzbern Castle: Setting sun/Lancer’s proposal"},
+          {id: "凛13-16", eng: "Intermission/Winter forest", jp: "幕間/冬の森"},
+          {id: "凛13-17", eng: "Einzbern Castle/Puppet master", jp: "アインツベルン城/傀儡の主"},
+          {id: "凛13-18", eng: "Einzbern Castle/Your distortion", jp: "アインツベルン城/君の歪み"},
+          {id: "凛13-5", eng: "Einzbern Castle: Setting sun/Lancer’s proposal", jp: "アインツベルン城・落陽/ランサーの提案"},
           {
             h: [
-              {id: "凛13-9", eng: "Joint force proposal/Refuse"},
-              {id: "凛13-7", eng: "Joint force proposal/Consent"},
-              {id: "凛13-8", eng: "Joint force proposal/Rin-sama embarrassed and angry"},
+              {id: "凛13-9", eng: "Joint force proposal/Refuse", jp: "共闘提案/断る"},
+              {id: "凛13-7", eng: "Joint force proposal/Consent", jp: "共闘提案/快諾"},
+              {id: "凛13-8", eng: "Joint force proposal/Rin-sama embarrassed and angry", jp: "共闘提案/凛さま照れ怒る"},
             ],
           },
           {
             h: [
-              {id: "凛13-19", eng: "13th Day: Night-To the church/One conclusion"},
-              {id: "凛13-20", eng: "13th Day: Night-To the church/Past the night"},
+              {id: "凛13-19", eng: "13th Day: Night-To the church/One conclusion", jp: "十三日目・夜〜教会へ/或る結末。"},
+              {id: "凛13-20", eng: "13th Day: Night-To the church/Past the night", jp: "十三日目・夜〜教会へ/夜を越えて"},
             ],
           },
-          {id: "凛13-22", eng: "Tiger Dojo 23"},
+          {id: "凛13-22", eng: "Tiger Dojo 23", jp: "タイガー道場23"},
         ],
       }, {
         section: "凛14", v: [
-          {id: "凛14-17", eng: "14th Day: Dawn-Church/Battle start"},
-          {id: "凛14-18", eng: "14th Day: Church underground temple/Showdown"},
-          {id: "凛14-19", eng: "Intermission/Lance of sure hit, shield of no loss"},
-          {id: "凛14-20", eng: "Showdown/Rin’s clever attack"},
-          {id: "凛14-0", eng: "Battle, end of battle/Choice"},
+          {id: "凛14-17", eng: "14th Day: Dawn-Church/Battle start", jp: "十四日目・夜明け〜教会/戦闘開始"},
+          {id: "凛14-18", eng: "14th Day: Church underground temple/Showdown", jp: "十四日目・教会地下聖堂/対決"},
+          {id: "凛14-19", eng: "Intermission/Lance of sure hit, shield of no loss", jp: "幕間/必中の槍、無敗の盾"},
+          {id: "凛14-20", eng: "Showdown/Rin’s clever attack", jp: "対決/凛の奇策"},
+          {id: "凛14-0", eng: "Battle, end of battle/Choice", jp: "対決、決着/選択肢"},
           {
             h: [
-              {id: "凛14-1", eng: "Choice/Ideal"},
-              {id: "凛14-2", eng: "Choice/Idea"},
+              {id: "凛14-1", eng: "Choice/Ideal", jp: "選択/理想。"},
+              {id: "凛14-2", eng: "Choice/Idea", jp: "選択/理念。"},
             ],
           },
-          {id: "凛14-3", eng: "14th Day: Church underground temple/Reality Marble"},
-          {id: "凛14-21", eng: "14th Day: Outside church/Return with Saber"},
-          {id: "凛14-22", eng: "Intermission/Captured princess"},
-          {id: "凛14-23", eng: "14th Day: Midnight/To the place of conviction"},
-          {id: "凛14-24", eng: "Intermission/Original and Fake"},
-          {id: "凛14-25", eng: "15th Day: Dawn-Einzbern Castle/“VS”"},
-          {id: "凛14-26", eng: "Intermission/End of a hero"},
-          {id: "凛14-27", eng: "End of battle/Answer"},
-          {id: "凛14-28", eng: "Einzbern Castle/Enemy that must be defeated"},
-          {id: "凛14-29", eng: "Intermission/Contradictory Holy Grail"},
-          {id: "凛14-4", eng: "15th Day: Return home, night/Before the final battle"},
+          {id: "凛14-3", eng: "14th Day: Church underground temple/Reality Marble", jp: "十四日目・教会地下聖堂/リアリティ・マーブル"},
+          {id: "凛14-21", eng: "14th Day: Outside church/Return with Saber", jp: "十四日目・〜教会外へ/帰還"},
+          {id: "凛14-22", eng: "Intermission/Captured princess", jp: "幕間/囚われの姫"},
+          {id: "凛14-23", eng: "14th Day: Midnight/To the place of conviction", jp: "十四日目・深夜〜/断罪の場へ"},
+          {id: "凛14-24", eng: "Intermission/Original and Fake", jp: "幕間/オリジナル＆フェイク"},
+          {id: "凛14-25", eng: "15th Day: Dawn-Einzbern Castle/“VS”", jp: "十五日目・夜明け〜アインツベルン城/『VS』"},
+          {id: "凛14-26", eng: "Intermission/End of a hero", jp: "幕間/英雄の結末"},
+          {id: "凛14-27", eng: "End of battle/Answer", jp: "決着/アンサー"},
+          {id: "凛14-28", eng: "Einzbern Castle/Enemy that must be defeated", jp: "アインツベルン城/倒すべき敵"},
+          {id: "凛14-29", eng: "Intermission/Contradictory Holy Grail", jp: "幕間/矛盾聖杯"},
+          {id: "凛14-4", eng: "15th Day: Return home, night/Before the final battle", jp: "十五日目・〜帰還・夜/最終決戦前"},
           {
             h: [
-              {id: "凛14-5", eng: "Last action/Go ask Rin"},
-              {id: "凛14-6", eng: "Last action/Tea with Saber"},
-              {id: "凛14-7", eng: "Last action/Think one more time"},
-            ],
-          },
-          {
-            h: [
-              {id: "凛14-108", eng: "15th Day: Night/Rin’s proposal (lethal dose)"},
-              {id: "凛14-8", eng: "15th Day: Night/Memories in the ocean"},
-            ],
-          },
-          {id: "凛14-130", eng: "The two’s choice/Mind and body"},
-          {id: "凛14-31", eng: "16th Day: Before dawn/To the Ryuudou Temple"},
-          {id: "凛14-32", eng: "Intermission/Unnamed great style"},
-          {id: "凛14-33", eng: "Confrontation/Gift “Embryo”"},
-          {id: "凛14-34", eng: "Battle/Circuit Overload"},
-          {id: "凛14-35", eng: "Battle/The beauties of nature"},
-          {id: "凛14-36", eng: "Match decided/Unlimited Blade Works"},
-          {id: "凛14-9", eng: "Intermission/Holy Grail breakdown"},
-          {
-            h: [
-              {id: "凛14-10", eng: "Intermission/New wish"},
-              {id: "凛14-11", eng: "Intermission/End of the dream"},
-            ],
-          },
-          {id: "凛14-12", eng: "End of battle/Last fight"},
-          {
-            h: [
-              {id: "凛14-14", eng: "Daybreak/Stay away"},
-              {id: "凛14-13", eng: "16th Day: Round crown corridor/Heavens fall"},
+              {id: "凛14-5", eng: "Last action/Go ask Rin", jp: "最後の行動/凛に相談"},
+              {id: "凛14-6", eng: "Last action/Tea with Saber", jp: "最後の行動/セイバーとお茶を"},
+              {id: "凛14-7", eng: "Last action/Think one more time", jp: "最後の行動/もう一度考える"},
             ],
           },
           {
             h: [
-              {id: "凛14-15", eng: "To epilogue 1"},
-              {id: "凛14-16", eng: "To epilogue 2"},
-              {id: "凛14-37", eng: "Tiger Dojo 24"},
+              {id: "凛14-108", eng: "15th Day: Night/Rin’s proposal (lethal dose)", jp: "十五日目・夜/凛の提案（致死量）"},
+              {id: "凛14-8", eng: "15th Day: Night/Memories in the ocean", jp: "十五日目・夜/海の記憶"},
+            ],
+          },
+          {id: "凛14-130", eng: "The two’s choice/Mind and body", jp: ""},
+          {id: "凛14-31", eng: "16th Day: Before dawn/To the Ryuudou Temple", jp: "十六日目・夜明け前/柳洞寺へ"},
+          {id: "凛14-32", eng: "Intermission/Unnamed great style", jp: "幕間/巌流、無名"},
+          {id: "凛14-33", eng: "Confrontation/Gift “Embryo”", jp: "対峙/ギフト“エンブリオ”"},
+          {id: "凛14-34", eng: "Battle/Circuit Overload", jp: "決戦/サーキット・オーバーロード"},
+          {id: "凛14-35", eng: "Battle/The beauties of nature", jp: "決戦/花鳥風月"},
+          {id: "凛14-36", eng: "Match decided/Unlimited Blade Works", jp: "決着/アンリミテッドブレイドワークス"},
+          {id: "凛14-9", eng: "Intermission/Holy Grail breakdown", jp: "幕間/聖杯崩壊"},
+          {
+            h: [
+              {id: "凛14-10", eng: "Intermission/New wish", jp: "幕間/新たな望み"},
+              {id: "凛14-11", eng: "Intermission/End of the dream", jp: "幕間/夢の終わり"},
+            ],
+          },
+          {id: "凛14-12", eng: "End of battle/Last fight", jp: "決着/ラスト・フライト"},
+          {
+            h: [
+              {id: "凛14-14", eng: "Daybreak/Stay away", jp: "夜明け/ステイ・アウェイ"},
+              {id: "凛14-13", eng: "16th Day: Round crown corridor/Heavens fall", jp: "十六日目・円冠回廊/ヘブンズフォール"},
+            ],
+          },
+          {
+            h: [
+              {id: "凛14-15", eng: "To epilogue 1", jp: "エピローグ１へ。"},
+              {id: "凛14-16", eng: "To epilogue 2", jp: "エピローグ２へ。"},
+              {id: "凛14-37", eng: "Tiger Dojo 24", jp: "タイガー道場24"},
             ],
           },
         ],
@@ -10331,581 +10494,633 @@ export const sections = {
     }, {
       v: [{
         section: "桜4", v: [
-          {id: "桜4-11", eng: "4th Day: Morning/Rin’s proposal"},
-          {id: "桜4-0", eng: "4th Day: Morning/Rin leaves"},
-          {id: "桜4-10", eng: "4th Day: Morning: Dojo/Saber explains the rules"},
-          {id: "桜4-1", eng: "4th Day: Dojo-Church/Holy Grail War, the beginning"},
-          {id: "桜4-7", eng: "4th Day: Outside church/Will to fight, fighting sword"},
-          {id: "桜4-8", eng: "4th Day: Afternoon-Dinner/Intruder"},
-          {id: "桜4-2", eng: "4th Day: Night: Patrol/Choice"},
+          {id: "桜4-11", eng: "4th Day: Morning/Rin’s proposal", jp: "四日目朝/凛からの提案"},
+          {id: "桜4-0", eng: "4th Day: Morning/Rin leaves", jp: "四日目・朝/凛、去る"},
+          {id: "桜4-10", eng: "4th Day: Morning: Dojo/Saber explains the rules", jp: "四日目・午前・道場/セイバーによるルール説明"},
+          {id: "桜4-1", eng: "4th Day: Dojo-Church/Holy Grail War, the beginning", jp: "四日目・道場〜教会/聖杯戦争、その発端"},
+          {id: "桜4-7", eng: "4th Day: Outside church/Will to fight, fighting sword", jp: "四日目・教会外/戦う意思、戦う剣"},
+          {id: "桜4-8", eng: "4th Day: Afternoon-Dinner/Intruder", jp: "四日目・夕方〜夕食/イントルーダー"},
+          {id: "桜4-2", eng: "4th Day: Night: Patrol/Choice", jp: "四日目・夜・巡回/選択肢"},
           {
             h: [
-              {id: "桜4-3", eng: "Action/To Miyama City"},
-              {id: "桜4-4", eng: "Action/To Shinto"},
+              {id: "桜4-3", eng: "Action/To Miyama City", jp: "行動/深山町へ"},
+              {id: "桜4-4", eng: "Action/To Shinto", jp: "行動/新都へ"},
             ],
           },
-          {id: "桜4-5", eng: "4th Day: Midnight: Park/Makiri’s end-VS Rider"},
-          {id: "桜4-9", eng: "4th Day: Midnight: Church/The answer lies at the very end"},
+          {id: "桜4-5", eng: "4th Day: Midnight: Park/Makiri’s end-VS Rider", jp: "四日目・深夜・公園/マキリの末〜ＶＳライダー"},
+          {id: "桜4-9", eng: "4th Day: Midnight: Church/The answer lies at the very end", jp: "四日目・深夜・教会/その答えは結末にのみ"},
         ],
       }, {
         section: "桜5", v: [
-          {id: "桜5-19", eng: "5th Day: Morning, awakening/A usual morning?"},
-          {id: "桜5-20", eng: "5th Day: Breakfast/Shinji’s viciousness"},
-          {id: "桜5-0", eng: "5th Day: Way to school-School/Ready?"},
+          {id: "桜5-19", eng: "5th Day: Morning, awakening/A usual morning?", jp: "五日目・朝、起床/いつもの朝？"},
+          {id: "桜5-20", eng: "5th Day: Breakfast/Shinji’s viciousness", jp: "五日目・朝食/慎二の蛮行"},
+          {id: "桜5-0", eng: "5th Day: Way to school-School/Ready?", jp: "五日目・登校〜学校/レディ？"},
           {
             h: [
-              {id: "桜5-1", eng: "Go!/About Sakura"},
-              {id: "桜5-2", eng: "Go!/About Shinji"},
-              {id: "桜5-3", eng: "No!/Fancy curse. The great devil gets very angry."},
+              {id: "桜5-1", eng: "Go!/About Sakura", jp: "ゴー！/桜について"},
+              {id: "桜5-2", eng: "Go!/About Shinji", jp: "ゴー/慎二について"},
+              {id: "桜5-3", eng: "No!/Fancy curse. The great devil gets very angry.", jp: "ノー！/ファンシーカース。大魔神とても怒る。"},
             ],
           },
-          {id: "桜5-4", eng: "5th Day: Lunchtime: Rooftop/Consultation with Rin-Peace treaty?"},
-          {id: "桜5-5", eng: "5th Day: After school: Shopping district/The daughter of winter-Illya (I) "},
+          {
+            id: "桜5-4",
+            eng: "5th Day: Lunchtime: Rooftop/Consultation with Rin-Peace treaty?",
+            jp: "五日目・昼休み・屋上/凛と相談〜休戦条約？",
+          },
+          {
+            id: "桜5-5",
+            eng: "5th Day: After school: Shopping district/The daughter of winter-Illya (I) ",
+            jp: "五日目・放課後・商店街/冬の娘〜イリヤ（Ⅰ）",
+          },
           {
             h: [
-              {id: "桜5-6", eng: "Reply/Reaction, not quite good"},
-              {id: "桜5-7", eng: "Reply/Good"},
+              {id: "桜5-6", eng: "Reply/Reaction, not quite good", jp: "返答/いまいちな反応"},
+              {id: "桜5-7", eng: "Reply/Good", jp: "返答/良かったね。"},
             ],
           },
-          {id: "桜5-8", eng: "5th Day: Noon: Park/Innocent murder"},
-          {id: "桜5-9", eng: "5th Day: Return home: Before dinner/Who will tell Sakura?"},
+          {id: "桜5-8", eng: "5th Day: Noon: Park/Innocent murder", jp: "五日目・夕方前・公園/イノセント・マーダー"},
+          {id: "桜5-9", eng: "5th Day: Return home: Before dinner/Who will tell Sakura?", jp: "五日目・帰宅・夕食前/桜に誰がきりだす？"},
           {
             h: [
-              {id: "桜5-10", eng: "Request/Fuji-Nee"},
-              {id: "桜5-11", eng: "Carry into effect/Myself"},
+              {id: "桜5-10", eng: "Request/Fuji-Nee", jp: "依頼/藤ねえ"},
+              {id: "桜5-11", eng: "Carry into effect/Myself", jp: "実行/自分"},
             ],
           },
-          {id: "桜5-13", eng: "5th Day: After dinner/Go check on Sakura?"},
+          {id: "桜5-13", eng: "5th Day: After dinner/Go check on Sakura?", jp: "五日目・夕食後/桜の様子を見に行く？"},
           {
             h: [
-              {id: "桜5-14", eng: "5th Day: Bathroom/Cold medicine, A capsule"},
-              {id: "桜5-15", eng: "5th Day: Living room/Cold medicine, C capsule"},
+              {id: "桜5-14", eng: "5th Day: Bathroom/Cold medicine, A capsule", jp: "五日目・脱衣場/コールドメディスン、Ａカプセル"},
+              {id: "桜5-15", eng: "5th Day: Living room/Cold medicine, C capsule", jp: "五日目・居間/コールドメディスン、Ｃカプセル"},
             ],
           },
-          {id: "桜5-16", eng: "5th Day: Midnight-Patrol/To the Ryuudou Temple"},
-          {id: "桜5-12", eng: "Intermission/Malak al Maut"},
-          {id: "桜5-21", eng: "5th Day: Midnight: Ryuudou Temple/VS Caster"},
-          {id: "桜5-22", eng: "Intermission/Disaster"},
+          {id: "桜5-16", eng: "5th Day: Midnight-Patrol/To the Ryuudou Temple", jp: "五日目・深夜〜巡回/柳洞寺へ"},
+          {id: "桜5-12", eng: "Intermission/Malak al Maut", jp: "幕間/マラク・アル・マウト"},
+          {id: "桜5-21", eng: "5th Day: Midnight: Ryuudou Temple/VS Caster", jp: "五日目・深夜・柳洞寺境内/ＶＳキャスター"},
+          {id: "桜5-22", eng: "Intermission/Disaster", jp: "幕間/ディザスター"},
           {
             h: [
-              {id: "桜5-17", eng: "5th Day: Bedtime/Shapeless island"},
-              {id: "桜5-117", eng: "5th Day: Bedtime/Shapeless island"},
+              {id: "桜5-17", eng: "5th Day: Bedtime/Shapeless island", jp: "五日目・就寝/形のない島"},
+              {id: "桜5-117", eng: "5th Day: Bedtime/Shapeless island", jp: "五日目・就寝/形のない島"},
             ],
           },
         ],
       }, {
         section: "桜6", v: [
-          {id: "桜6-0", eng: "6th Day: Awakening-Morning/Nurse Sakura"},
-          {id: "桜6-1", eng: "6th Day: Nurse Sakura/A simple question"},
+          {id: "桜6-0", eng: "6th Day: Awakening-Morning/Nurse Sakura", jp: "六日目・起床〜朝/桜の看病"},
+          {id: "桜6-1", eng: "6th Day: Nurse Sakura/A simple question", jp: "六日目・桜の看病/素朴な疑問"},
           {
             h: [
-              {id: "桜6-3", eng: "Answer/Cold smile"},
-              {id: "桜6-4", eng: "Answer/Sakura disappointed"},
+              {id: "桜6-3", eng: "Answer/Cold smile", jp: "回答/冷たい笑顔"},
+              {id: "桜6-4", eng: "Answer/Sakura disappointed", jp: "回答/残念がる桜"},
             ],
           },
-          {id: "桜6-5", eng: "6th Day: After lunch/Choice"},
+          {id: "桜6-5", eng: "6th Day: After lunch/Choice", jp: "六日目・昼食後/選択肢"},
           {
             h: [
-              {id: "桜6-9", eng: "6th Day: Park/Winter castle-Illya (II)"},
-              {id: "桜6-10", eng: "6th Day: Park/The daughter of winter-Illya (I)"},
-              {id: "桜6-7", eng: "6th Day: After lunch: Living room/Saber is merciless!"},
-              {id: "桜6-8", eng: "6th Day: After lunch: Living room/A peaceful time"},
+              {id: "桜6-9", eng: "6th Day: Park/Winter castle-Illya (II)", jp: "六日目・公園/冬の城〜イリヤ（Ⅱ）"},
+              {id: "桜6-10", eng: "6th Day: Park/The daughter of winter-Illya (I)", jp: "六日目・公園/冬の娘〜イリヤ（Ⅰ）"},
+              {id: "桜6-7", eng: "6th Day: After lunch: Living room/Saber is merciless!", jp: "六日目・昼食後・居間/このセイバー容赦せん！"},
+              {id: "桜6-8", eng: "6th Day: After lunch: Living room/A peaceful time", jp: "六日目・昼食後・居間/のどかな食後"},
             ],
           },
-          {id: "桜6-2", eng: "6th Day: Return home-Entrance/A big pinch"},
-          {id: "桜6-19", eng: "6th Day: Afternoon/Matou Shinji"},
+          {id: "桜6-2", eng: "6th Day: Return home-Entrance/A big pinch", jp: "六日目・帰宅〜玄関/だいぴんち"},
+          {id: "桜6-19", eng: "6th Day: Afternoon/Matou Shinji", jp: "六日目・夕方/間桐慎二"},
           {
             h: [
-              {id: "桜6-20", eng: "Action/Enraged"},
-              {id: "桜6-21", eng: "Action/Prudence"},
+              {id: "桜6-20", eng: "Action/Enraged", jp: "行動/激昂"},
+              {id: "桜6-21", eng: "Action/Prudence", jp: "行動/自重"},
             ],
           },
-          {id: "桜6-22", eng: "6th Day: -Night/Sakura sick-Tonight’s plan"},
+          {id: "桜6-22", eng: "6th Day: -Night/Sakura sick-Tonight’s plan", jp: "六日目・〜夜/倒れた桜〜夜の予定"},
           {
             h: [
-              {id: "桜6-16", eng: "6th Day: Night: Patrol/Shinto"},
-              {id: "桜6-17", eng: "6th Day: Night: Patrol/Miyama City"},
-              {id: "桜6-23", eng: "6th Day: Night-Bedtime/Matou Sakura (III)"},
+              {id: "桜6-16", eng: "6th Day: Night: Patrol/Shinto", jp: "六日目・夜・巡回/新都"},
+              {id: "桜6-17", eng: "6th Day: Night: Patrol/Miyama City", jp: "六日目・夜・巡回/深山町"},
+              {id: "桜6-23", eng: "6th Day: Night-Bedtime/Matou Sakura (III)", jp: "六日目・夜〜就寝/間桐桜（Ⅲ）"},
             ],
           },
-          {id: "桜6-18", eng: "6th Day: Bedtime/Day’s end"},
-          {id: "桜6-11", eng: "Intermission/Hero’s death"},
+          {id: "桜6-18", eng: "6th Day: Bedtime/Day’s end", jp: "六日目・就寝/一日の終わり"},
+          {id: "桜6-11", eng: "Intermission/Hero’s death", jp: "幕間/勇者の死"},
         ],
       }, {
         section: "桜7", v: [
-          {id: "桜7-15", eng: "7th Day: Awakening-Breakfast/Wandering cloud, sumo edition"},
-          {id: "桜7-16", eng: "7th Day: After breakfast/Sakura and lunch"},
-          {id: "桜7-1", eng: "7th Day: Way to school-Lunchtime/Interval"},
-          {id: "桜7-17", eng: "7th Day: Lunchtime: Rooftop/Tohsaka Rin (II)"},
-          {id: "桜7-0", eng: "7th Day: Before 5th period: Stairway/The two"},
-          {id: "桜7-2", eng: "7th Day: After school-Chinese Restaurant/Shocking Mapo tofu"},
-          {id: "桜7-18", eng: "Intermission/Re-contract"},
+          {id: "桜7-15", eng: "7th Day: Awakening-Breakfast/Wandering cloud, sumo edition", jp: "七日目・起床〜朝食/はぐれ雲相撲編"},
+          {id: "桜7-16", eng: "7th Day: After breakfast/Sakura and lunch", jp: "七日目・朝食後/桜とお弁当"},
+          {id: "桜7-1", eng: "7th Day: Way to school-Lunchtime/Interval", jp: "七日目・登校〜昼休み/インターバル"},
+          {id: "桜7-17", eng: "7th Day: Lunchtime: Rooftop/Tohsaka Rin (II)", jp: "七日目・昼休み・屋上/遠坂凛（Ⅱ）"},
+          {id: "桜7-0", eng: "7th Day: Before 5th period: Stairway/The two", jp: "七日目・五時限目前・階段/ふたり"},
+          {id: "桜7-2", eng: "7th Day: After school-Chinese Restaurant/Shocking Mapo tofu", jp: "七日目・放課後〜中華飯店/衝撃のマーボー"},
+          {id: "桜7-18", eng: "Intermission/Re-contract", jp: "幕間/再契約"},
           {
             h: [
-              {id: "桜7-6", eng: "7th Day: Way home: Intersection/Encounter"},
-              {id: "桜7-4", eng: "7th Day: Afternoon/Way home"},
+              {id: "桜7-6", eng: "7th Day: Way home: Intersection/Encounter", jp: "七日目・帰り道・交差点/遭遇"},
+              {id: "桜7-4", eng: "7th Day: Afternoon/Way home", jp: "七日目・午後/帰り道"},
             ],
           },
           {
             h: [
-              {id: "桜7-7", eng: "Choice/Homesick-Illya (III)"},
-              {id: "桜7-8", eng: "Choice/Cinema-Illya (III)"},
-              {id: "桜7-9", eng: "Choice/Mistake"},
+              {id: "桜7-7", eng: "Choice/Homesick-Illya (III)", jp: "選択/ホームシック〜イリヤ（Ⅲ）"},
+              {id: "桜7-8", eng: "Choice/Cinema-Illya (III)", jp: "選択/シネマ〜イリヤ（Ⅲ）"},
+              {id: "桜7-9", eng: "Choice/Mistake", jp: "選択/ミステイク"},
             ],
           },
           {
             h: [
-              {id: "桜7-10", eng: "7th Day: Return home: Living room/Temptation"},
-              {id: "桜7-19", eng: "7th Day: Return home: Living room/Temptation (Afternoon)"},
+              {id: "桜7-10", eng: "7th Day: Return home: Living room/Temptation", jp: "七日目・帰宅・居間/テンプテーション"},
+              {
+                id: "桜7-19",
+                eng: "7th Day: Return home: Living room/Temptation (Afternoon)",
+                jp: "七日目・帰宅・居間/テンプテーション（夕方）",
+              },
             ],
           },
-          {id: "桜7-20", eng: "7th Day: Training-Living room/Treat Sakura"},
-          {id: "桜7-11", eng: "7th Day: Midnight: Park/War balance randomizer"},
+          {id: "桜7-20", eng: "7th Day: Training-Living room/Treat Sakura", jp: "七日目・剣の稽古〜居間/桜の手当て"},
+          {id: "桜7-11", eng: "7th Day: Midnight: Park/War balance randomizer", jp: "七日目・深夜・公園/ウォーバランス・ランダマイザー"},
           {
             h: [
-              {id: "桜7-12", eng: "7th Day/Ocean depths"},
-              {id: "桜7-13", eng: "7th Day: Return alive-Return home/Gap between the two"},
+              {id: "桜7-12", eng: "7th Day/Ocean depths", jp: "七日目/深海"},
+              {id: "桜7-13", eng: "7th Day: Return alive-Return home/Gap between the two", jp: "七日目・生還〜帰宅/二人の溝"},
             ],
           },
           {
             h: [
-              {id: "桜7-5", eng: "Tiger Dojo 25"},
-              {id: "桜7-21", eng: "Intermission/Madness"},
+              {id: "桜7-5", eng: "Tiger Dojo 25", jp: "タイガー道場25"},
+              {id: "桜7-21", eng: "Intermission/Madness", jp: "幕間/跳梁"},
             ],
           },
         ],
       }, {
         section: "桜8", v: [
-          {id: "桜8-11", eng: "8th Day: Awakening-Morning/Sakura complains"},
-          {id: "桜8-12", eng: "8th Day: Morning/Challenging the shadow"},
-          {id: "桜8-13", eng: "8th Day: School/Foreseeing the future"},
-          {id: "桜8-14", eng: "8th Day: Rooftop/Rin’s advice"},
+          {id: "桜8-11", eng: "8th Day: Awakening-Morning/Sakura complains", jp: "八日目・起床〜朝/桜の告戒"},
+          {id: "桜8-12", eng: "8th Day: Morning/Challenging the shadow", jp: "八日目・朝/影に挑む"},
+          {id: "桜8-13", eng: "8th Day: School/Foreseeing the future", jp: "八日目・学校/未来予知"},
+          {id: "桜8-14", eng: "8th Day: Rooftop/Rin’s advice", jp: "八日目・屋上/凛のアドバイス"},
           {
             h: [
-              {id: "桜8-0", eng: "8th Day: After school/Sunset town"},
-              {id: "桜8-1", eng: "8th Day: Return home-Emiya household/Battle of the Holy Grail"},
+              {id: "桜8-0", eng: "8th Day: After school/Sunset town", jp: "八日目・下校/夕焼けの町"},
+              {
+                id: "桜8-1",
+                eng: "8th Day: Return home-Emiya household/Battle of the Holy Grail",
+                jp: "八日目・帰宅〜衛宮邸/聖杯の戦い",
+              },
             ],
           },
           {
             h: [
-              {id: "桜8-15", eng: "Intermission/Truth"},
-              {id: "桜8-23", eng: "Tiger Dojo 26"},
+              {id: "桜8-15", eng: "Intermission/Truth", jp: "幕間/真実"},
+              {id: "桜8-23", eng: "Tiger Dojo 26", jp: "タイガー道場26"},
             ],
           },
-          {id: "桜8-16", eng: "8th Day: Dinner/Peaceful day"},
-          {id: "桜8-2", eng: "8th Day: Patrol at night/Choice"},
+          {id: "桜8-16", eng: "8th Day: Dinner/Peaceful day", jp: "八日目・夕食/穏やかな日"},
+          {id: "桜8-2", eng: "8th Day: Patrol at night/Choice", jp: "八日目・夜の巡回/選択肢"},
           {
             h: [
-              {id: "桜8-3", eng: "Decision/Ryuudou Temple"},
-              {id: "桜8-4", eng: "Decision/Scolded"},
+              {id: "桜8-3", eng: "Decision/Ryuudou Temple", jp: "決定/柳洞寺"},
+              {id: "桜8-4", eng: "Decision/Scolded", jp: "決定/お叱り"},
             ],
           },
-          {id: "桜8-17", eng: "8th Day: Midnight: Ryuudou Temple/Assassin’s attack"},
-          {id: "桜8-18", eng: "Intermission/Last swordsman"},
-          {id: "桜8-5", eng: "8th Day: Midnight: Ryuudou Temple/The battle at Ryuudou Temple"},
+          {id: "桜8-17", eng: "8th Day: Midnight: Ryuudou Temple/Assassin’s attack", jp: "八日目・深夜・柳洞寺/アサシン襲来"},
+          {id: "桜8-18", eng: "Intermission/Last swordsman", jp: "幕間/最後の剣士"},
           {
-            h: [
-              {id: "桜8-6", eng: "Decision/Tragic trust"},
-              {id: "桜8-8", eng: "Decision/Use the Command Spell"},
-              {id: "桜8-7", eng: "Decision/Die together"},
-            ],
+            id: "桜8-5",
+            eng: "8th Day: Midnight: Ryuudou Temple/The battle at Ryuudou Temple",
+            jp: "八日目・深夜・柳洞寺お堂/柳洞寺の戦い。",
           },
           {
             h: [
-              {id: "桜8-9", eng: "The battle at Ryuudou Temple/True Assassin VS Rider"},
-              {id: "桜8-24", eng: "Tiger Dojo 27"},
+              {id: "桜8-6", eng: "Decision/Tragic trust", jp: "決定/悲痛な信頼"},
+              {id: "桜8-8", eng: "Decision/Use the Command Spell", jp: "決定/令呪、使用"},
+              {id: "桜8-7", eng: "Decision/Die together", jp: "決定/共に死す"},
             ],
           },
-          {id: "桜8-19", eng: "8th Day: Midnight: Ryuudou Temple/Parting and oath"},
-          {id: "桜8-20", eng: "8th Day: Return home-Bedtime/What is lost"},
-          {id: "桜8-21", eng: "Intermission/Pupa"},
-          {id: "桜8-22", eng: "Intermission/Report"},
+          {
+            h: [
+              {id: "桜8-9", eng: "The battle at Ryuudou Temple/True Assassin VS Rider", jp: "柳洞寺の戦い/真アサシンＶＳライダー"},
+              {id: "桜8-24", eng: "Tiger Dojo 27", jp: "タイガー道場27"},
+            ],
+          },
+          {id: "桜8-19", eng: "8th Day: Midnight: Ryuudou Temple/Parting and oath", jp: "八日目・深夜・柳洞寺/別れと誓い"},
+          {id: "桜8-20", eng: "8th Day: Return home-Bedtime/What is lost", jp: "八日目・帰宅〜就寝/なくしたもの"},
+          {id: "桜8-21", eng: "Intermission/Pupa", jp: "幕間/サナギ"},
+          {id: "桜8-22", eng: "Intermission/Report", jp: "幕間/レポート"},
         ],
       }, {
         section: "桜9", v: [
-          {id: "桜9-26", eng: "9th Day: Awakening-Morning/Sakura collapses"},
-          {id: "桜9-0", eng: "9th Day: School-Rooftop/Report Rin"},
+          {id: "桜9-26", eng: "9th Day: Awakening-Morning/Sakura collapses", jp: "九日目・起床〜朝/桜倒れる"},
+          {id: "桜9-0", eng: "9th Day: School-Rooftop/Report Rin", jp: "九日目・学校〜屋上/凛への報告"},
           {
             h: [
-              {id: "桜9-1", eng: "Answer/Unsatisfactory"},
-              {id: "桜9-2", eng: "Answer/Correct"},
-              {id: "桜9-3", eng: "Answer/Correct"},
+              {id: "桜9-1", eng: "Answer/Unsatisfactory", jp: "回答/不満"},
+              {id: "桜9-2", eng: "Answer/Correct", jp: "回答/正解"},
+              {id: "桜9-3", eng: "Answer/Correct", jp: "回答/正解"},
             ],
           },
-          {id: "桜9-4", eng: "Rin’s question/What to do now"},
+          {id: "桜9-4", eng: "Rin’s question/What to do now", jp: "凛の質問/これからの行動"},
           {
             h: [
-              {id: "桜9-6", eng: "Rin’s question/Choice"},
-              {id: "桜9-5", eng: "9th Day: Afternoon-Confrontation/Miserable lone force"},
-            ],
-          },
-          {
-            h: [
-              {id: "桜9-8", eng: "Reply/Who do you think you are?"},
-              {id: "桜9-38", eng: "Tiger Dojo 28"},
-            ],
-          },
-          {id: "桜9-9", eng: "Rin’s question/Can you trust her? Can you stay on her side?"},
-          {id: "桜9-11", eng: "Reply/Who do you think you are?"},
-          {id: "桜9-12", eng: "Rin’s question/Will you give me your absolute obedience?"},
-          {
-            h: [
-              {id: "桜9-13", eng: "Reply/Let me win"},
-              {id: "桜9-14", eng: "Reply/Geas"},
-            ],
-          },
-          {id: "桜9-27", eng: "9th Day: After school-Tohsaka household/Photo"},
-          {
-            h: [
-              {id: "桜9-15", eng: "9th Day: Rin’s room-Afternoon/Choice"},
-              {id: "桜9-32", eng: "9th Day: Rin’s room-Afternoon-Return home/Rin gets angry"},
+              {id: "桜9-6", eng: "Rin’s question/Choice", jp: "凛の問答/選択肢"},
+              {id: "桜9-5", eng: "9th Day: Afternoon-Confrontation/Miserable lone force", jp: "九日目・午後〜対決/孤軍無残"},
             ],
           },
           {
             h: [
-              {id: "桜9-16", eng: "Decision/Rin gets angry"},
-              {id: "桜9-17", eng: "Decision/Rin still gets angry"},
+              {id: "桜9-8", eng: "Reply/Who do you think you are?", jp: "返事/何様よアンタ"},
+              {id: "桜9-38", eng: "Tiger Dojo 28", jp: "タイガー道場28"},
             ],
           },
-          {id: "桜9-18", eng: "9th Day: Return home-To school/Over"},
-          {id: "桜9-33", eng: "9th Day: School/Older brother and younger sister-VS Rider"},
-          {id: "桜9-19", eng: "VS Rider/Truth about Sakura"},
+          {id: "桜9-9", eng: "Rin’s question/Can you trust her? Can you stay on her side?", jp: "凛の問答/信頼できる？裏切らない？"},
+          {id: "桜9-11", eng: "Reply/Who do you think you are?", jp: "返事/何様よアンタ"},
+          {id: "桜9-12", eng: "Rin’s question/Will you give me your absolute obedience?", jp: "凛の問答/絶対服従する？"},
           {
             h: [
-              {id: "桜9-20", eng: "Mystic eyes released/Save Rin"},
-              {id: "桜9-22", eng: "Mystic eyes released/Direct hit"},
-              {id: "桜9-21", eng: "9th Day: VS Rider/Stone coffin"},
+              {id: "桜9-13", eng: "Reply/Let me win", jp: "返事/わたしを勝たせてね"},
+              {id: "桜9-14", eng: "Reply/Geas", jp: "返事/ギアス"},
             ],
           },
+          {id: "桜9-27", eng: "9th Day: After school-Tohsaka household/Photo", jp: "九日目・下校〜遠坂邸/写真"},
           {
             h: [
-              {id: "桜9-35", eng: "9th Day: -Church/Sisters (I)"},
-              {id: "桜9-39", eng: "Tiger Dojo 29"},
-            ],
-          },
-          {id: "桜9-23", eng: "9th Day: Outside church-Park, night/What I should protect"},
-          {
-            h: [
-              {id: "桜9-36", eng: "9th Day: Park-To the church/Run into the rain"},
-              {id: "桜9-25", eng: "9th Day/Superhero"},
+              {id: "桜9-15", eng: "9th Day: Rin’s room-Afternoon/Choice", jp: "九日目・凛の部屋〜夕方/選択肢。"},
+              {id: "桜9-32", eng: "9th Day: Rin’s room-Afternoon-Return home/Rin gets angry", jp: "九日目・凛の部屋〜夕方〜帰宅/凛、怒る"},
             ],
           },
           {
             h: [
-              {id: "桜9-37", eng: "Intermission/Bailing hand"},
-              {id: "桜9-40", eng: "Tiger Dojo 30"},
+              {id: "桜9-16", eng: "Decision/Rin gets angry", jp: "決断/凛、怒る"},
+              {id: "桜9-17", eng: "Decision/Rin still gets angry", jp: "決断/凛、やっぱり怒る"},
             ],
           },
-          {id: "桜9-24", eng: "9th Day: Church: Confrontation with Rin/Set position"},
+          {id: "桜9-18", eng: "9th Day: Return home-To school/Over", jp: "九日目・帰宅〜学校へ/オーバー"},
+          {id: "桜9-33", eng: "9th Day: School/Older brother and younger sister-VS Rider", jp: "九日目・学校/兄と妹〜ＶＳライダー"},
+          {id: "桜9-19", eng: "VS Rider/Truth about Sakura", jp: "ＶＳライダー/桜の真実"},
           {
             h: [
-              {id: "桜9-28", eng: "9th Day/Rain"},
-              {id: "桜9-34", eng: "9th Day: Night: Church/Geas"},
-            ],
-          },
-          {
-            h: [
-              {id: "桜9-29", eng: "9th Day: Return home-Entrance/Sisters (II)"},
-              {id: "桜9-41", eng: "Tiger Dojo 31"},
+              {id: "桜9-20", eng: "Mystic eyes released/Save Rin", jp: "魔眼解放/凛を助ける。"},
+              {id: "桜9-22", eng: "Mystic eyes released/Direct hit", jp: "魔眼解放/直撃"},
+              {id: "桜9-21", eng: "9th Day: VS Rider/Stone coffin", jp: "九日目・ＶＳライダー/ストーン・コフィン"},
             ],
           },
           {
             h: [
-              {id: "桜9-30", eng: "九日目・深夜・自室/体の重なり"},
-              {id: "桜9-130", eng: "9th Day: Midnight: My room/Connection of Bodies"},
+              {id: "桜9-35", eng: "9th Day: -Church/Sisters (I)", jp: "九日目・〜教会/姉妹（Ⅰ）"},
+              {id: "桜9-39", eng: "Tiger Dojo 29", jp: "タイガー道場29"},
+            ],
+          },
+          {id: "桜9-23", eng: "9th Day: Outside church-Park, night/What I should protect", jp: "九日目・教会外〜公園・夜/まもるべきもの"},
+          {
+            h: [
+              {id: "桜9-36", eng: "9th Day: Park-To the church/Run into the rain", jp: "九日目・公園〜教会へ/雨に走る"},
+              {id: "桜9-25", eng: "9th Day/Superhero", jp: "九日目/正義の味方"},
+            ],
+          },
+          {
+            h: [
+              {id: "桜9-37", eng: "Intermission/Bailing hand", jp: "幕間/掬いの手"},
+              {id: "桜9-40", eng: "Tiger Dojo 30", jp: "タイガー道場30"},
+            ],
+          },
+          {id: "桜9-24", eng: "9th Day: Church: Confrontation with Rin/Set position", jp: "九日目・教会・凛と対峙/セット・ポジション"},
+          {
+            h: [
+              {id: "桜9-28", eng: "9th Day/Rain", jp: "九日目/レイン"},
+              {id: "桜9-34", eng: "9th Day: Night: Church/Geas", jp: "九日目・夜・教会/ギアス"},
+            ],
+          },
+          {
+            h: [
+              {id: "桜9-29", eng: "9th Day: Return home-Entrance/Sisters (II)", jp: "九日目・帰宅〜玄関/姉妹（Ⅱ）"},
+              {id: "桜9-41", eng: "Tiger Dojo 31", jp: "タイガー道場31"},
+            ],
+          },
+          {
+            h: [
+              {id: "桜9-30", eng: "九日目・深夜・自室/体の重なり", jp: "九日目・深夜・自室/スティール"},
+              {
+                id: "桜9-130",
+                eng: "9th Day: Midnight: My room/Connection of Bodies",
+                jp: "9th Day: Midnight: My room/Connection of Bodies",
+              },
             ],
           },
         ],
       }, {
         section: "桜10", v: [
-          {id: "桜10-6", eng: "10th Day: Awakening-Morning/Naive morning"},
-          {id: "桜10-0", eng: "10th Day: Breakfast/About Rider, who is at the table"},
+          {id: "桜10-6", eng: "10th Day: Awakening-Morning/Naive morning", jp: "十日目・起床〜朝/初々しい朝"},
+          {id: "桜10-0", eng: "10th Day: Breakfast/About Rider, who is at the table", jp: "十日目・朝食/食卓にいるライダーについて"},
           {
             h: [
-              {id: "桜10-1", eng: "Impression/Red card from Sakura and Rider"},
-              {id: "桜10-2", eng: "Impression/Rider mad"},
-              {id: "桜10-3", eng: "Rider, breakfast?/No"},
+              {id: "桜10-1", eng: "Impression/Red card from Sakura and Rider", jp: "感想/桜、ライダーにレッドカード"},
+              {id: "桜10-2", eng: "Impression/Rider mad", jp: "感想/ライダー、むす"},
+              {id: "桜10-3", eng: "Rider, breakfast?/No", jp: "ライダー、ごはんは/たべません"},
             ],
           },
-          {id: "桜10-4", eng: "10th Day: After breakfast/Future plans"},
-          {id: "桜10-7", eng: "10th Day: Emiya household-Go out/To the Einzbern forest"},
-          {id: "桜10-5", eng: "Intermission/Secret"},
-          {id: "桜10-8", eng: "10th Day: Einzbern forest/Meet up with Rin"},
+          {id: "桜10-4", eng: "10th Day: After breakfast/Future plans", jp: "十日目・朝食後/今後の方針"},
+          {id: "桜10-7", eng: "10th Day: Emiya household-Go out/To the Einzbern forest", jp: "十日目・衛宮邸〜外出/アインツベルンの森へ"},
+          {id: "桜10-5", eng: "Intermission/Secret", jp: "幕間/隠し事"},
+          {id: "桜10-8", eng: "10th Day: Einzbern forest/Meet up with Rin", jp: "十日目・アインツベルンの森/凛との合流"},
           {
             h: [
-              {id: "桜10-9", eng: "Einzbern forest/To the center of explosion"},
-              {id: "桜10-10", eng: "10th Day: Einzbern forest…?/Layered curse of the Womb Realm Mandala"},
-            ],
-          },
-          {
-            h: [
-              {id: "桜10-12", eng: "Intermission/Shadow swallowing the castle"},
-              {id: "桜10-34", eng: "Tiger Dojo 32"},
-            ],
-          },
-          {id: "桜10-11", eng: "Einzbern forest/Power game"},
-          {id: "桜10-19", eng: "Einzbern forest/Rescue Illya-Black swordsman"},
-          {id: "桜10-13", eng: "Einzbern forest/Distraction"},
-          {
-            h: [
-              {id: "桜10-14", eng: "Einzbern forest/Blood out"},
-              {id: "桜10-15", eng: "Einzbern forest/World purge, meltdown"},
+              {id: "桜10-9", eng: "Einzbern forest/To the center of explosion", jp: "アインツベルンの森/爆心地へ"},
+              {
+                id: "桜10-10",
+                eng: "10th Day: Einzbern forest…?/Layered curse of the Womb Realm Mandala",
+                jp: "十日目・アインツベルンの森……？/呪層界胎蔵曼荼羅",
+              },
             ],
           },
           {
             h: [
-              {id: "桜10-28", eng: "Intermission/Deep desire"},
-              {id: "桜10-35", eng: "Tiger Dojo 33"},
+              {id: "桜10-12", eng: "Intermission/Shadow swallowing the castle", jp: "幕間/城食影"},
+              {id: "桜10-34", eng: "Tiger Dojo 32", jp: "タイガー道場32"},
             ],
           },
-          {id: "桜10-29", eng: "10th Day: Church/Artificial Phantasm"},
-          {id: "桜10-16", eng: "10th Day: Out of church/Which one?"},
+          {id: "桜10-11", eng: "Einzbern forest/Power game", jp: "アインツベルンの森/パワー・ゲーム"},
+          {id: "桜10-19", eng: "Einzbern forest/Rescue Illya-Black swordsman", jp: "アインツベルンの森/イリヤ救出〜黒い剣士"},
+          {id: "桜10-13", eng: "Einzbern forest/Distraction", jp: "アインツベルンの森/ディストラクション"},
           {
             h: [
-              {id: "桜10-17", eng: "Answer/Rin blushes"},
-              {id: "桜10-18", eng: "Answer/Illya delighted"},
+              {id: "桜10-14", eng: "Einzbern forest/Blood out", jp: "アインツベルンの森/ブラッド・アウト"},
+              {id: "桜10-15", eng: "Einzbern forest/World purge, meltdown", jp: "アインツベルンの森/ワールドパージ・メルトダウン"},
             ],
           },
-          {id: "桜10-30", eng: "10th Day: Intersection-Return home/Blade virus "},
-          {id: "桜10-31", eng: "Intermission/Sacrilege"},
-          {id: "桜10-20", eng: "10th Day: Return home-Entrance/Sweet & spicy"},
           {
             h: [
-              {id: "桜10-21", eng: "Conversation/Second visit"},
-              {id: "桜10-22", eng: "Conversation/First visit"},
+              {id: "桜10-28", eng: "Intermission/Deep desire", jp: "幕間/昏い望み"},
+              {id: "桜10-35", eng: "Tiger Dojo 33", jp: "タイガー道場33"},
             ],
           },
-          {id: "桜10-32", eng: "10th Day: Dinner/Sisters (III)"},
-          {id: "桜10-23", eng: "10th Day: Bedtime/Choice"},
+          {id: "桜10-29", eng: "10th Day: Church/Artificial Phantasm", jp: "十日目・教会/アーティフィシャル・ファンタズム"},
+          {id: "桜10-16", eng: "10th Day: Out of church/Which one?", jp: "十日目・教会外へ/どっちがいいの？"},
           {
             h: [
-              {id: "桜10-24", eng: "Choice/Release it"},
-              {id: "桜10-25", eng: "Choice/Do not release it."},
+              {id: "桜10-17", eng: "Answer/Rin blushes", jp: "感想/凛赤面"},
+              {id: "桜10-18", eng: "Answer/Illya delighted", jp: "感想/喜ぶイリヤ"},
             ],
           },
-          {id: "桜10-26", eng: "10th Day: Bedtime/Rider’s inquiry"},
-          {id: "桜10-33", eng: "Intermission/Nightmare (I)"},
+          {id: "桜10-30", eng: "10th Day: Intersection-Return home/Blade virus ", jp: "十日目・交差点〜帰宅/ブレイドウイルス"},
+          {id: "桜10-31", eng: "Intermission/Sacrilege", jp: "幕間/サクラリッジ"},
+          {id: "桜10-20", eng: "10th Day: Return home-Entrance/Sweet & spicy", jp: "十日目・帰宅〜玄関/スイート＆スパイシー"},
+          {
+            h: [
+              {id: "桜10-21", eng: "Conversation/Second visit", jp: "会話中/二度目の来訪"},
+              {id: "桜10-22", eng: "Conversation/First visit", jp: "会話中/初めての来訪"},
+            ],
+          },
+          {id: "桜10-32", eng: "10th Day: Dinner/Sisters (III)", jp: "十日目・夕食/姉妹（Ⅲ）"},
+          {id: "桜10-23", eng: "10th Day: Bedtime/Choice", jp: "十日目・就寝/選択肢。"},
+          {
+            h: [
+              {id: "桜10-24", eng: "Choice/Release it", jp: "選択/解く"},
+              {id: "桜10-25", eng: "Choice/Do not release it.", jp: "選択/解かない"},
+            ],
+          },
+          {id: "桜10-26", eng: "10th Day: Bedtime/Rider’s inquiry", jp: "十日目・就寝/ライダーの問い"},
+          {id: "桜10-33", eng: "Intermission/Nightmare (I)", jp: "幕間/悪夢（Ⅰ）"},
         ],
       }, {
         section: "桜11", v: [
-          {id: "桜11-6", eng: "11th Day: Awakening: My room/Illya’s warning"},
-          {id: "桜11-7", eng: "11th Day: Breakfast/Bad news"},
-          {id: "桜11-8", eng: "11th Day: After breakfast/Future plans"},
-          {id: "桜11-9", eng: "11th Day: Morning: Dojo/Lecture on magic (Drastic measure)"},
-          {id: "桜11-10", eng: "11th Day: Lunch preparation/Sisters (IV)"},
-          {id: "桜11-0", eng: "11th Day: Afternoon/Choice"},
+          {id: "桜11-6", eng: "11th Day: Awakening: My room/Illya’s warning", jp: "十一日目・起床・自室/イリヤの忠告"},
+          {id: "桜11-7", eng: "11th Day: Breakfast/Bad news", jp: "十一日目・朝食/バッドニュース"},
+          {id: "桜11-8", eng: "11th Day: After breakfast/Future plans", jp: "十一日目・朝食後/今後の方針"},
+          {id: "桜11-9", eng: "11th Day: Morning: Dojo/Lecture on magic (Drastic measure)", jp: "十一日目・午前・道場/魔術講座（荒療治）"},
+          {id: "桜11-10", eng: "11th Day: Lunch preparation/Sisters (IV)", jp: "十一日目・昼食の準備/姉妹（Ⅳ）"},
+          {id: "桜11-0", eng: "11th Day: Afternoon/Choice", jp: "十一日目・午後/選択肢"},
           {
             h: [
-              {id: "桜11-1", eng: "Action/Rin and Illya"},
-              {id: "桜11-2", eng: "Action/Cute girl"},
-              {id: "桜11-3", eng: "Action/Earnest"},
+              {id: "桜11-1", eng: "Action/Rin and Illya", jp: "行動/凛とイリヤ"},
+              {id: "桜11-2", eng: "Action/Cute girl", jp: "行動/かわいい女の子"},
+              {id: "桜11-3", eng: "Action/Earnest", jp: "行動/一途"},
             ],
           },
-          {id: "桜11-4", eng: "11th Day: Checking on Sakura/Distant twilight (I)"},
-          {id: "桜11-11", eng: "Intermission/Distortion"},
-          {id: "桜11-12", eng: "11th Day: Dinner/Signs of disaster"},
-          {id: "桜11-13", eng: "11th Day: Night: Patrol/Tohsaka Rin (III)"},
-          {id: "桜11-14", eng: "11th Day: Return home: My room/Release of the seal-Overture of breakdown"},
+          {id: "桜11-4", eng: "11th Day: Checking on Sakura/Distant twilight (I)", jp: "十一日目・桜の看病/遠い夕暮れ（Ⅰ）"},
+          {id: "桜11-11", eng: "Intermission/Distortion", jp: "幕間/歪み"},
+          {id: "桜11-12", eng: "11th Day: Dinner/Signs of disaster", jp: "十一日目・夕食/異変、前兆"},
+          {id: "桜11-13", eng: "11th Day: Night: Patrol/Tohsaka Rin (III)", jp: "十一日目・夜・巡回/遠坂凛（Ⅲ）"},
+          {
+            id: "桜11-14",
+            eng: "11th Day: Return home: My room/Release of the seal-Overture of breakdown",
+            jp: "十一日目・帰宅・自室/封印解除〜崩壊序曲",
+          },
           {
             h: [
-              {id: "桜11-15", eng: "11th Day: Night: My room/Crack"},
-              {id: "桜11-115", eng: "11th Day: Night: My room/Connection of Minds"},
+              {id: "桜11-15", eng: "11th Day: Night: My room/Crack", jp: "十一日目・夜・自室/クラック"},
+              {id: "桜11-115", eng: "11th Day: Night: My room/Connection of Minds", jp: "十一日目・夜・自室/心の重なり"},
             ],
           },
-          {id: "桜11-16", eng: "Intermission/Nightmare (II)"},
+          {id: "桜11-16", eng: "Intermission/Nightmare (II)", jp: "幕間/悪夢（Ⅱ）"},
         ],
       }, {
         section: "桜12", v: [
-          {id: "桜12-5", eng: "12th Day: Awakening-Morning/Blank memory"},
-          {id: "桜12-6", eng: "12th Day: Breakfast/Illya’s breakfast"},
-          {id: "桜12-0", eng: "12th Day: Morning: Dojo/Determination"},
+          {id: "桜12-5", eng: "12th Day: Awakening-Morning/Blank memory", jp: "十二日目・起床〜朝/空白"},
+          {id: "桜12-6", eng: "12th Day: Breakfast/Illya’s breakfast", jp: "十二日目・朝食/イリヤの朝ごはん"},
+          {id: "桜12-0", eng: "12th Day: Morning: Dojo/Determination", jp: "十二日目・午前・道場/その決意"},
           {
             h: [
-              {id: "桜12-1", eng: "Resolution/Noble fool"},
-              {id: "桜12-2", eng: "Resolution/Blame for persistence"},
+              {id: "桜12-1", eng: "Resolution/Noble fool", jp: "覚悟/尊い愚者"},
+              {id: "桜12-2", eng: "Resolution/Blame for persistence", jp: "覚悟/不断の咎"},
             ],
           },
-          {id: "桜12-3", eng: "12th Day: Morning: Dojo/Training start"},
-          {id: "桜12-7", eng: "Intermission/Sisters (V)"},
-          {id: "桜12-8", eng: "12th Day: Noon: Dojo/Blank memory"},
-          {id: "桜12-9", eng: "12th Day: Shopping district/Lorelei"},
-          {id: "桜12-10", eng: "12th Day: Dinner-Night/Memory lost"},
-          {id: "桜12-11", eng: "12th Day: Night: Patrol/Shadow swallowing the town"},
-          {id: "桜12-12", eng: "Intermission/Chess"},
+          {id: "桜12-3", eng: "12th Day: Morning: Dojo/Training start", jp: "十二日目・午前・道場/修行開始"},
+          {id: "桜12-7", eng: "Intermission/Sisters (V)", jp: "幕間/姉妹（Ⅴ）"},
+          {id: "桜12-8", eng: "12th Day: Noon: Dojo/Blank memory", jp: "十二日目・正午・道場/空白"},
+          {id: "桜12-9", eng: "12th Day: Shopping district/Lorelei", jp: "十二日目・商店街/ローレライ"},
+          {id: "桜12-10", eng: "12th Day: Dinner-Night/Memory lost", jp: "十二日目・夕食〜夜/メモリー・ロスト"},
+          {id: "桜12-11", eng: "12th Day: Night: Patrol/Shadow swallowing the town", jp: "十二日目・夜・巡回/街食影"},
+          {id: "桜12-12", eng: "Intermission/Chess", jp: "2"},
           {
             h: [
-              {id: "桜12-13", eng: "12th Day: Return home-Bedtime/Void"},
-              {id: "桜12-113", eng: "12th Day: Return home-Bedtime/Mind’s Thirst"},
+              {id: "桜12-13", eng: "12th Day: Return home-Bedtime/Void", jp: "十二日目・帰宅〜就寝/ヴォイド"},
+              {id: "桜12-113", eng: "12th Day: Return home-Bedtime/Mind’s Thirst", jp: "十二日目・帰宅～就寝/心の渇き"},
             ],
           },
-          {id: "桜12-14", eng: "Intermission/Nightmare, awakening"},
+          {id: "桜12-14", eng: "Intermission/Nightmare, awakening", jp: "幕間/悪夢→目覚め"},
         ],
       }, {
         section: "桜13", v: [
-          {id: "桜13-8", eng: "13th Day: Awakening-Morning/Sakura’s absence-Finding"},
-          {id: "桜13-9", eng: "13th Day: Morning/Check on Sakura"},
-          {id: "桜13-10", eng: "13th Day: Morning: Living room/Distant twilight (II)"},
-          {id: "桜13-11", eng: "Intermission/Misery"},
-          {id: "桜13-0", eng: "13th Day: Morning: My room/Assassin intrusion"},
+          {id: "桜13-8", eng: "13th Day: Awakening-Morning/Sakura’s absence-Finding", jp: "十三日目・起床〜朝/桜の不在〜発見"},
+          {id: "桜13-9", eng: "13th Day: Morning/Check on Sakura", jp: "十三日目・午前/桜の看病"},
+          {id: "桜13-10", eng: "13th Day: Morning: Living room/Distant twilight (II)", jp: "十三日目・午前・居間/遠い夕暮れ（Ⅱ）"},
+          {id: "桜13-11", eng: "Intermission/Misery", jp: "幕間/ミザリー"},
+          {id: "桜13-0", eng: "13th Day: Morning: My room/Assassin intrusion", jp: "十三日目・午前・自室/アサシン侵入"},
           {
             h: [
-              {id: "桜13-1", eng: "13th Day: -Matou household/Confrontation with Zouken-the shadow’s true identity"},
-              {id: "桜13-2", eng: "13th Day: Noon-Dinner/Horror show"},
+              {
+                id: "桜13-1",
+                eng: "13th Day: -Matou household/Confrontation with Zouken-the shadow’s true identity",
+                jp: "十三日目・〜間桐邸/臓硯と対峙〜影の正体",
+              },
+              {id: "桜13-2", eng: "13th Day: Noon-Dinner/Horror show", jp: "十三日目・昼〜夕食/ホラーショウ"},
             ],
           },
           {
             h: [
-              {id: "桜13-12", eng: "13th Day: Return home: Entrance/Gift"},
-              {id: "桜13-15", eng: "Tiger Dojo 34"},
+              {id: "桜13-12", eng: "13th Day: Return home: Entrance/Gift", jp: "十三日目・帰宅・玄関/ギフト"},
+              {id: "桜13-15", eng: "Tiger Dojo 34", jp: "タイガー道場34"},
             ],
           },
-          {id: "桜13-13", eng: "13th Day: Afternoon: Sakura’s guest room/Once it’s spring"},
-          {id: "桜13-3", eng: "13th Day: Night/Decision time"},
+          {id: "桜13-13", eng: "13th Day: Afternoon: Sakura’s guest room/Once it’s spring", jp: "十三日目・午後・桜の客間/春になったら"},
+          {id: "桜13-3", eng: "13th Day: Night/Decision time", jp: "十三日目・夜/決断の刻"},
           {
             h: [
-              {id: "桜13-5", eng: "13th Day/Happy end"},
-              {id: "桜13-6", eng: "13th Day: Night/Beautiful aria"},
+              {id: "桜13-5", eng: "13th Day/Happy end", jp: "十三日目/ハッピーエンド"},
+              {id: "桜13-6", eng: "13th Day: Night/Beautiful aria", jp: "十三日目・夜/美しいアリア"},
             ],
           },
           {
             h: [
-              {id: "桜13-14", eng: "Intermission/Matou Sakura (IV)"},
-              {id: "桜13-16", eng: "Tiger Dojo 35"},
+              {id: "桜13-14", eng: "Intermission/Matou Sakura (IV)", jp: "幕間/間桐桜（Ⅳ）"},
+              {id: "桜13-16", eng: "Tiger Dojo 35", jp: "タイガー道場35"},
             ],
           },
         ],
       }, {
         section: "桜14", v: [
-          {id: "桜14-0", eng: "14th Day: Awakening-To the church/A ray of hope"},
-          {id: "桜14-2", eng: "Intermission/Foolish"},
-          {id: "桜14-8", eng: "Intermission/Trash"},
-          {id: "桜14-9", eng: "14th Day: Church/What is hidden in the Holy Grail"},
-          {id: "桜14-1", eng: "14th Day: Return home-Search-To the Matou household/Matou household murder case"},
+          {id: "桜14-0", eng: "14th Day: Awakening-To the church/A ray of hope", jp: "十四日目・起床〜教会へ/一縷の希望"},
+          {id: "桜14-2", eng: "Intermission/Foolish", jp: "幕間/フーリッシュ"},
+          {id: "桜14-8", eng: "Intermission/Trash", jp: "幕間/トラッシュ"},
+          {id: "桜14-9", eng: "14th Day: Church/What is hidden in the Holy Grail", jp: "十四日目・教会/聖杯に潜むモノ"},
+          {
+            id: "桜14-1",
+            eng: "14th Day: Return home-Search-To the Matou household/Matou household murder case",
+            jp: "十四日目・帰宅〜探索〜間桐邸へ/間桐邸殺人事件",
+          },
           {
             h: [
-              {id: "桜14-10", eng: "Intermission/Last piece"},
-              {id: "桜14-110", eng: "Intermission/Last piece"},
+              {id: "桜14-10", eng: "Intermission/Last piece", jp: "幕間/ラストピース"},
+              {id: "桜14-110", eng: "Intermission/Last piece", jp: ""},
             ],
           },
-          {id: "桜14-3", eng: "14th Day: Matou household: Sakura’s room/Choice"},
+          {id: "桜14-3", eng: "14th Day: Matou household: Sakura’s room/Choice", jp: "十四日目・間桐邸・桜の部屋/選択肢"},
           {
             h: [
-              {id: "桜14-4", eng: "Action/Best"},
-              {id: "桜14-5", eng: "Action/Worst"},
+              {id: "桜14-4", eng: "Action/Best", jp: "行動/最善"},
+              {id: "桜14-5", eng: "Action/Worst", jp: "行動/最悪"},
             ],
           },
-          {id: "桜14-6", eng: "Intermission/Sacrilege-Sisters (VI)"},
-          {id: "桜14-11", eng: "14th Day/Finale"},
+          {id: "桜14-6", eng: "Intermission/Sacrilege-Sisters (VI)", jp: "幕間/サクラリッジ〜姉妹（Ⅵ）"},
+          {id: "桜14-11", eng: "14th Day/Finale", jp: "十四日目/フィナーレ"},
         ],
       }, {
         section: "桜15", v: [
-          {id: "桜15-0", eng: "15th Day/Finale, replay"},
+          {id: "桜15-0", eng: "15th Day/Finale, replay", jp: "十五日目/フィナーレ・リプレイ"},
           {
             h: [
-              {id: "桜15-1", eng: "15th Day: Church-Outside church/Resume battle. Kotomine’s help."},
-              {id: "桜15-2", eng: "15th Day/Dead fin"},
+              {
+                id: "桜15-1",
+                eng: "15th Day: Church-Outside church/Resume battle. Kotomine’s help.",
+                jp: "十五日目・教会〜教会外/戦闘続行。言峰の協力を、",
+              },
+              {id: "桜15-2", eng: "15th Day/Dead fin", jp: "十五日目/デッド・フィン"},
             ],
           },
           {
             h: [
-              {id: "桜15-22", eng: "15th Day: To the forest/Duo"},
-              {id: "桜15-3", eng: "15th Day: Einzbern castle/Death penalty"},
-              {id: "桜15-27", eng: "Tiger Dojo 36"},
+              {id: "桜15-22", eng: "15th Day: To the forest/Duo", jp: "十五日目・森へ/デュオ"},
+              {id: "桜15-3", eng: "15th Day: Einzbern castle/Death penalty", jp: "十五日目・アインツベルン城/デス・ペナルティ"},
+              {id: "桜15-27", eng: "Tiger Dojo 36", jp: "タイガー道場36"},
             ],
           },
           {
             h: [
-              {id: "桜15-23", eng: "Intermission/Succeed from deep"},
-              {id: "桜15-28", eng: "Tiger Dojo 37"},
+              {id: "桜15-23", eng: "Intermission/Succeed from deep", jp: "幕間/サクスィード・フロム・ディープ"},
+              {id: "桜15-28", eng: "Tiger Dojo 37", jp: "タイガー道場37"},
             ],
           },
-          {id: "桜15-4", eng: "Einzbern castle/Illya found"},
+          {id: "桜15-4", eng: "Einzbern castle/Illya found", jp: "アインツベルン城/イリヤ発見"},
           {
             h: [
-              {id: "桜15-5", eng: "Action/Emotion"},
-              {id: "桜15-6", eng: "Action/Emotion"},
-              {id: "桜15-7", eng: "Action/Emotion"},
+              {id: "桜15-5", eng: "Action/Emotion", jp: "行動/感情"},
+              {id: "桜15-6", eng: "Action/Emotion", jp: "行動/感情"},
+              {id: "桜15-7", eng: "Action/Emotion", jp: "行動/感情"},
             ],
           },
-          {id: "桜15-8", eng: "Escape start-To the forest/Epilogue"},
-          {id: "桜15-9", eng: "Battle in the forest: First half/over load"},
-          {id: "桜15-10", eng: "Battle in the forest: Second half/Nine Bullet Revolver"},
-          {id: "桜15-11", eng: "15th Day: Einzbern forest/Death of a saint"},
-          {id: "桜15-12", eng: "15th Day: Return home-Emiya living room/Truth-Antihero Angra Mainyu"},
-          {id: "桜15-24", eng: "15th Day: Sakura’s shadow/Separation"},
-          {id: "桜15-25", eng: "15th Day: Night: Shed/Record of the Great Holy Grail"},
-          {id: "桜15-13", eng: "15th Day: Preparation for battle/Confrontation with Rider"},
+          {id: "桜15-8", eng: "Escape start-To the forest/Epilogue", jp: "逃走開始〜森へ/エピローグ"},
+          {id: "桜15-9", eng: "Battle in the forest: First half/over load", jp: "森の攻防・前半/over load"},
+          {
+            id: "桜15-10",
+            eng: "Battle in the forest: Second half/Nine Bullet Revolver",
+            jp: "森の攻防・後半/Nine Bullet Revolver",
+          },
+          {id: "桜15-11", eng: "15th Day: Einzbern forest/Death of a saint", jp: "十五日目・アインツベルンの森/聖者の死"},
+          {
+            id: "桜15-12",
+            eng: "15th Day: Return home-Emiya living room/Truth-Antihero Angra Mainyu",
+            jp: "十五日目・帰還〜衛宮邸居間/真相〜反英雄アンリマユ",
+          },
+          {id: "桜15-24", eng: "15th Day: Sakura’s shadow/Separation", jp: "十五日目・桜の影/決別"},
+          {id: "桜15-25", eng: "15th Day: Night: Shed/Record of the Great Holy Grail", jp: "十五日目・夜・土蔵/大聖杯の記録"},
+          {id: "桜15-13", eng: "15th Day: Preparation for battle/Confrontation with Rider", jp: "十五日目・決戦準備/ライダーとの対峙"},
           {
             h: [
-              {id: "桜15-16", eng: "Choice/Rider’s question"},
-              {id: "桜15-14", eng: "15th Day: Night/Rider leaves"},
-              {id: "桜15-15", eng: "15th Day: Night/Rider leaves"},
+              {id: "桜15-16", eng: "Choice/Rider’s question", jp: "選択肢/ライダーの問い"},
+              {id: "桜15-14", eng: "15th Day: Night/Rider leaves", jp: "十五日目・夜/ライダー去る"},
+              {id: "桜15-15", eng: "15th Day: Night/Rider leaves", jp: "十五日目・夜/ライダー去る"},
             ],
           },
           {
             h: [
-              {id: "桜15-17", eng: "15th Day: Night/Rider leaves"},
-              {id: "桜15-18", eng: "15th Day: Night/Rider leaves"},
-              {id: "桜15-19", eng: "15th Day: Preparation for battle/Tactics"},
+              {id: "桜15-17", eng: "15th Day: Night/Rider leaves", jp: "十五日目・夜/ライダー去る"},
+              {id: "桜15-18", eng: "15th Day: Night/Rider leaves", jp: "十五日目・夜/ライダー去る"},
+              {id: "桜15-19", eng: "15th Day: Preparation for battle/Tactics", jp: "十五日目・決戦準備/タクティクス"},
             ],
           },
           {
             h: [
-              {id: "桜15-20", eng: "16th Day: VS Saber/Sparks liner high"},
-              {id: "桜15-26", eng: "15th Day: Night/Goodbye, thank you"},
+              {id: "桜15-20", eng: "16th Day: VS Saber/Sparks liner high", jp: "十六日目・ＶＳセイバー/スパークスライナーハイ"},
+              {id: "桜15-26", eng: "15th Day: Night/Goodbye, thank you", jp: "十五日目・夜/サヨナラ、アリガトウ"},
             ],
           },
-          {id: "桜15-29", eng: "Tiger Dojo 38"},
+          {id: "桜15-29", eng: "Tiger Dojo 38", jp: "タイガー道場38"},
         ],
       }, {
         section: "桜16", v: [
-          {id: "桜16-0", eng: "Intermission/Zouken’s end"},
-          {id: "桜16-14", eng: "Last day/To the underground cave"},
-          {id: "桜16-15", eng: "Last day: Inside the cave/The strongest Servant"},
-          {id: "桜16-16", eng: "Intermission/Country of the dark queen"},
-          {id: "桜16-1", eng: "VS Saber/Burst"},
+          {id: "桜16-0", eng: "Intermission/Zouken’s end", jp: "幕間/臓硯の最期"},
+          {id: "桜16-14", eng: "Last day/To the underground cave", jp: "最終日/地下洞穴へ"},
+          {id: "桜16-15", eng: "Last day: Inside the cave/The strongest Servant", jp: "最終日・中空洞/最強のサーヴァント"},
+          {id: "桜16-16", eng: "Intermission/Country of the dark queen", jp: "幕間/黒き王女の国"},
+          {id: "桜16-1", eng: "VS Saber/Burst", jp: "ＶＳセイバー/バースト"},
           {
             h: [
-              {id: "桜16-3", eng: "VS Saber/Burst out"},
-              {id: "桜16-4", eng: "VS Saber/Crazy train II"},
-              {id: "桜16-2", eng: "Last day: Inside the cavern/Compassion"},
+              {id: "桜16-3", eng: "VS Saber/Burst out", jp: "ＶＳセイバー/バースト、アウト"},
+              {id: "桜16-4", eng: "VS Saber/Crazy train II", jp: "ＶＳセイバー/クレイジー・トレインⅡ"},
+              {id: "桜16-2", eng: "Last day: Inside the cavern/Compassion", jp: "最終日・中空洞/慈悲"},
             ],
           },
           {
             h: [
-              {id: "桜16-5", eng: "Oath/"},
-              {id: "桜16-23", eng: "Tiger Dojo 39"},
+              {id: "桜16-5", eng: "Oath/", jp: "誓い/"},
+              {id: "桜16-23", eng: "Tiger Dojo 39", jp: "タイガー道場39"},
             ],
           },
           {
             h: [
-              {id: "桜16-6", eng: "I’ll forget about you"},
-              {id: "桜16-7", eng: "Last day: Cavern/Femme fatale"},
+              {id: "桜16-6", eng: "I’ll forget about you", jp: "───君を忘れる"},
+              {id: "桜16-7", eng: "Last day: Cavern/Femme fatale", jp: "最終日・大空洞/ファム・ファタール"},
             ],
           },
           {
             h: [
-              {id: "桜16-17", eng: "Intermission/Gem Sword Zelretch"},
-              {id: "桜16-24", eng: "Tiger Dojo 40"},
+              {id: "桜16-17", eng: "Intermission/Gem Sword Zelretch", jp: "幕間/宝石剣ゼルレッチ"},
+              {id: "桜16-24", eng: "Tiger Dojo 40", jp: "タイガー道場40"},
             ],
           },
-          {id: "桜16-18", eng: "Intermission/Sisters (VII)"},
-          {id: "桜16-19", eng: "Conclusion/To the cavern"},
-          {id: "桜16-20", eng: "Conclusion/Liberation"},
-          {id: "桜16-8", eng: "Conclusion/To Angra Mainyu"},
+          {id: "桜16-18", eng: "Intermission/Sisters (VII)", jp: "幕間/姉妹（Ⅶ）"},
+          {id: "桜16-19", eng: "Conclusion/To the cavern", jp: "終局/大空洞へ"},
+          {id: "桜16-20", eng: "Conclusion/Liberation", jp: "終局/解放"},
+          {id: "桜16-8", eng: "Conclusion/To Angra Mainyu", jp: "終局/アンリマユへ"},
           {
             h: [
-              {id: "桜16-11", eng: "Conclusion/All evils of the world"},
-              {id: "桜16-9", eng: "Conclusion/Conclusion"},
+              {id: "桜16-11", eng: "Conclusion/All evils of the world", jp: "終局/この世全ての悪"},
+              {id: "桜16-9", eng: "Conclusion/Conclusion", jp: "終局/終局"},
             ],
           },
-          {id: "桜16-21", eng: "Intermission/At the end of the dearest wish"},
-          {id: "桜16-22", eng: "Conclusion/All the good in this life"},
-          {id: "桜16-10", eng: "Last projection"},
+          {id: "桜16-21", eng: "Intermission/At the end of the dearest wish", jp: "幕間/悲願の果て"},
+          {id: "桜16-22", eng: "Conclusion/All the good in this life", jp: "終局/この生、全ての善"},
+          {id: "桜16-10", eng: "Last projection", jp: "最後の投影"},
           {
             h: [
-              {id: "桜16-12", eng: "Conclusion/Conclusion"},
-              {id: "桜16-13", eng: "Conclusion/At the end of a miracle"},
+              {id: "桜16-12", eng: "Conclusion/Conclusion", jp: "終局/終局"},
+              {id: "桜16-13", eng: "Conclusion/At the end of a miracle", jp: "終局/奇跡の果て"},
             ],
           },
         ],

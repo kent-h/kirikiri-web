@@ -6,11 +6,16 @@ import {
   HImagesBishopcruz,
   HImagesDefaultArtist,
   HImagesOriginal,
+  HScripts,
   MatureImages,
 } from "./generated/asset-dictionary"
 import {SharedScripts} from "./generated/asset-dictionary.js"
 
 const sharedScriptsMap = SharedScripts.reduce((map, item) => {
+  map[item] = true
+  return map
+}, {})
+const hScriptsMap = HScripts.reduce((map, item) => {
   map[item] = true
   return map
 }, {})
@@ -20,7 +25,7 @@ export const LocateScript = (name, lang) => {
   if (sharedScriptsMap[name]) {
     return "/static/scripts/" + name + ".ks.gz"
   }
-  return "/static/scripts/" + lang + "/" + name + ".ks.gz"
+  return "/static/scripts/" + lang + (hScriptsMap[name] ? "/h/" : "/") + name + ".ks.gz"
 }
 
 export const LocateBGM = (name, version) => {
@@ -75,7 +80,7 @@ export const LocateImage = (name, lang, mature, h, hArtist) => {
   }
   if (h) {
     if (h === 2) {
-      hArtist = hArtist || HImagesDefaultArtist[name]
+      hArtist = hArtist || HImagesDefaultArtist[name] || HImagesDefaultArtist[name.slice(0, -1)]
       if ((hImagesArtistsMap[hArtist] || {})[name]) {
         return "/static/images/h/" + {
           "1": "bishopcruz",
