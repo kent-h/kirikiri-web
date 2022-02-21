@@ -14,7 +14,7 @@ const Index = (props) =>
   <Options>
     <Router>
       <Switch>
-        <Route exact path={["/:route(prologue|プロローグ|saber|セイバ|rin|凛|sakura|桜)", "/"]}>
+        <Route exact path={["/:route(prologue|プロローグ|fate|saber|セイバ|ubw|rin|凛|hf|sakura|桜)", "/"]}>
           <Home/>
         </Route>
         <Route path={["/:route/:day/:chapter", "/:route/:chapter", "/:script"]}>

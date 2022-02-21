@@ -98,38 +98,37 @@ export const LocateImage = (name, lang, mature, h, hArtist) => {
 
 export const RouteToNum = route => {
   return {
+    "fate": 0,
     "saber": 0,
     "セイバ": 0,
+    "ubw": 1,
     "rin": 1,
     "凛": 1,
+    "hf": 2,
     "sakura": 2,
     "桜": 2,
   }[route] || 0
 }
 
-export const NumToRoute = (route, lang) => {
+export const NumToRoute = (route) => {
   return {
-    "eng": {
-      0: "saber",
-      1: "rin",
-      2: "sakura",
-    },
-    "jp": {
-      0: "セイバ",
-      1: "凛",
-      2: "桜",
-    },
-  }[lang][route] || (lang === "eng" ? "saber" : "セイバ")
+    0: "fate",
+    1: "ubw",
+    2: "hf",
+  }[route] || "fate"
 }
 
 export const PathToID = (params) => {
   let r = {
     "prologue": "プ",
     "プロローグ": "プ",
+    "fate": "セ",
     "saber": "セ",
     "セイバ": "セ",
+    "ubw": "凛",
     "rin": "凛",
     "凛": "凛",
+    "hf": "桜",
     "sakura": "桜",
     "桜": "桜",
   }[params.route]
@@ -146,15 +145,15 @@ export const IDToPath = (id, lang) => {
     const route = {
       "eng": {
         "プ": "prologue",
-        "セ": "saber",
-        "凛": "rin",
-        "桜": "sakura",
+        "セ": "fate",
+        "凛": "ubw",
+        "桜": "hf",
       },
       "jp": {
         "プ": "プロローグ",
-        "セ": "セイバ",
-        "凛": "凛",
-        "桜": "桜",
+        "セ": "fate",
+        "凛": "ubw",
+        "桜": "hf",
       },
     }[lang][match[1]]
     return route + "/" + (match[2] ? match[2] + (lang === "eng" ? ({

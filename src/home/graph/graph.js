@@ -123,11 +123,11 @@ class Graph extends Component {
           {first && elemIndex === 1 &&
           <Navigation pane={routeNum}
                       onLeft={() => {
-                        this.props.history.replace("/" + NumToRoute(routeNum <= 0 ? 0 : routeNum - 1, this.props.options.lang))
+                        this.props.history.replace("/" + NumToRoute(routeNum <= 0 ? 0 : routeNum - 1))
                         this.setState({paneMoving: routeNum !== 0})
                       }}
                       onRight={() => {
-                        this.props.history.replace("/" + NumToRoute(routeNum >= 2 ? 2 : routeNum + 1, this.props.options.lang))
+                        this.props.history.replace("/" + NumToRoute(routeNum >= 2 ? 2 : routeNum + 1))
                         this.setState({paneMoving: routeNum !== 2})
                       }}/>}
           <div key={elemIndex} className="section-horizontal">
