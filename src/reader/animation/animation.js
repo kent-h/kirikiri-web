@@ -55,13 +55,6 @@ class Animation extends Component {
       audio.innerHTML =
         "<source src=\"" + file + ".ogg\" type=\"audio/ogg\"/>" +
         "<source src=\"" + file + ".m4a\" type=\"audio/mp4\"/>"
-      promises.push(new Promise(resolve => {
-        audio.oncanplaythrough = () => resolve(true)
-        audio.onerror = () => resolve(true)
-        let first = true
-        audio.firstElementChild.onerror = () => first ? (first = false) : resolve(true)
-        audio.lastElementChild.onerror = () => first ? (first = false) : resolve(true)
-      }))
       audio.preload = "auto"
       return audio
     }
