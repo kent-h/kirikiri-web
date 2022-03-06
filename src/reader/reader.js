@@ -17,6 +17,18 @@ class Reader extends Component {
     this.state = {ready: false}
   }
 
+  componentDidMount() {
+    const ua = window.navigator.userAgent
+    if (ua.indexOf("iPhone") > -1 || ua.indexOf("iPad") > -1) {
+      window.addEventListener('touchstart', () => {
+        const audioTags = Array.from(document.getElementsByClassName("react-audio-player "))
+        audioTags.forEach((a) => {
+          if (!a.ended && !a.playing) a.play()
+        })
+      })
+    }
+  }
+
   render() {
     const options = this.props.options
     return (
