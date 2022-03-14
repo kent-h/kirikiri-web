@@ -58,11 +58,14 @@ class Animation extends Component {
       promises.push(new Promise(resolve => {
         audio.oncanplaythrough = () => resolve(true)
         audio.onerror = () => resolve(true)
+        audio.firstElementChild.oncanplaythrough = () => resolve(true)
+        audio.lastElementChild.oncanplaythrough = () => resolve(true)
         let first = true
         audio.firstElementChild.onerror = () => first ? (first = false) : resolve(true)
         audio.lastElementChild.onerror = () => first ? (first = false) : resolve(true)
       }))
       audio.preload = "auto"
+      audio.load()
       return audio
     }
 

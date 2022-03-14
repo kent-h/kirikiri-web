@@ -7,8 +7,7 @@ class AudioPlayer extends Component {
     this.sleep = this.sleep.bind(this)
     this.onFadeOutComplete = this.onFadeOutComplete.bind(this)
 
-    this.soundID = 1
-    this.state = {playingSe: [], fadingOut: []}
+    this.state = {playingSe: [], fadingOut: [], soundIDPool: [...Array(8).keys()].map(i => i + 1)}
   }
 
   componentDidMount() {
@@ -38,10 +37,6 @@ class AudioPlayer extends Component {
     return Promise.race([abortPromise, new Promise(resolve => setTimeout(() => resolve(true), ms))])
   }
 
-  getPlayingID() {
-    return this.soundID++
-  }
-
   async runBGMTimeline(abortPromise) {
     if (this.props.bgmTimeline.length === 0) {
       this.setState(state => {
@@ -62,11 +57,13 @@ class AudioPlayer extends Component {
       if (!await this.sleep(abortPromise, duration)) {
         break
       }
-      const id = this.getPlayingID()
       this.setState(state => {
         if ((!state.playingBgm && keyframe.bgm) || (state.playingBgm && state.playingBgm.bgm !== keyframe.bgm)) {
           // move playing bgm to the fadingOut list for 0.5s
-          const ret = {playingBgm: keyframe.bgm ? Object.assign({id: id, loop: true}, keyframe) : undefined}
+          const ret = {
+            playingBgm: keyframe.bgm ? Object.assign({id: state.soundIDPool[0], loop: true}, keyframe) : undefined,
+            soundIDPool: [...state.soundIDPool].slice(1),
+          }
           if (state.playingBgm) {
             state.playingBgm.fadeOut = keyframe.fadeTime || 500
             ret.fadingOut = state.fadingOut.concat([state.playingBgm])
@@ -106,6 +103,7 @@ class AudioPlayer extends Component {
       }
 
       this.setState(state => {
+        let soundIDPool = [...state.soundIDPool]
         // figure out which sounds to stop
         const stopping = []
         const playingSe = state.playingSe.filter(se => {
@@ -116,45 +114,56 @@ class AudioPlayer extends Component {
             return false
           }
           return true
-        }).concat()
+        })
 
         // figure out which sounds to start
         Object.keys(keyframe.sounds).forEach(sound => {
           const info = keyframe.sounds[sound]
           if (!info.stop) {
             if (!info.loop || !playingSe.some(se => (se.sound === sound && se.loop))) { // don't add if looped sound is already playing
-              playingSe.push({id: this.getPlayingID(), sound: sound, loop: info.loop, fadeIn: info.fadeIn})
+              playingSe.push({id: soundIDPool[0], sound: sound, loop: info.loop, fadeIn: info.fadeIn})
+              soundIDPool = soundIDPool.slice(1)
             }
           }
         })
-        return {playingSe: playingSe, fadingOut: state.fadingOut.concat(stopping)}
+        return {playingSe: playingSe, fadingOut: state.fadingOut.concat(stopping), soundIDPool}
       })
       time = keyframe.time
     }
   }
 
   onFadeOutComplete(playingID) {
-    this.setState(state => ({fadingOut: state.fadingOut.filter(sound => (sound.id !== playingID))}))
+    this.setState(state => ({
+      fadingOut: state.fadingOut.filter(sound => (sound.id !== playingID)),
+      soundIDPool: state.soundIDPool.concat([playingID]),
+    }))
   }
 
   render() {
-    const sounds = this.state.fadingOut.map((sound) => (
-      <Audio key={sound.id}
-             id={sound.id}
-             bgm={sound.bgm}
-             sound={sound.sound}
-             loop={sound.loop}
-             fadeIn={sound.fadeIn}
-             fadeOut={sound.fadeOut}
-             onFadeOutComplete={this.onFadeOutComplete}/>
-    )).concat(this.state.playingSe.map((sound) => (
-      <Audio key={sound.id}
-             id={sound.id}
-             sound={sound.sound}
-             loop={sound.loop}
-             fadeIn={sound.fadeIn}/>
-    )))
+    const unusedIDs = [...Array(8).keys()].reduce((m, k) => {
+      m[k + 1] = true
+      return m
+    }, {})
+    const sounds = this.state.fadingOut.map((sound) => {
+      delete unusedIDs[sound.id]
+      return <Audio key={sound.id}
+                    id={sound.id}
+                    bgm={sound.bgm}
+                    sound={sound.sound}
+                    loop={sound.loop}
+                    fadeIn={sound.fadeIn}
+                    fadeOut={sound.fadeOut}
+                    onFadeOutComplete={this.onFadeOutComplete}/>
+    }).concat(this.state.playingSe.map((sound) => {
+      delete unusedIDs[sound.id]
+      return <Audio key={sound.id}
+                    id={sound.id}
+                    sound={sound.sound}
+                    loop={sound.loop}
+                    fadeIn={sound.fadeIn}/>
+    }))
     if (this.state.playingBgm) {
+      delete unusedIDs[this.state.playingBgm.id]
       sounds.push(<Audio key={this.state.playingBgm.id}
                          id={this.state.playingBgm.id}
                          bgm={this.state.playingBgm.bgm}
@@ -162,9 +171,12 @@ class AudioPlayer extends Component {
                          fadeIn={this.state.playingBgm.fadeTime}/>)
     }
 
-    return <>
+    // ensure that all audio devices exist at all times
+    Object.keys(unusedIDs).forEach(id => sounds.push(<Audio key={id} id={id}/>))
+
+    return <div>
       {sounds}
-    </>
+    </div>
   }
 }
 
