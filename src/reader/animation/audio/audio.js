@@ -14,7 +14,8 @@ class Audio extends Component {
       this.abort = resolve
     })
 
-    this.state = {fadeIn: 0, fadeOut: 1}
+    this.ref = React.createRef()
+    this.state = {fadeIn: 0, fadeOut: 1, playPosition: 0}
   }
 
   componentDidMount() {
@@ -24,7 +25,7 @@ class Audio extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const startFadeOut = !prevProps.fadeOut && this.props.fadeOut
+    const startFadeOut = prevProps.fadeOut === undefined && this.props.fadeOut !== undefined
     const startPlay = !prevProps.bgm && !prevProps.sound && (this.props.bgm || this.props.sound)
     const released = (prevProps.bgm || prevProps.sound) && !this.props.bgm && !this.props.sound
 
@@ -83,7 +84,7 @@ class Audio extends Component {
       }
     }
 
-    this.props.onFadeOutComplete(this.props.id)
+    this.props.onEnded(this.props.id)
   }
 
   render() {
@@ -92,19 +93,52 @@ class Audio extends Component {
     const volume = this.props.bgm ? this.props.options.bgm : this.props.sound ? (this.props.sound.startsWith("voice/") ? this.props.options.voice : this.props.options.sound) : 0
 
     // iOS appears to reset the audio player, while other platforms do not; easy workaround for non-iOS devices is to recreate the player
-    const isIOS = ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(navigator.platform)
-    return <ReactAudioPlayer key={isIOS ? undefined : (this.props.bgm || this.props.sound)}
-                             autoPlay
-                             muted={volume === 0}
-                             volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
-                             loop={this.props.loop}
-                             onCanPlayThrough={e => e.target.play()}
-                             preload={(this.props.bgm || this.props.sound) ? "auto" : "none"}>
-      {src && <>
-        <source src={src + ".ogg"} type="audio/ogg"/>
-        <source src={src + ".m4a"} type="audio/mp4"/>
-      </>}
-    </ReactAudioPlayer>
+    if (this.ref.current && this.ref.current.audioEl.current) {
+      const audio = this.ref.current.audioEl.current
+      if (!src) {
+        // force-reset the audio element
+        audio.pause()
+        audio.load()
+      }
+    }
+
+    const debugLevel = this.props.options.debugLevel
+
+    return <>
+      {debugLevel && <div>
+        {this.ref.current && this.ref.current.audioEl.current && <>
+          <div style={{
+            right: (1 - this.ref.current.audioEl.current.currentTime / (this.ref.current.audioEl.current.duration || 1)) * 100 + "%",
+          }}/>
+          <div style={{
+            top: (1 - this.state.fadeIn * this.state.fadeOut) * 100 + "%",
+            right: (1 - this.ref.current.audioEl.current.currentTime / (this.ref.current.audioEl.current.duration || 1)) * 100 + "%",
+          }}/>
+        </>}
+        <div>
+          <div>{this.props.id}</div>
+          {(this.props.bgm || this.props.sound || "--unused--")}
+        </div>
+      </div>}
+
+      <ReactAudioPlayer autoPlay
+                        muted={volume === 0}
+                        volume={0.5 * volume * this.state.fadeIn * this.state.fadeOut}
+                        loop={this.props.loop}
+                        onCanPlayThrough={e => (src && e.target.play())}
+                        preload={(this.props.bgm || this.props.sound) ? "auto" : "none"}
+                        onEnded={() => this.props.onEnded(this.props.id)}
+
+                        ref={this.ref}
+                        controls={debugLevel === 2}
+                        listenInterval={debugLevel ? 30 : undefined}
+                        onListen={debugLevel ? e => this.setState({playPosition: e}) : undefined}>
+        {src && <>
+          <source src={src + ".ogg"} type="audio/ogg"/>
+          <source src={src + ".m4a"} type="audio/mp4"/>
+        </>}
+      </ReactAudioPlayer>
+    </>
   }
 }
 

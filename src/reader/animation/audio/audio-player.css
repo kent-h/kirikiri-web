@@ -1,0 +1,48 @@
+
+.audio-player:not([debug]) {
+  display: none;
+}
+
+.audio-player[debug] {
+  position:  fixed;
+  bottom:    0;
+  left:      0;
+  min-width: 12em;
+}
+
+.audio-player[debug] > div {
+  position:         relative;
+  background-color: darkslategray;
+  text-align:       center;
+}
+
+.audio-player[debug] > div:not(:first-child) {
+  border-top: 1px solid black;
+}
+
+.audio-player[debug] > div > div:not(:last-child) {
+  position: absolute;
+  top:      0;
+  left:     0;
+  bottom:   0;
+}
+
+.audio-player[debug] > div > div:nth-last-child(3) {
+  background-color: darkslateblue;
+}
+
+.audio-player[debug] > div > div:nth-last-child(2) {
+  background-color: darkblue;
+}
+
+
+.audio-player[debug] > div > div:last-child {
+  position:    relative;
+  text-align:  center;
+  white-space: nowrap;
+}
+
+.audio-player[debug] > div > div:last-child > div {
+  float: left;
+}
+
