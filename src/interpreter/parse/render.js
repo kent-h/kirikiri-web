@@ -37,7 +37,7 @@ const Render = (tokens, renderState, onPageReady, debug) => {
       case "[": // inline tag
         renderState.tokens.push(token)
         const command = token.command.toLowerCase()
-        if (command === "align" || command === "wacky" || command.startsWith("line")) {
+        if (command === "ch" || command === "align" || command === "wacky" || command.startsWith("line")) {
           renderState = RenderChunk(renderState, appendSection, debug)
         }
         break
@@ -396,6 +396,10 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           case "s":
             specialTag = false
             render = ("--- page generation halted at [s] ---")
+            break
+          case "ch":
+            specialTag = "lightyellow"
+            render = <span>{String.fromCharCode(parseInt(token.args.text.slice(5, -1), 16))}</span> // formatted like "&($0x00FC)"
             break
           case "wacky":
             specialTag = "lightyellow"
