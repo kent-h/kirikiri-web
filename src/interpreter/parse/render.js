@@ -410,7 +410,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             if (match) {
               specialTag = "lightyellow"
               // from trial and error, +2 appears to give the correct line length
-              render = <span>{String.fromCharCode(0xE010 + parseInt(match[2], 10) + 2 - 1)}</span>
+              render = <span>{String.fromCharCode(0xE010 + parseInt(match[2], 10) - 1)}</span>
             } else {
               specialTag = false
             }
