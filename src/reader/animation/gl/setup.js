@@ -36,6 +36,36 @@ void main() {
   gl_FragColor = texture2D(u_image, v_texCoord);
 }`
 
+const blurVertexShaderSource = `
+// defined per-vertex
+attribute vec2 a_position;
+attribute vec2 a_texCoord;
+
+// constant for whole batch
+uniform mat3 u_matrix;
+
+varying vec2 v_texCoord;
+
+void main() {
+  v_texCoord = a_texCoord;
+  gl_Position = vec4(u_matrix * vec3(a_position, 1), 1);
+}`
+
+const blurFragmentShaderSource = `
+// fragment shaders don't have a default precision so we need
+// to pick one. mediump is a good default
+precision mediump float;
+
+// our texture
+uniform sampler2D u_image;
+
+// from vertex shader
+varying vec2 v_texCoord;
+
+void main() {
+  gl_FragColor = (texture2D(u_image, v_texCoord.yx)+ texture2D(u_image, v_texCoord.yx+vec2(0.0 , 8.0/800.0)) )*0.5;
+}`
+
 
 const setupGL = (canvas) => {
   if (!canvas) {
@@ -62,9 +92,15 @@ const setupGL = (canvas) => {
 
   const spriteQuad = Sprite.setupQuad(gl)
 
+  const blurPassProgram = Shader.createProgram(gl)
+    .add(gl.VERTEX_SHADER, blurVertexShaderSource)
+    .add(gl.FRAGMENT_SHADER, blurFragmentShaderSource)
+    .link()
+
   const sprites = {}
 
-  const renderTexture = tex.newRenderTexture(gl)
+  const renderTexture = tex.newRenderTexture(gl, gl.RGB)
+  const blurTexture = tex.newRenderTexture(gl, gl.RGB)
 
   // code above this line is initialization code.
   // code below this line is rendering code.
@@ -96,7 +132,6 @@ const setupGL = (canvas) => {
 
     spriteQuad.bind(program.a.position, program.a.texCoord)
 
-
     Object.keys(sprites).forEach((name, i, list) => {
       const sprite = sprites[name]
       gl.bindTexture(gl.TEXTURE_2D, sprite.id)
@@ -111,7 +146,7 @@ const setupGL = (canvas) => {
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
     })
 
-    copyToScreen(gl, renderTexture, texWidth, texHeight, program)
+    copyToScreen(gl, renderTexture, blurTexture, texWidth, texHeight, program, blurPassProgram)
   }
 
   const imageReady = (name, image) => {
@@ -157,54 +192,102 @@ const setupGL = (canvas) => {
   return {shutdown, imageReady}
 }
 
-const copyToScreen = function (gl, renderTexture, texWidth, texHeight, program) {
+const copyToScreen = function (gl, renderTexture, blurTexture, texWidth, texHeight, program, blurPassProgram) {
+
+  // since the render texture is sized based on the screen, copy can be pixel-perfect
+  // it is better to be off by half a pixel to the left or right, than to blur one pixel over the whole image
+  const leftWidth = Math.round((gl.canvas.width - texWidth) / 2)
 
   // render to screen
   gl.bindFramebuffer(gl.FRAMEBUFFER, null)
-
   program.bind()
-
   renderTexture.bindAsTexture()
 
   gl.uniformMatrix3fv(program.u.matrix, false, m3.identity())
 
-  // since the render texture is sized based on the screen, copy can be pixel-perfect
-  // it is better to be off by half a pixel to the left or right, than to blur one pixel over the whole image
-  const left = Math.round((gl.canvas.width - texWidth) / 2)
+  // draw main block
+  gl.viewport(leftWidth, gl.canvas.height - texHeight, texWidth, texHeight)
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
   if (texWidth < gl.canvas.width) {
 
-    // draw left block
-    const leftScale = texWidth / left
-    gl.uniformMatrix3fv(program.u.matrix, false, m3.translate(m3.scale(m3.translation(-1, 0), leftScale >= 1 ? leftScale : 1, leftScale >= 1 ? 1 : 1 / leftScale), 1, 0))
+    // render blur first pass to other texture
+    blurTexture.bindAsTarget(texHeight, texWidth) // flip coordinates
+    blurPassProgram.bind()
+    renderTexture.bindAsTexture()
 
-    gl.viewport(0, gl.canvas.height - texHeight, left, texHeight)
+    gl.uniformMatrix3fv(blurPassProgram.u.matrix, false, m3.identity())
+    gl.viewport(0, 0, texHeight, texWidth) // flip coordinates
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+
+
+    // render to screen
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null)
+    blurPassProgram.bind()
+    blurTexture.bindAsTexture()
+
+
+    // draw left block
+    const leftScale = texWidth / leftWidth
+    gl.uniformMatrix3fv(blurPassProgram.u.matrix, false, m3.translate(m3.scale(m3.translation(-1, 0), leftScale >= 1 ? leftScale : 1, leftScale >= 1 ? 1 : 1 / leftScale), 1, 0))
+
+    gl.viewport(0, gl.canvas.height - texHeight, leftWidth, texHeight)
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
     // draw right block
-    const right = left + texWidth
+    const right = leftWidth + texWidth
     const rightWidth = gl.canvas.width - right
     const rightScale = texWidth / rightWidth
-    gl.uniformMatrix3fv(program.u.matrix, false, m3.translate(m3.scale(m3.translation(1, 0), rightScale >= 1 ? rightScale : 1, rightScale >= 1 ? 1 : 1 / rightScale), -1, 0))
+    gl.uniformMatrix3fv(blurPassProgram.u.matrix, false, m3.translate(m3.scale(m3.translation(1, 0), rightScale >= 1 ? rightScale : 1, rightScale >= 1 ? 1 : 1 / rightScale), -1, 0))
 
     gl.viewport(right, gl.canvas.height - texHeight, rightWidth, texHeight)
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 
   } else if (texHeight < gl.canvas.height) {
 
+    // render to screen
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null)
+
+    program.bind()
+
+    renderTexture.bindAsTexture()
+
+    gl.uniformMatrix3fv(program.u.matrix, false, m3.identity())
+
     // draw bottom block
     const bottomScale = texHeight / (gl.canvas.height - texHeight)
     gl.uniformMatrix3fv(program.u.matrix, false, m3.translate(m3.scale(m3.translation(0, -1), bottomScale >= 1 ? 1 : 1 / bottomScale, bottomScale >= 1 ? bottomScale : 1), 0, 1))
 
-    gl.viewport(left, 0, texWidth, gl.canvas.height - texHeight)
+    gl.viewport(leftWidth, 0, texWidth, gl.canvas.height - texHeight)
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
   }
+}
 
-  gl.uniformMatrix3fv(program.u.matrix, false, m3.identity())
+const blurConvolution = (width, deviation) => {
+  const blurAmount = (x, deviation) => {
+    const dev2 = 2 * deviation * deviation
+    return Math.exp(-x * x / dev2) / Math.sqrt(Math.PI * dev2)
+  }
 
-  // draw main block
-  gl.viewport(left, gl.canvas.height - texHeight, texWidth, texHeight)
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+  let limitDistance = Math.ceil(deviation * 3)
+
+  const weightsPerPixel = []
+  for (let i = -limitDistance; i <= limitDistance; i++) {
+    weightsPerPixel.push(blurAmount(i, deviation))
+  }
+
+  const offsets = []
+  const weights = []
+  for (let i = 0; i < weightsPerPixel.length; i += 2) {
+    const distance = -limitDistance + i
+    const combinedWeight = weightsPerPixel[i] + weightsPerPixel[i + 1]
+    offsets.push((distance + combinedWeight * 0.5) / width)
+    weights.push(combinedWeight)
+  }
+  offsets.push(limitDistance / width)
+  weights.push(weightsPerPixel[-1])
+
+  return {offsets, weights}
 }
 
 export default setupGL

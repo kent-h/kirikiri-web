@@ -1,5 +1,5 @@
 export const tex = {
-  newRenderTexture: function (gl) {
+  newRenderTexture: function (gl, format) {
     const targetTexture = gl.createTexture()
     gl.bindTexture(gl.TEXTURE_2D, targetTexture)
 
@@ -16,19 +16,16 @@ export const tex = {
 
     return {
       bindAsTarget: (width, height) => {
-        if (width !== lastWidth || height !== lastHeight) {
+        const change = width !== lastWidth || height !== lastHeight
+        if (change) {
           lastWidth = width
           lastHeight = height
 
           // define size and format of level 0
-          const internalFormat = gl.RGBA
-          const format = gl.RGBA
-          const type = gl.UNSIGNED_BYTE
           gl.bindTexture(gl.TEXTURE_2D, targetTexture)
-          gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, null)
+          gl.texImage2D(gl.TEXTURE_2D, 0, format, width, height, 0, format, gl.UNSIGNED_BYTE, null)
 
           // set the filtering so we don't need mips
-          // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
@@ -37,6 +34,11 @@ export const tex = {
 
         gl.bindFramebuffer(gl.FRAMEBUFFER, fb)
         gl.viewport(0, 0, width, height)
+
+        if (change) {
+          gl.clearColor(0, 0, 0, 0)
+          gl.clear(gl.COLOR_BUFFER_BIT)
+        }
       },
       bindAsTexture: () => {
         gl.bindTexture(gl.TEXTURE_2D, targetTexture)
