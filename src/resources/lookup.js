@@ -80,7 +80,9 @@ export const LocateImage = (name, lang, mature, h, hArtist) => {
   }
   if (h) {
     if (h === 2) {
-      hArtist = hArtist || HImagesDefaultArtist[name] || HImagesDefaultArtist[name.slice(0, -1)]
+      for (let cut=0; !hArtist && cut<name.length; cut++){
+        hArtist = HImagesDefaultArtist[name.slice(0, name.length-cut)]
+      }
       if ((hImagesArtistsMap[hArtist] || {})[name]) {
         return "/static/images/h/" + {
           "1": "bishopcruz",
