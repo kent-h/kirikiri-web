@@ -21,6 +21,22 @@ const Render = (tokens, renderState, onPageReady, debug) => {
     renderState.section.push(<Fragment key={renderState.section.length + 1}>{Component}</Fragment>)
   }
 
+  const appendText = (text) => {
+    if (renderState.ruby) {
+      append(
+        <span>
+          <ruby>
+            <rb>{text.slice(0, renderState.ruby.num)}</rb>
+            <rt>{renderState.ruby.text}</rt>
+          </ruby>
+          {text.slice(renderState.ruby.num)}
+        </span>)
+      renderState.ruby = null
+    } else {
+      append(<span>{text}</span>)
+    }
+  }
+
   tokens.forEach(token => {
     switch (token.type) {
       case ";": // comment
@@ -28,7 +44,7 @@ const Render = (tokens, renderState, onPageReady, debug) => {
         break
       case "t": // text
         renderState = RenderChunk(renderState, appendSection, debug)
-        append(<span>{token.text}</span>)
+        appendText(token.text)
         break
       case "*": // link
         renderState.tokens.push(token)
@@ -80,6 +96,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   let {layers, bgmTimeline, seTimeline} = renderState
 
   let {buildingSavePoints, savePoints} = renderState
+
+  let ruby = renderState.ruby
 
   const generateSection = () => {
     if (isDivider) {
@@ -380,6 +398,10 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             specialTag = "lightyellow"
             render = <div style={{textAlign: token.args.anchor || "center"}}>{token.args.text}</div>
             break
+          case "ruby":
+            specialTag = "lightyellow"
+            ruby = {text: token.args.text, num: token.args.char || 1}
+            break
           case "macro":
             specialTag = false
             // on creation of a macro, there's nothing to render unless debugging
@@ -473,6 +495,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     layers: layers,
     bgmTimeline: bgmTimeline,
     seTimeline: seTimeline,
+    ruby: ruby,
   }
 }
 
