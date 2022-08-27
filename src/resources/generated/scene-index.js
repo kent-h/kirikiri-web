@@ -4205,12 +4205,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll go and help Sakura.",
+        "jp": "桜の手伝いをしに行こう。",
         "then": {
           "goto": "セ1-1",
         },
       },
       {
         "eng": "I’ll go and finish my daily routine.",
+        "jp": "いつもの日課を済ませてしまおう。",
         "then": {
           "goto": "セ1-2",
         },
@@ -4233,12 +4235,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll go and help out the student council.",
+        "jp": "生徒会の手伝いをしよう。",
         "then": {
           "goto": "セ1-4",
         },
       },
       {
         "eng": "I’ll go to work.",
+        "jp": "アルバイトに行こう。",
         "then": {
           "goto": "セ1-5",
         },
@@ -4264,6 +4268,7 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll take Sakura home.",
+        "jp": "桜を送っていく。",
         "then": {
           "conditions": [
             {
@@ -4282,12 +4287,14 @@ export const graphLogic = {
       },
       {
         "eng": "I’ll play with Fuji-Nee.",
+        "jp": "藤ねえと遊ぶ。",
         "then": {
           "goto": "セ1-11",
         },
       },
       {
         "eng": "I’ll rest.",
+        "jp": "大人しく休む。",
         "then": {
           "goto": "セ1-12",
         },
@@ -4334,12 +4341,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Wait here and stand by.",
+        "jp": "……ここで待機する。",
         "then": {
           "goto": "セ10-3",
         },
       },
       {
         "eng": "I have to follow Saber…!",
+        "jp": "セイバーを追わなければ……！",
         "then": {
           "goto": "セ10-1",
         },
@@ -4353,12 +4362,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Follow Shinji.",
+        "jp": "慎二を追う。",
         "then": {
           "goto": "セ10-5",
         },
       },
       {
         "eng": "Run to Saber.",
+        "jp": "セイバーに駆け寄る。",
         "then": {
           "goto": "セ10-6",
         },
@@ -4391,18 +4402,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I have to fight. I’ll make the first move when the door opens.",
+        "jp": "こうなったら戦うだけだ。扉が開いた瞬間、先手を撃つ。",
         "then": {
           "goto": "セ11-3",
         },
       },
       {
         "eng": "…I’m in no condition to fight. I’ll sit in the chair and pretend I’m tied up.",
+        "jp": "……戦える状態じゃない。椅子に座って、縛られたフリをしよう。",
         "then": {
           "goto": "セ11-4",
         },
       },
       {
         "eng": "…How about that bed?",
+        "jp": "………………あのベッドなどいかがなものか？",
         "then": {
           "goto": "セ11-5",
         },
@@ -4428,12 +4442,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’m worried about Saber.",
+        "jp": "セイバーが気にかかる。",
         "then": {
           "goto": "セ11-7",
         },
       },
       {
         "eng": "I’m worried about Tohsaka.",
+        "jp": "遠坂が気にかかる。",
         "then": {
           "goto": "セ11-8",
         },
@@ -4456,12 +4472,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll provide backup with the bow…!",
+        "jp": "弓で援護を……！",
         "then": {
           "goto": "セ11-10",
         },
       },
       {
         "eng": "…What’s the point?",
+        "jp": "───それが何になる。",
         "then": {
           "goto": "セ11-11",
         },
@@ -4478,12 +4496,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Is that the only option?",
+        "jp": "……それしか、ないのか。",
         "then": {
           "goto": "セ11-13",
         },
       },
       {
         "eng": "Don’t use it!",
+        "jp": "───使うな！",
         "then": {
           "goto": "セ11-14",
         },
@@ -4500,12 +4520,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I’ll have to nod for now.",
+        "jp": "……今は、頷くしかない。",
         "then": {
           "goto": "セ11-1",
         },
       },
       {
         "eng": "…I can’t do that.",
+        "jp": "……それは、出来ない。",
         "then": {
           "goto": "セ11-2",
         },
@@ -4542,12 +4564,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Protect Illya.",
+        "jp": "イリヤを匿う。",
         "then": {
           "goto": "セ12-1",
         },
       },
       {
         "eng": "Entrust her to the church.",
+        "jp": "教会に預ける。",
         "then": {
           "goto": "セ12-2",
         },
@@ -4564,18 +4588,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "All right, let’s have lunch.",
+        "jp": "よし、昼食にしよう。",
         "then": {
           "goto": "セ12-4",
         },
       },
       {
         "eng": "That’s fine, but why are you exactly on time today?",
+        "jp": "いいけど、なんで今日に限って時間ピッタリなんだ？",
         "then": {
           "goto": "セ12-5",
         },
       },
       {
         "eng": "No way. We’re fasting today.",
+        "jp": "───だめでござる。今日は断食でござる。",
         "then": {
           "goto": "セ12-6",
         },
@@ -4595,18 +4622,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Ask about the projection magic.",
+        "jp": "投影魔術を詳しく聞く。",
         "then": {
           "goto": "セ12-8",
         },
       },
       {
         "eng": "Question number one.",
+        "jp": "疑問点、いち。",
         "then": {
           "goto": "セ12-9",
         },
       },
       {
         "eng": "Silence is good.",
+        "jp": "沈黙は美徳。",
         "then": {
           "goto": "セ12-10",
         },
@@ -4641,12 +4671,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Let Saber take care of Caster and protect the other two here.",
+        "jp": "キャスターはセイバーに任せ、ここで二人を守る。",
         "then": {
           "goto": "セ13-1",
         },
       },
       {
         "eng": "Go out with Saber.",
+        "jp": "セイバーと二人で打って出る。",
         "then": {
           "goto": "セ13-2",
         },
@@ -4660,12 +4692,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Believe in Tohsaka.",
+        "jp": "遠坂を信じる。",
         "then": {
           "goto": "セ13-4",
         },
       },
       {
         "eng": "Let Saber take care of Caster.",
+        "jp": "セイバーにキャスターを任せる。",
         "then": {
           "goto": "セ13-5",
         },
@@ -4679,12 +4713,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…That timing, she got it…!",
+        "jp": "……あの間合い、取った……！",
         "then": {
           "goto": "セ13-8",
         },
       },
       {
         "eng": "Don’t do it, Saber…!",
+        "jp": "だめだ、セイバー……！",
         "then": {
           "goto": "セ13-9",
         },
@@ -4727,12 +4763,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Stand up.",
+        "jp": "立ち上がる。",
         "then": {
           "goto": "セ14-4",
         },
       },
       {
         "eng": "Don’t stand up.",
+        "jp": "立ち上がらない。",
         "then": {
           "goto": "セ14-3",
         },
@@ -4786,12 +4824,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go back home.",
+        "jp": "家に戻る。",
         "then": {
           "goto": "セ15-1",
         },
       },
       {
         "eng": "Go down the stairs.",
+        "jp": "地下室に下りる。",
         "then": {
           "goto": "セ15-2",
         },
@@ -4811,18 +4851,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Spend time with Saber.",
+        "jp": "セイバーとの時間にする。",
         "then": {
           "goto": "セ15-5",
         },
       },
       {
         "eng": "Go and report to Kiritsugu.",
+        "jp": "切嗣に報告する。",
         "then": {
           "goto": "セ15-6",
         },
       },
       {
         "eng": "…Have a strategy meeting.",
+        "jp": "……作戦会議をする。",
         "then": {
           "goto": "セ15-7",
         },
@@ -4839,18 +4882,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Look for a weapon.",
+        "jp": "武器を探す。",
         "then": {
           "goto": "セ15-8",
         },
       },
       {
         "eng": "Strengthen Saber.",
+        "jp": "セイバーを強化する。",
         "then": {
           "goto": "セ15-9",
         },
       },
       {
         "eng": "…Give Saber back her sheath.",
+        "jp": "……鞘をセイバーに返す。",
         "then": {
           "goto": "セ15-10",
         },
@@ -4879,12 +4925,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Even so, Tohsaka.",
+        "jp": "……それでもだ、遠坂。",
         "then": {
           "goto": "セ15-15",
         },
       },
       {
         "eng": "…Is there a way?",
+        "jp": "……方法があるのか？",
         "then": {
           "goto": "セ15-16",
         },
@@ -4988,12 +5036,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’m worried about Tohsaka.",
+        "jp": "遠坂が心配だ。",
         "then": {
           "goto": "セ2-8",
         },
       },
       {
         "eng": "I’m worried about Sakura.",
+        "jp": "桜が気にかかる。",
         "then": {
           "goto": "セ2-10",
         },
@@ -5010,6 +5060,7 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll do my daily routine at the dojo.",
+        "jp": "道場で朝の日課をこなそう。",
         "then": {
           "conditions": [
             {
@@ -5028,6 +5079,7 @@ export const graphLogic = {
       },
       {
         "eng": "I’ll make one more side dish since Sakura’s coming.",
+        "jp": "桜も来るし、もう一品加えよう。",
         "then": {
           "goto": "セ2-3",
         },
@@ -5057,12 +5109,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "Stop her.",
+              "jp": "止める。",
               "then": {
                 "goto": "凛3-9",
               },
             },
             {
               "eng": "Don’t stop her.",
+              "jp": "止めない。",
               "then": {
                 "goto": "セ3-17",
               },
@@ -5084,12 +5138,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Revoke the Command Spell.",
+        "jp": "……刻印を破棄する。",
         "then": {
           "goto": "セ3-4",
         },
       },
       {
         "eng": "…Fight.",
+        "jp": "───戦う。",
         "then": {
           "goto": "セ3-18",
         },
@@ -5103,12 +5159,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Run away with Tohsaka…!",
+        "jp": "遠坂を連れて逃げる……！",
         "then": {
           "goto": "セ3-6",
         },
       },
       {
         "eng": "Save Saber…!",
+        "jp": "セイバーを助ける……！",
         "then": {
           "goto": "セ3-7",
         },
@@ -5173,18 +5231,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Ask about yesterday.",
+        "jp": "まずは昨日の話から。",
         "then": {
           "goto": "セ4-1",
         },
       },
       {
         "eng": "Ask about the serious stuff.",
+        "jp": "それじゃあ真面目な話から。",
         "then": {
           "goto": "セ4-2",
         },
       },
       {
         "eng": "…I have a bad feeling about this. I don’t want to hear either.",
+        "jp": "……いやな予感がする。どっちも聞かない。",
         "then": {
           "goto": "セ4-3",
         },
@@ -5207,12 +5268,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…All right. Let’s cooperate.",
+        "jp": "……分かった、手を組もう。",
         "then": {
           "goto": "セ4-18",
         },
       },
       {
         "eng": "…I’m sorry, but I can’t.",
+        "jp": "……悪いが、組めない。",
         "then": {
           "goto": "セ4-5",
         },
@@ -5226,18 +5289,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Which heroine is Saber?",
+        "jp": "セイバーは何処の英雄なのか？",
         "then": {
           "goto": "セ4-8",
         },
       },
       {
         "eng": "Is she all right?",
+        "jp": "体は大丈夫なのか？",
         "then": {
           "goto": "セ4-7",
         },
       },
       {
         "eng": "…Where did you get those clothes?",
+        "jp": "……その服、どうしたのさ。",
         "then": {
           "goto": "セ4-9",
         },
@@ -5281,12 +5347,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go and meet Tohsaka as arranged.",
+        "jp": "遠坂との待ち合わせ場所へ。",
         "then": {
           "goto": "セ5-6",
         },
       },
       {
         "eng": "Explain things to Sakura.",
+        "jp": "桜に、きちんと説明する。",
         "then": {
           "goto": "セ5-7",
         },
@@ -5309,18 +5377,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "About Lancer.",
+        "jp": "ランサーについて。",
         "then": {
           "goto": "セ5-9",
         },
       },
       {
         "eng": "About Archer.",
+        "jp": "アーチャーについて。",
         "then": {
           "goto": "セ5-10",
         },
       },
       {
         "eng": "About Berserker.",
+        "jp": "バーサーカーについて。",
         "then": {
           "goto": "セ5-11",
         },
@@ -5349,12 +5420,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Talk to Rider.",
+        "jp": "ライダーに話しかける。",
         "then": {
           "goto": "セ6-3",
         },
       },
       {
         "eng": "…Keep away from dangerous things.",
+        "jp": "……危うきに近寄らず。",
         "then": {
           "goto": "セ6-4",
         },
@@ -5371,12 +5444,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Fight.",
+        "jp": "戦う。",
         "then": {
           "goto": "セ6-6",
         },
       },
       {
         "eng": "Don’t fight.",
+        "jp": "戦わない。",
         "then": {
           "goto": "セ6-7",
         },
@@ -5418,18 +5493,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Her reason for fighting. I want to know why she seeks the Holy Grail.",
+        "jp": "戦う理由。聖杯を求める理由が知りたい。",
         "then": {
           "goto": "セ7-4",
         },
       },
       {
         "eng": "I want to know about Saber before she became a Servant.",
+        "jp": "サーヴァントになる前のセイバーを知りたい。",
         "then": {
           "goto": "セ7-5",
         },
       },
       {
         "eng": "I want a secret attack. A super move would be great.",
+        "jp": "切り札がほしい。必殺剣とか、いいね。",
         "then": {
           "goto": "セ7-6",
         },
@@ -5470,12 +5548,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "I want to know about Saber before she became a Servant.",
+              "jp": "サーヴァントになる前のセイバーが知りたい。",
               "then": {
                 "goto": "セ7-12",
               },
             },
             {
               "eng": "A super move even a monkey could understand.",
+              "jp": "サルでも分かる必殺剣。",
               "then": {
                 "goto": "セ7-13",
               },
@@ -5489,12 +5569,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "I want to know why Saber is fighting.",
+              "jp": "セイバーが戦う理由が知りたい。",
               "then": {
                 "goto": "セ7-14",
               },
             },
             {
               "eng": "A super move even a crab can use.",
+              "jp": "カニでも使える必殺剣。",
               "then": {
                 "goto": "セ7-15",
               },
@@ -5508,12 +5590,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "I want to know why Saber is fighting.",
+              "jp": "セイバーの戦う理由が知りたい。",
               "then": {
                 "goto": "セ7-16",
               },
             },
             {
               "eng": "I want to know about Saber before she became a Servant.",
+              "jp": "サーヴァントになる前のセイバーを知りたい。",
               "then": {
                 "goto": "セ7-17",
               },
@@ -5561,12 +5645,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go straight home.",
+        "jp": "衛宮邸にまっすぐ帰る。",
         "then": {
           "goto": "セ7-19",
         },
       },
       {
         "eng": "Go and visit the park.",
+        "jp": "公園に寄っていく。",
         "then": {
           "goto": "セ7-20",
         },
@@ -5589,18 +5675,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Fuji-Nee, where’s my gift?",
+        "jp": "藤ねえ、おみやげは？",
         "then": {
           "goto": "セ7-22",
         },
       },
       {
         "eng": "…She might really get me to make a pie. I’ll stay away for a while.",
+        "jp": "……本気でパイを作らされかねない。しばらく退避しよう。",
         "then": {
           "goto": "セ7-24",
         },
       },
       {
         "eng": "Apples won’t do. Eat some Mandarins, Fuji-Nee.",
+        "jp": "林檎とかはいい。藤ねえ、蜜柑を食べるんだ。",
         "then": {
           "goto": "セ7-23",
         },
@@ -5632,12 +5721,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go and get Tohsaka.",
+        "jp": "遠坂を呼びに行く。",
         "then": {
           "goto": "セ9-1",
         },
       },
       {
         "eng": "Wait quietly.",
+        "jp": "大人しく待つ。",
         "then": {
           "goto": "セ9-2",
         },
@@ -5654,12 +5745,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "There’s no need to stop…!",
+        "jp": "止まる必要などない……！",
         "then": {
           "goto": "セ9-4",
         },
       },
       {
         "eng": "I can’t block it myself…!",
+        "jp": "自分では防げない……！",
         "then": {
           "goto": "セ9-5",
         },
@@ -5676,12 +5769,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Beat her before I get beaten…!",
+        "jp": "倒される前に倒す……！",
         "then": {
           "goto": "セ9-7",
         },
       },
       {
         "eng": "…I can’t match her.",
+        "jp": "……戦いになどならない。",
         "then": {
           "goto": "セ9-8",
         },
@@ -5695,18 +5790,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Summon Saber…!",
+        "jp": "セイバーを召喚する……！",
         "then": {
           "goto": "セ9-9",
         },
       },
       {
         "eng": "If I can get Saber to help me…!",
+        "jp": "セイバーに助けて貰えば……！",
         "then": {
           "goto": "セ9-10",
         },
       },
       {
         "eng": "No, I can’t use my Command Spell…!",
+        "jp": "ダメだ、令呪は消費できない……！",
         "then": {
           "goto": "セ9-11",
         },
@@ -5749,18 +5847,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I have to talk to Tohsaka.",
+        "jp": "いや、遠坂と話をつけないと。",
         "then": {
           "goto": "凛10-1",
         },
       },
       {
         "eng": "I’ll go talk to Saber at the dojo.",
+        "jp": "道場でセイバーと話をつけよう。",
         "then": {
           "goto": "凛10-2",
         },
       },
       {
         "eng": "I’ll pass since it’s cold. Mandarin, mandarin, mandarin.",
+        "jp": "寒いのでパス。ミカンミカンミカン。",
         "then": {
           "goto": "凛10-3",
         },
@@ -5798,12 +5899,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll just make Japanese food. Actually, I’ll take it out on the culprit.",
+        "jp": "パンがないので今朝は和風で。というか犯人をとっちめに行く。",
         "then": {
           "goto": "凛11-1",
         },
       },
       {
         "eng": "…I won’t question it. I’ll jog to the shopping district.",
+        "jp": "……パンの使い道はあえて不問。ジョギングがてらに商店街へ。",
         "then": {
           "goto": "凛11-2",
         },
@@ -5814,12 +5917,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Look inside.",
+        "jp": "中の様子を見る。",
         "then": {
           "goto": "凛11-3",
         },
       },
       {
         "eng": "Well, I guess Tohsaka’s all right.",
+        "jp": "ま、遠坂なら大丈夫だろう。",
         "then": {
           "goto": "凛11-9",
         },
@@ -5845,12 +5950,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Refuse.",
+        "jp": "断る。",
         "then": {
           "goto": "凛11-6",
         },
       },
       {
         "eng": "Obey.",
+        "jp": "従う。",
         "then": {
           "goto": "凛11-5",
         },
@@ -5886,12 +5993,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Meet up with Tohsaka.",
+        "jp": "遠坂と合流する。",
         "then": {
           "goto": "凛12-1",
         },
       },
       {
         "eng": "Go to the church for advice.",
+        "jp": "教会へ相談に行く。",
         "then": {
           "goto": "凛12-3",
         },
@@ -5908,18 +6017,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Run away.",
+        "jp": "逃げる。",
         "then": {
           "goto": "凛12-2",
         },
       },
       {
         "eng": "Fight.",
+        "jp": "戦う。",
         "then": {
           "goto": "凛12-10",
         },
       },
       {
         "eng": "Try to find an opening.",
+        "jp": "隙を見つける。",
         "then": {
           "goto": "凛12-11",
         },
@@ -5930,12 +6042,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I’ll go out. I can give Tohsaka an opening now…!",
+        "jp": "……いける。今ならキャスターに隙を作れる……！",
         "then": {
           "goto": "凛12-5",
         },
       },
       {
         "eng": "…Not yet. I can’t act so recklessly.",
+        "jp": "……まだだ。そんな安易な真似はできない。",
         "then": {
           "goto": "凛12-6",
         },
@@ -5949,12 +6063,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Don’t help her.",
+        "jp": "助けない。",
         "then": {
           "goto": "凛12-7",
         },
       },
       {
         "eng": "Help her.",
+        "jp": "助ける。",
         "then": {
           "goto": "凛12-8",
         },
@@ -6003,18 +6119,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I don’t have any plans. We’ll just fight them head-on.",
+        "jp": "そんなものはない。正面突破、これあるのみ。",
         "then": {
           "goto": "凛13-1",
         },
       },
       {
         "eng": "We can’t fight them head-on. Is there a secret passage in the church?",
+        "jp": "正面突破は却下だ。教会に抜け道とかある？",
         "then": {
           "goto": "凛13-2",
         },
       },
       {
         "eng": "We can’t do this by ourselves. We’ll cooperate with other Masters.",
+        "jp": "俺たちだけでは無理だ。他のマスターと協力する。",
         "then": {
           "goto": "凛13-3",
         },
@@ -6034,12 +6153,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Restrain myself.",
+        "jp": "……自分を押し留める。",
         "then": {
           "goto": "凛13-6",
         },
       },
       {
         "eng": "────Stop the man…!",
+        "jp": "────男を止める……！",
         "then": {
           "goto": "凛13-15",
         },
@@ -6050,18 +6171,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…All right.",
+        "jp": "……いいだろう。",
         "then": {
           "goto": "凛13-7",
         },
       },
       {
         "eng": "…I don’t mind, but under one condition.",
+        "jp": "……構わないが、一つ条件がある。",
         "then": {
           "goto": "凛13-8",
         },
       },
       {
         "eng": "…I refuse.",
+        "jp": "……断る。",
         "then": {
           "goto": "凛13-9",
         },
@@ -6136,12 +6260,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…What’s wrong with stopping them if I can?",
+        "jp": "……止められるのなら、止めてはいけないのか。",
         "then": {
           "goto": "凛14-1",
         },
       },
       {
         "eng": "…What good is stopping them?",
+        "jp": "……止めて、どうする。",
         "then": {
           "goto": "凛14-2",
         },
@@ -6161,18 +6287,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go over strategy with Tohsaka.",
+        "jp": "遠坂と作戦を練る。",
         "then": {
           "goto": "凛14-5",
         },
       },
       {
         "eng": "Go to the dojo to check up on Saber.",
+        "jp": "セイバーの様子を見に道場へ。",
         "then": {
           "goto": "凛14-6",
         },
       },
       {
         "eng": "Think.",
+        "jp": "もう一度、よく考えてみる。",
         "then": {
           "goto": "凛14-7",
         },
@@ -6264,12 +6393,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I’ll at least take him with me…!",
+        "jp": "……こうなったら、せめて道連れに……！",
         "then": {
           "goto": "凛14-13",
         },
       },
       {
         "eng": "…No way, I can’t give up so easily…!",
+        "jp": "……冗談、簡単に諦められるか……！",
         "then": {
           "goto": "凛14-14",
         },
@@ -6375,18 +6506,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Stay here.",
+        "jp": "……この場に残る。",
         "then": {
           "goto": "凛3-1",
         },
       },
       {
         "eng": "…Follow them.",
+        "jp": "……後を追う。",
         "then": {
           "goto": "凛3-3",
         },
       },
       {
         "eng": "Do as Tohsaka said.",
+        "jp": "遠坂の言葉に従う。",
         "then": {
           "goto": "凛3-2",
         },
@@ -6397,12 +6531,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Don’t go.",
+        "jp": "……この場に残る。",
         "then": {
           "goto": "凛3-4",
         },
       },
       {
         "eng": "…Head to the graveyard.",
+        "jp": "……墓地に向かう。",
         "then": {
           "goto": "凛3-5",
         },
@@ -6416,12 +6552,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Call back Saber.",
+        "jp": "セイバーを呼び戻す。",
         "then": {
           "goto": "凛3-6",
         },
       },
       {
         "eng": "Bring back Saber.",
+        "jp": "セイバーを連れ戻す。",
         "then": {
           "goto": "凛3-7",
         },
@@ -6476,18 +6614,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Stay at the archery range.",
+        "jp": "このまま弓道場にいる。",
         "then": {
           "goto": "凛4-4",
         },
       },
       {
         "eng": "Go to the student council room.",
+        "jp": "生徒会室に移動する。",
         "then": {
           "goto": "凛4-5",
         },
       },
       {
         "eng": "Show Saber around school.",
+        "jp": "セイバーに学校案内をする。",
         "then": {
           "goto": "凛4-6",
         },
@@ -6534,18 +6675,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll go see how Saber’s doing.",
+        "jp": "セイバーの様子を見に行こう。",
         "then": {
           "goto": "凛5-1",
         },
       },
       {
         "eng": "I’ll go and help Sakura.",
+        "jp": "桜の手伝いをしに行こう。",
         "then": {
           "goto": "凛5-2",
         },
       },
       {
         "eng": "I’ll go and wake Fuji-Nee up.",
+        "jp": "藤ねえを起こしに行こう。",
         "then": {
           "goto": "凛5-3",
         },
@@ -6568,12 +6712,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Jump to the stairs…!",
+        "jp": "階段に飛び込む……！",
         "then": {
           "goto": "凛5-5",
         },
       },
       {
         "eng": "Jump back to the hallway…!",
+        "jp": "廊下に跳び退く……！",
         "then": {
           "goto": "凛5-6",
         },
@@ -6587,6 +6733,7 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Can I hand her my Command Spell…?",
+        "jp": "令呪を差し出していいのか……？",
         "then": {
           "update": [
             "凛好感度-=1",
@@ -6596,6 +6743,7 @@ export const graphLogic = {
       },
       {
         "eng": "Can I admit defeat against Tohsaka…?",
+        "jp": "遠坂に負けを認めていいのか……？",
         "then": {
           "update": [
             "凛好感度+=1",
@@ -6609,18 +6757,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Use the Command Spell.",
+        "jp": "令呪を使う。",
         "then": {
           "goto": "凛5-10",
         },
       },
       {
         "eng": "Fight using my remaining left arm…!",
+        "jp": "残った左手で応戦する……！",
         "then": {
           "goto": "凛5-11",
         },
       },
       {
         "eng": "I can pull out this “nail” in my right arm…!",
+        "jp": "右手に刺さった“釘”を抜けば……！",
         "then": {
           "goto": "凛5-12",
         },
@@ -6662,12 +6813,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I can’t say for sure.",
+        "jp": "断言はできない",
         "then": {
           "goto": "凛5-17",
         },
       },
       {
         "eng": "I guess that’s how it’ll be.",
+        "jp": "そういう事になるな",
         "then": {
           "goto": "凛5-18",
         },
@@ -6716,18 +6869,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll stop Fuji-Nee’s wrongdoing before the sun sets.",
+        "jp": "日が沈んで夕飯になる前に、藤ねえの悪行を止めておこう。",
         "then": {
           "goto": "凛6-1",
         },
       },
       {
         "eng": "I’ll go see how Sakura’s doing before the sun sets.",
+        "jp": "日が沈んで夕飯になる前に、桜の様子を見てこよう。",
         "then": {
           "goto": "凛6-2",
         },
       },
       {
         "eng": "I’ll go tell Saber that I’m home before the sun sets.",
+        "jp": "日が沈んで夕飯になる前に、セイバーに帰宅を報告しに行こう。",
         "then": {
           "goto": "凛6-3",
         },
@@ -6777,18 +6933,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…She’s after me. I’ll give up and go out there.",
+        "jp": "……あいつの狙いは俺だ。大人しく出て行こう。",
         "then": {
           "goto": "凛7-1",
         },
       },
       {
         "eng": "…She’s after me. I don’t want to die, so I’ll keep quiet.",
+        "jp": "……あいつの狙いは俺だ。死にたくないから黙っていよう。",
         "then": {
           "goto": "凛7-2",
         },
       },
       {
         "eng": "…Who’s she after? I don’t know, so I’ll play dumb.",
+        "jp": "……あいつの狙いは誰だ。分からないからとぼけよう。",
         "then": {
           "goto": "凛7-3",
         },
@@ -6808,12 +6967,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Search for Shinji with the two of us.",
+        "jp": "二人で慎二を捜す。",
         "then": {
           "goto": "凛7-5",
         },
       },
       {
         "eng": "Use the Command Spell to call for Saber.",
+        "jp": "令呪を使用してセイバーを呼ぶ。",
         "then": {
           "goto": "凛7-6",
         },
@@ -6848,12 +7009,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I guess I’ll ask him.",
+        "jp": "……一応、話を聞いてみる。",
         "then": {
           "goto": "凛8-1",
         },
       },
       {
         "eng": "…It’ll be pointless, so I guess I won’t ask.",
+        "jp": "……無駄だろうし、止めておこう。",
         "then": {
           "goto": "凛8-10",
         },
@@ -6867,18 +7030,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’m worried about Sakura. I’ll go to the Matou household.",
+        "jp": "桜が気にかかる。間桐邸に行ってみよう。",
         "then": {
           "goto": "凛8-3",
         },
       },
       {
         "eng": "Oh yeah, I have to contact Tohsaka.",
+        "jp": "そうだ、遠坂に連絡しなくては。",
         "then": {
           "goto": "凛8-4",
         },
       },
       {
         "eng": "Meat’s on sale today. I’ll make a huge meal to make Saber happy.",
+        "jp": "今日は肉の特売日。ご馳走にしてセイバーを喜ばせよう。",
         "then": {
           "goto": "凛8-5",
         },
@@ -6920,12 +7086,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "It’s too dangerous. Stop Tohsaka.",
+        "jp": "やっぱり危険だ。遠坂を止める。",
         "then": {
           "goto": "凛9-1",
         },
       },
       {
         "eng": "…I guess that’s the only option.",
+        "jp": "……今はそれしかない。",
         "then": {
           "goto": "凛9-2",
         },
@@ -6945,12 +7113,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go help Saber……!",
+        "jp": "セイバーの助けに入る……！",
         "then": {
           "goto": "凛9-4",
         },
       },
       {
         "eng": "Protect Tohsaka……!",
+        "jp": "遠坂を守りきる……！",
         "then": {
           "goto": "凛9-5",
         },
@@ -6989,18 +7159,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I really like her.",
+        "jp": "かなり好き。",
         "then": {
           "goto": "桜10-1",
         },
       },
       {
         "eng": "I really find her hard to deal with.",
+        "jp": "かなり苦手。",
         "then": {
           "goto": "桜10-2",
         },
       },
       {
         "eng": "More importantly, do you want something to eat, Rider?",
+        "jp": "それよりライダー、ごはんは？",
         "then": {
           "goto": "桜10-3",
         },
@@ -7038,12 +7211,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I should stay here.",
+        "jp": "……この場に残るべきだ。",
         "then": {
           "goto": "桜10-10",
         },
       },
       {
         "eng": "I should go see what’s going on.",
+        "jp": "急いで様子を見に行くべきだ。",
         "then": {
           "goto": "桜10-9",
         },
@@ -7066,12 +7241,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Bring back Tohsaka…!",
+        "jp": "遠坂を連れ戻す……！",
         "then": {
           "goto": "桜10-15",
         },
       },
       {
         "eng": "Protect Illya…!",
+        "jp": "イリヤを守りきる……！",
         "then": {
           "goto": "桜10-14",
         },
@@ -7088,12 +7265,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I guess Tohsaka.",
+        "jp": "遠坂、かな？",
         "then": {
           "goto": "桜10-17",
         },
       },
       {
         "eng": "I guess Illya.",
+        "jp": "イリヤ、かな？",
         "then": {
           "goto": "桜10-18",
         },
@@ -7141,12 +7320,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Release it.",
+        "jp": "解く",
         "then": {
           "goto": "桜10-24",
         },
       },
       {
         "eng": "Do not release it.",
+        "jp": "解かない",
         "then": {
           "goto": "桜10-25",
         },
@@ -7186,18 +7367,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Go check out how Tohsaka and Illya are doing.",
+        "jp": "遠坂とイリヤの様子を見に行く。",
         "then": {
           "goto": "桜11-1",
         },
       },
       {
         "eng": "I haven’t seen Rider.",
+        "jp": "そういえば、ライダーに会ってないな。",
         "then": {
           "goto": "桜11-2",
         },
       },
       {
         "eng": "No, I’ll go check up on Sakura.",
+        "jp": "いや、桜の見舞いを優先しよう。",
         "then": {
           "goto": "桜11-3",
         },
@@ -7274,12 +7458,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…I nod.",
+        "jp": "……首を縦に振った。",
         "then": {
           "goto": "桜12-1",
         },
       },
       {
         "eng": "…No, I can’t do that.",
+        "jp": "……駄目だ、それだけは出来ない……。",
         "then": {
           "goto": "桜12-2",
         },
@@ -7359,12 +7545,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Accept.",
+        "jp": "受ける。",
         "then": {
           "goto": "桜13-1",
         },
       },
       {
         "eng": "Do not accept.",
+        "jp": "受けない。",
         "then": {
           "goto": "桜13-2",
         },
@@ -7391,12 +7579,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "Kill Sakura.",
+              "jp": "この手に、かける。",
               "then": {
                 "goto": "桜13-5",
               },
             },
             {
               "eng": "…I can’t do that.",
+              "jp": "……それだけは、出来ない。",
               "then": {
                 "goto": "桜13-6",
               },
@@ -7460,12 +7650,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Quickly go back home.",
+        "jp": "急いでうちに戻る。",
         "then": {
           "goto": "桜14-4",
         },
       },
       {
         "eng": "I can’t forgive Zouken.",
+        "jp": "臓硯を許せない。",
         "then": {
           "goto": "桜14-5",
         },
@@ -7503,12 +7695,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Save Sakura. Bring back Illya.",
+        "jp": "桜を助ける。イリヤを連れ戻す。",
         "then": {
           "goto": "桜15-1",
         },
       },
       {
         "eng": "We lost.",
+        "jp": "俺たちの負けだ。",
         "then": {
           "goto": "桜15-2",
         },
@@ -7519,12 +7713,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Refuse.",
+        "jp": "断る。",
         "then": {
           "goto": "桜15-3",
         },
       },
       {
         "eng": "Accept.",
+        "jp": "頷く。",
         "then": {
           "goto": "桜15-22",
         },
@@ -7541,18 +7737,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Bring Illya back.",
+        "jp": "イリヤを連れ戻す。",
         "then": {
           "goto": "桜15-5",
         },
       },
       {
         "eng": "Bring Illya back.",
+        "jp": "イリヤを連れ戻す。",
         "then": {
           "goto": "桜15-6",
         },
       },
       {
         "eng": "Bring Illya back.",
+        "jp": "イリヤを連れ戻す。",
         "then": {
           "goto": "桜15-7",
         },
@@ -7587,18 +7786,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Escape out the shed…!",
+        "jp": "土蔵の外へ逃げる……！",
         "then": {
           "goto": "桜15-14",
         },
       },
       {
         "eng": "Fight back using projection…!",
+        "jp": "投影で抵抗する……！",
         "then": {
           "goto": "桜15-15",
         },
       },
       {
         "eng": "…Give her the answer to the previous question. ",
+        "jp": "……いつかの答えを、口にする。",
         "then": {
           "goto": "桜15-16",
         },
@@ -7615,18 +7817,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "‘Will I be able to fight until the very end’",
+        "jp": "『最後まで戦えるか』",
         "then": {
           "goto": "桜15-17",
         },
       },
       {
         "eng": "‘Will I not give up until the very end’",
+        "jp": "『最後まで諦めないか』",
         "then": {
           "goto": "桜15-18",
         },
       },
       {
         "eng": "‘Will I be on Sakura’s side until the very end’",
+        "jp": "『最後まで桜の味方か』",
         "then": {
           "goto": "桜15-19",
         },
@@ -7670,18 +7875,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Attack Saber…!",
+        "jp": "セイバーと打ち合う……！",
         "then": {
           "goto": "桜16-2",
         },
       },
       {
         "eng": "Use another projection…!",
+        "jp": "次の投影……！",
         "then": {
           "goto": "桜16-3",
         },
       },
       {
         "eng": "Wait for my chance…!",
+        "jp": "まだ機会を待つ……！",
         "then": {
           "goto": "桜16-4",
         },
@@ -7704,12 +7912,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Save Saber.",
+        "jp": "……セイバーを助ける。",
         "then": {
           "goto": "桜16-7",
         },
       },
       {
         "eng": "…Bring my arm down.",
+        "jp": "……この腕を振り下ろす。",
         "then": {
           "goto": "桜16-6",
         },
@@ -7750,12 +7960,14 @@ export const graphLogic = {
           "choices": [
             {
               "eng": "Do it.",
+              "jp": "行う。",
               "then": {
                 "goto": "桜16-12",
               },
             },
             {
               "eng": "…Is that the way?",
+              "jp": "……いいのか、それで。",
               "then": {
                 "goto": "桜16-13",
               },
@@ -7823,12 +8035,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Secure the neighborhood.",
+        "jp": "自分の足場を固める。",
         "then": {
           "goto": "桜4-3",
         },
       },
       {
         "eng": "Go to Shinto.",
+        "jp": "新都へ。",
         "then": {
           "goto": "桜4-4",
         },
@@ -7866,18 +8080,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Consult her about Sakura.",
+        "jp": "桜の事を相談する。",
         "then": {
           "goto": "桜5-1",
         },
       },
       {
         "eng": "Consult her about Shinji.",
+        "jp": "慎二の事を相談する。",
         "then": {
           "goto": "桜5-2",
         },
       },
       {
         "eng": "I smell danger! Run away to my classroom!",
+        "jp": "危険の匂いだ、教室にダッシュ！",
         "then": {
           "goto": "桜5-3",
         },
@@ -7903,12 +8120,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I don’t hate you.",
+        "jp": "俺は嫌いじゃないぞ。",
         "then": {
           "goto": "桜5-7",
         },
       },
       {
         "eng": "I don’t mind it anymore.",
+        "jp": "俺は気にしてないぞ。",
         "then": {
           "goto": "桜5-6",
         },
@@ -7934,12 +8153,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Have Fuji-Nee ask Sakura.",
+        "jp": "藤ねえにお願いする。",
         "then": {
           "goto": "桜5-10",
         },
       },
       {
         "eng": "I’ll tell Sakura myself.",
+        "jp": "自分で言う。",
         "then": {
           "goto": "桜5-11",
         },
@@ -7962,12 +8183,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Should I go check on her…?",
+        "jp": "様子を見に行ってみようか……？",
         "then": {
           "goto": "桜5-14",
         },
       },
       {
         "eng": "…No, I’ll let Fuji-Nee do it.",
+        "jp": "……いや、藤ねえに任せよう。",
         "then": {
           "goto": "桜5-15",
         },
@@ -8023,12 +8246,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Don’t lie.",
+        "jp": "嘘はつかない。",
         "then": {
           "goto": "桜6-3",
         },
       },
       {
         "eng": "Evade the question.",
+        "jp": "なんとか誤魔化す。",
         "then": {
           "goto": "桜6-4",
         },
@@ -8048,6 +8273,7 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "I’ll go shopping.",
+        "jp": "外に買い物に行こう。",
         "then": {
           "conditions": [
             {
@@ -8067,12 +8293,14 @@ export const graphLogic = {
       },
       {
         "eng": "I’ll have a snack.",
+        "jp": "おやつの時間にするべし。",
         "then": {
           "goto": "桜6-7",
         },
       },
       {
         "eng": "TV comes after a meal.",
+        "jp": "食後はまったりテレビである。",
         "then": {
           "goto": "桜6-8",
         },
@@ -8116,12 +8344,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Punch Shinji.",
+        "jp": "慎二を殴る。",
         "then": {
           "goto": "桜6-20",
         },
       },
       {
         "eng": "Restrain myself.",
+        "jp": "我慢する。",
         "then": {
           "goto": "桜6-21",
         },
@@ -8138,18 +8368,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Patrol Shinto.",
+        "jp": "新都を巡回する。",
         "then": {
           "goto": "桜6-16",
         },
       },
       {
         "eng": "Patrol Miyama City.",
+        "jp": "深山町を巡回する。",
         "then": {
           "goto": "桜6-17",
         },
       },
       {
         "eng": "…No, I’m worried about Sakura.",
+        "jp": "……いや、桜が心配だ。",
         "then": {
           "goto": "桜6-23",
         },
@@ -8179,18 +8412,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Invite her to my house as a guest.",
+        "jp": "お客さまとしてうちに招く。",
         "then": {
           "goto": "桜7-7",
         },
       },
       {
         "eng": "To show my apology, I’ll do anything she says.",
+        "jp": "謝罪を込めて言うコトを聞く。",
         "then": {
           "goto": "桜7-8",
         },
       },
       {
         "eng": "Have her forgive me.",
+        "jp": "なんとか大目に見てもらう。",
         "then": {
           "goto": "桜7-9",
         },
@@ -8280,12 +8516,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Investigate the Ryuudou Temple.",
+        "jp": "柳洞寺を調べよう。",
         "then": {
           "goto": "桜8-3",
         },
       },
       {
         "eng": "Investigate the park.",
+        "jp": "公園を調べよう。",
         "then": {
           "goto": "桜8-4",
         },
@@ -8302,18 +8540,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Trust Saber and wait for her…!",
+        "jp": "セイバーを信じて待つ……！",
         "then": {
           "goto": "桜8-6",
         },
       },
       {
         "eng": "Attack Zouken…!",
+        "jp": "臓硯に斬りかかる……！",
         "then": {
           "goto": "桜8-7",
         },
       },
       {
         "eng": "Use my Command Spell…!",
+        "jp": "令呪を使う……！",
         "then": {
           "goto": "桜8-8",
         },
@@ -8386,18 +8627,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "He was on guard against my counterattack?",
+        "jp": "反撃を警戒していた、とか？",
         "then": {
           "goto": "桜9-1",
         },
       },
       {
         "eng": "He didn’t want to kill me?",
+        "jp": "俺を殺したくなかった、とか？",
         "then": {
           "goto": "桜9-2",
         },
       },
       {
         "eng": "He could afford to play around?",
+        "jp": "爺さんの余裕だった、とか？",
         "then": {
           "goto": "桜9-3",
         },
@@ -8423,12 +8667,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…No, this is my problem.",
+        "jp": "……いや、これは自分ひとりの問題だ。",
         "then": {
           "goto": "桜9-5",
         },
       },
       {
         "eng": "I can’t do this myself. I need Tohsaka’s help.",
+        "jp": "俺一人じゃダメだ。遠坂の手を借りないと。",
         "then": {
           "goto": "桜9-6",
         },
@@ -8442,6 +8688,7 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Yes",
+        "jp": "はい",
         "then": {
           "update": [
             "凛好感度+=1",
@@ -8451,6 +8698,7 @@ export const graphLogic = {
       },
       {
         "eng": "No",
+        "jp": "いいえ",
         "then": {
           "goto": "桜9-8",
         },
@@ -8464,12 +8712,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Yes",
+        "jp": "はい",
         "then": {
           "goto": "桜9-12",
         },
       },
       {
         "eng": "No",
+        "jp": "いいえ",
         "then": {
           "goto": "桜9-11",
         },
@@ -8486,12 +8736,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "No way!",
+        "jp": "するか！",
         "then": {
           "goto": "桜9-13",
         },
       },
       {
         "eng": "…I guess it can’t be helped.",
+        "jp": "……仕方ない。",
         "then": {
           "goto": "桜9-14",
         },
@@ -8511,12 +8763,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "No, I can’t leave Sakura by herself.",
+        "jp": "いや、これ以上桜をひとりにさせられない。",
         "then": {
           "goto": "桜9-16",
         },
       },
       {
         "eng": "…There’s the housekeeper, so I guess I can stay a bit longer…",
+        "jp": "……家政婦さんもいるし、あと少しぐらいなら……",
         "then": {
           "goto": "桜9-17",
         },
@@ -8539,18 +8793,21 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "Pull Tohsaka’s hand.",
+        "jp": "遠坂の手を引いて───",
         "then": {
           "goto": "桜9-20",
         },
       },
       {
         "eng": "Close my eyes and attack Rider.",
+        "jp": "目を瞑って、ライダーに斬りかかる───",
         "then": {
           "goto": "桜9-21",
         },
       },
       {
         "eng": "I can’t do anything.",
+        "jp": "何もできない───",
         "then": {
           "goto": "桜9-22",
         },
@@ -8574,12 +8831,14 @@ export const graphLogic = {
     "choices": [
       {
         "eng": "…Persist on being a superhero.",
+        "jp": "……正義の味方を、張り通す。",
         "then": {
           "goto": "桜9-25",
         },
       },
       {
         "eng": "I want to protect Sakura.",
+        "jp": "桜の味方になりたいんだ。",
         "then": {
           "goto": "桜9-36",
         },
@@ -9405,7 +9664,11 @@ export const sections = {
       ],
     }, {
       section: "セ1", v: [
-        {id: "セ1-0", eng: "1st Day: Recollection of ten years ago-Morning/Rebirth", jp: "一日目・十年前の回想〜朝/Rebirth"},
+        {
+          id: "セ1-0",
+          eng: "1st Day: Recollection of ten years ago-Morning/Rebirth",
+          jp: "一日目・十年前の回想〜朝/Rebirth",
+        },
         {
           h: [
             {id: "セ1-1", eng: "1st Day: Breakfast preparation/Matou Sakura (I)", jp: "一日目・朝の支度/間桐桜（Ⅰ）"},
@@ -9426,7 +9689,11 @@ export const sections = {
           h: [
             {id: "セ1-11", eng: "1st Day: Night/The return of the orange man", jp: "一日目・夜/みかん星人の逆襲"},
             {id: "セ1-12", eng: "1st Day: Night/Well done even more", jp: "一日目・夜/更におつかれさまでした。"},
-            {id: "セ1-13", eng: "1st Day: Night/Taking Sakura home, introductory chapter", jp: "一日目・夜/桜を送る、初級編"},
+            {
+              id: "セ1-13",
+              eng: "1st Day: Night/Taking Sakura home, introductory chapter",
+              jp: "一日目・夜/桜を送る、初級編",
+            },
             {id: "セ1-14", eng: "1st Day: Night/Taking Sakura home, advanced chapter", jp: "一日目・夜/桜を送る、上級編"},
           ],
         },
@@ -9462,12 +9729,20 @@ export const sections = {
               eng: "2nd Day: After school, Sakura’s classroom/Matou Sakura (II)",
               jp: "二日目・放課後・桜の教室/間桐桜（Ⅱ）",
             },
-            {id: "セ2-8", eng: "2nd Day: After School-Part time job/Tohsaka Rin (I)", jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）"},
+            {
+              id: "セ2-8",
+              eng: "2nd Day: After School-Part time job/Tohsaka Rin (I)",
+              jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）",
+            },
           ],
         },
         {
           h: [
-            {id: "セ2-4", eng: "2nd Day: After school-Part time job/Tohsaka Rin (I)", jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）"},
+            {
+              id: "セ2-4",
+              eng: "2nd Day: After school-Part time job/Tohsaka Rin (I)",
+              jp: "二日目・放課後〜アルバイト/遠坂凛（Ⅰ）",
+            },
             {id: "セ2-1", eng: "2nd Day: Dinner/Love’s magical ranger force", jp: "二日目・夕食/恋のマジカルレンジャーフォース"},
           ],
         },
@@ -9559,7 +9834,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "セ4-1", eng: "4th Day: Rin’s question/Understanding the current situation", jp: "四日目・凛の質問/現状把握"},
+              {
+                id: "セ4-1",
+                eng: "4th Day: Rin’s question/Understanding the current situation",
+                jp: "四日目・凛の質問/現状把握",
+              },
               {id: "セ4-2", eng: "4th Day: Rin’s question/The serious stuff", jp: "四日目・凛の質問/真面目な話"},
               {id: "セ4-3", eng: "4th Day: Rin’s question/Invitation refusal", jp: "四日目・凛の質問/勧誘お断り"},
             ],
@@ -9612,7 +9891,11 @@ export const sections = {
             ],
           },
           {id: "セ5-12", eng: "5th Day: Dinner/You too", jp: "五日目・夕食/君も一緒に"},
-          {id: "セ5-14", eng: "5th Day: Dinner-Bedtime/Clash of the lion and the tiger", jp: "五日目・夕食〜就寝/激突、ライオン対トラ"},
+          {
+            id: "セ5-14",
+            eng: "5th Day: Dinner-Bedtime/Clash of the lion and the tiger",
+            jp: "五日目・夕食〜就寝/激突、ライオン対トラ",
+          },
         ],
       }, {
         section: "セ6", v: [
@@ -9625,7 +9908,11 @@ export const sections = {
           {id: "セ6-1", eng: "6th Day: Shinji’s invitation, breakdown/Choice", jp: "六日目・慎二の誘い、決裂/選択肢"},
           {
             h: [
-              {id: "セ6-3", eng: "6th Day: Return from the Matou household/Lady of fresh blood", jp: "六日目・間桐邸帰り/鮮血淑女"},
+              {
+                id: "セ6-3",
+                eng: "6th Day: Return from the Matou household/Lady of fresh blood",
+                jp: "六日目・間桐邸帰り/鮮血淑女",
+              },
               {
                 id: "セ6-4",
                 eng: "6th Day: Return from the Matou household/Averting one’s gaze",
@@ -9642,7 +9929,11 @@ export const sections = {
           {
             h: [
               {id: "セ6-7", eng: "6th Day: Night/Conflict between the two", jp: "六日目・夜/二人の齟齬"},
-              {id: "セ6-6", eng: "6th Day: Late night-Ryuudou temple/Missing Ariadne", jp: "六日目・深夜〜柳洞寺/ミッシング・アリアドネ"},
+              {
+                id: "セ6-6",
+                eng: "6th Day: Late night-Ryuudou temple/Missing Ariadne",
+                jp: "六日目・深夜〜柳洞寺/ミッシング・アリアドネ",
+              },
             ],
           },
           {
@@ -9662,7 +9953,11 @@ export const sections = {
             eng: "7th Day: Awakening-Morning/Superhero and the usual breakfast",
             jp: "七日目・目覚め〜朝/正義の味方といつもの朝食",
           },
-          {id: "セ7-2", eng: "7th Day: Before noon: Training swordsmanship/Life guard", jp: "七日目・午前・剣の修行/ライフ・ガード"},
+          {
+            id: "セ7-2",
+            eng: "7th Day: Before noon: Training swordsmanship/Life guard",
+            jp: "七日目・午前・剣の修行/ライフ・ガード",
+          },
           {
             h: [
               {
@@ -9670,8 +9965,16 @@ export const sections = {
                 eng: "7th Day: Conversation with Saber/What to pour into the Grail",
                 jp: "七日目・セイバーとの会話/杯に注ぐもの",
               },
-              {id: "セ7-5", eng: "7th Day: Conversation with Saber/Hero apocalypse story", jp: "七日目・セイバーとの会話/英雄黙示譚"},
-              {id: "セ7-6", eng: "7th Day: Conversation with Saber/Saber-san angry", jp: "七日目・セイバーとの会話/セイバーさんご立腹"},
+              {
+                id: "セ7-5",
+                eng: "7th Day: Conversation with Saber/Hero apocalypse story",
+                jp: "七日目・セイバーとの会話/英雄黙示譚",
+              },
+              {
+                id: "セ7-6",
+                eng: "7th Day: Conversation with Saber/Saber-san angry",
+                jp: "七日目・セイバーとの会話/セイバーさんご立腹",
+              },
             ],
           },
           {id: "セ7-7", eng: "7th Day: Noon/The daughter of winter-Illya (I)", jp: "七日目・昼/冬の娘〜イリヤ（Ⅰ）"},
@@ -9680,25 +9983,49 @@ export const sections = {
             eng: "7th Day: Return home-Before dinner/Shirou peeping incident: Prelude",
             jp: "七日目・帰宅〜夕食前/士郎覗き事件・序",
           },
-          {id: "セ7-1", eng: "7th Day: After dinner/Magic Lecture (Magic Crest)", jp: "七日目・夕食後/魔術講座（魔術刻印）"},
+          {
+            id: "セ7-1",
+            eng: "7th Day: After dinner/Magic Lecture (Magic Crest)",
+            jp: "七日目・夕食後/魔術講座（魔術刻印）",
+          },
           {id: "セ7-3", eng: "7th Day: Late night-Bedtime/Differing person", jp: "七日目・深夜〜就寝/異なる者"},
-          {id: "セ7-8", eng: "8th Day: Morning-Training swordsmanship/Life guard & safe", jp: "八日目・朝〜剣の修行/ライフガード＆セーフ"},
+          {
+            id: "セ7-8",
+            eng: "8th Day: Morning-Training swordsmanship/Life guard & safe",
+            jp: "八日目・朝〜剣の修行/ライフガード＆セーフ",
+          },
           {
             h: [
-              {id: "セ7-12", eng: "8th Day: Conversation with Saber/Hero apocalypse story", jp: "八日目・セイバーとの会話/英雄黙示譚"},
-              {id: "セ7-13", eng: "8th Day: Conversation with Saber/Saber-san angry", jp: "八日目・セイバーとの会話/セイバーさんご立腹"},
+              {
+                id: "セ7-12",
+                eng: "8th Day: Conversation with Saber/Hero apocalypse story",
+                jp: "八日目・セイバーとの会話/英雄黙示譚",
+              },
+              {
+                id: "セ7-13",
+                eng: "8th Day: Conversation with Saber/Saber-san angry",
+                jp: "八日目・セイバーとの会話/セイバーさんご立腹",
+              },
               {
                 id: "セ7-14",
                 eng: "8th Day: Conversation with Saber/What to pour into the Grail",
                 jp: "八日目・セイバーとの会話/杯に注ぐもの",
               },
-              {id: "セ7-15", eng: "8th Day: Conversation with Saber/Saber-san angry", jp: "八日目・セイバーとの会話/セイバーさんご立腹"},
+              {
+                id: "セ7-15",
+                eng: "8th Day: Conversation with Saber/Saber-san angry",
+                jp: "八日目・セイバーとの会話/セイバーさんご立腹",
+              },
               {
                 id: "セ7-16",
                 eng: "8th Day: Conversation with Saber/What to pour into the Grail",
                 jp: "八日目・セイバーとの会話/杯に注ぐもの",
               },
-              {id: "セ7-17", eng: "8th Day: Conversation with Saber/Hero apocalypse story", jp: "八日目・セイバーとの会話/英雄黙示譚"},
+              {
+                id: "セ7-17",
+                eng: "8th Day: Conversation with Saber/Hero apocalypse story",
+                jp: "八日目・セイバーとの会話/英雄黙示譚",
+              },
             ],
           },
           {id: "セ7-18", eng: "8th Day: Noon/Shopping district", jp: "八日目・昼/商店街"},
@@ -9767,7 +10094,11 @@ export const sections = {
       }, {
         section: "セ10", v: [
           {id: "セ10-0", eng: "10th Day: Awakening-Morning/Strategy meeting", jp: "十日目・起床〜朝/作戦会議"},
-          {id: "セ10-9", eng: "10th Day: Afternoon-Memory of ten years ago/Portrait", jp: "十日目・午後〜十年前の回想/ポートレイト"},
+          {
+            id: "セ10-9",
+            eng: "10th Day: Afternoon-Memory of ten years ago/Portrait",
+            jp: "十日目・午後〜十年前の回想/ポートレイト",
+          },
           {id: "セ10-2", eng: "VS Rider (II)/Assault", jp: "ＶＳライダー（Ⅱ）/強襲"},
           {
             h: [
@@ -9913,7 +10244,11 @@ export const sections = {
         section: "セ13", v: [
           {id: "セ13-3", eng: "13th Day: Awakening/The king’s memories", jp: "十三日目・起床/王の記憶"},
           {id: "セ13-12", eng: "13th Day: Breakfast/Sweets", jp: "十三日目・朝食/スイート"},
-          {id: "セ13-6", eng: "13th Day: Training swordsmanship-Lunchtime/Saber (IV)", jp: "十三日目・剣の稽古〜昼食/セイバー（Ⅳ）"},
+          {
+            id: "セ13-6",
+            eng: "13th Day: Training swordsmanship-Lunchtime/Saber (IV)",
+            jp: "十三日目・剣の稽古〜昼食/セイバー（Ⅳ）",
+          },
           {
             id: "セ13-13",
             eng: "13th Day: Afternoon/Tohsaka Sensei’s misunderstanding-Saber’s contradiction",
@@ -9949,7 +10284,11 @@ export const sections = {
               {id: "セ13-16", eng: "Tiger Dojo 10", jp: "タイガー道場10"},
             ],
           },
-          {id: "セ13-11", eng: "13th Day: Late night-To the church/Ten years ago (II)", jp: "十三日目・深夜〜教会へ/十年前（Ⅱ）"},
+          {
+            id: "セ13-11",
+            eng: "13th Day: Late night-To the church/Ten years ago (II)",
+            jp: "十三日目・深夜〜教会へ/十年前（Ⅱ）",
+          },
           {id: "セ13-14", eng: "13th Day: Late night/You’re my only star", jp: "十三日目・深夜／Youre My Only Star"},
         ],
       }, {
@@ -10000,12 +10339,20 @@ export const sections = {
           {
             h: [
               {id: "セ15-21", eng: "15th Day: Church/That which cannot be surrendered", jp: "十五日目・教会/ゆずれぬとが"},
-              {id: "セ15-3", eng: "15th Day: Church underground/That which cannot be changed", jp: "十五日目・教会地下/変えられぬもの"},
+              {
+                id: "セ15-3",
+                eng: "15th Day: Church underground/That which cannot be changed",
+                jp: "十五日目・教会地下/変えられぬもの",
+              },
             ],
           },
           {
             h: [
-              {id: "セ15-22", eng: "15th Day: Escape-Foreigner’s cemetery/Shining star", jp: "十五日目・脱出〜外人墓地/輝ける星"},
+              {
+                id: "セ15-22",
+                eng: "15th Day: Escape-Foreigner’s cemetery/Shining star",
+                jp: "十五日目・脱出〜外人墓地/輝ける星",
+              },
               {id: "セ15-24", eng: "Tiger Dojo 13", jp: "タイガー道場13"},
             ],
           },
@@ -10050,7 +10397,11 @@ export const sections = {
     }, {
       v: [{
         section: "凛4", v: [
-          {id: "凛4-0", eng: "4th Day: Awakening-My room/Separation with Rin-Saber", jp: "四日目・目覚め〜自室/凛との決別〜セイバー"},
+          {
+            id: "凛4-0",
+            eng: "4th Day: Awakening-My room/Separation with Rin-Saber",
+            jp: "四日目・目覚め〜自室/凛との決別〜セイバー",
+          },
           {
             h: [
               {id: "凛4-1", eng: "Conversation/Flawless blindspot", jp: "会話中/無傷の死角"},
@@ -10100,7 +10451,11 @@ export const sections = {
           {id: "凛5-20", eng: "5th Day: Breakfast-Way to school/Everyday (II)", jp: "五日目・朝食〜登校/日常（Ⅱ）"},
           {
             h: [
-              {id: "凛5-21", eng: "5th Day: Morning, school/Tohsaka Rin, Mitsuzuri Ayako", jp: "五日目・朝、学校/遠坂凛、美綴綾子"},
+              {
+                id: "凛5-21",
+                eng: "5th Day: Morning, school/Tohsaka Rin, Mitsuzuri Ayako",
+                jp: "五日目・朝、学校/遠坂凛、美綴綾子",
+              },
               {id: "凛5-27", eng: "5th Day: School/Compensation for the pride", jp: "五日目・学校/誇りの代償"},
             ],
           },
@@ -10130,7 +10485,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛5-13", eng: "5th Day: Woods-Tohsaka residence/Rin’s treatment", jp: "五日目・雑木林〜遠坂邸/凛の治療"},
+              {
+                id: "凛5-13",
+                eng: "5th Day: Woods-Tohsaka residence/Rin’s treatment",
+                jp: "五日目・雑木林〜遠坂邸/凛の治療",
+              },
               {id: "凛5-26", eng: "Tiger Dojo 17", jp: "タイガー道場17"},
             ],
           },
@@ -10168,8 +10527,16 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛6-1", eng: "6th Day: Before dinner/Assault, stop the okonomiyaki bowl", jp: "六日目・夕食前/強襲、お好み焼き丼阻止"},
-              {id: "凛6-2", eng: "6th Day: Matou household/People at the Matou household", jp: "六日目・〜間桐邸/間桐家の人々"},
+              {
+                id: "凛6-1",
+                eng: "6th Day: Before dinner/Assault, stop the okonomiyaki bowl",
+                jp: "六日目・夕食前/強襲、お好み焼き丼阻止",
+              },
+              {
+                id: "凛6-2",
+                eng: "6th Day: Matou household/People at the Matou household",
+                jp: "六日目・〜間桐邸/間桐家の人々",
+              },
               {id: "凛6-3", eng: "6th Day: Dojo/Report about today", jp: "六日目・〜道場/今日の報告"},
             ],
           },
@@ -10180,7 +10547,11 @@ export const sections = {
                 eng: "6th Day: After dinner, training/Tiger Dojo, extra edition",
                 jp: "六日目・夕食後、剣の稽古/タイガー道場、番外編",
               },
-              {id: "凛6-5", eng: "6th Day: After dinner, training/Peaceful moment", jp: "六日目・夕食後、剣の稽古/平和な一時"},
+              {
+                id: "凛6-5",
+                eng: "6th Day: After dinner, training/Peaceful moment",
+                jp: "六日目・夕食後、剣の稽古/平和な一時",
+              },
             ],
           },
           {id: "凛6-6", eng: "6th Day: Midnight/Calling", jp: "六日目・深夜/コーリング"},
@@ -10190,8 +10561,16 @@ export const sections = {
         ],
       }, {
         section: "凛7", v: [
-          {id: "凛7-11", eng: "7th Day: Morning-Training swordsmanship/Saber unhappy", jp: "七日目・朝〜剣の稽古/セイバー、不機嫌"},
-          {id: "凛7-0", eng: "7th Day: School, lunchtime/Creeping shadow of the demon", jp: "七日目・学校・昼休み/忍び寄るアクマの影"},
+          {
+            id: "凛7-11",
+            eng: "7th Day: Morning-Training swordsmanship/Saber unhappy",
+            jp: "七日目・朝〜剣の稽古/セイバー、不機嫌",
+          },
+          {
+            id: "凛7-0",
+            eng: "7th Day: School, lunchtime/Creeping shadow of the demon",
+            jp: "七日目・学校・昼休み/忍び寄るアクマの影",
+          },
           {
             h: [
               {id: "凛7-1", eng: "7th Day: Lunchtime/Smart move", jp: "七日目・昼休み/賢明な判断"},
@@ -10222,7 +10601,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛8-10", eng: "8th Day: Student council room/Chasing too far prohibited", jp: "八日目・生徒会室/深追い厳禁"},
+              {
+                id: "凛8-10",
+                eng: "8th Day: Student council room/Chasing too far prohibited",
+                jp: "八日目・生徒会室/深追い厳禁",
+              },
               {id: "凛8-1", eng: "8th Day: Student council room/Hypnos", jp: "八日目・生徒会室/ヒュプノス"},
             ],
           },
@@ -10235,9 +10618,21 @@ export const sections = {
           {id: "凛8-2", eng: "8th Day: After school/Choice", jp: "八日目・放課後/選択肢。"},
           {
             h: [
-              {id: "凛8-3", eng: "8th Day: After school-Matou household/The strange two", jp: "八日目・放課後〜間桐邸/あやしい二人"},
-              {id: "凛8-4", eng: "8th Day: After school-Return home/Contact via phone", jp: "八日目・放課後〜帰宅/電話で連絡"},
-              {id: "凛8-5", eng: "8th Day: After school-Shopping district/Strange maid", jp: "八日目・放課後〜商店街/おかしなメイド"},
+              {
+                id: "凛8-3",
+                eng: "8th Day: After school-Matou household/The strange two",
+                jp: "八日目・放課後〜間桐邸/あやしい二人",
+              },
+              {
+                id: "凛8-4",
+                eng: "8th Day: After school-Return home/Contact via phone",
+                jp: "八日目・放課後〜帰宅/電話で連絡",
+              },
+              {
+                id: "凛8-5",
+                eng: "8th Day: After school-Shopping district/Strange maid",
+                jp: "八日目・放課後〜商店街/おかしなメイド",
+              },
             ],
           },
           {id: "凛8-6", eng: "8th Day: Dinner-Bedtime/Reason", jp: "八日目・夕食〜就寝/その理由"},
@@ -10245,7 +10640,11 @@ export const sections = {
       }, {
         section: "凛9", v: [
           {id: "凛9-7", eng: "Intermission/A story of a knight", jp: "幕間/ある騎士の物語。"},
-          {id: "凛9-8", eng: "9th Day: Morning-After school/Guests at the Ryuudou Temple", jp: "九日目・朝〜放課後/柳洞寺の客人"},
+          {
+            id: "凛9-8",
+            eng: "9th Day: Morning-After school/Guests at the Ryuudou Temple",
+            jp: "九日目・朝〜放課後/柳洞寺の客人",
+          },
           {id: "凛9-0", eng: "9th Day: Night/Ambush, decisive action", jp: "九日目・夜/奇襲、決行"},
           {
             h: [
@@ -10264,7 +10663,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛9-13", eng: "9th Day: Night, intersection/Plan failed, Rin’s wonder", jp: "九日目・夜・交差点/作戦失敗、凛の疑惑"},
+              {
+                id: "凛9-13",
+                eng: "9th Day: Night, intersection/Plan failed, Rin’s wonder",
+                jp: "九日目・夜・交差点/作戦失敗、凛の疑惑",
+              },
               {id: "凛9-14", eng: "Tiger Dojo 19", jp: "タイガー道場19"},
             ],
           },
@@ -10284,10 +10687,18 @@ export const sections = {
             h: [
               {id: "凛10-1", eng: "10th Day: Night/Conversation on projection magic", jp: "十日目・夜/投影魔術の話"},
               {id: "凛10-2", eng: "10th Day: Night, dojo/Wild Wild England", jp: "十日目・夜・道場/ワイルドワイルドイングランド"},
-              {id: "凛10-3", eng: "10th Day: Night, living room/Which one do you like?", jp: "十日目・夜・居間/どっちが好きなの？"},
+              {
+                id: "凛10-3",
+                eng: "10th Day: Night, living room/Which one do you like?",
+                jp: "十日目・夜・居間/どっちが好きなの？",
+              },
             ],
           },
-          {id: "凛10-4", eng: "10th Day: Night, porch/Tohsaka Rin (V)-Shirou’s defect", jp: "十日目・夜・縁側/遠坂凛（Ⅴ）〜士郎の瑕"},
+          {
+            id: "凛10-4",
+            eng: "10th Day: Night, porch/Tohsaka Rin (V)-Shirou’s defect",
+            jp: "十日目・夜・縁側/遠坂凛（Ⅴ）〜士郎の瑕",
+          },
           {id: "凛10-8", eng: "10th Day: Bedtime-Shed/Night training-Warning", jp: "十日目・就寝〜土蔵/夜の鍛練〜警告"},
         ],
       }, {
@@ -10295,7 +10706,11 @@ export const sections = {
           {id: "凛11-0", eng: "11th Day: Early morning/Bread disappearing incident", jp: "十一日目・早朝/食パン消失事件"},
           {
             h: [
-              {id: "凛11-1", eng: "11th Day: Early morning, outbuilding/You’re the culprit", jp: "十一日目・早朝・離れ/犯人はオマエ"},
+              {
+                id: "凛11-1",
+                eng: "11th Day: Early morning, outbuilding/You’re the culprit",
+                jp: "十一日目・早朝・離れ/犯人はオマエ",
+              },
               {
                 id: "凛11-2",
                 eng: "11th Day: Early morning/Legend of the fastest one in Miyama City",
@@ -10305,7 +10720,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛11-9", eng: "11th Day: Shopping district/Life signal lighted", jp: "十一日目・〜商店街へ/ライフシグナル大回灯"},
+              {
+                id: "凛11-9",
+                eng: "11th Day: Shopping district/Life signal lighted",
+                jp: "十一日目・〜商店街へ/ライフシグナル大回灯",
+              },
               {id: "凛11-3", eng: "11th Day: Rin’s guest room/Good morning?", jp: "十一日目・凛の客間/グッドモーニング？"},
             ],
           },
@@ -10321,7 +10740,11 @@ export const sections = {
           },
           {
             h: [
-              {id: "凛11-12", eng: "11th Day: Escape-To the Tohsaka household/Withdrawal", jp: "十一日目・逃走〜遠坂邸へ/戦線離脱"},
+              {
+                id: "凛11-12",
+                eng: "11th Day: Escape-To the Tohsaka household/Withdrawal",
+                jp: "十一日目・逃走〜遠坂邸へ/戦線離脱",
+              },
               {id: "凛11-17", eng: "Tiger Dojo 20", jp: "タイガー道場20"},
             ],
           },
@@ -10332,7 +10755,11 @@ export const sections = {
         ],
       }, {
         section: "凛12", v: [
-          {id: "凛12-14", eng: "Intermission/Holy woman violated|Intermission/Captured knight|gmature", jp: "幕間/囚われの騎士"},
+          {
+            id: "凛12-14",
+            eng: "Intermission/Holy woman violated|Intermission/Captured knight|gmature",
+            jp: "幕間/囚われの騎士",
+          },
           {
             h: [
               {id: "凛12-0", eng: "12th Day: To battle/Choice", jp: "十二日目・戦いへ/選択肢"},
@@ -10375,8 +10802,16 @@ export const sections = {
               {id: "凛12-17", eng: "Tiger Dojo 22", jp: "タイガー道場22"},
             ],
           },
-          {id: "凛12-8", eng: "12th Day: Confrontation/Desperate projection-return alive", jp: "十二日目・対峙/決死の投影〜生還"},
-          {id: "凛12-13", eng: "12th Day: Foreigners’ cemetery/Tohsaka Rin (VII)", jp: "十二日目・夜の外人墓地/遠坂凛（Ⅶ）"},
+          {
+            id: "凛12-8",
+            eng: "12th Day: Confrontation/Desperate projection-return alive",
+            jp: "十二日目・対峙/決死の投影〜生還",
+          },
+          {
+            id: "凛12-13",
+            eng: "12th Day: Foreigners’ cemetery/Tohsaka Rin (VII)",
+            jp: "十二日目・夜の外人墓地/遠坂凛（Ⅶ）",
+          },
         ],
       }, {
         section: "凛13", v: [
@@ -10397,7 +10832,11 @@ export const sections = {
             jp: "十三日目・目覚め〜森へ/冬の森、大魔神かなり怒る",
           },
           {id: "凛13-21", eng: "13th Day/Entering Einzbern Castle", jp: "十三日目/アインツベルン城侵入"},
-          {id: "凛13-4", eng: "13th Day: Einzbern Castle/Gilgamesh VS Berserker", jp: "十三日目・アインツベルン城/ギルガメッシュＶＳバーサーカー"},
+          {
+            id: "凛13-4",
+            eng: "13th Day: Einzbern Castle/Gilgamesh VS Berserker",
+            jp: "十三日目・アインツベルン城/ギルガメッシュＶＳバーサーカー",
+          },
           {
             h: [
               {id: "凛13-15", eng: "Decision/Distortion (IV)", jp: "決断/ディストレーション（Ⅳ）"},
@@ -10436,7 +10875,11 @@ export const sections = {
               {id: "凛14-2", eng: "Choice/Idea", jp: "選択/理念。"},
             ],
           },
-          {id: "凛14-3", eng: "14th Day: Church underground temple/Reality Marble", jp: "十四日目・教会地下聖堂/リアリティ・マーブル"},
+          {
+            id: "凛14-3",
+            eng: "14th Day: Church underground temple/Reality Marble",
+            jp: "十四日目・教会地下聖堂/リアリティ・マーブル",
+          },
           {id: "凛14-21", eng: "14th Day: Outside church/Return with Saber", jp: "十四日目・〜教会外へ/帰還"},
           {id: "凛14-22", eng: "Intermission/Captured princess", jp: "幕間/囚われの姫"},
           {id: "凛14-23", eng: "14th Day: Midnight/To the place of conviction", jp: "十四日目・深夜〜/断罪の場へ"},
@@ -10446,7 +10889,11 @@ export const sections = {
           {id: "凛14-27", eng: "End of battle/Answer", jp: "決着/アンサー"},
           {id: "凛14-28", eng: "Einzbern Castle/Enemy that must be defeated", jp: "アインツベルン城/倒すべき敵"},
           {id: "凛14-29", eng: "Intermission/Contradictory Holy Grail", jp: "幕間/矛盾聖杯"},
-          {id: "凛14-4", eng: "15th Day: Return home, night/Before the final battle", jp: "十五日目・〜帰還・夜/最終決戦前"},
+          {
+            id: "凛14-4",
+            eng: "15th Day: Return home, night/Before the final battle",
+            jp: "十五日目・〜帰還・夜/最終決戦前",
+          },
           {
             h: [
               {id: "凛14-5", eng: "Last action/Go ask Rin", jp: "最後の行動/凛に相談"},
@@ -10497,8 +10944,16 @@ export const sections = {
           {id: "桜4-11", eng: "4th Day: Morning/Rin’s proposal", jp: "四日目朝/凛からの提案"},
           {id: "桜4-0", eng: "4th Day: Morning/Rin leaves", jp: "四日目・朝/凛、去る"},
           {id: "桜4-10", eng: "4th Day: Morning: Dojo/Saber explains the rules", jp: "四日目・午前・道場/セイバーによるルール説明"},
-          {id: "桜4-1", eng: "4th Day: Dojo-Church/Holy Grail War, the beginning", jp: "四日目・道場〜教会/聖杯戦争、その発端"},
-          {id: "桜4-7", eng: "4th Day: Outside church/Will to fight, fighting sword", jp: "四日目・教会外/戦う意思、戦う剣"},
+          {
+            id: "桜4-1",
+            eng: "4th Day: Dojo-Church/Holy Grail War, the beginning",
+            jp: "四日目・道場〜教会/聖杯戦争、その発端",
+          },
+          {
+            id: "桜4-7",
+            eng: "4th Day: Outside church/Will to fight, fighting sword",
+            jp: "四日目・教会外/戦う意思、戦う剣",
+          },
           {id: "桜4-8", eng: "4th Day: Afternoon-Dinner/Intruder", jp: "四日目・夕方〜夕食/イントルーダー"},
           {id: "桜4-2", eng: "4th Day: Night: Patrol/Choice", jp: "四日目・夜・巡回/選択肢"},
           {
@@ -10508,7 +10963,11 @@ export const sections = {
             ],
           },
           {id: "桜4-5", eng: "4th Day: Midnight: Park/Makiri’s end-VS Rider", jp: "四日目・深夜・公園/マキリの末〜ＶＳライダー"},
-          {id: "桜4-9", eng: "4th Day: Midnight: Church/The answer lies at the very end", jp: "四日目・深夜・教会/その答えは結末にのみ"},
+          {
+            id: "桜4-9",
+            eng: "4th Day: Midnight: Church/The answer lies at the very end",
+            jp: "四日目・深夜・教会/その答えは結末にのみ",
+          },
         ],
       }, {
         section: "桜5", v: [
@@ -10539,7 +10998,11 @@ export const sections = {
             ],
           },
           {id: "桜5-8", eng: "5th Day: Noon: Park/Innocent murder", jp: "五日目・夕方前・公園/イノセント・マーダー"},
-          {id: "桜5-9", eng: "5th Day: Return home: Before dinner/Who will tell Sakura?", jp: "五日目・帰宅・夕食前/桜に誰がきりだす？"},
+          {
+            id: "桜5-9",
+            eng: "5th Day: Return home: Before dinner/Who will tell Sakura?",
+            jp: "五日目・帰宅・夕食前/桜に誰がきりだす？",
+          },
           {
             h: [
               {id: "桜5-10", eng: "Request/Fuji-Nee", jp: "依頼/藤ねえ"},
@@ -10579,8 +11042,16 @@ export const sections = {
             h: [
               {id: "桜6-9", eng: "6th Day: Park/Winter castle-Illya (II)", jp: "六日目・公園/冬の城〜イリヤ（Ⅱ）"},
               {id: "桜6-10", eng: "6th Day: Park/The daughter of winter-Illya (I)", jp: "六日目・公園/冬の娘〜イリヤ（Ⅰ）"},
-              {id: "桜6-7", eng: "6th Day: After lunch: Living room/Saber is merciless!", jp: "六日目・昼食後・居間/このセイバー容赦せん！"},
-              {id: "桜6-8", eng: "6th Day: After lunch: Living room/A peaceful time", jp: "六日目・昼食後・居間/のどかな食後"},
+              {
+                id: "桜6-7",
+                eng: "6th Day: After lunch: Living room/Saber is merciless!",
+                jp: "六日目・昼食後・居間/このセイバー容赦せん！",
+              },
+              {
+                id: "桜6-8",
+                eng: "6th Day: After lunch: Living room/A peaceful time",
+                jp: "六日目・昼食後・居間/のどかな食後",
+              },
             ],
           },
           {id: "桜6-2", eng: "6th Day: Return home-Entrance/A big pinch", jp: "六日目・帰宅〜玄関/だいぴんち"},
@@ -10604,12 +11075,20 @@ export const sections = {
         ],
       }, {
         section: "桜7", v: [
-          {id: "桜7-15", eng: "7th Day: Awakening-Breakfast/Wandering cloud, sumo edition", jp: "七日目・起床〜朝食/はぐれ雲相撲編"},
+          {
+            id: "桜7-15",
+            eng: "7th Day: Awakening-Breakfast/Wandering cloud, sumo edition",
+            jp: "七日目・起床〜朝食/はぐれ雲相撲編",
+          },
           {id: "桜7-16", eng: "7th Day: After breakfast/Sakura and lunch", jp: "七日目・朝食後/桜とお弁当"},
           {id: "桜7-1", eng: "7th Day: Way to school-Lunchtime/Interval", jp: "七日目・登校〜昼休み/インターバル"},
           {id: "桜7-17", eng: "7th Day: Lunchtime: Rooftop/Tohsaka Rin (II)", jp: "七日目・昼休み・屋上/遠坂凛（Ⅱ）"},
           {id: "桜7-0", eng: "7th Day: Before 5th period: Stairway/The two", jp: "七日目・五時限目前・階段/ふたり"},
-          {id: "桜7-2", eng: "7th Day: After school-Chinese Restaurant/Shocking Mapo tofu", jp: "七日目・放課後〜中華飯店/衝撃のマーボー"},
+          {
+            id: "桜7-2",
+            eng: "7th Day: After school-Chinese Restaurant/Shocking Mapo tofu",
+            jp: "七日目・放課後〜中華飯店/衝撃のマーボー",
+          },
           {id: "桜7-18", eng: "Intermission/Re-contract", jp: "幕間/再契約"},
           {
             h: [
@@ -10639,7 +11118,11 @@ export const sections = {
           {
             h: [
               {id: "桜7-12", eng: "7th Day/Ocean depths", jp: "七日目/深海"},
-              {id: "桜7-13", eng: "7th Day: Return alive-Return home/Gap between the two", jp: "七日目・生還〜帰宅/二人の溝"},
+              {
+                id: "桜7-13",
+                eng: "7th Day: Return alive-Return home/Gap between the two",
+                jp: "七日目・生還〜帰宅/二人の溝",
+              },
             ],
           },
           {
@@ -10719,7 +11202,11 @@ export const sections = {
           {
             h: [
               {id: "桜9-6", eng: "Rin’s question/Choice", jp: "凛の問答/選択肢"},
-              {id: "桜9-5", eng: "9th Day: Afternoon-Confrontation/Miserable lone force", jp: "九日目・午後〜対決/孤軍無残"},
+              {
+                id: "桜9-5",
+                eng: "9th Day: Afternoon-Confrontation/Miserable lone force",
+                jp: "九日目・午後〜対決/孤軍無残",
+              },
             ],
           },
           {
@@ -10728,7 +11215,11 @@ export const sections = {
               {id: "桜9-38", eng: "Tiger Dojo 28", jp: "タイガー道場28"},
             ],
           },
-          {id: "桜9-9", eng: "Rin’s question/Can you trust her? Can you stay on her side?", jp: "凛の問答/信頼できる？裏切らない？"},
+          {
+            id: "桜9-9",
+            eng: "Rin’s question/Can you trust her? Can you stay on her side?",
+            jp: "凛の問答/信頼できる？裏切らない？",
+          },
           {id: "桜9-11", eng: "Reply/Who do you think you are?", jp: "返事/何様よアンタ"},
           {id: "桜9-12", eng: "Rin’s question/Will you give me your absolute obedience?", jp: "凛の問答/絶対服従する？"},
           {
@@ -10741,7 +11232,11 @@ export const sections = {
           {
             h: [
               {id: "桜9-15", eng: "9th Day: Rin’s room-Afternoon/Choice", jp: "九日目・凛の部屋〜夕方/選択肢。"},
-              {id: "桜9-32", eng: "9th Day: Rin’s room-Afternoon-Return home/Rin gets angry", jp: "九日目・凛の部屋〜夕方〜帰宅/凛、怒る"},
+              {
+                id: "桜9-32",
+                eng: "9th Day: Rin’s room-Afternoon-Return home/Rin gets angry",
+                jp: "九日目・凛の部屋〜夕方〜帰宅/凛、怒る",
+              },
             ],
           },
           {
@@ -10751,7 +11246,11 @@ export const sections = {
             ],
           },
           {id: "桜9-18", eng: "9th Day: Return home-To school/Over", jp: "九日目・帰宅〜学校へ/オーバー"},
-          {id: "桜9-33", eng: "9th Day: School/Older brother and younger sister-VS Rider", jp: "九日目・学校/兄と妹〜ＶＳライダー"},
+          {
+            id: "桜9-33",
+            eng: "9th Day: School/Older brother and younger sister-VS Rider",
+            jp: "九日目・学校/兄と妹〜ＶＳライダー",
+          },
           {id: "桜9-19", eng: "VS Rider/Truth about Sakura", jp: "ＶＳライダー/桜の真実"},
           {
             h: [
@@ -10766,7 +11265,11 @@ export const sections = {
               {id: "桜9-39", eng: "Tiger Dojo 29", jp: "タイガー道場29"},
             ],
           },
-          {id: "桜9-23", eng: "9th Day: Outside church-Park, night/What I should protect", jp: "九日目・教会外〜公園・夜/まもるべきもの"},
+          {
+            id: "桜9-23",
+            eng: "9th Day: Outside church-Park, night/What I should protect",
+            jp: "九日目・教会外〜公園・夜/まもるべきもの",
+          },
           {
             h: [
               {id: "桜9-36", eng: "9th Day: Park-To the church/Run into the rain", jp: "九日目・公園〜教会へ/雨に走る"},
@@ -10779,7 +11282,11 @@ export const sections = {
               {id: "桜9-40", eng: "Tiger Dojo 30", jp: "タイガー道場30"},
             ],
           },
-          {id: "桜9-24", eng: "9th Day: Church: Confrontation with Rin/Set position", jp: "九日目・教会・凛と対峙/セット・ポジション"},
+          {
+            id: "桜9-24",
+            eng: "9th Day: Church: Confrontation with Rin/Set position",
+            jp: "九日目・教会・凛と対峙/セット・ポジション",
+          },
           {
             h: [
               {id: "桜9-28", eng: "9th Day/Rain", jp: "九日目/レイン"},
@@ -10806,7 +11313,11 @@ export const sections = {
       }, {
         section: "桜10", v: [
           {id: "桜10-6", eng: "10th Day: Awakening-Morning/Naive morning", jp: "十日目・起床〜朝/初々しい朝"},
-          {id: "桜10-0", eng: "10th Day: Breakfast/About Rider, who is at the table", jp: "十日目・朝食/食卓にいるライダーについて"},
+          {
+            id: "桜10-0",
+            eng: "10th Day: Breakfast/About Rider, who is at the table",
+            jp: "十日目・朝食/食卓にいるライダーについて",
+          },
           {
             h: [
               {id: "桜10-1", eng: "Impression/Red card from Sakura and Rider", jp: "感想/桜、ライダーにレッドカード"},
@@ -10815,7 +11326,11 @@ export const sections = {
             ],
           },
           {id: "桜10-4", eng: "10th Day: After breakfast/Future plans", jp: "十日目・朝食後/今後の方針"},
-          {id: "桜10-7", eng: "10th Day: Emiya household-Go out/To the Einzbern forest", jp: "十日目・衛宮邸〜外出/アインツベルンの森へ"},
+          {
+            id: "桜10-7",
+            eng: "10th Day: Emiya household-Go out/To the Einzbern forest",
+            jp: "十日目・衛宮邸〜外出/アインツベルンの森へ",
+          },
           {id: "桜10-5", eng: "Intermission/Secret", jp: "幕間/隠し事"},
           {id: "桜10-8", eng: "10th Day: Einzbern forest/Meet up with Rin", jp: "十日目・アインツベルンの森/凛との合流"},
           {
@@ -10882,7 +11397,11 @@ export const sections = {
           {id: "桜11-6", eng: "11th Day: Awakening: My room/Illya’s warning", jp: "十一日目・起床・自室/イリヤの忠告"},
           {id: "桜11-7", eng: "11th Day: Breakfast/Bad news", jp: "十一日目・朝食/バッドニュース"},
           {id: "桜11-8", eng: "11th Day: After breakfast/Future plans", jp: "十一日目・朝食後/今後の方針"},
-          {id: "桜11-9", eng: "11th Day: Morning: Dojo/Lecture on magic (Drastic measure)", jp: "十一日目・午前・道場/魔術講座（荒療治）"},
+          {
+            id: "桜11-9",
+            eng: "11th Day: Morning: Dojo/Lecture on magic (Drastic measure)",
+            jp: "十一日目・午前・道場/魔術講座（荒療治）",
+          },
           {id: "桜11-10", eng: "11th Day: Lunch preparation/Sisters (IV)", jp: "十一日目・昼食の準備/姉妹（Ⅳ）"},
           {id: "桜11-0", eng: "11th Day: Afternoon/Choice", jp: "十一日目・午後/選択肢"},
           {
@@ -10937,9 +11456,17 @@ export const sections = {
         ],
       }, {
         section: "桜13", v: [
-          {id: "桜13-8", eng: "13th Day: Awakening-Morning/Sakura’s absence-Finding", jp: "十三日目・起床〜朝/桜の不在〜発見"},
+          {
+            id: "桜13-8",
+            eng: "13th Day: Awakening-Morning/Sakura’s absence-Finding",
+            jp: "十三日目・起床〜朝/桜の不在〜発見",
+          },
           {id: "桜13-9", eng: "13th Day: Morning/Check on Sakura", jp: "十三日目・午前/桜の看病"},
-          {id: "桜13-10", eng: "13th Day: Morning: Living room/Distant twilight (II)", jp: "十三日目・午前・居間/遠い夕暮れ（Ⅱ）"},
+          {
+            id: "桜13-10",
+            eng: "13th Day: Morning: Living room/Distant twilight (II)",
+            jp: "十三日目・午前・居間/遠い夕暮れ（Ⅱ）",
+          },
           {id: "桜13-11", eng: "Intermission/Misery", jp: "幕間/ミザリー"},
           {id: "桜13-0", eng: "13th Day: Morning: My room/Assassin intrusion", jp: "十三日目・午前・自室/アサシン侵入"},
           {
@@ -10958,7 +11485,11 @@ export const sections = {
               {id: "桜13-15", eng: "Tiger Dojo 34", jp: "タイガー道場34"},
             ],
           },
-          {id: "桜13-13", eng: "13th Day: Afternoon: Sakura’s guest room/Once it’s spring", jp: "十三日目・午後・桜の客間/春になったら"},
+          {
+            id: "桜13-13",
+            eng: "13th Day: Afternoon: Sakura’s guest room/Once it’s spring",
+            jp: "十三日目・午後・桜の客間/春になったら",
+          },
           {id: "桜13-3", eng: "13th Day: Night/Decision time", jp: "十三日目・夜/決断の刻"},
           {
             h: [
@@ -11048,8 +11579,16 @@ export const sections = {
             jp: "十五日目・帰還〜衛宮邸居間/真相〜反英雄アンリマユ",
           },
           {id: "桜15-24", eng: "15th Day: Sakura’s shadow/Separation", jp: "十五日目・桜の影/決別"},
-          {id: "桜15-25", eng: "15th Day: Night: Shed/Record of the Great Holy Grail", jp: "十五日目・夜・土蔵/大聖杯の記録"},
-          {id: "桜15-13", eng: "15th Day: Preparation for battle/Confrontation with Rider", jp: "十五日目・決戦準備/ライダーとの対峙"},
+          {
+            id: "桜15-25",
+            eng: "15th Day: Night: Shed/Record of the Great Holy Grail",
+            jp: "十五日目・夜・土蔵/大聖杯の記録",
+          },
+          {
+            id: "桜15-13",
+            eng: "15th Day: Preparation for battle/Confrontation with Rider",
+            jp: "十五日目・決戦準備/ライダーとの対峙",
+          },
           {
             h: [
               {id: "桜15-16", eng: "Choice/Rider’s question", jp: "選択肢/ライダーの問い"},

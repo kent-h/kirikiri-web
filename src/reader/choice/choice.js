@@ -18,7 +18,7 @@ const Choice = props => {
     text = text || ""
     if (logic.choices) {
       return logic.choices.map(choice =>
-        renderLogic(choice.then, (props.options.debugLevel && text ? text + " > " : "") + choice.eng),
+        renderLogic(choice.then, (props.options.debugLevel && text ? text + " > " : "") + (props.options.lang === "eng" ? choice.eng : choice.jp)),
       )
     } else if (logic.conditions) {
       return <div>
@@ -30,7 +30,7 @@ const Choice = props => {
       return (!hRegex.test(logic.goto) || !!props.options.h) &&
         <div style={{marginTop: "2em"}}>
           <Link to={"/" + IDToPath(logic.goto, props.options.lang)}>
-            <button className="choice-button">{text || "Continue"}</button>
+            <button className="choice-button">{text || (props.options.lang === "eng" ? "Continue" : "次へ")}</button>
           </Link>
         </div>
     }
