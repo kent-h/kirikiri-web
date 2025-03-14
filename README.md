@@ -1,68 +1,69 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# KiriKiri Web
 
-## Available Scripts
+A [KiriKiri](https://en.wikipedia.org/wiki/List_of_visual_novel_engines#KiriKiri) engine specifically written to power the [web version of Fate/Stay Night](https://fatestaynight.vnovel.org).
 
-In the project directory, you can run:
+## Social
 
-### `npm start`
+Join [our Discord](https://discord.gg/ejespgUpgg)!
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Development
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+PRs welcome!
 
-### `npm test`
+To get the project running, you will need node installed, then simply:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repo.
+2. Run `npm ci` to install dependencies.
+3. Run `npm start` to start the development server.
+4. Navigate to https://localhost:3000.
 
-### `npm run build`
+Note that:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Changes to source files will be reloaded automatically.
+- Static assets will be loaded on-demand from the live site, so an internet connection is required. (See `"proxy"` in [package.json](./package.json))
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## How it Works / Repo Organization
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Static assets extracted from the original Visual Novel are loaded on demand, these are collected under `https://fatestaynight.vnovel.org/static/`
 
-### `npm run eject`
+```shell
+├── bgm         # top-level music folder
+│   ├── classic # original music
+│   ├── ps2     # ps2 music
+│   └── vita    # ps vita music
+├── images      # top-level images folder
+│   ├── eng     # modified / translated
+│   ├── h       # alternate versions
+│   └── mature  # alternate versions
+├── scripts     # script files (*.ks) containing game logic
+│   ├── eng     # translated
+│   │   └── h   # alternate versions
+│   └── jp      # original language
+│       └── h   # alternate versions
+├── sound       # sound effects
+└── voice       # voice lines
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The exception to this, is a couple indexes which are generated alongside the above assets, but are included directly in this repo.<br/>
+(See [lookup.js](./src/resources/lookup.js) and the [generated/](./src/resources/generated) folder for more details.)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Tools for extracting & converting assets are in a separate repo, see https://github.com/Kent-H/kirikiri-web-helper.<br/>
+(Please request access via discord.)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Notable Components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Most pages are rendered by the [Reader](./src/reader/reader.js) component, which among other things, is responsible for:
 
-## Learn More
+    1. Displaying the current scene's text, handling user input & navigation.
+    2. Detecting the user's progression through the text.
+    3. Displaying the appropriate animation (including music & sounds) for the currently visible text.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- The above text & animations are extracted from KiriKiri scripts, loaded by a separate, dedicated [Script Loader](./src/interpreter/script-loader.js) component, which performs a few logical steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    1. [Tokenize](./src/interpreter/parse/tokenize.js) - Reads in a \*.ks file and outputs tokens.
+    2. [Interpret](./src/interpreter/parse/interpreter.js) - Receives tokens from tokenizer and updates gamestate.
+    3. [Render](./src/interpreter/parse/render.js) - Creates animation segments based on progression of the gamestate.
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- A [home page](./src/home/home.js) exists to support navigating the full visual novel, and includes:
+    - A short introduction & site tutorial.
+    - A graph of every scene, including connectivity between scenes.
