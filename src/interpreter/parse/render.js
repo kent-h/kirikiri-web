@@ -79,6 +79,20 @@ const Render = (tokens, renderState, onPageReady, debug) => {
 
 const lineRegex = /^(line)(\d+)$/
 
+// the superpose macro puts an overlay on the layer KAG calls `.superpose_layer_no` (the last character layer)
+// it only needs to be a number above the character layers, so it is drawn on top of them
+const SUPERPOSE_LAYER = 9
+// texton is a plugin, so its transition time is not in the scripts
+const TEXTON_FADE_TIME = 300
+
+// resolves a layer argument, null for "&" expressions other than the superpose layer
+const resolveLayer = layer => {
+  if (typeof layer !== "string" || !layer.startsWith("&")) {
+    return layer
+  }
+  return layer.includes("superpose_layer_no") ? SUPERPOSE_LAYER : null
+}
+
 const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   const tokens = renderState.tokens
 
@@ -98,6 +112,9 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   let {buildingSavePoints, savePoints} = renderState
 
   let ruby = renderState.ruby
+
+  // superpose and superpose_off only change the back page, so they take effect at the next transition
+  let pendingSuperpose = renderState.pendingSuperpose
 
   const generateSection = () => {
     if (isDivider) {
@@ -151,7 +168,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   const pushFrame = (layer, frame) => {
     generateSection()
     layer = layer === "base" ? 0 : (layer || 0)
-    layers[layer] = layers[layer] || []
+    // a layer is shown from the start of a section, so a new one holds nothing until its first frame
+    layers[layer] = layers[layer] || [{contents: {}, time: frame.time}]
     layers[layer].push(frame)
   }
 
@@ -162,25 +180,23 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     pushFrame(layer, frame)
   }
 
+  // a frame transitions from the layer's previous frame, however long ago that was
+  // holding the layer keeps it as it is until now, so that the next frame transitions from now instead
+  const holdLayer = (layer) => {
+    const last = lastFrame(layer)
+    if (last && last.time < time) {
+      duplicateLastFrame(layer)
+    }
+  }
+
+  // fade out every other layer along with the new background
   const clearOtherLayers = (layer, timeOffset) => {
     layer = layer === "base" ? 0 : (layer || 0)
-    timeOffset = timeOffset ? parseInt(timeOffset, 10) : 0
-    // there must be a cleaner way to indicate that a layer has been removed
+    timeOffset = parseInt(timeOffset, 10) || 0
     layers.forEach((animation, animLayer) => {
-      if (animation !== layers[layer]) {
-        if (lastContents(animLayer).image) {
-          // duplicateLastFrame(animLayer, {
-          //   time: time,
-          // })
-          // duplicateLastFrame(animLayer, {
-          //   time: time,
-          //   opacity: 0,
-          // })
-          animation.push({
-            contents: {},
-            time: time,
-          })
-        }
+      if (animation !== layers[layer] && lastContents(animLayer).image) {
+        holdLayer(animLayer)
+        animation.push({contents: {}, time: time + timeOffset})
       }
     })
   }
@@ -202,6 +218,29 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
       bottom: pos ? 0 : undefined,
       opacity: (token.args.opacity ? parseInt(token.args.opacity, 10) : 255) / 255,
     })
+  }
+
+  // show or hide the superposed image, fading over fadeTime
+  const commitSuperpose = (fadeTime) => {
+    if (!pendingSuperpose) {
+      return
+    }
+    const pending = pendingSuperpose
+    pendingSuperpose = undefined
+    fadeTime = fadeTime || 0
+    if (pending.hide) {
+      if (lastContents(SUPERPOSE_LAYER).image) {
+        duplicateLastFrame(SUPERPOSE_LAYER)
+        pushFrame(SUPERPOSE_LAYER, {contents: {}, time: time + fadeTime})
+      }
+    } else {
+      // start transparent, then fade in to the requested opacity
+      pushBasicFrame(pending.token, "bgimage/", pending.token.args.storage, SUPERPOSE_LAYER, 0, true)
+      const frame = lastFrame(SUPERPOSE_LAYER)
+      const opacity = frame.opacity
+      frame.opacity = 0
+      duplicateLastFrame(SUPERPOSE_LAYER, {time: time + fadeTime, opacity})
+    }
   }
 
   const pushBgm = (bgm, fadeTime) => {
@@ -286,6 +325,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           let fOrigT = "translate(" + (cx ? parseInt(cx, 10) / 8 - 50 + "%" : "50%") + "," + (cy ? parseInt(cy, 10) / 6 - 50 + "%" : "50%") + ")"
           let rOrigT = "translate(" + (cx ? -parseInt(cx, 10) / 8 + 50 + "%" : "50%") + "," + (cy ? -parseInt(cy, 10) / 6 + 50 + "%" : "50%") + ")"
 
+          holdLayer(token.args.layer)
           pushFrame(token.args.layer, {
             time: time,
             contents: {
@@ -306,14 +346,37 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             transform: fOrigT + " scale(" + (token.args.mag ? token.args.mag : 2) + ") " + rOrigT,
           })
           break
-        case "imageex":
-          pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer || 10, 0, true)
+        case "imageex": {
+          const layer = resolveLayer(token.args.layer)
+          if (layer === SUPERPOSE_LAYER) {
+            pendingSuperpose = {token}
+          } else if (layer !== null) {
+            holdLayer(layer || 10)
+            pushBasicFrame(token, "bgimage/", token.args.storage, layer || 10, 0, true)
+          }
+          break
+        }
+        case "layopt":
+          if (resolveLayer(token.args.layer) === SUPERPOSE_LAYER && token.args.visible === "false") {
+            pendingSuperpose = {hide: true}
+          }
+          break
+        case "redraw": {
+          const redrawTime = parseInt(token.args.time, 10) || 0
+          commitSuperpose(redrawTime)
+          time += redrawTime
+          break
+        }
+        case "texton":
+          commitSuperpose(TEXTON_FADE_TIME)
+          specialTag = false
           break
         case "image":
         case "image4demo":
           if (token.args.layer && token.args.layer.startsWith("&")) {
             break
           }
+          holdLayer(token.args.layer)
           pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
           break
         case "fadein":
@@ -324,6 +387,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           duplicateLastFrame(token.args.layer)
           pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.layer, token.args.time, true)
           clearOtherLayers(token.args.layer, token.args.time)
+          // after the clear, so a pending superpose is shown over the new background
+          commitSuperpose(parseInt(token.args.time, 10))
 
           time += (token.args.time ? parseInt(token.args.time, 10) : 0)
           break
@@ -340,7 +405,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             nodes.push(node)
           }
 
-          let moveTime = parseInt(token.args.time, 10)
+          let moveTime = parseInt(token.args.time, 10) || 0
           nodes.forEach((node, nodeID) => {
             duplicateLastFrame(token.args.layer, {
               time: time + moveTime * (1 + nodeID),
@@ -351,8 +416,9 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
             })
           })
 
-          moveTime += time * nodes.length
-          endTime = endTime > moveTime ? endTime : moveTime
+          // each path node takes moveTime
+          const moveEnd = time + moveTime * nodes.length
+          endTime = endTime > moveEnd ? endTime : moveEnd
           break
         case "wm":
           time = time > endTime ? time : endTime
@@ -496,6 +562,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     bgmTimeline: bgmTimeline,
     seTimeline: seTimeline,
     ruby: ruby,
+    pendingSuperpose: pendingSuperpose,
   }
 }
 

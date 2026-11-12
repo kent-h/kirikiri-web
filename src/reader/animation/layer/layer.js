@@ -8,6 +8,7 @@ class Layer extends Component {
   constructor(props) {
     super(props)
     this.sleep = this.sleep.bind(this)
+    this.onImageLoad = this.onImageLoad.bind(this)
 
     this.state = {keyframe: null, last: null}
   }
@@ -60,13 +61,22 @@ class Layer extends Component {
     }
   }
 
+  // if the image failed to preload its width is unknown, so take it from the image once it does load
+  onImageLoad(contents, e) {
+    if (!contents.naturalWidth && e.target.naturalWidth) {
+      contents.naturalWidth = e.target.naturalWidth / 8
+      this.forceUpdate()
+    }
+  }
+
   render() {
     const keyframe = this.state.keyframe
     const last = this.state.last
     const ret = keyframe && keyframe.contents.image &&
-      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image + this.props.animationID}
+      <img key={(keyframe.contents.key ? "t" : "f") + keyframe.contents.folder + keyframe.contents.image}
            className="background-image-layer"
            layer={this.props.layer}
+           onLoad={e => this.onImageLoad(keyframe.contents, e)}
            src={LocateImage(keyframe.contents.image, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)}
            style={{
              transition: "all " + keyframe.duration + "ms " + (keyframe.acceleration > 0 ? "ease-in" : keyframe.acceleration < 0 ? "ease-out" : "linear"),
@@ -82,9 +92,10 @@ class Layer extends Component {
       return [ret]
     } else {
       return [ret,
-        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image + this.props.animationID}
+        <img key={(last.contents.key ? "t" : "f") + last.contents.folder + last.contents.image}
              className="background-image-layer"
              layer={this.props.layer}
+             onLoad={e => this.onImageLoad(last.contents, e)}
              src={LocateImage(last.contents.image, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)}
              style={{
                // keyframe transform will have the correct duration
