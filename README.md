@@ -21,6 +21,7 @@ Note that:
 
 - Changes to source files will be reloaded automatically.
 - Static assets will be loaded on-demand from the live site, so an internet connection is required. (See `"proxy"` in [package.json](./package.json))
+- To check the interpreter against every real scene, download the scripts once with `node scripts/fetch-scripts.js /tmp/ks`, then run `KS_DIR=/tmp/ks CI=true npx react-scripts test --watchAll=false corpus`. Without `KS_DIR` that test is skipped.
 
 ## How it Works / Repo Organization
 
