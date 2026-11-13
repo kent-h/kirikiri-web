@@ -160,6 +160,9 @@ Three.
 // the frames of one layer in one section, as [image, time] pairs
 const framesOf = (timeline, layer) => timeline[layer].map(frame => [frame.contents.image, frame.time])
 
+// the game's numbered layers are foreground layers (characters at l=0 r=1 lc=2 rc=3 c=4); "base" is the background
+const LAYER = n => 10 + n
+
 test("a background change fades sprites out with it, not from the start of the section", () => {
   const timelines = sections(`
 @fadein file=room time=500
@@ -169,7 +172,7 @@ One.
 @fadein file=street time=500
 Two.
 `)
-  expect(framesOf(timelines[1], 1)).toEqual([
+  expect(framesOf(timelines[1], LAYER(1))).toEqual([
     ["sprite", 0],
     ["sprite", 1000], // still shown when the background starts changing
     [undefined, 1500], // gone when it has finished
@@ -185,7 +188,7 @@ One.
 @image storage=b layer=1 left=0 top=0
 Two.
 `)
-  expect(framesOf(timelines[1], 1)).toEqual([
+  expect(framesOf(timelines[1], LAYER(1))).toEqual([
     ["a", 0],
     ["a", 2000],
     ["b", 2000],
@@ -212,7 +215,7 @@ One.
 @image storage=sprite layer=3 left=0 top=0
 Two.
 `)
-  expect(framesOf(timelines[1], 3)).toEqual([
+  expect(framesOf(timelines[1], LAYER(3))).toEqual([
     [undefined, 1000],
     ["sprite", 1000],
   ])
@@ -229,7 +232,7 @@ One.
 @image storage=other layer=1 left=0 top=0
 Two.
 `)
-  const frames = framesOf(timelines[1], 1)
+  const frames = framesOf(timelines[1], LAYER(1))
   // the path ends at 100 + 2 * 300, and the next image comes after that
   expect(frames[frames.length - 2]).toEqual(["sprite", 700])
   expect(frames[frames.length - 1]).toEqual(["other", 700])
@@ -300,4 +303,53 @@ Two.
     ["black", 1400],
     ["classroom", 2100],
   ])
+})
+
+
+test("an image on layer 0 goes over the background instead of replacing it", () => {
+  const timelines = sections(`
+@fadein file=classroom time=500
+One.
+@imageex storage=teacher page=fore visible=true layer=0 left=-400 top=127 opacity=0
+@move layer=0 path=(220,127,255) time=300
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "classroom", [LAYER(0)]: "teacher"})
+  const frames = timelines[1][LAYER(0)]
+  expect(frames[frames.length - 1].left).toBe(220)
+})
+
+test("a numbered layer is the same layer as the position ld puts a sprite on", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=a pos=center
+One.
+@move layer=4 path=(100,0,255) time=300
+Two.
+`)
+  const frames = timelines[1][LAYER(4)]
+  expect(frames[frames.length - 1].contents.image).toBe("a")
+  expect(frames[frames.length - 1].left).toBe(100)
+})
+
+test("moving an empty layer adds nothing", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@move layer=2 path=(0,0,255) time=300
+Two.
+`)
+  timelines.forEach(timeline => expect(imagesAtEnd(timeline)).toEqual({0: "room"}))
+})
+
+test("higher numbered layers stack above the character positions and below the superpose layer", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@image storage=effect layer=7 left=0 top=0
+@superpose storage=overlay
+@texton
+One.
+`)
+  const layers = Object.keys(imagesAtEnd(timelines[0])).map(Number)
+  expect(layers).toEqual([0, LAYER(7), 20])
 })
