@@ -461,3 +461,25 @@ Two.
 `)
   expect(imagesAtEnd(timelines[1])).toEqual({0: "room", [LAYER(0)]: "rin05c", [LAYER(1)]: "saber04a"})
 })
+
+test("visuals after the last text still play", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+Last line.
+@pg
+@ld file=rin09c pos=c time=400
+@blackout time=800
+`)
+  const last = timelines[timelines.length - 1]
+  expect(timelines.length).toBe(2)
+  expect(framesOf(last, 0).slice(-1)[0][0]).toBe("black")
+  expect(framesOf(last, LAYER(4)).map(frame => frame[0])).toContain("rin09c")
+})
+
+test("a scene ending on text keeps its sections as before", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+Only line.
+`)
+  expect(timelines.length).toBe(1)
+})

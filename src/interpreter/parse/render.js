@@ -147,12 +147,16 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   // pasttime and turnaround save the background in tmp, black out, then show "&tmp" again
   let savedBackground = renderState.savedBackground
 
+  // closes the section built so far (its text and frames) and starts the next one, once per chunk
   const generateSection = () => {
     if (isDivider) {
       return
     }
     isDivider = true
+    closeSection()
+  }
 
+  const closeSection = () => {
     const isNewSavePoint = buildingSavePoints.length !== 0
     savePoints = isNewSavePoint ? buildingSavePoints : savePoints
     buildingSavePoints = []
@@ -739,7 +743,12 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   toRender.forEach(append)
 
   if (forceSection) {
-    generateSection()
+    // at the end of the script, also close the section this chunk started, so visuals after the last text play
+    if (isDivider) {
+      closeSection()
+    } else {
+      generateSection()
+    }
   }
 
   return {
