@@ -100,6 +100,12 @@ const POSITION_NAMES = {
 }
 // the layer for a sprite position, center if it has none
 const positionLayer = pos => POSITION_LAYERS[POSITION_NAMES[pos] || "c"]
+// fg commands name a layer by its stacking index: 1000 for foreground layer 0, 2000 for layer 1…
+const indexLayer = index => layerIndex(String(Math.max(Math.round(parseInt(index, 10) / 1000) - 1, 0)))
+// the character a sprite shows: its file name up to the first digit, "凛私服" for "凛私服08a(中)"
+const character = image => (image || "").toLowerCase().replace(/\d.*$/, "")
+// entry i of a comma separated list argument (rep's storages=, poss=…), undefined when empty
+const listArg = (value, i) => (value || "").split(",")[i] || undefined
 
 // the superpose macro puts an overlay on the layer KAG calls `.superpose_layer_no` (the last foreground layer)
 // it only needs to be a number above the foreground layers scripts use (up to 7), so it is drawn on top of them
@@ -216,6 +222,39 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     if (last && last.time < time) {
       duplicateLastFrame(layer)
     }
+  }
+
+  // the picture a layer shows now; unlike lastContents, an empty layer shows nothing
+  const pictureOn = layer => (lastFrame(layer) || {contents: {}}).contents.image
+
+  // the foreground layers that show a picture now
+  const shownLayers = () => layers.reduce((shown, frames, layer) => {
+    if (layer >= FOREGROUND && layer !== SUPERPOSE_LAYER && pictureOn(layer)) {
+      shown.push(layer)
+    }
+    return shown
+  }, [])
+
+  // the foreground layer showing a picture, undefined if none does
+  const layerShowing = image => shownLayers().find(layer => pictureOn(layer) === (image || "").toLowerCase())
+
+  // fade a layer's picture out, returns whether there was one
+  const clearLayer = (layer, fadeTime) => {
+    if (layer === undefined || !pictureOn(layer)) {
+      return false
+    }
+    holdLayer(layer)
+    pushFrame(layer, {contents: {}, time: time + fadeTime})
+    return true
+  }
+
+  // cross-fade a layer to another picture, keeping its place
+  const swapPicture = (layer, image, fadeTime) => {
+    const last = lastFrame(layer)
+    holdLayer(layer)
+    const contents = Object.assign({}, last.contents, {image: image.toLowerCase(), key: !last.contents.key})
+    delete contents.naturalWidth
+    pushFrame(layer, Object.assign({}, last, {time: time + fadeTime, contents}))
   }
 
   // fade out every other layer along with the new background
@@ -395,16 +434,102 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           const targets = pos === "all" ? Object.values(POSITION_LAYERS) : [positionLayer(pos)]
           let cleared = false
           targets.forEach(layer => {
-            const last = lastFrame(layer)
-            if (last && last.contents.image) {
-              holdLayer(layer)
-              pushFrame(layer, {contents: {}, time: time + fadeTime})
-              cleared = true
-            }
+            cleared = clearLayer(layer, fadeTime) || cleared
           })
           if (cleared) {
             time += fadeTime
           }
+          break
+        }
+        // fg, chgfg, movefg, clfg and rep with lists come from the port's sprite plugin
+        case "fg": {
+          const args = token.args
+          const layer = args.layer !== undefined ? layerIndex(args.layer) : args.index ? indexLayer(args.index) : positionLayer(args.pos)
+          const fadeTime = parseInt(args.time, 10) || 0
+          holdLayer(layer)
+          pushBasicFrame(token, "bgimage/", args.storage || args.file, layer, fadeTime, true) // one script writes file=
+          time += fadeTime
+          break
+        }
+        case "chgfg": { // changes the sprite of the same character; index only says where when there is none
+          const fadeTime = parseInt(token.args.time, 10) || 0
+          ;(token.args.storage || "").split(",").filter(image => image).forEach(image => {
+            const shown = shownLayers()
+            let layer = shown.find(layer => character(pictureOn(layer)) === character(image))
+            if (layer === undefined) {
+              layer = token.args.index ? indexLayer(token.args.index) : shown.length === 1 ? shown[0] : undefined
+            }
+            if (layer !== undefined && pictureOn(layer)) {
+              swapPicture(layer, image, fadeTime)
+            } else if (layer !== undefined) {
+              holdLayer(layer)
+              pushBasicFrame(token, "bgimage/", image, layer, fadeTime, true)
+            }
+          })
+          time += fadeTime
+          break
+        }
+        case "movefg": {
+          const args = token.args
+          const layer = args.layer !== undefined ? layerIndex(args.layer) : layerShowing(args.storage)
+          const last = layer !== undefined && lastFrame(layer)
+          if (!last) {
+            break
+          }
+          const moveTime = parseInt(args.time, 10) || 0
+          holdLayer(layer)
+          duplicateLastFrame(layer, {
+            time: time + moveTime,
+            left: args.left !== undefined ? parseInt(args.left, 10) : last.left,
+            top: args.top !== undefined ? parseInt(args.top, 10) : last.top,
+            opacity: args.opacity !== undefined ? parseInt(args.opacity, 10) / 255 : last.opacity,
+            acceleration: args.accel || 0,
+          })
+          endTime = Math.max(endTime, time + moveTime)
+          break
+        }
+        case "clfg": {
+          const args = token.args
+          const fadeTime = parseInt(args.time, 10) || 0
+          const targets = args.index ? [indexLayer(args.index)] : args.pos ? [positionLayer(args.pos)] : args.storage ? [layerShowing(args.storage)] : shownLayers()
+          let cleared = false
+          targets.forEach(layer => {
+            cleared = clearLayer(layer, fadeTime) || cleared
+          })
+          if (cleared) {
+            time += fadeTime
+          }
+          break
+        }
+        case "rep": { // the list form: shows exactly the listed sprites, then the background
+          const args = token.args
+          const fadeTime = parseInt(args.time, 10) || 0
+          const flag = value => value === "1" || value === "true" ? "true" : undefined
+          const placed = []
+          ;(args.storages || "").split(",").forEach((image, i) => {
+            if (!image) {
+              return
+            }
+            const index = listArg(args.indexes, i), pos = listArg(args.poss, i)
+            const layer = index ? indexLayer(index) : pos ? positionLayer(pos) : layerIndex(String(i))
+            const sprite = {args: {
+              pos,
+              left: listArg(args.lefts, i),
+              top: listArg(args.tops, i),
+              opacity: listArg(args.opacities, i),
+              fliplr: flag(listArg(args.fliplrs, i)),
+              flipud: flag(listArg(args.flipuds, i)),
+            }}
+            holdLayer(layer)
+            pushBasicFrame(sprite, "bgimage/", image, layer, fadeTime, true)
+            placed.push(layer)
+          })
+          shownLayers().filter(layer => !placed.includes(layer)).forEach(layer => clearLayer(layer, fadeTime))
+          if (args.bg) {
+            duplicateLastFrame(0)
+            pushBasicFrame({args: {}}, "bgimage/", args.bg, 0, fadeTime, true)
+          }
+          time += fadeTime
           break
         }
         case "layopt":
@@ -456,11 +581,13 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           time += (token.args.time ? parseInt(token.args.time, 10) : 0)
           break
         }
-        case "move":
-          if (token.args.layer && token.args.layer.startsWith("&")) {
+        case "move": {
+          // move names its layer; some of the port's scripts name the picture to move instead
+          const layer = token.args.layer !== undefined ? token.args.layer : layerShowing(token.args.storage)
+          if (layer === undefined || (typeof layer === "string" && layer.startsWith("&"))) {
             break
           }
-          duplicateLastFrame(token.args.layer)
+          duplicateLastFrame(layer)
 
           let nodes = []
           const pathRegex = /\((-?\d+),(-?\d+),(-?\d+)\)/y // read as many as we have
@@ -471,7 +598,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
 
           let moveTime = parseInt(token.args.time, 10) || 0
           nodes.forEach((node, nodeID) => {
-            duplicateLastFrame(token.args.layer, {
+            duplicateLastFrame(layer, {
               time: time + moveTime * (1 + nodeID),
               left: parseInt(node[1], 10),
               top: parseInt(node[2], 10),
@@ -484,6 +611,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           const moveEnd = time + moveTime * nodes.length
           endTime = endTime > moveEnd ? endTime : moveEnd
           break
+        }
         case "wm":
           time = time > endTime ? time : endTime
           break

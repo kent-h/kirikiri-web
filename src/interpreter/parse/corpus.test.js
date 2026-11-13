@@ -70,6 +70,7 @@ const shownBy = token => {
     case "ld_notrans":
       return [args.file]
     case "fg":
+      return list(args.storage || args.file)
     case "chgfg":
       return list(args.storage)
     case "ldall":

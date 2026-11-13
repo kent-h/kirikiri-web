@@ -68,6 +68,11 @@ const macros = `
 @macro name=blackout
 @fadein * file=black
 @endmacro
+
+@macro name=rep
+@cl_notrans pos=all
+@bg file=%bg time=%time noclear=true
+@endmacro
 @return
 `
 
@@ -352,4 +357,107 @@ One.
 `)
   const layers = Object.keys(imagesAtEnd(timelines[0])).map(Number)
   expect(layers).toEqual([0, LAYER(7), 20])
+})
+
+// the image and left position a layer ends a section on
+const endOf = (timeline, layer) => {
+  const frames = timeline[layer] || []
+  const last = frames[frames.length - 1] || {contents: {}}
+  return [last.contents.image, last.left]
+}
+
+test("fg shows a picture on the layer its index names, chgfg swaps it in place and clfg clears it", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@fg index=5000 pos=center storage=a time=400
+Two.
+@chgfg index=5000 storage=b time=400
+Three.
+@clfg index=5000 storage=b time=400
+Four.
+`)
+  expect(endOf(timelines[1], LAYER(4))).toEqual(["a", 400])
+  expect(endOf(timelines[2], LAYER(4))).toEqual(["b", 400])
+  expect(endOf(timelines[3], LAYER(4))[0]).toBeUndefined()
+})
+
+test("fg without a position goes where left and top say", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@fg left=0 index=1000 top=-500 storage=bar
+Two.
+`)
+  const frames = timelines[1][LAYER(0)]
+  expect(frames[frames.length - 1]).toMatchObject({left: 0, top: -500, contents: {image: "bar"}})
+})
+
+test("chgfg without an index swaps the picture of the same character", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=rin01a pos=left
+@ld_notrans file=saber02b pos=center
+One.
+@chgfg time=300 storage=saber05c
+Two.
+@chgfg time=300 storage=rin03d,saber01a
+Three.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room", [LAYER(0)]: "rin01a", [LAYER(4)]: "saber05c"})
+  expect(imagesAtEnd(timelines[2])).toEqual({0: "room", [LAYER(0)]: "rin03d", [LAYER(4)]: "saber01a"})
+})
+
+test("movefg and move with a storage move the layer showing that picture", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@fg index=3000 left=0 top=0 storage=circle
+@fg index=2000 left=0 top=0 storage=glow
+One.
+@movefg storage=circle left=-120 top=-132 opacity=255 time=600 accel=0
+@move storage=glow path=(10,20,128) time=200
+@wm
+Two.
+`)
+  expect(endOf(timelines[1], LAYER(2))).toEqual(["circle", -120])
+  const glow = timelines[1][LAYER(1)]
+  expect(glow[glow.length - 1]).toMatchObject({left: 10, top: 20, opacity: 128 / 255})
+  expect(imagesAtEnd(timelines[1])[0]).toBe("room")
+})
+
+test("clfg with no arguments clears every foreground layer but keeps the background", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=a pos=left
+@fg index=5000 pos=center storage=b
+One.
+@clfg
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room"})
+})
+
+test("rep with lists restores exactly the pictures it lists, then the background", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=old pos=left
+One.
+@rep fliplr=0 fliplrs=,1 storages=rin01a,blood time=400 flipud=0 opacities=,56 lefts=,6 tops=,4 poss=c, bg=street indexes=1000,2000
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "street", [LAYER(0)]: "rin01a", [LAYER(1)]: "blood"})
+  const blood = timelines[1][LAYER(1)]
+  expect(blood[blood.length - 1]).toMatchObject({left: 6, top: 4, opacity: 56 / 255})
+  expect(blood[blood.length - 1].contents.transform).toContain("scaleX(-1)")
+})
+
+test("chgfg changes the same character even when its index names another slot", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@rep storages=rin09c,saber04a time=400 poss=,lc bg=room indexes=1000,2000
+One.
+@chgfg index=2000 storage=rin05c time=400
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room", [LAYER(0)]: "rin05c", [LAYER(1)]: "saber04a"})
 })

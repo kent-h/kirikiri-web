@@ -2,6 +2,9 @@ import Tokenize from "./tokenize"
 
 
 const ignoreMacros = {cl_notrans: true}
+// rep with lists (storages=, poss=…) comes from the port's sprite plugin; the game's rep macro doesn't know
+// it, so like cl_notrans it goes to the renderer as it is
+const isListRep = tag => tag.command === "rep" && tag.args.storages !== undefined
 
 // macros test and pick their arguments ("mp") with TJS expressions, which are not run
 // these handle the simple forms the game's macros use: comparisons of mp values joined by && and ||
@@ -73,7 +76,7 @@ const InterpretCommand = (tokens, gameState, tag) => {
   }
 
   if (tag.command in gameState.macros) { // if a macro, run each command in the macro
-    if (!(tag.command in ignoreMacros)) {
+    if (!(tag.command in ignoreMacros) && !isListRep(tag)) {
       tokens.push(tag)
       const macro = gameState.macros[tag.command]
       return macro.some(macroCommand => {
