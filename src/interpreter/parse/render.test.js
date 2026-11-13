@@ -15,6 +15,59 @@ const macros = `
 @layopt layer=&(.superpose_layer_no) page=back visible=false
 @endif
 @endmacro
+
+@macro name=ld_notrans
+@eval cond="mp.pos==''" exp="mp.pos='center'"
+@imageEx * storage=%file page=back visible=true
+@endmacro
+
+@macro name=ld_auto
+@ld_notrans *
+@transex *
+@wt canskip=%canskip|false
+@endmacro
+
+@macro name=ld
+@textoff cond="sf.notextonoff==0&&f.notextonoff==0"
+@ld_auto *
+@texton cond="sf.notextonoff==0&&f.notextonoff==0"
+@endmacro
+
+@macro name=cl_auto
+@cl_notrans *
+@transex *
+@wt canskip=%canskip|false
+@endmacro
+
+@macro name=cl
+@cl_auto *
+@endmacro
+
+@macro name=ldallT
+@backlay
+@cl_notrans pos=all cond="mp.erase!='false'"
+@ld_notrans file="&(mp.l!=void?mp.l:mp.left)" pos=l cond="mp.l!=void||mp.left!=void" index=%il|1000
+@ld_notrans file="&(mp.r!=void?mp.r:mp.right)" pos=r cond="mp.r!=void||mp.right!=void" index=%ir|2000
+@ld_notrans file="&(mp.c!=void?mp.c:mp.center)" pos=c cond="mp.c!=void||mp.center!=void" index=%ic|5000
+@transex *
+@endmacro
+
+@macro name=ldall
+@ldallT *
+@endmacro
+
+@macro name=turnaround
+@textoff
+@eval exp="global.tmp=f.layer_image['base']"
+@blackout time=700 rule=シャッター下から vague=128
+@wait time=700
+@bg cond="mp.texton!='false'" file="&tmp" time=700 rule=シャッター下から vague=128
+@fadein cond="mp.texton=='false'" file="&tmp" time=700 rule=シャッター下から vague=128
+@endmacro
+
+@macro name=blackout
+@fadein * file=black
+@endmacro
 @return
 `
 
@@ -180,4 +233,71 @@ Two.
   // the path ends at 100 + 2 * 300, and the next image comes after that
   expect(frames[frames.length - 2]).toEqual(["sprite", 700])
   expect(frames[frames.length - 1]).toEqual(["other", 700])
+})
+
+
+// the images a section shows at its end, by layer
+const imagesAtEnd = timeline => timeline.reduce((images, frames, layer) => {
+  const image = frames && frames[frames.length - 1].contents.image
+  if (image) {
+    images[layer] = image
+  }
+  return images
+}, {})
+
+test("a background change with noclear keeps the sprites", () => {
+  const timelines = sections(`
+@fadein file=hall time=500
+One.
+@ld_notrans file=teacher pos=c index=5000
+@fadein file=stairs time=800 noclear=1
+Oh, Tohsaka-san.
+@say storage=v1
+Good morning.
+`)
+  expect(Object.values(imagesAtEnd(timelines[1]))).toEqual(["stairs", "teacher"])
+  expect(Object.values(imagesAtEnd(timelines[2]))).toEqual(["stairs", "teacher"])
+})
+
+test("ld cross-fades the sprite over its time, and cl fades it out", () => {
+  const timelines = sections(`
+@fadein file=stairs time=500
+@ld_notrans file=a pos=c
+One.
+@ld pos=c file=b time=300 method=crossfade
+Two.
+@cl pos=c time=400
+Three.
+`)
+  const layer = timelines[1].findIndex(frames => frames && frames.some(frame => frame.contents.image === "b"))
+  expect(framesOf(timelines[1], layer)).toEqual([["a", 0], ["b", 300]])
+  expect(framesOf(timelines[2], layer)).toEqual([["b", 0], [undefined, 400]])
+})
+
+test("ldall shows the sprites it names, at their positions", () => {
+  const timelines = sections(`
+@fadein file=stairs time=500
+@ld_notrans file=a pos=c
+One.
+@ldall l=left_sprite c=center_sprite time=400
+Two.
+`)
+  const images = Object.values(imagesAtEnd(timelines[1]))
+  expect(images).toEqual(["stairs", "left_sprite", "center_sprite"])
+})
+
+test("turnaround blacks out and brings the same background back", () => {
+  const timelines = sections(`
+@fadein file=classroom time=500
+One.
+@turnaround
+Two.
+`)
+  expect(framesOf(timelines[1], 0)).toEqual([
+    ["classroom", 0],
+    ["classroom", 0],
+    ["black", 700],
+    ["black", 1400],
+    ["classroom", 2100],
+  ])
 })

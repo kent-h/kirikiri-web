@@ -79,9 +79,22 @@ const Render = (tokens, renderState, onPageReady, debug) => {
 
 const lineRegex = /^(line)(\d+)$/
 
+// character sprites placed by position (ld, ldall) get a layer per position
+// KAG orders them by index (l 1000, r 2000, lc 3000, rc 4000, c 5000), so the layers go in that order
+const POSITION_LAYERS = {l: 10, r: 11, lc: 12, rc: 13, c: 14}
+const POSITION_NAMES = {
+  l: "l", left: "l",
+  lc: "lc", leftcenter: "lc", left_center: "lc",
+  c: "c", center: "c",
+  rc: "rc", rightcenter: "rc", right_center: "rc",
+  r: "r", right: "r",
+}
+// the layer for a sprite position, center if it has none
+const positionLayer = pos => POSITION_LAYERS[POSITION_NAMES[pos] || "c"]
+
 // the superpose macro puts an overlay on the layer KAG calls `.superpose_layer_no` (the last character layer)
 // it only needs to be a number above the character layers, so it is drawn on top of them
-const SUPERPOSE_LAYER = 9
+const SUPERPOSE_LAYER = 20
 // texton is a plugin, so its transition time is not in the scripts
 const TEXTON_FADE_TIME = 300
 
@@ -115,6 +128,9 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
 
   // superpose and superpose_off only change the back page, so they take effect at the next transition
   let pendingSuperpose = renderState.pendingSuperpose
+
+  // pasttime and turnaround save the background in tmp, black out, then show "&tmp" again
+  let savedBackground = renderState.savedBackground
 
   const generateSection = () => {
     if (isDivider) {
@@ -351,8 +367,30 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           if (layer === SUPERPOSE_LAYER) {
             pendingSuperpose = {token}
           } else if (layer !== null) {
-            holdLayer(layer || 10)
-            pushBasicFrame(token, "bgimage/", token.args.storage, layer || 10, 0, true)
+            const target = layer || positionLayer(token.args.pos)
+            // ld passes its transition time down, so the sprite cross-fades and the script waits for it
+            const fadeTime = parseInt(token.args.time, 10) || 0
+            holdLayer(target)
+            pushBasicFrame(token, "bgimage/", token.args.storage, target, fadeTime, true)
+            time += fadeTime
+          }
+          break
+        }
+        case "cl_notrans": { // cl and cl_auto pass through this, removing the sprite at a position or all of them
+          const pos = token.args.pos || "all"
+          const fadeTime = parseInt(token.args.time, 10) || 0
+          const targets = pos === "all" ? Object.values(POSITION_LAYERS) : [positionLayer(pos)]
+          let cleared = false
+          targets.forEach(layer => {
+            const last = lastFrame(layer)
+            if (last && last.contents.image) {
+              holdLayer(layer)
+              pushFrame(layer, {contents: {}, time: time + fadeTime})
+              cleared = true
+            }
+          })
+          if (cleared) {
+            time += fadeTime
           }
           break
         }
@@ -379,19 +417,32 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           holdLayer(token.args.layer)
           pushBasicFrame(token, "bgimage/", token.args.storage, token.args.layer, 0, true)
           break
+        case "eval":
+          if (/tmp\s*=\s*f\.layer_image\['base'\]/.test(token.args.exp || "")) {
+            savedBackground = lastContents(0).image
+          }
+          break
         case "fadein":
-        case "bg":
+        case "bg": {
           if (token.args.layer && token.args.layer.startsWith("&")) {
             break
           }
+          let file = token.args.file || token.args.storage
+          if (file === "&tmp") {
+            file = savedBackground || "black"
+          }
           duplicateLastFrame(token.args.layer)
-          pushBasicFrame(token, "bgimage/", token.args.file || token.args.storage, token.args.layer, token.args.time, true)
-          clearOtherLayers(token.args.layer, token.args.time)
+          pushBasicFrame(token, "bgimage/", file, token.args.layer, token.args.time, true)
+          // noclear keeps the sprites up through the background change
+          if (!token.args.noclear || token.args.noclear === "0" || token.args.noclear === "false") {
+            clearOtherLayers(token.args.layer, token.args.time)
+          }
           // after the clear, so a pending superpose is shown over the new background
           commitSuperpose(parseInt(token.args.time, 10))
 
           time += (token.args.time ? parseInt(token.args.time, 10) : 0)
           break
+        }
         case "move":
           if (token.args.layer && token.args.layer.startsWith("&")) {
             break
@@ -563,6 +614,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     seTimeline: seTimeline,
     ruby: ruby,
     pendingSuperpose: pendingSuperpose,
+    savedBackground: savedBackground,
   }
 }
 
