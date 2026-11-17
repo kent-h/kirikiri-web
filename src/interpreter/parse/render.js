@@ -242,6 +242,48 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
   // the foreground layer showing a picture, undefined if none does
   const layerShowing = image => shownLayers().find(layer => pictureOn(layer) === (image || "").toLowerCase())
 
+  // the layer fg draws on: the one it names with layer=, else index=, else pos=
+  const fgLayer = args => {
+    if (args.layer !== undefined) {
+      return layerIndex(args.layer)
+    }
+    if (args.index) {
+      return indexLayer(args.index)
+    }
+    return positionLayer(args.pos)
+  }
+
+  // the layer chgfg changes to show a picture: the one showing the same character, else the one index= names,
+  // else the only sprite on screen; undefined if none of those fit
+  const chgfgLayer = (image, index) => {
+    const shown = shownLayers()
+    const sameCharacter = shown.find(layer => character(pictureOn(layer)) === character(image))
+    if (sameCharacter !== undefined) {
+      return sameCharacter
+    }
+    if (index) {
+      return indexLayer(index)
+    }
+    if (shown.length === 1) {
+      return shown[0]
+    }
+    return undefined
+  }
+
+  // the layers clfg clears: the one it names with index=, pos= or storage=, else every shown sprite
+  const clfgLayers = args => {
+    if (args.index) {
+      return [indexLayer(args.index)]
+    }
+    if (args.pos) {
+      return [positionLayer(args.pos)]
+    }
+    if (args.storage) {
+      return [layerShowing(args.storage)]
+    }
+    return shownLayers()
+  }
+
   // fade a layer's picture out, returns whether there was one
   const clearLayer = (layer, fadeTime) => {
     if (layer === undefined || !pictureOn(layer)) {
@@ -446,7 +488,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
         // fg, chgfg, movefg, clfg and rep with lists come from the port's sprite plugin
         case "fg": {
           const args = token.args
-          const layer = args.layer !== undefined ? layerIndex(args.layer) : args.index ? indexLayer(args.index) : positionLayer(args.pos)
+          const layer = fgLayer(args)
           const fadeTime = parseInt(args.time, 10) || 0
           holdLayer(layer)
           pushBasicFrame(token, "bgimage/", args.storage || args.file, layer, fadeTime, true) // one script writes file=
@@ -455,15 +497,15 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
         }
         case "chgfg": { // changes the sprite of the same character; index only says where when there is none
           const fadeTime = parseInt(token.args.time, 10) || 0
-          ;(token.args.storage || "").split(",").filter(image => image).forEach(image => {
-            const shown = shownLayers()
-            let layer = shown.find(layer => character(pictureOn(layer)) === character(image))
+          const images = (token.args.storage || "").split(",").filter(image => image)
+          images.forEach(image => {
+            const layer = chgfgLayer(image, token.args.index)
             if (layer === undefined) {
-              layer = token.args.index ? indexLayer(token.args.index) : shown.length === 1 ? shown[0] : undefined
+              return
             }
-            if (layer !== undefined && pictureOn(layer)) {
+            if (pictureOn(layer)) {
               swapPicture(layer, image, fadeTime)
-            } else if (layer !== undefined) {
+            } else {
               holdLayer(layer)
               pushBasicFrame(token, "bgimage/", image, layer, fadeTime, true)
             }
@@ -493,7 +535,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
         case "clfg": {
           const args = token.args
           const fadeTime = parseInt(args.time, 10) || 0
-          clearLayers(args.index ? [indexLayer(args.index)] : args.pos ? [positionLayer(args.pos)] : args.storage ? [layerShowing(args.storage)] : shownLayers(), fadeTime)
+          clearLayers(clfgLayers(args), fadeTime)
           break
         }
         case "rep": { // the list form: shows exactly the listed sprites, then the background
@@ -501,7 +543,8 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
           const fadeTime = parseInt(args.time, 10) || 0
           const flag = value => value === "1" || value === "true" ? "true" : undefined
           const placed = []
-          ;(args.storages || "").split(",").forEach((image, i) => {
+          const images = (args.storages || "").split(",")
+          images.forEach((image, i) => {
             if (!image) {
               return
             }
