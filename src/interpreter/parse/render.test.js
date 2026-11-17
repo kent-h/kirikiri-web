@@ -1,0 +1,485 @@
+import Render from "./render"
+import Tokenize from "./tokenize"
+
+// the superpose macros as defined in the game's マクロ.ks
+const macros = `
+@macro name=superpose
+@textoff
+@imageex * layer=&.superpose_layer_no page=back visible=true opacity=%opacity|255
+@eval exp="f.superpose_on=true"
+@endmacro
+
+@macro name=superpose_off
+@if exp="f.superpose_on"
+@textoff
+@layopt layer=&(.superpose_layer_no) page=back visible=false
+@endif
+@endmacro
+
+@macro name=ld_notrans
+@eval cond="mp.pos==''" exp="mp.pos='center'"
+@imageEx * storage=%file page=back visible=true
+@endmacro
+
+@macro name=ld_auto
+@ld_notrans *
+@transex *
+@wt canskip=%canskip|false
+@endmacro
+
+@macro name=ld
+@textoff cond="sf.notextonoff==0&&f.notextonoff==0"
+@ld_auto *
+@texton cond="sf.notextonoff==0&&f.notextonoff==0"
+@endmacro
+
+@macro name=cl_auto
+@cl_notrans *
+@transex *
+@wt canskip=%canskip|false
+@endmacro
+
+@macro name=cl
+@cl_auto *
+@endmacro
+
+@macro name=ldallT
+@backlay
+@cl_notrans pos=all cond="mp.erase!='false'"
+@ld_notrans file="&(mp.l!=void?mp.l:mp.left)" pos=l cond="mp.l!=void||mp.left!=void" index=%il|1000
+@ld_notrans file="&(mp.r!=void?mp.r:mp.right)" pos=r cond="mp.r!=void||mp.right!=void" index=%ir|2000
+@ld_notrans file="&(mp.c!=void?mp.c:mp.center)" pos=c cond="mp.c!=void||mp.center!=void" index=%ic|5000
+@transex *
+@endmacro
+
+@macro name=ldall
+@ldallT *
+@endmacro
+
+@macro name=turnaround
+@textoff
+@eval exp="global.tmp=f.layer_image['base']"
+@blackout time=700 rule=シャッター下から vague=128
+@wait time=700
+@bg cond="mp.texton!='false'" file="&tmp" time=700 rule=シャッター下から vague=128
+@fadein cond="mp.texton=='false'" file="&tmp" time=700 rule=シャッター下から vague=128
+@endmacro
+
+@macro name=blackout
+@fadein * file=black
+@endmacro
+
+@macro name=rep
+@cl_notrans pos=all
+@bg file=%bg time=%time noclear=true
+@endmacro
+@return
+`
+
+// returns the animation timeline of each scroll section, in order
+const sections = script => {
+  const tokens = []
+  Tokenize(tokens, {
+    macros: {},
+    stackFrame: {storage: "macros", file: macros, fileIndex: 0, returnFrame: {storage: "test", file: script, fileIndex: 0}},
+  })
+  return Render(tokens, undefined, () => {}, 0)
+    .map(fragment => fragment.props.children)
+    .filter(child => child && child.props && child.props.timeline)
+    .map(child => child.props.timeline)
+}
+
+// the layers that hold an image at the end of a section
+const shownAtEnd = timeline => timeline
+  .map(frames => frames[frames.length - 1].contents.image)
+  .filter(image => image)
+
+// the prologue day 1 pendant scene, shortened
+const pendantScene = `
+@fadein file=room time=1000
+@superpose storage=pendant opacity=168
+@texton
+Finishing breakfast, I grab my bag.
+@say storage=v1
+Oh yeah. I should bring the pendant.
+@pg
+@say storage=v2
+This thing is a hundred years old after all.
+@textoff
+@redraw method=crossfade vague=64 time=600
+@superpose_off
+@texton
+No, that's an understatement.
+@say storage=v3
+I put the pendant into my pocket.
+`
+
+test("a superposed image stays up until superpose_off", () => {
+  const timelines = sections(pendantScene)
+  expect(timelines.map(shownAtEnd)).toEqual([
+    ["room", "pendant"],
+    ["room", "pendant"],
+    ["room", "pendant"],
+    ["room"],
+    ["room"],
+  ])
+})
+
+test("a superposed image appears after the background transition, at its opacity", () => {
+  const frames = sections(pendantScene)[0].find(frames => frames && frames.some(frame => frame.contents.image === "pendant"))
+  // nothing visible before the background has faded in
+  frames.filter(frame => frame.time < 1000).forEach(frame => {
+    expect(!frame.contents.image || frame.opacity === 0).toBe(true)
+  })
+  expect(frames[frames.length - 1].opacity).toBeCloseTo(168 / 255)
+})
+
+test("superpose_off fades the image out after the redraw", () => {
+  const frames = sections(pendantScene)[3].find(frames => frames && frames.some(frame => frame.contents.image === "pendant"))
+  const last = frames[frames.length - 1]
+  const beforeLast = frames[frames.length - 2]
+  expect(last.contents.image).toBeUndefined()
+  expect(beforeLast.contents.image).toBe("pendant")
+  expect(beforeLast.time).toBe(600) // still fully shown when the redraw has finished
+  expect(last.time).toBeGreaterThan(beforeLast.time) // then fades out rather than vanishing
+})
+
+test("a background change clears a superposed image", () => {
+  const timelines = sections(`
+@fadein file=room time=1000
+@superpose storage=pendant opacity=168
+@texton
+One.
+@fadein file=street time=1000
+Two.
+@say storage=v1
+Three.
+`)
+  expect(timelines.map(shownAtEnd)).toEqual([
+    ["room", "pendant"],
+    ["street"],
+    ["street"],
+  ])
+})
+
+// the frames of one layer in one section, as [image, time] pairs
+const framesOf = (timeline, layer) => timeline[layer].map(frame => [frame.contents.image, frame.time])
+
+// the game's numbered layers are foreground layers (characters at l=0 r=1 lc=2 rc=3 c=4); "base" is the background
+const LAYER = n => 10 + n
+
+test("a background change fades sprites out with it, not from the start of the section", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@image storage=sprite layer=1 left=0 top=0
+One.
+@wait time=1000
+@fadein file=street time=500
+Two.
+`)
+  expect(framesOf(timelines[1], LAYER(1))).toEqual([
+    ["sprite", 0],
+    ["sprite", 1000], // still shown when the background starts changing
+    [undefined, 1500], // gone when it has finished
+  ])
+})
+
+test("swapping a sprite after a wait swaps it then, not from the start of the section", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@image storage=a layer=1 left=0 top=0
+One.
+@wait time=2000
+@image storage=b layer=1 left=0 top=0
+Two.
+`)
+  expect(framesOf(timelines[1], LAYER(1))).toEqual([
+    ["a", 0],
+    ["a", 2000],
+    ["b", 2000],
+  ])
+})
+
+test("a dash on a layer starts when the dash does", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@wait time=1000
+@dashcombot storage=flash cx=c cy=c imag=1 mag=2 time=200
+Two.
+`)
+  const frames = framesOf(timelines[1], 0)
+  expect(frames.slice(0, 3)).toEqual([["room", 0], ["room", 1000], ["flash", 1000]])
+})
+
+test("a layer that first appears partway through a section shows nothing until then", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@wait time=1000
+@image storage=sprite layer=3 left=0 top=0
+Two.
+`)
+  expect(framesOf(timelines[1], LAYER(3))).toEqual([
+    [undefined, 1000],
+    ["sprite", 1000],
+  ])
+})
+
+test("wm waits for every node of a move path", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@image storage=sprite layer=1 left=0 top=0
+One.
+@wait time=100
+@move layer=1 path=(10,0,255)(20,0,255) time=300
+@wm
+@image storage=other layer=1 left=0 top=0
+Two.
+`)
+  const frames = framesOf(timelines[1], LAYER(1))
+  // the path ends at 100 + 2 * 300, and the next image comes after that
+  expect(frames[frames.length - 2]).toEqual(["sprite", 700])
+  expect(frames[frames.length - 1]).toEqual(["other", 700])
+})
+
+
+// the images a section shows at its end, by layer
+const imagesAtEnd = timeline => timeline.reduce((images, frames, layer) => {
+  const image = frames && frames[frames.length - 1].contents.image
+  if (image) {
+    images[layer] = image
+  }
+  return images
+}, {})
+
+test("a background change with noclear keeps the sprites", () => {
+  const timelines = sections(`
+@fadein file=hall time=500
+One.
+@ld_notrans file=teacher pos=c index=5000
+@fadein file=stairs time=800 noclear=1
+Oh, Tohsaka-san.
+@say storage=v1
+Good morning.
+`)
+  expect(Object.values(imagesAtEnd(timelines[1]))).toEqual(["stairs", "teacher"])
+  expect(Object.values(imagesAtEnd(timelines[2]))).toEqual(["stairs", "teacher"])
+})
+
+test("ld cross-fades the sprite over its time, and cl fades it out", () => {
+  const timelines = sections(`
+@fadein file=stairs time=500
+@ld_notrans file=a pos=c
+One.
+@ld pos=c file=b time=300 method=crossfade
+Two.
+@cl pos=c time=400
+Three.
+`)
+  const layer = timelines[1].findIndex(frames => frames && frames.some(frame => frame.contents.image === "b"))
+  expect(framesOf(timelines[1], layer)).toEqual([["a", 0], ["b", 300]])
+  expect(framesOf(timelines[2], layer)).toEqual([["b", 0], [undefined, 400]])
+})
+
+test("ldall shows the sprites it names, at their positions", () => {
+  const timelines = sections(`
+@fadein file=stairs time=500
+@ld_notrans file=a pos=c
+One.
+@ldall l=left_sprite c=center_sprite time=400
+Two.
+`)
+  const images = Object.values(imagesAtEnd(timelines[1]))
+  expect(images).toEqual(["stairs", "left_sprite", "center_sprite"])
+})
+
+test("turnaround blacks out and brings the same background back", () => {
+  const timelines = sections(`
+@fadein file=classroom time=500
+One.
+@turnaround
+Two.
+`)
+  expect(framesOf(timelines[1], 0)).toEqual([
+    ["classroom", 0],
+    ["classroom", 0],
+    ["black", 700],
+    ["black", 1400],
+    ["classroom", 2100],
+  ])
+})
+
+
+test("an image on layer 0 goes over the background instead of replacing it", () => {
+  const timelines = sections(`
+@fadein file=classroom time=500
+One.
+@imageex storage=teacher page=fore visible=true layer=0 left=-400 top=127 opacity=0
+@move layer=0 path=(220,127,255) time=300
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "classroom", [LAYER(0)]: "teacher"})
+  const frames = timelines[1][LAYER(0)]
+  expect(frames[frames.length - 1].left).toBe(220)
+})
+
+test("a numbered layer is the same layer as the position ld puts a sprite on", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=a pos=center
+One.
+@move layer=4 path=(100,0,255) time=300
+Two.
+`)
+  const frames = timelines[1][LAYER(4)]
+  expect(frames[frames.length - 1].contents.image).toBe("a")
+  expect(frames[frames.length - 1].left).toBe(100)
+})
+
+test("moving an empty layer adds nothing", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@move layer=2 path=(0,0,255) time=300
+Two.
+`)
+  timelines.forEach(timeline => expect(imagesAtEnd(timeline)).toEqual({0: "room"}))
+})
+
+test("higher numbered layers stack above the character positions and below the superpose layer", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@image storage=effect layer=7 left=0 top=0
+@superpose storage=overlay
+@texton
+One.
+`)
+  const layers = Object.keys(imagesAtEnd(timelines[0])).map(Number)
+  expect(layers).toEqual([0, LAYER(7), 20])
+})
+
+// the image and left position a layer ends a section on
+const endOf = (timeline, layer) => {
+  const frames = timeline[layer] || []
+  const last = frames[frames.length - 1] || {contents: {}}
+  return [last.contents.image, last.left]
+}
+
+test("fg shows a picture on the layer its index names, chgfg swaps it in place and clfg clears it", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@fg index=5000 pos=center storage=a time=400
+Two.
+@chgfg index=5000 storage=b time=400
+Three.
+@clfg index=5000 storage=b time=400
+Four.
+`)
+  expect(endOf(timelines[1], LAYER(4))).toEqual(["a", 400])
+  expect(endOf(timelines[2], LAYER(4))).toEqual(["b", 400])
+  expect(endOf(timelines[3], LAYER(4))[0]).toBeUndefined()
+})
+
+test("fg without a position goes where left and top say", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+One.
+@fg left=0 index=1000 top=-500 storage=bar
+Two.
+`)
+  const frames = timelines[1][LAYER(0)]
+  expect(frames[frames.length - 1]).toMatchObject({left: 0, top: -500, contents: {image: "bar"}})
+})
+
+test("chgfg without an index swaps the picture of the same character", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=rin01a pos=left
+@ld_notrans file=saber02b pos=center
+One.
+@chgfg time=300 storage=saber05c
+Two.
+@chgfg time=300 storage=rin03d,saber01a
+Three.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room", [LAYER(0)]: "rin01a", [LAYER(4)]: "saber05c"})
+  expect(imagesAtEnd(timelines[2])).toEqual({0: "room", [LAYER(0)]: "rin03d", [LAYER(4)]: "saber01a"})
+})
+
+test("movefg and move with a storage move the layer showing that picture", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@fg index=3000 left=0 top=0 storage=circle
+@fg index=2000 left=0 top=0 storage=glow
+One.
+@movefg storage=circle left=-120 top=-132 opacity=255 time=600 accel=0
+@move storage=glow path=(10,20,128) time=200
+@wm
+Two.
+`)
+  expect(endOf(timelines[1], LAYER(2))).toEqual(["circle", -120])
+  const glow = timelines[1][LAYER(1)]
+  expect(glow[glow.length - 1]).toMatchObject({left: 10, top: 20, opacity: 128 / 255})
+  expect(imagesAtEnd(timelines[1])[0]).toBe("room")
+})
+
+test("clfg with no arguments clears every foreground layer but keeps the background", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=a pos=left
+@fg index=5000 pos=center storage=b
+One.
+@clfg
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room"})
+})
+
+test("rep with lists restores exactly the pictures it lists, then the background", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@ld_notrans file=old pos=left
+One.
+@rep fliplr=0 fliplrs=,1 storages=rin01a,blood time=400 flipud=0 opacities=,56 lefts=,6 tops=,4 poss=c, bg=street indexes=1000,2000
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "street", [LAYER(0)]: "rin01a", [LAYER(1)]: "blood"})
+  const blood = timelines[1][LAYER(1)]
+  expect(blood[blood.length - 1]).toMatchObject({left: 6, top: 4, opacity: 56 / 255})
+  expect(blood[blood.length - 1].contents.transform).toContain("scaleX(-1)")
+})
+
+test("chgfg changes the same character even when its index names another slot", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+@rep storages=rin09c,saber04a time=400 poss=,lc bg=room indexes=1000,2000
+One.
+@chgfg index=2000 storage=rin05c time=400
+Two.
+`)
+  expect(imagesAtEnd(timelines[1])).toEqual({0: "room", [LAYER(0)]: "rin05c", [LAYER(1)]: "saber04a"})
+})
+
+test("visuals after the last text still play", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+Last line.
+@pg
+@ld file=rin09c pos=c time=400
+@blackout time=800
+`)
+  const last = timelines[timelines.length - 1]
+  expect(timelines.length).toBe(2)
+  expect(framesOf(last, 0).slice(-1)[0][0]).toBe("black")
+  expect(framesOf(last, LAYER(4)).map(frame => frame[0])).toContain("rin09c")
+})
+
+test("a scene ending on text keeps its sections as before", () => {
+  const timelines = sections(`
+@fadein file=room time=500
+Only line.
+`)
+  expect(timelines.length).toBe(1)
+})

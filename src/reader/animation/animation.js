@@ -37,7 +37,10 @@ class Animation extends Component {
             const img = new Image()
             promises.push(new Promise(resolve => {
               img.onload = () => resolve(true)
-              img.onerror = () => resolve(true)
+              img.onerror = () => {
+                console.warn("failed to preload image " + img.src)
+                resolve(true)
+              }
             }))
             img.src = LocateImage(name, this.props.options.lang, this.props.options.mature, this.props.options.h, this.props.options.hArtist)
             images[name] = img
@@ -118,7 +121,8 @@ class Animation extends Component {
       Object.keys(this.props.animation.timeline || []).forEach(layerID => {
         const layer = this.props.animation.timeline[layerID]
         layer.forEach(frame => {
-          if (frame.contents.image) {
+          // a failed image has no width, the layer takes it from the image if it loads later
+          if (frame.contents.image && neededImg[frame.contents.image].naturalWidth) {
             frame.contents.naturalWidth = neededImg[frame.contents.image].naturalWidth / 8
           }
         })
