@@ -252,6 +252,14 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     return true
   }
 
+  // fade out the pictures on these layers, and wait for that if there were any
+  const clearLayers = (targets, fadeTime) => {
+    const cleared = targets.filter(layer => clearLayer(layer, fadeTime))
+    if (cleared.length) {
+      time += fadeTime
+    }
+  }
+
   // cross-fade a layer to another picture, keeping its place
   const swapPicture = (layer, image, fadeTime) => {
     const last = lastFrame(layer)
@@ -301,10 +309,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
     pendingSuperpose = undefined
     fadeTime = fadeTime || 0
     if (pending.hide) {
-      if (lastContents(SUPERPOSE_LAYER).image) {
-        duplicateLastFrame(SUPERPOSE_LAYER)
-        pushFrame(SUPERPOSE_LAYER, {contents: {}, time: time + fadeTime})
-      }
+      clearLayer(SUPERPOSE_LAYER, fadeTime)
     } else {
       // start transparent, then fade in to the requested opacity
       pushBasicFrame(pending.token, "bgimage/", pending.token.args.storage, SUPERPOSE_LAYER, 0, true)
@@ -435,14 +440,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
         case "cl_notrans": { // cl and cl_auto pass through this, removing the sprite at a position or all of them
           const pos = token.args.pos || "all"
           const fadeTime = parseInt(token.args.time, 10) || 0
-          const targets = pos === "all" ? Object.values(POSITION_LAYERS) : [positionLayer(pos)]
-          let cleared = false
-          targets.forEach(layer => {
-            cleared = clearLayer(layer, fadeTime) || cleared
-          })
-          if (cleared) {
-            time += fadeTime
-          }
+          clearLayers(pos === "all" ? Object.values(POSITION_LAYERS) : [positionLayer(pos)], fadeTime)
           break
         }
         // fg, chgfg, movefg, clfg and rep with lists come from the port's sprite plugin
@@ -495,14 +493,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
         case "clfg": {
           const args = token.args
           const fadeTime = parseInt(args.time, 10) || 0
-          const targets = args.index ? [indexLayer(args.index)] : args.pos ? [positionLayer(args.pos)] : args.storage ? [layerShowing(args.storage)] : shownLayers()
-          let cleared = false
-          targets.forEach(layer => {
-            cleared = clearLayer(layer, fadeTime) || cleared
-          })
-          if (cleared) {
-            time += fadeTime
-          }
+          clearLayers(args.index ? [indexLayer(args.index)] : args.pos ? [positionLayer(args.pos)] : args.storage ? [layerShowing(args.storage)] : shownLayers(), fadeTime)
           break
         }
         case "rep": { // the list form: shows exactly the listed sprites, then the background
@@ -744,11 +735,7 @@ const RenderChunk = (renderState, appendSection, debug, forceSection) => {
 
   if (forceSection) {
     // at the end of the script, also close the section this chunk started, so visuals after the last text play
-    if (isDivider) {
-      closeSection()
-    } else {
-      generateSection()
-    }
+    closeSection()
   }
 
   return {
